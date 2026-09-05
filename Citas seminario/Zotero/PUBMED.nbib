@@ -1,0 +1,2670 @@
+PMID- 39056903
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+LR  - 20240728
+IS  - 1099-4300 (Electronic)
+IS  - 1099-4300 (Linking)
+VI  - 26
+IP  - 7
+DP  - 2024 Jun 24
+TI  - GC-STCL: A Granger Causality-Based Spatial-Temporal Contrastive Learning 
+      Framework for EEG Emotion Recognition.
+LID - 10.3390/e26070540 [doi]
+LID - 540
+AB  - EEG signals capture information through multi-channel electrodes and hold 
+      promising prospects for human emotion recognition. However, the presence of high 
+      levels of noise and the diverse nature of EEG signals pose significant 
+      challenges, leading to potential overfitting issues that further complicate the 
+      extraction of meaningful information. To address this issue, we propose a Granger 
+      causal-based spatial-temporal contrastive learning framework, which significantly 
+      enhances the ability to capture EEG signal information by modeling rich 
+      spatial-temporal relationships. Specifically, in the spatial dimension, we employ 
+      a sampling strategy to select positive sample pairs from individuals watching the 
+      same video. Subsequently, a Granger causality test is utilized to enhance graph 
+      data and construct potential causality for each channel. Finally, a residual 
+      graph convolutional neural network is employed to extract features from EEG 
+      signals and compute spatial contrast loss. In the temporal dimension, we first 
+      apply a frequency domain noise reduction module for data enhancement on each time 
+      series. Then, we introduce the Granger-Former model to capture time domain 
+      representation and calculate the time contrast loss. We conduct extensive 
+      experiments on two publicly available sentiment recognition datasets (DEAP and 
+      SEED), achieving 1.65% improvement of the DEAP dataset and 1.55% improvement of 
+      the SEED dataset compared to state-of-the-art unsupervised models. Our method 
+      outperforms benchmark methods in terms of prediction accuracy as well as 
+      interpretability.
+FAU - Wang, Lei
+AU  - Wang L
+AD  - School of Software Technology, Dalian University of Technology, Dalian 116024, 
+      China.
+FAU - Wang, Siming
+AU  - Wang S
+AD  - School of Information and Communication Engineering, University of Electronic 
+      Science and Technology of China, Chengdu 611731, China.
+FAU - Jin, Bo
+AU  - Jin B
+AD  - School of Innovation and Entrepreneurship, Dalian University of Technology, 
+      Dalian 116024, China.
+FAU - Wei, Xiaopeng
+AU  - Wei X
+AD  - School of Computer Science and Technology, Dalian University of Technology, 
+      Dalian 116024, China.
+LA  - eng
+PT  - Journal Article
+DEP - 20240624
+PL  - Switzerland
+TA  - Entropy (Basel)
+JT  - Entropy (Basel, Switzerland)
+JID - 101243874
+PMC - PMC11275820
+OTO - NOTNLM
+OT  - EEG
+OT  - Granger causal
+OT  - contrastive learning
+OT  - emotion recognition
+OT  - noise reduction
+COIS- The authors declare no conflicts of interest.
+EDAT- 2024/07/26 12:46
+MHDA- 2024/07/26 12:47
+PMCR- 2024/06/24
+CRDT- 2024/07/26 08:35
+PHST- 2024/04/12 00:00 [received]
+PHST- 2024/06/06 00:00 [revised]
+PHST- 2024/06/17 00:00 [accepted]
+PHST- 2024/07/26 12:47 [medline]
+PHST- 2024/07/26 12:46 [pubmed]
+PHST- 2024/07/26 08:35 [entrez]
+PHST- 2024/06/24 00:00 [pmc-release]
+AID - e26070540 [pii]
+AID - entropy-26-00540 [pii]
+AID - 10.3390/e26070540 [doi]
+PST - epublish
+SO  - Entropy (Basel). 2024 Jun 24;26(7):540. doi: 10.3390/e26070540.
+
+PMID- 40745440
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+LR  - 20250805
+IS  - 2045-2322 (Electronic)
+IS  - 2045-2322 (Linking)
+VI  - 15
+IP  - 1
+DP  - 2025 Jul 31
+TI  - Mixture-of-experts graph transformers for interpretable particle collision 
+      detection.
+PG  - 27906
+LID - 10.1038/s41598-025-12003-9 [doi]
+LID - 27906
+AB  - The Large Hadron Collider at CERN produces immense volumes of complex data from 
+      high-energy particle collisions, demanding sophisticated analytical techniques 
+      for effective interpretation. Neural Networks, including Graph Neural Networks, 
+      have shown promise in tasks such as event classification and object 
+      identification by representing collisions as graphs. However, while Graph Neural 
+      Networks excel in predictive accuracy, their "black box" nature often limits 
+      their explainability, making it difficult to trust their decision-making 
+      processes. In this paper, we propose a novel approach that combines a Graph 
+      Transformer model with Mixture-of-Expert layers to achieve high predictive 
+      performance while embedding explainability into the architecture. By leveraging 
+      attention maps and expert specialization, the model offers insights into its 
+      internal decision-making, linking predictions to physics-informed features. We 
+      evaluate the model on simulated events from the ATLAS experiment, focusing on 
+      distinguishing rare Supersymmetric signal events from Standard Model background. 
+      Our results highlight that the model achieves competitive classification accuracy 
+      while providing interpretable outputs that align with known physics, 
+      demonstrating its potential as a robust and transparent tool for high-energy 
+      physics data analysis. This approach underscores the importance of explainability 
+      in machine learning methods applied to high energy physics, offering a path 
+      toward greater trust in AI-driven discoveries.
+CI  - © 2025. The Author(s).
+FAU - Genovese, Donatella
+AU  - Genovese D
+AD  - Department of Computer, Control and Management Engineering, Sapienza University 
+      of Rome, Via Ariosto 25, Rome, 00185, Italy. donatella.genovese@uniroma1.it.
+FAU - Sgroi, Alessandro
+AU  - Sgroi A
+AD  - Department of Computer, Control and Management Engineering, Sapienza University 
+      of Rome, Via Ariosto 25, Rome, 00185, Italy.
+FAU - Devoto, Alessio
+AU  - Devoto A
+AD  - Department of Computer, Control and Management Engineering, Sapienza University 
+      of Rome, Via Ariosto 25, Rome, 00185, Italy.
+FAU - Valentine, Samuel
+AU  - Valentine S
+AD  - Department of Physics, University of Liverpool, Oxford Street, Liverpool, L69 
+      7ZE, UK.
+FAU - Wood, Lennox
+AU  - Wood L
+AD  - Department of Physics, University of Liverpool, Oxford Street, Liverpool, L69 
+      7ZE, UK.
+FAU - Sebastiani, Cristiano
+AU  - Sebastiani C
+AD  - Department of Physics, University of Liverpool, Oxford Street, Liverpool, L69 
+      7ZE, UK.
+AD  - Experimental Physics Department, CERN, Geneva, 1211, Switzerland.
+FAU - Scardapane, Simone
+AU  - Scardapane S
+AD  - Department of Information Engineering, Electronics and Telecommunications, 
+      Sapienza University of Rome, Via Eudossiana 18, Rome, 00184, Italy.
+AD  - INFN Sezione di Roma, Piazzale Aldo Moro 5, Rome, 00185, Italy.
+FAU - D'Onofrio, Monica
+AU  - D'Onofrio M
+AD  - Department of Physics, University of Liverpool, Oxford Street, Liverpool, L69 
+      7ZE, UK.
+FAU - Giagu, Stefano
+AU  - Giagu S
+AD  - INFN Sezione di Roma, Piazzale Aldo Moro 5, Rome, 00185, Italy.
+AD  - Department of Physics, Sapienza University of Rome, Piazzale Aldo Moro 5, Rome, 
+      00185, Italy.
+LA  - eng
+PT  - Journal Article
+DEP - 20250731
+PL  - England
+TA  - Sci Rep
+JT  - Scientific reports
+JID - 101563288
+SB  - IM
+PMC - PMC12314041
+COIS- Declarations. Competing interests: The authors declare no competing interests.
+EDAT- 2025/08/01 06:28
+MHDA- 2025/08/01 06:29
+PMCR- 2025/07/31
+CRDT- 2025/08/01 00:05
+PHST- 2025/01/23 00:00 [received]
+PHST- 2025/07/14 00:00 [accepted]
+PHST- 2025/08/01 06:29 [medline]
+PHST- 2025/08/01 06:28 [pubmed]
+PHST- 2025/08/01 00:05 [entrez]
+PHST- 2025/07/31 00:00 [pmc-release]
+AID - 10.1038/s41598-025-12003-9 [pii]
+AID - 12003 [pii]
+AID - 10.1038/s41598-025-12003-9 [doi]
+PST - epublish
+SO  - Sci Rep. 2025 Jul 31;15(1):27906. doi: 10.1038/s41598-025-12003-9.
+
+PMID- 38325183
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20240220
+LR  - 20240220
+IS  - 1879-2057 (Electronic)
+IS  - 0001-4575 (Linking)
+VI  - 198
+DP  - 2024 Apr
+TI  - Lane-change intention recognition considering oncoming traffic: Novel insights 
+      revealed by advances in deep learning.
+PG  - 107476
+LID - S0001-4575(24)00021-6 [pii]
+LID - 10.1016/j.aap.2024.107476 [doi]
+AB  - Lane-changing (LC) intention recognition models have seen limited real-world 
+      application due to a lack of research on two-lane two-way road environments. This 
+      study constructs a high-fidelity simulated two-lane two-way road to develop a 
+      Transformer model that accurately recognizes LC intention. We propose a novel LC 
+      labelling algorithm combining vehicle dynamics and eye-tracking (VEL) and compare 
+      it against traditional time window labelling (TWL). We find the LC recognition 
+      accuracy can be further improved when oncoming vehicle features are included in 
+      the LC dataset. The Transformer demonstrates state-of-the-art performance 
+      recognizing LC 4.59 s in advance with 92.6 % accuracy using the VEL labelling 
+      method compared to GRU, LSTM and CNN + LSTM models. To interpret the 
+      Transformer's 'black box', we apply LIME model which reveals the model focuses on 
+      eye-tracking features and LC vehicle interactions with preceding and oncoming 
+      traffic during LC events. This research demonstrates that modelling additional 
+      road users and driver gaze in LC intention recognition achieves significant 
+      improvements in model performance and time-to-collision warning capabilities on 
+      two-lane two-way roads.
+CI  - Copyright © 2024 Elsevier Ltd. All rights reserved.
+FAU - Liu, Hao
+AU  - Liu H
+AD  - Guangxi Key Laboratory of ITS, Guilin University of Electronic Technology, School 
+      of Architecture and Transportation Engineering, Guilin University of Electronic 
+      Technology, Guilin 541004, China.
+FAU - Wang, Tao
+AU  - Wang T
+AD  - Guangxi Key Laboratory of ITS, Guilin University of Electronic Technology, School 
+      of Architecture and Transportation Engineering, Guilin University of Electronic 
+      Technology, Guilin 541004, China. Electronic address: wangtao@guet.edu.cn.
+FAU - Li, Wenyong
+AU  - Li W
+AD  - Guangxi Key Laboratory of ITS, Guilin University of Electronic Technology, School 
+      of Architecture and Transportation Engineering, Guilin University of Electronic 
+      Technology, Guilin 541004, China.
+FAU - Ye, Xiaofei
+AU  - Ye X
+AD  - Faculty of Maritime and Transportation, Ningbo University, Ningbo 315211, China.
+FAU - Yuan, Quan
+AU  - Yuan Q
+AD  - State Key Laboratory of Automotive Safety and Energy, School of Vehicle & 
+      Mobility, Tsinghua University, Beijing 100084, China.
+LA  - eng
+PT  - Journal Article
+DEP - 20240206
+PL  - England
+TA  - Accid Anal Prev
+JT  - Accident; analysis and prevention
+JID - 1254476
+SB  - IM
+MH  - Humans
+MH  - *Automobile Driving
+MH  - Accidents, Traffic
+MH  - *Deep Learning
+MH  - Intention
+MH  - Algorithms
+OTO - NOTNLM
+OT  - Eye-tracking features
+OT  - LIME
+OT  - Lane-change intention recognition
+OT  - Multi-head attention mechanism
+OT  - Transformer
+COIS- Declaration of competing interest The authors declare that they have no known 
+      competing financial interests or personal relationships that could have appeared 
+      to influence the work reported in this paper.
+EDAT- 2024/02/08 00:42
+MHDA- 2024/02/20 11:50
+CRDT- 2024/02/07 18:12
+PHST- 2023/08/28 00:00 [received]
+PHST- 2023/12/12 00:00 [revised]
+PHST- 2024/01/10 00:00 [accepted]
+PHST- 2024/02/20 11:50 [medline]
+PHST- 2024/02/08 00:42 [pubmed]
+PHST- 2024/02/07 18:12 [entrez]
+AID - S0001-4575(24)00021-6 [pii]
+AID - 10.1016/j.aap.2024.107476 [doi]
+PST - ppublish
+SO  - Accid Anal Prev. 2024 Apr;198:107476. doi: 10.1016/j.aap.2024.107476. Epub 2024 
+      Feb 6.
+
+PMID- 38749322
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20240529
+LR  - 20241219
+IS  - 1879-0534 (Electronic)
+IS  - 0010-4825 (Linking)
+VI  - 176
+DP  - 2024 Jun
+TI  - Explaining deep learning for ECG analysis: Building blocks for auditing and 
+      knowledge discovery.
+PG  - 108525
+LID - S0010-4825(24)00609-7 [pii]
+LID - 10.1016/j.compbiomed.2024.108525 [doi]
+AB  - Deep neural networks have become increasingly popular for analyzing ECG data 
+      because of their ability to accurately identify cardiac conditions and hidden 
+      clinical factors. However, the lack of transparency due to the black box nature 
+      of these models is a common concern. To address this issue, explainable AI (XAI) 
+      methods can be employed. In this study, we present a comprehensive analysis of 
+      post-hoc XAI methods, investigating the glocal (aggregated local attributions 
+      over multiple samples) and global (concept based XAI) perspectives. We have 
+      established a set of sanity checks to identify saliency as the most sensible 
+      attribution method. We provide a dataset-wide analysis across entire patient 
+      subgroups, which goes beyond anecdotal evidence, to establish the first 
+      quantitative evidence for the alignment of model behavior with cardiologists' 
+      decision rules. Furthermore, we demonstrate how these XAI techniques can be 
+      utilized for knowledge discovery, such as identifying subtypes of myocardial 
+      infarction. We believe that these proposed methods can serve as building blocks 
+      for a complementary assessment of the internal validity during a certification 
+      process, as well as for knowledge discovery in the field of ECG analysis.
+CI  - Copyright © 2024 The Author(s). Published by Elsevier Ltd.. All rights reserved.
+FAU - Wagner, Patrick
+AU  - Wagner P
+AD  - Fraunhofer Heinrich Hertz Institute, Berlin, Germany. Electronic address: 
+      patrick.wagner@hhi.fraunhofer.de.
+FAU - Mehari, Temesgen
+AU  - Mehari T
+AD  - Fraunhofer Heinrich Hertz Institute, Berlin, Germany; Physikalisch-Technische 
+      Bundesanstalt, Berlin, Germany. Electronic address: 
+      temesgen.mehari@hhi.fraunhofer.de.
+FAU - Haverkamp, Wilhelm
+AU  - Haverkamp W
+AD  - Charité Universitätsmedizin Berlin, Berlin, Germany. Electronic address: 
+      wilhelm.haverkamp@dhzc-charite.de.
+FAU - Strodthoff, Nils
+AU  - Strodthoff N
+AD  - Carl von Ossietzky Universität Oldenburg, Oldenburg, Germany. Electronic address: 
+      nils.strodthoff@uol.de.
+LA  - eng
+PT  - Journal Article
+DEP - 20240506
+PL  - United States
+TA  - Comput Biol Med
+JT  - Computers in biology and medicine
+JID - 1250250
+SB  - IM
+MH  - *Electrocardiography/methods
+MH  - *Deep Learning
+MH  - Humans
+MH  - Knowledge Discovery/methods
+MH  - Neural Networks, Computer
+MH  - Signal Processing, Computer-Assisted
+OTO - NOTNLM
+OT  - Deep neural networks
+OT  - Electrocardiography
+OT  - Explainable AI (XAI)
+OT  - Knowledge discovery
+OT  - Post-hoc XAI methods
+OT  - Time series analysis
+COIS- Declaration of competing interest The authors declare that they have no known 
+      competing financial interests or personal relationships that could have appeared 
+      to influence the work reported in this paper.
+EDAT- 2024/05/16 00:44
+MHDA- 2024/05/30 05:46
+CRDT- 2024/05/15 18:13
+PHST- 2023/09/21 00:00 [received]
+PHST- 2024/04/22 00:00 [revised]
+PHST- 2024/04/25 00:00 [accepted]
+PHST- 2024/05/30 05:46 [medline]
+PHST- 2024/05/16 00:44 [pubmed]
+PHST- 2024/05/15 18:13 [entrez]
+AID - S0010-4825(24)00609-7 [pii]
+AID - 10.1016/j.compbiomed.2024.108525 [doi]
+PST - ppublish
+SO  - Comput Biol Med. 2024 Jun;176:108525. doi: 10.1016/j.compbiomed.2024.108525. Epub 
+      2024 May 6.
+
+PMID- 36501884
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20221216
+LR  - 20221220
+IS  - 1424-8220 (Electronic)
+IS  - 1424-8220 (Linking)
+VI  - 22
+IP  - 23
+DP  - 2022 Nov 25
+TI  - Fault Early Warning Model for High-Speed Railway Train Based on Feature 
+      Contribution and Causal Inference.
+LID - 10.3390/s22239184 [doi]
+LID - 9184
+AB  - The demands for model accuracy and computing efficiency in fault warning 
+      scenarios are increasing as high-speed railway train technology continues to 
+      advance. The black box model is difficult to interpret, making it impossible for 
+      this technology to be widely adopted in the railway industry, which has strict 
+      safety regulations. This paper proposes a fault early warning machine learning 
+      model based on feature contribution and causal inference. First, the 
+      contributions of the features are calculated through the Shapley additive 
+      explanations model. Then, causal relationships are discovered through causal 
+      inference models. Finally, data from causal and high-contribution time series are 
+      applied to the model. Ablation tests are conducted with the Naïve Bayes, Gradient 
+      Boosting Decision Tree, eXtreme Gradient Boosting, and other models in order to 
+      confirm the efficiency of the method based on early warning data regarding the 
+      on-site high-speed train traction equipment circuit board failure. The findings 
+      indicate that the strategy improves the evaluation markers, including the early 
+      warning accuracy, precision, recall, and F1 score, by an average of more than 
+      10%. There is a 35% improvement in the computing efficiency, and the model can 
+      provide feature causal graph verification for expert product decision-making.
+FAU - Liu, Dian
+AU  - Liu D
+AUID- ORCID: 0000-0002-1328-5303
+AD  - State Key Lab of Rail Traffic Control & Safety, Beijing Jiaotong University, 
+      Beijing 100044, China.
+AD  - Locomotive & Car Research Institute, China Academy of Railway Sciences Group Co., 
+      Ltd., Beijing 100081, China.
+FAU - Qin, Yong
+AU  - Qin Y
+AD  - State Key Lab of Rail Traffic Control & Safety, Beijing Jiaotong University, 
+      Beijing 100044, China.
+FAU - Zhao, Yiying
+AU  - Zhao Y
+AD  - China Railway Engineering Design and Consulting Group Co., Ltd., Beijing 100055, 
+      China.
+FAU - Yang, Weijun
+AU  - Yang W
+AD  - Locomotive & Car Research Institute, China Academy of Railway Sciences Group Co., 
+      Ltd., Beijing 100081, China.
+FAU - Hu, Haijun
+AU  - Hu H
+AD  - Locomotive & Car Research Institute, China Academy of Railway Sciences Group Co., 
+      Ltd., Beijing 100081, China.
+FAU - Yang, Ning
+AU  - Yang N
+AUID- ORCID: 0000-0003-4388-2691
+AD  - Locomotive & Car Research Institute, China Academy of Railway Sciences Group Co., 
+      Ltd., Beijing 100081, China.
+FAU - Liu, Bing
+AU  - Liu B
+AD  - Locomotive & Car Research Institute, China Academy of Railway Sciences Group Co., 
+      Ltd., Beijing 100081, China.
+LA  - eng
+GR  - 2019YFB1705000/China's National Key R&amp;D Program Project/
+PT  - Journal Article
+DEP - 20221125
+PL  - Switzerland
+TA  - Sensors (Basel)
+JT  - Sensors (Basel, Switzerland)
+JID - 101204366
+SB  - IM
+MH  - Bayes Theorem
+MH  - Equipment Failure
+MH  - *Industry
+MH  - *Machine Learning
+MH  - Records
+PMC - PMC9740490
+OTO - NOTNLM
+OT  - SHAP
+OT  - causal inference
+OT  - data-driven
+OT  - fault warning
+OT  - interpretability
+COIS- The authors declare no conflict of interest.
+EDAT- 2022/12/12 06:00
+MHDA- 2022/12/15 06:00
+PMCR- 2022/11/25
+CRDT- 2022/12/11 01:36
+PHST- 2022/10/31 00:00 [received]
+PHST- 2022/11/18 00:00 [revised]
+PHST- 2022/11/22 00:00 [accepted]
+PHST- 2022/12/11 01:36 [entrez]
+PHST- 2022/12/12 06:00 [pubmed]
+PHST- 2022/12/15 06:00 [medline]
+PHST- 2022/11/25 00:00 [pmc-release]
+AID - s22239184 [pii]
+AID - sensors-22-09184 [pii]
+AID - 10.3390/s22239184 [doi]
+PST - epublish
+SO  - Sensors (Basel). 2022 Nov 25;22(23):9184. doi: 10.3390/s22239184.
+
+PMID- 41168299
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20251031
+LR  - 20251103
+IS  - 2045-2322 (Electronic)
+IS  - 2045-2322 (Linking)
+VI  - 15
+IP  - 1
+DP  - 2025 Oct 30
+TI  - Explainable attention-based deep learning for classification and interpretation 
+      of heart murmurs using phonocardiograms.
+PG  - 37991
+LID - 10.1038/s41598-025-21971-x [doi]
+LID - 37991
+AB  - Cardiovascular diseases (CVDs) remain a leading global health challenge, 
+      necessitating diagnostic solutions that combine high accuracy with clinical 
+      interpretability and reproducibility. Traditional auscultation methods rely 
+      extensively on clinician expertise, resulting in variability and potential 
+      diagnostic delays, especially for subtle murmurs indicative of existing cardiac 
+      abnormalities. While automated methods have improved diagnostic accuracy, they 
+      frequently lack reproducibility and transparency, contributing to clinical 
+      mistrust. To address these challenges, we propose an Explainable Attention-Based 
+      Deep Learning framework specifically designed for classification and 
+      interpretation of heart murmurs using phonocardiogram (PCG) signals. Our approach 
+      employs a Transformer architecture tailored for robust time frequency feature 
+      extraction-such as spectrograms and Mel Frequency Cepstral Coefficients (MFCCs) 
+      applied to PCGs. Visual explanations generated through Gradient weighted Class 
+      Activation Mapping (Grad-CAM) explicitly highlight critical systolic and 
+      diastolic murmur segments driving the model's diagnostic predictions. We 
+      rigorously validated our framework across multiple datasets, including the 
+      HeartWave dataset (over 1,300 recordings), and further corroborated our results 
+      using CirCor DigiScope, PhysioNet, and Shenzhen datasets. Our revised validation 
+      strategy, adopting robust A-Test methods, demonstrated enhanced reliability with 
+      an accuracy of 96.7%, macro-F1 score of 95.5%, and an AUC above 0.97. Compared to 
+      ten baseline models-including CNN-RNN hybrids, ResNet variants, and Time Growing 
+      Neural Networks (TGNNs) our framework showed a 3-5% improvement in accuracy and a 
+      2-4% increase in macro F1 score, particularly excelling in identifying rare 
+      conditions such as valvular defects and congenital anomalies. Ablation studies 
+      underscored the crucial role of attention mechanisms for both accuracy 
+      enhancement and interpretability, showing strong alignment between 
+      model-generated explanations and expert annotations. Future work will further 
+      explore model scalability, robustness in diverse clinical environments, and 
+      integration with multimodal data, including electrocardiograms, aiming for 
+      comprehensive and clinically trusted diagnostic support.
+CI  - © 2025. The Author(s).
+FAU - Althaph, Bollapalli
+AU  - Althaph B
+AD  - School of Computer Science and Engineering (SCOPE), VIT-AP University, Amaravati, 
+      Vijayawada, 522237, Andhra Pradesh, India.
+FAU - Challa, Nagendra Panini
+AU  - Challa NP
+AD  - School of Computer Science and Engineering (SCOPE), VIT-AP University, Amaravati, 
+      Vijayawada, 522237, Andhra Pradesh, India. nagendra.challa@vitap.ac.in.
+LA  - eng
+PT  - Journal Article
+DEP - 20251030
+PL  - England
+TA  - Sci Rep
+JT  - Scientific reports
+JID - 101563288
+SB  - IM
+MH  - *Deep Learning
+MH  - Phonocardiography/methods
+MH  - Humans
+MH  - *Heart Murmurs/diagnosis/classification/physiopathology
+MH  - Reproducibility of Results
+PMC - PMC12575608
+OTO - NOTNLM
+OT  - Attention mechanisms
+OT  - Cardiovascular diseases
+OT  - Explainable AI
+OT  - Grad-CAM
+OT  - Heart sound analysis
+OT  - Phonocardiogram (PCG)
+OT  - Transformer Architecture
+COIS- Competing interests: The authors declare no competing interests.
+EDAT- 2025/10/31 06:26
+MHDA- 2025/10/31 06:27
+PMCR- 2025/10/30
+CRDT- 2025/10/31 00:26
+PHST- 2025/03/21 00:00 [received]
+PHST- 2025/09/24 00:00 [accepted]
+PHST- 2025/10/31 06:27 [medline]
+PHST- 2025/10/31 06:26 [pubmed]
+PHST- 2025/10/31 00:26 [entrez]
+PHST- 2025/10/30 00:00 [pmc-release]
+AID - 10.1038/s41598-025-21971-x [pii]
+AID - 21971 [pii]
+AID - 10.1038/s41598-025-21971-x [doi]
+PST - epublish
+SO  - Sci Rep. 2025 Oct 30;15(1):37991. doi: 10.1038/s41598-025-21971-x.
+
+PMID- 41822154
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+DCOM- 20260319
+LR  - 20260813
+IS  - 2331-8422 (Electronic)
+IS  - 2331-8422 (Linking)
+DP  - 2026 Mar 5
+TI  - TCR-EML: Explainable Model Layers for TCR-pMHC Prediction.
+LID - arXiv:2510.04377v2
+AB  - T cell receptor (TCR) recognition of peptide-MHC (pMHC) complexes is a central 
+      component of adaptive immunity, with implications for vaccine design, cancer 
+      immunotherapy, and autoimmune disease. While recent advances in machine learning 
+      have improved prediction of TCR-pMHC binding, the most effective approaches are 
+      black-box transformer models that cannot provide a rationale for predictions. 
+      Post-hoc explanation methods can provide insight with respect to the input but do 
+      not explicitly model biochemical mechanisms (e.g. known binding regions), as in 
+      TCR-pMHC binding. "Explain-by-design" models (i.e., with architectural components 
+      that can be examined directly after training) have been explored in other 
+      domains, but have not been used for TCR-pMHC binding. We propose explainable 
+      model layers (TCR-EML) that can be incorporated into proteinlanguage model 
+      backbones for TCR-pMHC modeling. Our approach uses prototype layers for amino 
+      acid residue contacts drawn from known TCR-pMHC binding mechanisms, enabling 
+      high-quality explanations for predicted TCR-pMHC binding. Experiments of our 
+      proposed method on large-scale datasets demonstrate competitive predictive 
+      accuracy and generalization, and evaluation on the TCR-XAI benchmark demonstrates 
+      improved explainability compared with existing approaches.
+FAU - Li, Jiarui
+AU  - Li J
+AD  - Department of Computer Science, Tulane University.
+FAU - Yin, Zixiang
+AU  - Yin Z
+AD  - Department of Computer Science, Tulane University.
+FAU - Ding, Zhengming
+AU  - Ding Z
+AD  - Department of Computer Science, Tulane University.
+FAU - Landry, Samuel J
+AU  - Landry SJ
+AD  - Department of Biochemistry and Molecular Biology, Tulane University School of 
+      Medicine.
+FAU - Mettu, Ramgopal R
+AU  - Mettu RR
+AD  - Department of Computer Science, Tulane University.
+LA  - eng
+PT  - Journal Article
+PT  - Preprint
+DEP - 20260305
+PL  - United States
+TA  - ArXiv
+JT  - ArXiv
+JID - 101759493
+PMC - PMC12976928
+EDAT- 2026/03/13 06:52
+MHDA- 2026/03/13 06:53
+PMCR- 2026/03/05
+CRDT- 2026/03/13 04:49
+PHST- 2026/03/13 06:52 [pubmed]
+PHST- 2026/03/13 06:53 [medline]
+PHST- 2026/03/13 04:49 [entrez]
+PHST- 2026/03/05 00:00 [pmc-release]
+AID - 2510.04377 [pii]
+PST - epublish
+SO  - ArXiv [Preprint]. 2026 Mar 5:arXiv:2510.04377v2.
+
+PMID- 41280531
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+DCOM- 20251124
+LR  - 20251126
+IS  - 2666-5018 (Electronic)
+IS  - 2666-5018 (Linking)
+VI  - 6
+IP  - 9
+DP  - 2025 Sep
+TI  - Enhancing explainability in clinical deep-learning models: Latent-space variable 
+      decoding is superior to gradient-weighted class activation mapping.
+PG  - 1248-1258
+LID - 10.1016/j.hroo.2025.06.022 [doi]
+AB  - BACKGROUND: Deep-learning models designed to assist with clinical decision making 
+      abound in cardiology. However, the "black box" nature of these models limits 
+      physicians' ability to use them to cross-check clinical gestalt when evaluating 
+      model predictions. Analytical techniques such as the popular gradient-weighted 
+      class activation mapping (Grad-CAM) may provide insight into model 
+      explainability, but the reliability and reproducibility of these techniques have 
+      not been studied. OBJECTIVE: To perform a rigorous assessment of the 
+      explainability offered by Grad-CAM, with comparison to alternative saliency 
+      methods provided by intrinsicly explainable deep-learning models. METHODS: We 
+      examined a well-phenotyped cohort of 1930 patients with hypertrophic 
+      cardiomyopathy (HCM) and available electrocardiographic waveform data. Novel 
+      deep-learning models were developed for the prediction of 2 high-risk HCM 
+      features: left ventricular (LV) apical aneurysm and massive LV hypertrophy. 
+      Saliency analysis was performed using (1) Grad-CAM and (2) latent-space variable 
+      decoding (LSVD). RESULTS: Deep-learning models amenable to Grad-CAM- and 
+      LSVD-based saliency analysis demonstrated comparable performances in the 
+      identification of LV apical aneurysm (C statistic 0.95 vs 0.93) and massive LV 
+      hypertrophy (C statistic 0.82 vs 0.83) during holdout testing. However, while 
+      Grad-CAM produced highly variable visual assessments of model attention and 
+      offered little insight into the models' underlying decision-making processes, 
+      LSVD allowed direct visualization of those electrocardiographic characteristics 
+      that differentiated patients with and without the high-risk HCM features of 
+      interest. In addition, Kolmogorov-Smirnov goodness-of-fit testing of latent-space 
+      variables offered a method for prospectively assessing the likelihood of 
+      deep-learning model overfitting. CONCLUSION: Deep-learning models amenable to 
+      LSVD analysis offered more robust explainability than did models amenable to the 
+      popular Grad-CAM analytical technique while offering comparable predictive 
+      performance.
+CI  - © 2025 Heart Rhythm Society. Published by Elsevier Inc.
+FAU - Carrick, Richard T
+AU  - Carrick RT
+AD  - Johns Hopkins Hypertrophic Cardiomyopathy Center, Division of Cardiology, 
+      Department of Medicine, Johns Hopkins University, Balitmore, Maryland.
+FAU - Rowin, Ethan J
+AU  - Rowin EJ
+AD  - Lahey Hospital and Medical Center Hypertrophic Cardiomyopathy Center, Division of 
+      Cardiology, Department of Medicine, Lahey Hospital & Medical Center, Burlington, 
+      Massachusetts.
+FAU - Gasperetti, Alessio
+AU  - Gasperetti A
+AD  - Johns Hopkins Hypertrophic Cardiomyopathy Center, Division of Cardiology, 
+      Department of Medicine, Johns Hopkins University, Balitmore, Maryland.
+FAU - Madias, Christopher
+AU  - Madias C
+AD  - Tufts Cardiac Arrhythmia Center, Division of Cardiology, Department of Medicine, 
+      Tufts Medical Center, Boston, Massachusetts.
+FAU - Maron, Martin
+AU  - Maron M
+AD  - Lahey Hospital and Medical Center Hypertrophic Cardiomyopathy Center, Division of 
+      Cardiology, Department of Medicine, Lahey Hospital & Medical Center, Burlington, 
+      Massachusetts.
+FAU - Wu, Katherine C
+AU  - Wu KC
+AD  - Johns Hopkins Hypertrophic Cardiomyopathy Center, Division of Cardiology, 
+      Department of Medicine, Johns Hopkins University, Balitmore, Maryland.
+LA  - eng
+PT  - Journal Article
+DEP - 20250703
+PL  - United States
+TA  - Heart Rhythm O2
+JT  - Heart rhythm O2
+JID - 101768511
+PMC - PMC12635720
+OTO - NOTNLM
+OT  - Deep-learning
+OT  - Explainability
+OT  - Gradient-weighted class activation mapping
+OT  - Hypertrophic cardiomyopathy
+OT  - Latent-space variable decoding
+OT  - Saliency analysis
+OT  - Variational autoencoder
+EDAT- 2025/11/24 12:38
+MHDA- 2025/11/24 12:39
+PMCR- 2025/07/03
+CRDT- 2025/11/24 08:57
+PHST- 2025/11/24 12:39 [medline]
+PHST- 2025/11/24 12:38 [pubmed]
+PHST- 2025/11/24 08:57 [entrez]
+PHST- 2025/07/03 00:00 [pmc-release]
+AID - S2666-5018(25)00241-7 [pii]
+AID - 10.1016/j.hroo.2025.06.022 [doi]
+PST - epublish
+SO  - Heart Rhythm O2. 2025 Jul 3;6(9):1248-1258. doi: 10.1016/j.hroo.2025.06.022. 
+      eCollection 2025 Sep.
+
+PMID- 42089414
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20260716
+LR  - 20260716
+IS  - 1549-960X (Electronic)
+IS  - 1549-9596 (Linking)
+VI  - 66
+IP  - 10
+DP  - 2026 May 25
+TI  - Ensemble Machine Learning for Interpretable Prediction of Acute Toxicity in 
+      Metal-Organic Framework Linkers.
+PG  - 5708-5720
+LID - 10.1021/acs.jcim.6c00227 [doi]
+AB  - Metal-organic frameworks (MOFs) are promising platforms for drug delivery due to 
+      their high porosity, tunable chemistry, and controlled release capabilities. 
+      However, their clinical translation is limited by insufficient safety data, 
+      particularly regarding the toxicity of organic linkers that may leach or degrade 
+      under physiological conditions. Experimental evaluation of linker 
+      biocompatibility across the vast MOF design space is impractical, creating a 
+      critical bottleneck for biomedical applications. Here, we present an integrated 
+      machine learning framework for systematic toxicity assessment of MOF organic 
+      linkers. Using acute toxicity data from the TOXRIC database, we trained four 
+      complementary modeling architectures: a directed message-passing graph neural 
+      network (Chemprop), a transformer-based SMILES model (ChemBERTa-2), a Random 
+      Forest using Morgan fingerprints, and a Support Vector Machine based on 
+      physicochemical descriptors. Across 5-fold stratified cross-validation, all 
+      models demonstrated strong predictive performance, achieving micro F1 scores up 
+      to ∼0.87, and microaveraged ROC-AUC values between ∼0.95 and 0.96, indicating 
+      robust discrimination despite substantial class imbalance. The trained models 
+      were applied to a large hypothetical MOF linker library, and ensemble predictions 
+      were used to improve robustness and reduce model-specific bias. 
+      Applicability-domain analysis based on chemical space overlap and 
+      nearest-neighbor similarity confirmed that predictions remained within 
+      well-supported regions of chemical space. To enable mechanistic interpretability, 
+      we integrated graph-based SHAP analysis with a SHAP-weighted Morgan fingerprint 
+      representation, allowing systematic identification of molecular substructures 
+      driving high-severity toxicity predictions. The most influential motifs showed 
+      strong agreement with independently documented toxic scaffolds, including 
+      polycyclic aromatic hydrocarbons. Together, this framework provides a scalable, 
+      accurate, and interpretable approach for prioritizing safe MOF linkers and 
+      guiding experimental screening toward candidates with favorable safety profiles.
+FAU - Hemmati, Mohammad
+AU  - Hemmati M
+AUID- ORCID: 0009-0002-9955-3408
+AD  - College of Science & Mathematics, University of Massachusetts Boston, Boston, 
+      Massachusetts 02125, United States.
+FAU - Ein Moghassemi, Sepideh
+AU  - Ein Moghassemi S
+AUID- ORCID: 0000-0002-3467-3612
+AD  - Department of Chemistry, University of Massachusetts Boston, Boston, 
+      Massachusetts 02125, United States.
+FAU - Hashemianzadeh, Seyed Majid
+AU  - Hashemianzadeh SM
+AUID- ORCID: 0000-0003-1480-9014
+AD  - School of Chemistry, Iran University of Science and Technology, Tehran 
+      16846-13114, Iran.
+LA  - eng
+PT  - Journal Article
+DEP - 20260506
+PL  - United States
+TA  - J Chem Inf Model
+JT  - Journal of chemical information and modeling
+JID - 101230060
+RN  - 0 (Metal-Organic Frameworks)
+SB  - IM
+MH  - *Machine Learning
+MH  - *Metal-Organic Frameworks/toxicity/chemistry
+MH  - Random Forest
+MH  - Graph Neural Networks
+MH  - Predictive Learning Models
+MH  - Ensemble Learning
+EDAT- 2026/05/06 12:35
+MHDA- 2026/05/26 23:34
+CRDT- 2026/05/06 07:03
+PHST- 2026/05/26 23:34 [medline]
+PHST- 2026/05/06 12:35 [pubmed]
+PHST- 2026/05/06 07:03 [entrez]
+AID - 10.1021/acs.jcim.6c00227 [doi]
+PST - ppublish
+SO  - J Chem Inf Model. 2026 May 25;66(10):5708-5720. doi: 10.1021/acs.jcim.6c00227. 
+      Epub 2026 May 6.
+
+PMID- 41291726
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20260627
+LR  - 20260627
+IS  - 1479-5876 (Electronic)
+IS  - 1479-5876 (Linking)
+VI  - 24
+IP  - 1
+DP  - 2025 Nov 25
+TI  - Context-aware gene dependency modeling via graph attention networks for precision 
+      oncology.
+PG  - 74
+LID - 10.1186/s12967-025-07501-3 [doi]
+LID - 74
+AB  - BACKGROUND: Understanding context-specific gene dependencies is essential for 
+      uncovering therapeutic vulnerabilities and advancing precision oncology. However, 
+      existing computational methods often fail to capture sample-specific effects or 
+      provide biological interpretability. METHODS: We developed GATDep, a graph 
+      attention network-based framework that predicts sample-specific gene dependency 
+      scores by integrating transcriptomic data with curated gene-gene interaction 
+      networks. Each sample is represented as a context-aware graph instance, where 
+      node features are derived from gene set variation analysis, enabling 
+      pathway-level encoding of cellular states. RESULTS: GATDep frames dependency 
+      prediction as a node-level regression problem and outperforms state-of-the-art 
+      models across multiple benchmark datasets. The model provides interpretable 
+      attention weights and feature attribution maps via GNNExplainer, revealing 
+      biologically meaningful gene interactions. When applied to CRISPR and RNAi 
+      screening datasets, GATDep accurately identifies both known and novel 
+      dependencies and shows strong correlations with drug sensitivity. Furthermore, 
+      analysis of TCGA patient cohorts demonstrates significant associations between 
+      predicted dependencies and key clinical features, including microsatellite 
+      instability, chemotherapy response, and pathway-level perturbations. CONCLUSIONS: 
+      GATDep offers an extensible and interpretable framework for modeling gene 
+      essentiality at the sample level. By combining network topology with 
+      transcriptomic context, it enables the discovery of functionally and clinically 
+      relevant gene dependencies, providing a foundation for drug prioritization and 
+      precision cancer therapy.
+FAU - Yu, Guili
+AU  - Yu G
+AD  - Pujiang Community Health Service Center, Shanghai, China.
+FAU - Gong, Yifeng
+AU  - Gong Y
+AD  - Wuhu Fanchang Hospital of Traditional Chinese Medicine, Anhui, China.
+FAU - Fan, Beiping
+AU  - Fan B
+AD  - Pujiang People Institute, Shanghai, China.
+FAU - Gao, Jing
+AU  - Gao J
+AD  - Pujiang Community Health Service Center, Shanghai, China. 938326372@qq.com.
+FAU - Fan, Qiangqiang
+AU  - Fan Q
+AD  - Pujiang People Institute, Shanghai, China. dongliulou@126.com.
+AD  - WuXi AppTec, Waigaoqiao Free Trade Zone, Shanghai, China. dongliulou@126.com.
+LA  - eng
+PT  - Journal Article
+DEP - 20251125
+PL  - England
+TA  - J Transl Med
+JT  - Journal of translational medicine
+JID - 101190741
+SB  - IM
+MH  - Humans
+MH  - *Precision Medicine
+MH  - *Medical Oncology/methods
+MH  - Graph Neural Networks
+MH  - *Gene Regulatory Networks
+MH  - *Models, Genetic
+PMC - PMC12805727
+COIS- Declarations. Ethics approval and consent to participate: Not applicable. Consent 
+      for publication: All authors agree to the publication of the article. Competing 
+      Interests: The authors declare that they have no competing interests.
+EDAT- 2025/11/26 06:29
+MHDA- 2026/06/27 06:44
+PMCR- 2025/11/25
+CRDT- 2025/11/26 00:10
+PHST- 2025/08/21 00:00 [received]
+PHST- 2025/11/16 00:00 [accepted]
+PHST- 2026/06/27 06:44 [medline]
+PHST- 2025/11/26 06:29 [pubmed]
+PHST- 2025/11/26 00:10 [entrez]
+PHST- 2025/11/25 00:00 [pmc-release]
+AID - 10.1186/s12967-025-07501-3 [pii]
+AID - 7501 [pii]
+AID - 10.1186/s12967-025-07501-3 [doi]
+PST - epublish
+SO  - J Transl Med. 2025 Nov 25;24(1):74. doi: 10.1186/s12967-025-07501-3.
+
+PMID- 42362638
+OWN - NLM
+STAT- Publisher
+LR  - 20260626
+IS  - 2045-2322 (Electronic)
+IS  - 2045-2322 (Linking)
+DP  - 2026 Jun 26
+TI  - Pressure-conditioned temporal graph-attention network for robotic tactile 
+      perception on uneven surfaces and varying velocities.
+LID - 10.1038/s41598-026-58332-1 [doi]
+AB  - Robust tactile texture recognition under realistic robotic interaction conditions 
+      remains challenging due to curvature-dependent contact variability and dynamic 
+      tactile excitation. This study proposes a Pressure-Conditioned Temporal 
+      Graph-Attention Network (PCT-GATNet) for multimodal tactile texture recognition 
+      using pressure-conditioned feature modulation, multi-scale temporal modeling, 
+      graph-based channel reasoning, and local temporal attention within a unified 
+      framework. The proposed method was evaluated on two public tactile benchmarks 
+      involving uneven curved-surface interaction and varying sliding velocities. 
+      Comparative experiments against CNN, TCN, and CNN-Transformer baselines were 
+      conducted under unified preprocessing and cross-validation protocols across 
+      temporal windows of 128, 256, and 512 samples. PCT-GATNet achieved 97.06% 
+      accuracy on the uneven-surface dataset under 10-fold cross-validation and up to 
+      98% accuracy on the dynamic texture dataset, consistently outperforming the 
+      baseline architectures. Additional statistical analysis and quantitative 
+      explainability consistency evaluation demonstrated improved robustness, stable 
+      temporal representation learning, and physically meaningful tactile feature 
+      attribution. The findings demonstrate that pressure-conditioned graph-attention 
+      temporal modeling improves both performance and interpretability for tactile 
+      perception under realistic robotic interaction conditions.
+CI  - © 2026. The Author(s).
+FAU - Alharthi, Abdullah
+AU  - Alharthi A
+AUID- ORCID: 0000-0001-6776-7503
+AD  - Department of Electrical Engineering, King Khalid University, Abha, Saudi Arabia. 
+      asalharthi@kku.edu.sa.
+LA  - eng
+GR  - RGP2/176/46/King Khalid University/
+PT  - Journal Article
+DEP - 20260626
+PL  - England
+TA  - Sci Rep
+JT  - Scientific reports
+JID - 101563288
+SB  - IM
+OTO - NOTNLM
+OT  - Explainable AI
+OT  - Graph attention networks
+OT  - Multimodal IMU sensing
+OT  - Pressure-conditioned learning
+OT  - Robotic manipulation
+OT  - Tactile perception
+OT  - Temporal convolutional networks
+OT  - Uneven surface interaction
+COIS- Declarations. Competing Interests: The authors declare no competing interests.
+EDAT- 2026/06/27 00:53
+MHDA- 2026/06/27 00:53
+CRDT- 2026/06/26 23:18
+PHST- 2026/03/26 00:00 [received]
+PHST- 2026/06/12 00:00 [accepted]
+PHST- 2026/06/27 00:53 [medline]
+PHST- 2026/06/27 00:53 [pubmed]
+PHST- 2026/06/26 23:18 [entrez]
+AID - 10.1038/s41598-026-58332-1 [pii]
+AID - 10.1038/s41598-026-58332-1 [doi]
+PST - aheadofprint
+SO  - Sci Rep. 2026 Jun 26. doi: 10.1038/s41598-026-58332-1.
+
+PMID- 41240740
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20251212
+LR  - 20251212
+IS  - 1879-2057 (Electronic)
+IS  - 0001-4575 (Linking)
+VI  - 225
+DP  - 2026 Feb
+TI  - SET-DGCN: An end-to-end electroencephalography-based fatigue detection method for 
+      young drivers.
+PG  - 108311
+LID - S0001-4575(25)00399-9 [pii]
+LID - 10.1016/j.aap.2025.108311 [doi]
+AB  - Driver fatigue poses a critical threat to global road safety, particularly among 
+      young drivers. Nevertheless, policy-level interventions remain fragmented due to 
+      the lack of reliable and deployable detection technologies. Bridging this gap 
+      requires accurate, interpretable, and real-time fatigue monitoring systems 
+      capable of informing practical decision-making in transportation safety 
+      management. To address this challenge, we propose an end-to-end EEG-based fatigue 
+      detection model, Scale-Enhanced Transformer and Dynamic Graph Convolutional 
+      Network (SET-DGCN). The model captures multi-scale temporal dependencies and 
+      spatial brain-region interactions by integrating convolutional embeddings, 
+      attention mechanisms, and learnable graph structures. Extensive evaluations on 
+      both a driving simulation dataset and the publicly available SEED-VIG dataset 
+      confirm that SET-DGCN outperforms mainstream convolutional neural network 
+      (CNN)-based, graph convolutional network (GCN)-based, and Transformer-based 
+      models in terms of accuracy and F1-score, while maintaining strong cross-subject 
+      generalization. To enhance both interpretability and application relevance, a 
+      component-level attribution method (COAR) is employed to evaluate the functional 
+      contribution of model modules, while SHapley Additive exPlanations (SHAP) 
+      analysis is used to uncover brain region-specific patterns across fatigue stages. 
+      Based on these neural insights, a set of multi-level policy and design 
+      recommendations is proposed, ranging from infrastructure enhancements to adaptive 
+      in-vehicle systems and individualized interventions, to provide a comprehensive 
+      framework for mitigating fatigue among young drivers in real-world transportation 
+      contexts.
+CI  - Copyright © 2025 Elsevier Ltd. All rights reserved.
+FAU - Cao, Yang
+AU  - Cao Y
+AD  - Institute of Smart City and Intelligent Transportation, Southwest Jiaotong 
+      University, Chengdu, Sichuan 611756, China.
+FAU - Chen, Tiantian
+AU  - Chen T
+AD  - Cho Chun Shik Graduate School of Mobility, Korea Advanced Institute of Science 
+      and Technology, South Korea.
+FAU - Han, Ke
+AU  - Han K
+AD  - School of Economics and Management, Southwest Jiaotong University, Chengdu 
+      610031, China.
+FAU - Chung, Hyungchul
+AU  - Chung H
+AD  - Urban Planning and Design, Xi'an Jiaotong-Liverpool University, 111 Ren'ai Road, 
+      Suzhou Industrial Park, Suzhou 215123, China.
+FAU - Huang, Zhaoguo
+AU  - Huang Z
+AD  - School of Traffic and Transportation, Lanzhou Jiaotong University, Lanzhou 
+      730070, China.
+FAU - Ding, Hongliang
+AU  - Ding H
+AD  - Institute of Smart City and Intelligent Transportation, Southwest Jiaotong 
+      University, Chengdu, Sichuan 611756, China. Electronic address: 
+      hongliang.ding@swjtu.edu.cn.
+LA  - eng
+PT  - Journal Article
+DEP - 20251114
+PL  - England
+TA  - Accid Anal Prev
+JT  - Accident; analysis and prevention
+JID - 1254476
+SB  - IM
+MH  - Humans
+MH  - *Automobile Driving/psychology
+MH  - *Electroencephalography/methods
+MH  - *Fatigue/diagnosis
+MH  - Young Adult
+MH  - Male
+MH  - Adolescent
+MH  - Neural Networks, Computer
+MH  - Female
+MH  - Attention
+MH  - Adult
+OTO - NOTNLM
+OT  - Driving fatigue detection
+OT  - EEG
+OT  - Safety policy
+OT  - Spatiotemporal deep learning
+OT  - Young driver
+COIS- Declaration of competing interest The authors declare that they have no known 
+      competing financial interests or personal relationships that could have appeared 
+      to influence the work reported in this paper.
+EDAT- 2025/11/16 00:27
+MHDA- 2025/12/13 00:32
+CRDT- 2025/11/15 18:10
+PHST- 2025/05/13 00:00 [received]
+PHST- 2025/10/23 00:00 [revised]
+PHST- 2025/11/10 00:00 [accepted]
+PHST- 2025/12/13 00:32 [medline]
+PHST- 2025/11/16 00:27 [pubmed]
+PHST- 2025/11/15 18:10 [entrez]
+AID - S0001-4575(25)00399-9 [pii]
+AID - 10.1016/j.aap.2025.108311 [doi]
+PST - ppublish
+SO  - Accid Anal Prev. 2026 Feb;225:108311. doi: 10.1016/j.aap.2025.108311. Epub 2025 
+      Nov 14.
+
+PMID- 41860701
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20260627
+LR  - 20260627
+IS  - 1432-1254 (Electronic)
+IS  - 0020-7128 (Linking)
+VI  - 70
+IP  - 4
+DP  - 2026 Mar 20
+TI  - Causal and spatiotemporal deep learning for dengue forecasting and extreme 
+      outbreak risk under climate variability: a framework from Vietnam.
+LID - 97 [pii]
+LID - 10.1007/s00484-026-03151-2 [doi]
+AB  - Dengue fever in Vietnam is increasingly influenced by climate variability, yet 
+      most early warning systems still rely on single-model, province-level forecasts 
+      that overlook lagged climate drivers, spatial spillover, and extreme-outbreak 
+      risk. This study develops and evaluates an integrated, climate-informed dengue 
+      forecasting framework for Ba Ria–Vung Tau (BRVT), a coastal province in southern 
+      Vietnam, using weekly district-level dengue surveillance data and 17 
+      satellite-derived meteorological variables from 2003 to 2022. We first applied 
+      distributed lag nonlinear models, mutual information, and Granger-style causality 
+      tests to identify a compact set of 11 lagged climate predictors—dominated by 
+      humidity, soil moisture, wet-bulb temperature, and rainfall at 1–4-week lags—that 
+      are both statistically robust and epidemiologically plausible drivers of dengue. 
+      Spatiotemporal decomposition (STL, wavelet analysis) and hotspot mapping 
+      (Getis–Ord Gi* with kriging) revealed a rising trend in incidence, strengthening 
+      annual and 2–3-year cycles, and persistent high-risk clusters centred on Vung Tau 
+      and Ba Ria cities. Building on these diagnostics, we compared a suite of 
+      machine-learning and deep-learning models using a fixed chronological split 
+      (training: January 2003–December 2019; validation: January 2020–December 2022). 
+      Classical tree-based ensembles, Gaussian process regression, and recurrent 
+      networks achieved MAE ≈ 4.5–5.4 and R² ≈ 0.46–0.57, whereas the proposed 
+      Time-Series Transformer and graph neural networks (GNNs) substantially improved 
+      performance (Transformer: MAE 3.56, RMSE 5.99, R² 0.813; GNNs: MAE 2.83, RMSE 
+      4.92, R² 0.874), with similar training and validation errors indicating limited 
+      overfitting. Finally, Extreme Value Theory was used to fit a Generalized Extreme 
+      Value distribution to annual maxima of weekly incidence, yielding Weibull-type 
+      tail behaviour, return levels, and exceedance probabilities that quantify the 
+      expected frequency of rare but severe dengue seasons. By combining causally 
+      screened climate predictors, spatiotemporal deep learning, and tail-risk metrics 
+      within a single pipeline, this framework provides operationally useful weekly 
+      forecasts and extreme-outbreak risk indicators to support early warning, 
+      spatially targeted vector control, and surge planning in dengue-endemic settings.
+FAU - Tuan, Dang Anh
+AU  - Tuan DA
+AUID- ORCID: 0000-0002-3320-4072
+AD  - Faculty of Public Health, University of Medicine and Pharmacy at Ho Chi Minh 
+      City, 217 Hong Bang Street, Cho Lon Ward, Ho Chi Minh City, 700000, Vietnam. 
+      tuanda222@gmail.com.
+LA  - eng
+PT  - Journal Article
+DEP - 20260320
+PL  - United States
+TA  - Int J Biometeorol
+JT  - International journal of biometeorology
+JID - 0374716
+SB  - IM
+MH  - *Dengue/epidemiology
+MH  - Vietnam/epidemiology
+MH  - *Deep Learning
+MH  - Humans
+MH  - Forecasting
+MH  - *Disease Outbreaks
+MH  - Climate
+MH  - Spatio-Temporal Analysis
+MH  - Predictive Learning Models
+MH  - Incidence
+OTO - NOTNLM
+OT  - Causal inference
+OT  - Climate variability
+OT  - Dengue forecasting
+OT  - Extreme value theory (EVT)
+OT  - Graph neural networks (GNN)
+OT  - Southeast Asia
+OT  - Spatiotemporal deep learning
+OT  - Time-series transformer
+COIS- Declarations. Ethical approval: Not applicable. Conflict of interest: The author 
+      declares no conflicts of interest. AI Disclosure: The author used AI tools 
+      (ChatGPT) solely for language refinement. No AI was used in data collection, 
+      analysis, or interpretation.
+EDAT- 2026/03/20 18:37
+MHDA- 2026/06/27 12:36
+CRDT- 2026/03/20 12:13
+PHST- 2025/09/27 00:00 [received]
+PHST- 2026/02/11 00:00 [accepted]
+PHST- 2026/01/11 00:00 [revised]
+PHST- 2026/06/27 12:36 [medline]
+PHST- 2026/03/20 18:37 [pubmed]
+PHST- 2026/03/20 12:13 [entrez]
+AID - 10.1007/s00484-026-03151-2 [pii]
+AID - 10.1007/s00484-026-03151-2 [doi]
+PST - epublish
+SO  - Int J Biometeorol. 2026 Mar 20;70(4):97. doi: 10.1007/s00484-026-03151-2.
+
+PMID- 42315700
+OWN - NLM
+STAT- Publisher
+LR  - 20260618
+IS  - 2948-2933 (Electronic)
+IS  - 2948-2925 (Linking)
+DP  - 2026 Jun 18
+TI  - Deep Learning vs. Traditional Machine Learning in the Diagnosis of Cutaneous Drug 
+      Eruptions: A Comparative Study with Explainable AI on Whole-Slide Images.
+LID - 10.1007/s10278-026-02057-0 [doi]
+AB  - Histopathological diagnosis of cutaneous drug eruptions (CDEs) presents a 
+      challenge in dermatopathology due to morphological overlap and high 
+      inter-observer variability. This retrospective study systematically compares the 
+      diagnostic performance of modern convolutional neural networks (ConvNeXt, ResNet 
+      152, EfficientNet), hierarchical vision transformers (Swin Transformer), and 
+      traditional machine learning algorithms (HGBT, XGBoost) on whole-slide images 
+      (WSIs) of CDEs and validates decisions using explainable artificial intelligence 
+      (XAI). We analyzed 443 WSIs collected between 2014 and 2024, encompassing three 
+      diagnostic classes: CDE (n = 194), Atopic Dermatitis (n = 187), and 
+      histologically normal skin controls (n = 62), thereby better reflecting 
+      real-world clinical diagnostic challenges. Following controlled data augmentation 
+      to 600 images (200 per class), all models were evaluated on a held-out 20% test 
+      set (n = 120) using accuracy, sensitivity, specificity, precision, and F1-score 
+      across all three classes. Each WSI was processed as a single resized (512 × 512 
+      pixels) sample; no sub-patch tessellation or patch-level aggregation was 
+      performed. Gradient-weighted Class Activation Mapping (Grad-CAM) was applied to 
+      visualize the histological regions influencing model decisions. ConvNeXt emerged 
+      as the highest-performing model, achieving the highest accuracy rate (88.98%) and 
+      demonstrating strong multi-class differential diagnosis capability. ResNet 152 
+      and Hybrid Feature Fusion models also achieved highly competitive results (86.44% 
+      accuracy). ConvNeXt demonstrated a statistically significant advantage over 
+      traditional methods and legacy architectures (p < 0.05). Histogram-Based Gradient 
+      Enhancement Classification Tree (HGBT) and XGBoost were effective among 
+      traditional models, with accuracies of 77.97% and 77.12%, respectively. Grad-CAM 
+      confirmed that models focused on clinically meaningful histological features, 
+      including basal vacuolar degeneration and eosinophilic infiltration. These 
+      findings suggest that advanced deep learning architectures, particularly 
+      ConvNeXt, may assist pathologists as a decision-support and triage tool in 
+      multi-class CDE diagnosis; ensemble methods offer a viable alternative in 
+      resource-constrained settings. Pending external validation, these XAI-supported 
+      models have the potential to provide transparent, reproducible diagnostic 
+      assistance in dermatopathology.
+CI  - © 2026. The Author(s) under exclusive licence to Society for Imaging Informatics 
+      in Medicine.
+FAU - Türkmen Dedeoğlu, Ayşe
+AU  - Türkmen Dedeoğlu A
+AD  - Department of Pathology, Mersin City Training and Research Hospital, Mersin, 
+      Turkey.
+FAU - Yanık, Hüseyin
+AU  - Yanık H
+AD  - Department of Information Systems and Technologies, School of Applied Technology 
+      and Management, Mersin, Turkey.
+FAU - Uysal, Erdem
+AU  - Uysal E
+AD  - Computer Engineering, Mersin University, Mersin, Turkey.
+FAU - Fikir, Gizem
+AU  - Fikir G
+AD  - Department of Pathology, Faculty of Medicine, Mersin University, Mersin, Turkey.
+FAU - Değirmenci, Evren
+AU  - Değirmenci E
+AD  - Department of Electrical and Electronics Engineering, Faculty of Engineering, 
+      Mersin University, Mersin, Turkey.
+FAU - Türsen, Ümit
+AU  - Türsen Ü
+AD  - Department of Dermatology, Faculty of Medicine, Mersin University, Mersin, 
+      Turkey.
+FAU - Yuyucu Karabulut, Yasemin
+AU  - Yuyucu Karabulut Y
+AD  - Department of Pathology, Faculty of Medicine, Mersin University, Mersin, Turkey. 
+      yykarabulut@yahoo.com.tr.
+LA  - eng
+PT  - Journal Article
+DEP - 20260618
+PL  - Switzerland
+TA  - J Imaging Inform Med
+JT  - Journal of imaging informatics in medicine
+JID - 9918663679206676
+SB  - IM
+OTO - NOTNLM
+OT  - Atopic dermatitis
+OT  - Cutaneous drug eruptions
+OT  - Deep learning
+OT  - Digital pathology
+OT  - Explainable artificial intelligence (XAI)
+OT  - Hybrid feature fusion
+OT  - Whole-slide viewing
+COIS- Declarations. Ethics Approval: This study was approved by the Institutional 
+      Ethics Committee of Mersin University Faculty of Medicine (Document No: 
+      E-59760191-3558834). All procedures were performed in accordance with the ethical 
+      standards of the institutional and/or national research committee and with the 
+      1964 Helsinki Declaration and its later amendments. As this is a retrospective 
+      analysis using fully anonymized, archival histopathological specimens obtained 
+      from the routine diagnostic archive of Mersin University Faculty of Medicine 
+      Department of Pathology, with no patient contact, no collection of new biological 
+      material, and no access to personally identifiable information, the Institutional 
+      Ethics Committee waived the requirement for individual informed consent in 
+      accordance with applicable institutional and national regulations governing 
+      research on anonymized archival material. Consent for Publication: The authors 
+      affirm that all whole-slide images (WSIs) utilized in this study, including those 
+      presented in the figures, are fully anonymized. No identifying individual 
+      participant information is included in this manuscript. Consent to Participate: 
+      Because this study analyzed only fully anonymized, archival histopathological 
+      specimens, with no patient contact and no access to personally identifiable 
+      information, the requirement for individual informed consent to participate was 
+      waived by the Institutional Ethics Committee of Mersin University Faculty of 
+      Medicine in accordance with applicable institutional and national regulations 
+      governing research on anonymized archival material. Competing interests: The 
+      authors declare no competing interests.
+EDAT- 2026/06/19 00:36
+MHDA- 2026/06/19 00:36
+CRDT- 2026/06/18 23:23
+PHST- 2026/03/19 00:00 [received]
+PHST- 2026/06/05 00:00 [accepted]
+PHST- 2026/05/27 00:00 [revised]
+PHST- 2026/06/19 00:36 [medline]
+PHST- 2026/06/19 00:36 [pubmed]
+PHST- 2026/06/18 23:23 [entrez]
+AID - 10.1007/s10278-026-02057-0 [pii]
+AID - 10.1007/s10278-026-02057-0 [doi]
+PST - aheadofprint
+SO  - J Imaging Inform Med. 2026 Jun 18. doi: 10.1007/s10278-026-02057-0.
+
+PMID- 42248208
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20260623
+LR  - 20260623
+IS  - 1361-6560 (Electronic)
+IS  - 0031-9155 (Linking)
+VI  - 71
+IP  - 12
+DP  - 2026 Jun 23
+TI  - Revisiting multi-nodal radiomics with advanced feature learning for lymphoma 
+      classification: a multi-center study.
+LID - 10.1088/1361-6560/ae7955 [doi]
+AB  - Objective.Develop and evaluate a patient-level framework for discriminating 
+      Hodgkin lymphoma (HL) from non-HL (NHL) on baseline18F-FDG PET by aggregating 
+      radiomic descriptors from a variable number of involved lymph nodes in a 
+      multi-center setting.Approach.Each patient was modeled as an unordered set of 
+      lesion-level PET radiomic feature vectors. PET images were converted to 
+      standardized uptake values (SUV), resampled to a uniform voxel spacing 
+      of2×2×2mm3, and radiomic features were extracted using PyRadiomics from the 
+      original SUV images with a fixed bin width of 0.25 SUV units, following 
+      definitions consistent with the Image Biomarker Standardisation Initiative. A 
+      total of 107 first-order, texture, and shape features were extracted per lesion 
+      and optionally augmented with demographic variables and normalized node 
+      center-of-mass coordinates after rigid registration to a common reference space. 
+      We compared statistical pooled tabular baselines with learnable set-based 
+      aggregation models, including Transformer, Deep Sets, multiple instance learning, 
+      Set Transformer, and a graph-based model. Models were trained using five-fold 
+      cross-validation on Center 1 (151 patients; 85 HL, 66 NHL) and evaluated on an 
+      independent external Center 2 cohort (80 patients; 36 HL, 44 NHL) under direct 
+      transfer and unsupervised test-time adaptation (TTA).Main results.Combining 
+      radiomics with demographic and spatial features consistently improved 
+      discrimination. On Center 1, the best-performing deep aggregation models achieved 
+      ROC-AUC (mean±standard deviation) up to0.91±0.05and accuracy up to0.84±0.07. 
+      External evaluation on Center 2 revealed a measurable domain shift, with reduced 
+      performance under direct transfer. Unsupervised TTA, particularly TENT, improved 
+      cross-center generalization for deep aggregation models; for example, the 
+      Transformer improved from ROC-AUC0.81±0.05andF1-score0.60±0.23to 
+      ROC-AUC0.87±0.01andF1-score0.75±0.01. Feature attribution analysis indicated that 
+      both demographic and radiomic descriptors contributed to the 
+      predictions.Significance.These results show that multi-nodal PET radiomics 
+      combined with demographic and spatial dissemination cues is a promising strategy 
+      for patient-level HL versus NHL prediction. The findings also highlight the 
+      importance of robustness considerations in multi-center PET radiomics and suggest 
+      that TTA may help mitigate cross-center variability.
+CI  - Creative Commons Attribution license.
+FAU - Karimzadeh, Reza
+AU  - Karimzadeh R
+AUID- ORCID: 0000-0003-0911-367X
+AD  - Department of Computer Science, University of Copenhagen, Copenhagen, Denmark.
+FAU - Hasanabadi, Setareh
+AU  - Hasanabadi S
+AUID- ORCID: 0009-0003-2270-8974
+AD  - Department of Medical Radiation Engineering, Shahid Beheshti University, Tehran, 
+      Iran.
+FAU - Cheraghi, Maryam
+AU  - Cheraghi M
+AUID- ORCID: 0009-0005-0222-116X
+AD  - Department of Medical Radiation Engineering, Shahid Beheshti University, Tehran, 
+      Iran.
+AD  - National Research Institute of Tuberculosis and Lung Diseases, Shahid Beheshti 
+      University of Medical Sciences, Tehran, Iran.
+FAU - Bakhshayesh Karam, Mehrdad
+AU  - Bakhshayesh Karam M
+AUID- ORCID: 0000-0003-4864-6161
+AD  - National Research Institute of Tuberculosis and Lung Diseases, Shahid Beheshti 
+      University of Medical Sciences, Tehran, Iran.
+AD  - Nuclear Medicine Department,Masih Daneshvari Hospital, Tehran, Iran.
+FAU - Arabi, Hossein
+AU  - Arabi H
+AUID- ORCID: 0000-0001-6526-0960
+AD  - Department of Medical Imaging, Geneva University Hospital, Geneva, Switzerland.
+FAU - Ibragimov, Bulat
+AU  - Ibragimov B
+AUID- ORCID: 0000-0001-7739-7788
+AD  - Department of Computer Science, University of Copenhagen, Copenhagen, Denmark.
+LA  - eng
+PT  - Journal Article
+PT  - Multicenter Study
+DEP - 20260623
+PL  - England
+TA  - Phys Med Biol
+JT  - Physics in medicine and biology
+JID - 0401220
+SB  - IM
+MH  - Adult
+MH  - Female
+MH  - Humans
+MH  - Male
+MH  - Middle Aged
+MH  - *Image Processing, Computer-Assisted/methods
+MH  - *Lymph Nodes/diagnostic imaging
+MH  - *Lymphoma/diagnostic imaging/classification
+MH  - Positron-Emission Tomography
+MH  - *Radiomics
+MH  - Aged
+OTO - NOTNLM
+OT  - lymphoma subtype classification
+OT  - multi-nodal radiomics
+OT  - set-based aggregation
+OT  - test time adaptation
+EDAT- 2026/06/06 00:35
+MHDA- 2026/06/23 12:35
+CRDT- 2026/06/05 19:04
+PHST- 2026/03/16 00:00 [received]
+PHST- 2026/06/05 00:00 [accepted]
+PHST- 2026/06/23 12:35 [medline]
+PHST- 2026/06/06 00:35 [pubmed]
+PHST- 2026/06/05 19:04 [entrez]
+AID - 10.1088/1361-6560/ae7955 [doi]
+PST - epublish
+SO  - Phys Med Biol. 2026 Jun 23;71(12). doi: 10.1088/1361-6560/ae7955.
+
+PMID- 42268907
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20260612
+LR  - 20260813
+IS  - 2291-9694 (Electronic)
+IS  - 2291-9694 (Linking)
+VI  - 14
+DP  - 2026 Jun 10
+TI  - Understanding Transformer-Based Classifications of Medical Text Using a Large 
+      Language Model for the Attribution of Feature Importance: Proof-of-Concept 
+      Algorithm Development and Validation Study.
+PG  - e81644
+LID - 10.2196/81644 [doi]
+LID - e81644
+AB  - BACKGROUND: Deep learning, particularly encoder-only transformer architectures, 
+      has demonstrated excellent performance in biomedical literature classification, 
+      facilitating evidence-based medicine, and knowledge synthesis. However, the 
+      opacity of these models' decision-making processes limits their clinical 
+      interpretability, trustworthiness, and widespread adoption. Traditional 
+      explainable artificial intelligence methods, such as Shapley Additive 
+      Explanations (SHAP) and integrated gradients (IG), address this issue but often 
+      incur substantial computational overhead for text classification. Generative 
+      large language models may offer a novel approach to generating interpretable, 
+      context-aware explanations as autonomous agents. OBJECTIVE: As a 
+      proof-of-concept, the study aimed to investigate the effectiveness of GPT-4o as a 
+      standalone, end-to-end perturbation-based explainer for a BioLinkBERT text 
+      classifier. We compared its explanations against the SHAP partition explainer and 
+      IG as established baselines in terms of explanation faithfulness and semantic 
+      alignment. METHODS: A stratified sample of 200 studies from the McMaster Premium 
+      Literature Service (PLUS) and Clinical Hedges databases was classified by a 
+      fine-tuned BioLinkBERT model for methodological rigor. The sampling specifically 
+      over-represented difficult, low-confidence predictions to rigorously test the 
+      explainers, with an equal number of studies sampled from each probability decile 
+      predicted by BioLinkBERT. GPT-4o, SHAP, and IG generated token-level feature 
+      attributions across a robust feature space of 80,901 tokens. GPT-based 
+      explanations were derived through a sophisticated, iterative masking perturbation 
+      workflow under 2 prompting schemes (token indices vs explicit subword tokens). 
+      Explanations were evaluated using a rank-based, modified area over the 
+      perturbation curve (AOPC), pairwise correlation analyses, and qualitative 
+      assessment of feature importance. RESULTS: Among the 200 studies, 80,901 tokens 
+      were included, and feature attributions were generated by the 4 explainers (6369 
+      unique tokens). SHAP (AOPC 0.222, 95% CI 0.200-0.244) and IG (AOPC 0.225, 95% CI 
+      0.202-0.247) provided consistent explanations, effectively identifying tokens 
+      relevant to study rigor (eg, "randomized" and "blind"). In contrast, despite 
+      evaluating a larger perturbation space, the GPT-4o prompting schemes did not 
+      achieve comparable faithfulness (AOPC 0.025-0.029) and produced divergent token 
+      attributions. Correlation analysis demonstrated moderate alignment between SHAP 
+      and IG (Pearson r=0.367), whereas GPT-4o exhibited limited correlation (Pearson 
+      r≤0.032) with the established baselines. Sensitivity analyses isolating only 
+      correctly classified instances yielded similar trends. Additionally, the 
+      iterative application programming interface calls required for GPT made it 
+      significantly more computationally intensive and costly to execute, whereas IG 
+      was the most temporally efficient. CONCLUSIONS: Despite their advanced contextual 
+      capabilities, current generative large language models are limited when deployed 
+      as standalone perturbation explainers. The findings reveal that GPT-4o struggles 
+      to accurately synthesize mathematical feature importance through iterative 
+      masking, lacking the reliability of traditional explainable artificial 
+      intelligence frameworks. Future research could build upon this work and 
+      investigate specialized prompt engineering, whole-word recombination strategies, 
+      and hybrid frameworks.
+CI  - © Fangwen Zhou, Ashirbani Saha, Muhammad Afzal, Rick Parrish, R Brian Haynes, 
+      Alfonso Iorio, Cynthia Lokker. Originally published in JMIR Medical Informatics 
+      (https://medinform.jmir.org).
+FAU - Zhou, Fangwen
+AU  - Zhou F
+AUID- ORCID: 0000-0001-6236-764X
+AD  - Health Information Research Unit, Department of Health Research Methods, 
+      Evidence, and Impact, Faculty of Health Sciences, McMaster University, 1280 Main 
+      Street West, Hamilton, ON, L8S 4L8, Canada, 1 905-525-9140 ext 22208.
+FAU - Saha, Ashirbani
+AU  - Saha A
+AUID- ORCID: 0000-0002-7650-1720
+AD  - Department of Oncology, Faculty of Health Sciences, McMaster University, 
+      Hamilton, ON, Canada.
+FAU - Afzal, Muhammad
+AU  - Afzal M
+AUID- ORCID: 0000-0002-7851-2327
+AD  - Department of Computer Science, Birmingham City University, Birmingham, United 
+      Kingdom.
+FAU - Parrish, Rick
+AU  - Parrish R
+AUID- ORCID: 0000-0002-3809-6015
+AD  - Health Information Research Unit, Department of Health Research Methods, 
+      Evidence, and Impact, Faculty of Health Sciences, McMaster University, 1280 Main 
+      Street West, Hamilton, ON, L8S 4L8, Canada, 1 905-525-9140 ext 22208.
+FAU - Haynes, R Brian
+AU  - Haynes RB
+AUID- ORCID: 0000-0002-1453-3196
+AD  - Health Information Research Unit, Department of Health Research Methods, 
+      Evidence, and Impact, Faculty of Health Sciences, McMaster University, 1280 Main 
+      Street West, Hamilton, ON, L8S 4L8, Canada, 1 905-525-9140 ext 22208.
+FAU - Iorio, Alfonso
+AU  - Iorio A
+AUID- ORCID: 0000-0002-3331-8766
+AD  - Health Information Research Unit, Department of Health Research Methods, 
+      Evidence, and Impact, Faculty of Health Sciences, McMaster University, 1280 Main 
+      Street West, Hamilton, ON, L8S 4L8, Canada, 1 905-525-9140 ext 22208.
+AD  - Department of Medicine, Faculty of Health Sciences, McMaster University, 
+      Hamilton, ON, Canada.
+FAU - Lokker, Cynthia
+AU  - Lokker C
+AUID- ORCID: 0000-0003-2436-4290
+AD  - Health Information Research Unit, Department of Health Research Methods, 
+      Evidence, and Impact, Faculty of Health Sciences, McMaster University, 1280 Main 
+      Street West, Hamilton, ON, L8S 4L8, Canada, 1 905-525-9140 ext 22208.
+LA  - eng
+PT  - Journal Article
+DEP - 20260610
+PL  - Canada
+TA  - JMIR Med Inform
+JT  - JMIR medical informatics
+JID - 101645109
+SB  - IM
+MH  - Humans
+MH  - *Classification Algorithms
+MH  - Generative Artificial Intelligence
+MH  - *Large Language Models
+MH  - Natural Language Processing
+MH  - Proof of Concept Study
+PMC - PMC13252589
+OTO - NOTNLM
+OT  - GPT
+OT  - SHAP
+OT  - Shapley Additive Explanations
+OT  - artificial intelligence
+OT  - deep learning
+OT  - explainable artificial intelligence
+OT  - feature attribution
+OT  - integrated gradients
+OT  - natural language processing
+COIS- Conflicts of Interest: McMaster University, a nonprofit public academic 
+      institution, operates contracts through the Health Information Research Unit 
+      under the supervision of AI and RBH. These contracts involve professional and 
+      commercial publishers to provide newly published studies and systematic reviews, 
+      which are critically appraised for research methodology and assessed for clinical 
+      relevance as part of McMaster Premium Literature Service (PLUS). CL and RP 
+      receive partial compensation through these contracts, and RBH is remunerated for 
+      supervisory responsibilities and royalties. AS, FZ, and MA have no affiliations 
+      with McMaster PLUS.
+EDAT- 2026/06/11 05:39
+MHDA- 2026/06/13 00:39
+PMCR- 2026/06/10
+CRDT- 2026/06/10 13:44
+PHST- 2025/07/31 00:00 [received]
+PHST- 2026/04/29 00:00 [revised]
+PHST- 2026/04/29 00:00 [accepted]
+PHST- 2026/06/13 00:39 [medline]
+PHST- 2026/06/11 05:39 [pubmed]
+PHST- 2026/06/10 13:44 [entrez]
+PHST- 2026/06/10 00:00 [pmc-release]
+AID - v14i1e81644 [pii]
+AID - 81644 [pii]
+AID - 10.2196/81644 [doi]
+PST - epublish
+SO  - JMIR Med Inform. 2026 Jun 10;14:e81644. doi: 10.2196/81644.
+
+PMID- 42553427
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+DCOM- 20260805
+LR  - 20260813
+IS  - 2673-7647 (Electronic)
+IS  - 2673-7647 (Linking)
+VI  - 6
+DP  - 2026
+TI  - Clinically interpretable deep learning for breast cancer missense variant 
+      pathogenicity prediction.
+PG  - 1844071
+LID - 10.3389/fbinf.2026.1844071 [doi]
+LID - 1844071
+AB  - BACKGROUND: Missense variants in breast cancer remain diagnostically challenging 
+      due to their functional diversity and complex genomic contexts. Conventional 
+      laboratory assays for evaluating pathogenicity are labor-intensive, costly, and 
+      often impractical for large-scale screening, creating a pressing need for 
+      accurate, scalable, and clinically interpretable computational approaches. 
+      METHODS: In this study, we present a novel deep learning framework for predicting 
+      the pathogenicity of breast cancer missense variants, integrating comprehensive 
+      preprocessing, advanced imputation, rigorous model benchmarking, and 
+      explainability. Genetic variants were curated from multiple genomic databases, 
+      annotated using the Ensembl Variant Effect Predictor (VEP), and processed with 
+      Variational Autoencoders (VAE) for missing-value imputation. Seven deep learning 
+      models, MLP, CNN, DNN, RNN, LSTM, GRU, and Transformer, were trained and 
+      evaluated across 11 performance metrics. To quantify performance stability, each 
+      model was trained across five random seeds; mean AUC ± SD across seeds is 
+      reported as the primary performance estimate, with the best-seed run used only 
+      for LIME and PMI interpretability analyses. Recursive feature elimination, 
+      permutation importance (PMI), and Local Interpretable Model-Agnostic Explanations 
+      (LIME) were employed to enhance transparency. Statistical analyses, including 
+      Z-tests, ANOVA, and calibration assessments, validated performance consistency 
+      and inter-model differences. RESULTS: GRU achieved the highest internal AUC 
+      (0.9956 [95% CI 0.9936-0.9972]; mean across five seeds 0.9941 ± 0.0011), with 
+      precision 0.9967 and calibration ECE 0.0095. Externally, LSTM led with AUC 
+      0.9457, exceeding all eleven standalone predictors benchmarked on the same set. 
+      Models showed strong alignment with conservation signals such as phyloP470way and 
+      Eigen-PC scores. Notably, the pipeline provides performance metrics with 95% 
+      confidence intervals and incorporates case-level LIME visualizations for true 
+      positive, true negative, false positive, and false negative predictions, 
+      bolstering interpretability and clinical relevance. CONCLUSION: This work 
+      delivers one of the most comprehensive evaluations of deep learning in breast 
+      cancer variant classification to date. By combining high-performance sequential 
+      models with interpretable AI tools, the proposed framework provides a 
+      reproducible, transparent benchmark for variant pathogenicity prediction and a 
+      foundation for future research use and translation in cancer genomics.
+CI  - Copyright © 2026 Ahmad, AlDhaheri, Mohamad and Ali.
+FAU - Ahmad, Rahaf M
+AU  - Ahmad RM
+AD  - Department of Genetics and Genomics, College of Medical and Health Sciences, 
+      United Arab Emirates University, Al-Ain, United Arab Emirates.
+FAU - AlDhaheri, Noura
+AU  - AlDhaheri N
+AD  - Department of Genetics and Genomics, College of Medical and Health Sciences, 
+      United Arab Emirates University, Al-Ain, United Arab Emirates.
+FAU - Mohamad, Mohd Saberi
+AU  - Mohamad MS
+AD  - Department of Genetics and Genomics, College of Medical and Health Sciences, 
+      United Arab Emirates University, Al-Ain, United Arab Emirates.
+AD  - Centre for Advanced Analytics, CEO for Artificial Intelligence, Faculty of 
+      Engineering and Technology, Multimedia University, Melaka, Malaysia.
+AD  - Department of Biosystems Engineering, Faculty of Agricultural Technology, 
+      Universitas Brawijaya, Malang, Indonesia.
+FAU - Ali, Bassam R
+AU  - Ali BR
+AD  - Department of Genetics and Genomics, College of Medical and Health Sciences, 
+      United Arab Emirates University, Al-Ain, United Arab Emirates.
+AD  - Zayed Center for Heath Sciences, College of Medicine and Health Sciences, United 
+      Arab Emirates University, Al-Ain, United Arab Emirates.
+LA  - eng
+PT  - Journal Article
+DEP - 20260721
+PL  - Switzerland
+TA  - Front Bioinform
+JT  - Frontiers in bioinformatics
+JID - 9918227263306676
+PMC - PMC13433856
+OTO - NOTNLM
+OT  - breast cancer
+OT  - clinical interpretability
+OT  - deep learning
+OT  - missense variants
+OT  - pathogenicity prediction
+COIS- The author(s) declared that this work was conducted in the absence of any 
+      commercial or financial relationships that could be construed as a potential 
+      conflict of interest. The author BA declared that they were an editorial board 
+      member of Frontiers at the time of submission. This had no impact on the peer 
+      review process and the final decision.
+EDAT- 2026/08/05 06:42
+MHDA- 2026/08/05 06:43
+PMCR- 2026/07/21
+CRDT- 2026/08/05 05:23
+PHST- 2026/03/31 00:00 [received]
+PHST- 2026/06/18 00:00 [revised]
+PHST- 2026/06/22 00:00 [accepted]
+PHST- 2026/08/05 06:43 [medline]
+PHST- 2026/08/05 06:42 [pubmed]
+PHST- 2026/08/05 05:23 [entrez]
+PHST- 2026/07/21 00:00 [pmc-release]
+AID - 1844071 [pii]
+AID - 10.3389/fbinf.2026.1844071 [doi]
+PST - epublish
+SO  - Front Bioinform. 2026 Jul 21;6:1844071. doi: 10.3389/fbinf.2026.1844071. 
+      eCollection 2026.
+
+PMID- 41850037
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20260711
+LR  - 20260711
+IS  - 1872-7565 (Electronic)
+IS  - 0169-2607 (Linking)
+VI  - 280
+DP  - 2026 Jun
+TI  - Med-ViX-Ray: Enhancing explainable chest X-ray analysis with clinical knowledge 
+      graphs.
+PG  - 109313
+LID - S0169-2607(26)00081-7 [pii]
+LID - 10.1016/j.cmpb.2026.109313 [doi]
+AB  - BACKGROUND AND OBJECTIVE: Deep learning has achieved remarkable success in chest 
+      x-ray interpretation, yet most models remain black boxes, producing accurate 
+      predictions without exposing the clinical reasoning behind them. This opacity 
+      limits trust and adoption in real-world practice. We introduce Med-ViX-Ray, a 
+      knowledge-guided and interpretable framework that integrates symbolic clinical 
+      reasoning into a vision Transformer backbone. METHODS: The model leverages a 
+      structured graph of radiological signs and conditions, aligning image attention 
+      maps with domain knowledge through a probabilistic soft-matching module and a 
+      nudging mechanism that refines classifier outputs. This dual integration allows 
+      predictions to be explained in terms of clinically meaningful signs and 
+      corresponding image regions, offering transparency beyond post-hoc heatmaps. We 
+      evaluated Med-ViX-Ray on MIMIC-CXR for training and internal validation, and 
+      tested its generalization on VinDR-CXR and RSNA Pneumonia benchmarks. RESULTS: 
+      The proposed method improves recall and F1-score compared to a strong SwinV2 
+      baseline (Respectively, F1-micro: 0.561 - 0.456; Precision: 0.462 - 0-529; 
+      Recall: 0.715 - 0.466; ROC: 0.788 - 0.744), while maintaining competitive overall 
+      performance. Qualitative analyses confirm that the model highlights clinically 
+      relevant regions and sign-activations aligned with radiological practice. 
+      CONCLUSION: These results suggest that knowledge-guided attention and sign-based 
+      explanations can enhance interpretability and recall in chest X-ray 
+      classification models. Future work will extend the framework toward report 
+      generation and prospective clinical evaluation.
+CI  - Copyright © 2026 The Authors. Published by Elsevier B.V. All rights reserved.
+FAU - Cieri, Manuel
+AU  - Cieri M
+AD  - University of Salerno, Giovanni Paolo II Street 132, Fisciano, SA, 84084, Italy. 
+      Electronic address: m.cieri1@studenti.unisa.it.
+FAU - Palomba, Fabio
+AU  - Palomba F
+AD  - University of Salerno, Giovanni Paolo II Street 132, Fisciano, SA, 84084, Italy.
+LA  - eng
+PT  - Journal Article
+DEP - 20260314
+PL  - Ireland
+TA  - Comput Methods Programs Biomed
+JT  - Computer methods and programs in biomedicine
+JID - 8506513
+SB  - IM
+MH  - Humans
+MH  - *Radiography, Thoracic
+MH  - Deep Learning
+MH  - Algorithms
+MH  - Pneumonia/diagnostic imaging
+MH  - *Radiographic Image Interpretation, Computer-Assisted/methods
+OTO - NOTNLM
+OT  - AI
+OT  - CXR
+OT  - Explainability
+OT  - Knowledge-guided
+OT  - Medicine
+OT  - Transformer
+COIS- Declaration of competing interest The authors declare that they have no known 
+      competing financial interests or personal relationships that could have appeared 
+      to influence the work reported in this paper.
+EDAT- 2026/03/19 01:31
+MHDA- 2026/04/12 04:37
+CRDT- 2026/03/18 19:12
+PHST- 2025/10/26 00:00 [received]
+PHST- 2026/03/03 00:00 [revised]
+PHST- 2026/03/09 00:00 [accepted]
+PHST- 2026/04/12 04:37 [medline]
+PHST- 2026/03/19 01:31 [pubmed]
+PHST- 2026/03/18 19:12 [entrez]
+AID - S0169-2607(26)00081-7 [pii]
+AID - 10.1016/j.cmpb.2026.109313 [doi]
+PST - ppublish
+SO  - Comput Methods Programs Biomed. 2026 Jun;280:109313. doi: 
+      10.1016/j.cmpb.2026.109313. Epub 2026 Mar 14.
+
+PMID- 42052214
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+DCOM- 20260429
+LR  - 20260813
+IS  - 2624-8212 (Electronic)
+IS  - 2624-8212 (Linking)
+VI  - 9
+DP  - 2026
+TI  - Explainable neuro-symbolic artificial intelligence for automated interpretation 
+      of corneal topography and early keratoconus detection.
+PG  - 1713747
+LID - 10.3389/frai.2026.1713747 [doi]
+LID - 1713747
+AB  - BACKGROUND: Early detection of keratoconus is essential for preventing 
+      postoperative complications in refractive surgery and preserving long-term visual 
+      function. Although artificial intelligence has demonstrated strong potential in 
+      ophthalmic image analysis, many existing models operate as black-box systems and 
+      provide limited clinical interpretability. Transparent decision support is 
+      therefore critical for safe deployment of AI in clinical practice. METHODS: We 
+      propose an explainable neuro-symbolic framework for automated interpretation of 
+      corneal topography reports and refractive surgery eligibility assessment. The 
+      proposed system integrates multimodal feature extraction, a symbolic corneal 
+      knowledge graph, probabilistic reasoning, and large language model (LLM)-based 
+      report generation. Quantitative biometric parameters and corneal curvature maps 
+      extracted from IOLMaster 700 reports were processed through a hybrid 
+      convolutional neural network-Vision Transformer (CNN-ViT) module to capture 
+      spatial corneal morphology. These representations were aligned with a clinically 
+      curated knowledge graph encoding relationships between corneal parameters, 
+      disease states, and surgical decision criteria. Bayesian probabilistic inference 
+      was then applied to estimate disease likelihoods, while an ensemble LLM module 
+      generated structured bilingual clinical reports explaining the reasoning process. 
+      RESULTS: In a prospective pilot cohort of 20 eyes, the proposed framework 
+      demonstrated strong diagnostic performance for early keratoconus detection, 
+      achieving an area under the receiver operating characteristic curve (AUC) of 
+      approximately 0.95. Sensitivity and specificity remained high across decision 
+      thresholds, and the system achieved a balanced F1 score for refractive surgery 
+      eligibility classification. Expert evaluation indicated high interpretability and 
+      clinical usefulness of the generated reports. The end-to-end pipeline required 
+      approximately 95 ± 12 s per case, supporting near-real-time clinical decision 
+      support. CONCLUSION: The proposed neuro-symbolic framework combines deep 
+      representation learning, structured medical knowledge, and explainable 
+      language-based reporting to provide transparent AI-assisted corneal diagnostics. 
+      Although the current results are based on a pilot cohort, the framework 
+      demonstrates the potential of integrating neural networks, knowledge graphs, and 
+      large language models for interpretable ophthalmic AI systems. Future studies 
+      using larger multicenter datasets are required to further validate clinical 
+      performance and generalizability.
+CI  - Copyright © 2026 Wang and Qin.
+FAU - Wang, Mini Han
+AU  - Wang MH
+AD  - Zhuhai People's Hospital (The Affiliated Hospital of Beijing Institute of 
+      Technology, Zhuhai Clinical Medical College of Jinan University), Zhuhai, 
+      Guangdong, China.
+AD  - Zhuhai Institute of Advanced Technology Chinese Academy of Sciences, Zhuhai, 
+      Guangdong, China.
+AD  - The Faculty of Medicine, The Chinese University of Hong Kong, Hong Kong, Hong 
+      Kong SAR, China.
+FAU - Qin, Shuai
+AU  - Qin S
+AD  - Zhuhai People's Hospital (The Affiliated Hospital of Beijing Institute of 
+      Technology, Zhuhai Clinical Medical College of Jinan University), Zhuhai, 
+      Guangdong, China.
+AD  - Department of Ophthalmology, The Third Affiliated Hospital of Southern Medical 
+      University, Guangzhou, China.
+LA  - eng
+PT  - Journal Article
+DEP - 20260413
+PL  - Switzerland
+TA  - Front Artif Intell
+JT  - Frontiers in artificial intelligence
+JID - 101770551
+PMC - PMC13111306
+OTO - NOTNLM
+OT  - corneal topography
+OT  - explainable AI
+OT  - keratoconus detection
+OT  - knowledge graph
+OT  - large language models
+OT  - neuro-symbolic artificial intelligence
+OT  - refractive surgery screening
+COIS- The author(s) declared that this work was conducted in the absence of any 
+      commercial or financial relationships that could be construed as a potential 
+      conflict of interest.
+EDAT- 2026/04/29 12:25
+MHDA- 2026/04/29 12:26
+PMCR- 2026/04/13
+CRDT- 2026/04/29 04:53
+PHST- 2025/09/26 00:00 [received]
+PHST- 2026/03/20 00:00 [revised]
+PHST- 2026/03/23 00:00 [accepted]
+PHST- 2026/04/29 12:26 [medline]
+PHST- 2026/04/29 12:25 [pubmed]
+PHST- 2026/04/29 04:53 [entrez]
+PHST- 2026/04/13 00:00 [pmc-release]
+AID - 10.3389/frai.2026.1713747 [doi]
+PST - epublish
+SO  - Front Artif Intell. 2026 Apr 13;9:1713747. doi: 10.3389/frai.2026.1713747. 
+      eCollection 2026.
+
+PMID- 41634460
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20260627
+LR  - 20260627
+IS  - 1590-3478 (Electronic)
+IS  - 1590-1874 (Linking)
+VI  - 47
+IP  - 3
+DP  - 2026 Feb 4
+TI  - Analysis of the generalization ability of graph neural networks in cross-subject 
+      EEG emotion recognition.
+PG  - 229
+LID - 10.1007/s10072-026-08835-6 [doi]
+AB  - BACKGROUND: Emotion decoding from Electroencephalography (EEG) remains limited by 
+      cross-subject variability and low structural generalisation. This study aimed to 
+      develop a calibration-free (inference without per-subject retraining), 
+      entropy-guided graph neural network (EGGN) to enhance accuracy, Architectural 
+      interpretability, and fairness in EEG-based emotion recognition. METHODS: We used 
+      the Shanghai Jiao Tong University Emotion EEG Dataset (SEED) (n = 15, 3 sessions, 
+      62 channels) and the Database for Emotion Analysis using Physiological Signals 
+      (DEAP) (n = 32, 40 trials, 32 channels) datasets, segmented into 3-s epochs with 
+      a sampling rate of 128 Hz. Models included Graph Convolutional Network (GCN), 
+      Transformer, and Entropy-Guided Graph Neural Network (EGGN), trained using 
+      10-fold cross-validation. Graph edges were derived via entropy gradients; 
+      dual-attention pooling and fairness metrics were applied. Saliency and graph 
+      fingerprint analyses were performed on SEED; calibration-free and meta-learning 
+      evaluations were conducted on DEAP. RESULTS: EGGN achieved the highest accuracy: 
+      84.2% (valence) and 83.1% (arousal) on SEED, outperforming Transformer (80.5%, 
+      79.8%) and GCN (78.1%, 76.4%). Entropy-based edge modelling improved accuracy by 
+      2.8–3.9%; dual-attention pooling further increased accuracy (+ 3.6–4.1%) and 
+      Neuropsychological Alignment Score (NAS) defined by cosine similarity between 
+      predicted saliency maps and established emotion-related brain regions 
+      (+ 0.14–0.17). Fairness metrics showed minimal gender bias (Disparate Impact 
+      Ratio (DIR) = 0.97; Equal Opportunity Difference (EOD) = –1.1%). Graph similarity 
+      peaked at 0.74 for high arousal (SEED–DEAP); Uniform Manifold Approximation and 
+      Projection (UMAP) silhouette score was 0.64. Calibration-free inference yielded a 
+      minor performance drop (EGGN Δ = –1.4% to –0.8%). CONCLUSION: EGGN enables 
+      robust, interpretable, and fair emotion decoding from electroencephalography 
+      across subjects and datasets.
+FAU - Wang, Lingyue
+AU  - Wang L
+AD  - School of Health Sciences and Biomedical Engineering, Hebei University of 
+      Technology, Tianjin, 300401, China.
+FAU - Guo, Lei
+AU  - Guo L
+AD  - School of Health Sciences and Biomedical Engineering, Hebei University of 
+      Technology, Tianjin, 300401, China.
+FAU - Yang, Xinsheng
+AU  - Yang X
+AD  - School of Electrical Engineering, Hebei University of Technology, Tianjin, 
+      300401, China.
+FAU - Li, Ying
+AU  - Li Y
+AUID- ORCID: 0009-0000-8934-9898
+AD  - School of Health Sciences and Biomedical Engineering, Hebei University of 
+      Technology, Tianjin, 300401, China. liying_hebut_tj@163.com.
+LA  - eng
+PT  - Journal Article
+DEP - 20260204
+PL  - Italy
+TA  - Neurol Sci
+JT  - Neurological sciences : official journal of the Italian Neurological Society and 
+      of the Italian Society of Clinical Neurophysiology
+JID - 100959175
+SB  - IM
+MH  - Humans
+MH  - *Graph Neural Networks
+MH  - *Emotions/physiology
+MH  - *Electroencephalography/methods
+MH  - *Signal Processing, Computer-Assisted
+MH  - Male
+MH  - Adult
+MH  - *Brain/physiology
+OTO - NOTNLM
+OT  - Calibration-free techniques
+OT  - Computer-assisted
+OT  - Electroencephalography
+OT  - Emotion recognition
+OT  - Graph neural networks
+OT  - Machine learning
+OT  - Signal processing
+COIS- Declarations. Conflict of interest: The authors declare no conflicts of interest. 
+      Ethical statement: The Institutional Review Board of Hebei University of 
+      Technology approved the study (No. HEBUThMEC2022065) and all participants were 
+      informed about the research aims, data (usage) and right to withdraw from the 
+      study at any time and then gave written consent. They received strict 
+      confidentiality agreements for quantitative data and then analysed the data which 
+      had been anonymised to protect individual identities. Informed consent: Verbal 
+      informed consent was obtained from all participants prior to their involvement in 
+      the study. This procedure was approved by the Institutional Review Board. The 
+      rationale for using verbal consent, as outlined in the approved ethics 
+      application, was that written documentation was not practicable for a portion of 
+      the participants due to logistical constraints. The consent process included a 
+      clear explanation of the research aims, procedures, confidentiality measures, and 
+      the right to withdraw at any time without penalty. The provision of verbal 
+      consent was formally witnessed and documented by the research team.
+EDAT- 2026/02/04 05:06
+MHDA- 2026/06/27 06:44
+CRDT- 2026/02/03 23:34
+PHST- 2025/07/11 00:00 [received]
+PHST- 2026/01/15 00:00 [accepted]
+PHST- 2026/06/27 06:44 [medline]
+PHST- 2026/02/04 05:06 [pubmed]
+PHST- 2026/02/03 23:34 [entrez]
+AID - 10.1007/s10072-026-08835-6 [pii]
+AID - 10.1007/s10072-026-08835-6 [doi]
+PST - epublish
+SO  - Neurol Sci. 2026 Feb 4;47(3):229. doi: 10.1007/s10072-026-08835-6.
+
+PMID- 42509050
+OWN - NLM
+STAT- Publisher
+LR  - 20260727
+IS  - 1878-4046 (Electronic)
+IS  - 1076-6332 (Linking)
+DP  - 2026 Jul 27
+TI  - PT-CycleGAN: Progressive Transformer Based CycleGAN for 3 T to 7 T Like MRI 
+      Synthesis.
+LID - S1076-6332(26)00478-2 [pii]
+LID - 10.1016/j.acra.2026.06.062 [doi]
+AB  - RATIONALE AND OBJECTIVES: Existing Generative Adversarial Networks (GANs) for 3 T 
+      to 7 T MRI synthesis often suffer from structural instability and an inability to 
+      preserve fine grained anatomical textures due to rigid architectures. This study 
+      proposes PT-CycleGAN, a progressive transformer based framework designed to 
+      capture the hierarchical nature of neuroanatomy while maintaining training 
+      stability. MATERIALS AND METHODS: The proposed model utilizes a bidirectional 
+      CycleGAN architecture with a novel generator that dynamically scales attention 
+      complexity by increasing the number of attention heads across layers. A staged 
+      training strategy was implemented to stabilize global geometry before 
+      synthesizing high frequency details. Validation was conducted on T1 weighted and 
+      T2 weighted scans from two benchmark datasets (UNC and Hippocampal) using plane 
+      wise (A(x), C(r), S(g)) processing. Performance was evaluated using PSNR, SSIM, 
+      and SHAP based interpretability analysis. RESULTS: PT-CycleGAN significantly 
+      outperformed state of the art baselines, including SRGAN and MSR-CycleGAN. The 
+      model achieved a peak PSNR of 34.67 dB and an SSIM of 0.95. Qualitative 
+      assessment confirmed the recovery of sharp gray white matter interfaces and 
+      submillimeter cortical details. SHAP analysis verified that the synthesis process 
+      was guided by clinically salient features, specifically cerebrospinal fluid and 
+      gray matter regions. CONCLUSION: By implementing dynamic attention scaling and a 
+      synchronized staged training schedule, PT-CycleGAN provides a robust solution for 
+      high fidelity MRI translation. This approach effectively addresses architectural 
+      rigidity in traditional models, establishing a more reliable framework for ultra 
+      high field neuroimaging synthesis.
+CI  - Copyright © 2026 The Association of University Radiologists. Published by 
+      Elsevier Inc. All rights reserved.
+FAU - Burhagohain, Franklin
+AU  - Burhagohain F
+AD  - Department of Electronics and Communication Engineering, Indian Institute of 
+      Information Technology (IIIT) Guwahati, Guwahati, Assam, India (F.B., S.B.). 
+      Electronic address: franklin.buragohain@iiitg.ac.in.
+FAU - Barma, Shovan
+AU  - Barma S
+AD  - Department of Electronics and Communication Engineering, Indian Institute of 
+      Information Technology (IIIT) Guwahati, Guwahati, Assam, India (F.B., S.B.).
+LA  - eng
+PT  - Journal Article
+DEP - 20260727
+PL  - United States
+TA  - Acad Radiol
+JT  - Academic radiology
+JID - 9440159
+SB  - IM
+OTO - NOTNLM
+OT  - Attention mechanism
+OT  - CycleGAN
+OT  - MRI synthesis
+OT  - Progressive transformer
+OT  - Unpaired image translation
+COIS- Declaration of Competing Interest The authors whose names are listed immediately 
+      below certify that they have NO affiliations with or involvement in any 
+      organization or entity with any financial interest (such as honoraria; 
+      educational grants; participation in speakers’ bureaus; membership, employment, 
+      consultancies, stock ownership, or other equity interest; and expert testimony or 
+      patent licensing arrangements), or non financial interest (such as personal or 
+      professional relationships, affiliations, knowledge or beliefs) in the subject 
+      matter or materials discussed in this manuscript.
+EDAT- 2026/07/28 00:35
+MHDA- 2026/07/28 00:35
+CRDT- 2026/07/27 21:55
+PHST- 2026/04/02 00:00 [received]
+PHST- 2026/06/10 00:00 [revised]
+PHST- 2026/06/30 00:00 [accepted]
+PHST- 2026/07/28 00:35 [medline]
+PHST- 2026/07/28 00:35 [pubmed]
+PHST- 2026/07/27 21:55 [entrez]
+AID - S1076-6332(26)00478-2 [pii]
+AID - 10.1016/j.acra.2026.06.062 [doi]
+PST - aheadofprint
+SO  - Acad Radiol. 2026 Jul 27:S1076-6332(26)00478-2. doi: 10.1016/j.acra.2026.06.062.
+
+PMID- 42064597
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+DCOM- 20260501
+LR  - 20260813
+IS  - 2832-3637 (Electronic)
+IS  - 2832-3637 (Linking)
+VI  - 4
+IP  - 4
+DP  - 2026 Apr 27
+TI  - Mapping Functional Brain Organization Using Artificial Intelligence.
+PG  - 469-484
+LID - 10.1021/cbmi.5c00092 [doi]
+AB  - The human brain is characterized by spatially distinguishable cytoarchitecture, 
+      structure, function, connectivity, and morphology, allowing its parcellation into 
+      distinct regions. Delineating structurally and functionally homogeneous brain 
+      regions through parcellation is crucial for advancing our understanding of brain 
+      organization and function. Functional parcellation leverages resting-state or 
+      task-based fMRI data to map regions with coherent activity or connectivity 
+      patterns to uncover brain network architecture changes across the lifespan and in 
+      disease. Recent advances in artificial intelligence (AI) have transformed this 
+      field by enabling data-driven and individualized mapping of functional brain 
+      organization. This review covers current methodologies across supervised, 
+      unsupervised, and self-supervised learning frameworks in functional parcellation 
+      using resting-state functional MRI (rs-fMRI), highlighting their applications in 
+      spatial and temporal feature extraction as well as individual parcellations. We 
+      compared traditional approaches such as independent component analysis with 
+      AI-based methods such as graph neural networks, convolutional neural networks, 
+      and transformer networks, emphasizing their distinctive methodological basis and 
+      performance. We elaborated validation strategies including test-retest 
+      reproducibility, functional homogeneity, alignment with task-based fMRI or 
+      electrophysiology, and cross-modality validation. We also discussed limitations 
+      of AI-based approaches, such as data requirements, generalizability, and 
+      interpretability. Furthermore, we proposed future directions including multimodal 
+      integration, foundation models, and explainable AI. Collectively, this review 
+      outlines the current strategies of functional parcellation using AI, ultimately 
+      supporting its usage for understanding brain organization across the lifespan and 
+      in disease.
+CI  - © 2025 American Chemical Society.
+FAU - Zhu, Tianjia
+AU  - Zhu T
+AD  - Department of Radiology, Children's Hospital of Philadelphia, 3401 Civic Center 
+      Boulevard, Philadelphia, Pennsylvania 19104, United States. RINGGOLD: 6567
+AD  - Department of Bioengineering, University of Pennsylvania, 3400 Spruce Street, 
+      Philadelphia, Pennsylvania 19104, United States. RINGGOLD: 6572
+FAU - Mohapatra, Sovesh
+AU  - Mohapatra S
+AD  - Department of Radiology, Children's Hospital of Philadelphia, 3401 Civic Center 
+      Boulevard, Philadelphia, Pennsylvania 19104, United States. RINGGOLD: 6567
+AD  - Department of Bioengineering, University of Pennsylvania, 3400 Spruce Street, 
+      Philadelphia, Pennsylvania 19104, United States. RINGGOLD: 6572
+FAU - Tan, Shufang
+AU  - Tan S
+AD  - Department of Radiology, Children's Hospital of Philadelphia, 3401 Civic Center 
+      Boulevard, Philadelphia, Pennsylvania 19104, United States. RINGGOLD: 6567
+AD  - Graduate School of Education, Peking University, Beijing 100871, China.
+FAU - Ouyang, Minhui
+AU  - Ouyang M
+AD  - Department of Radiology, Children's Hospital of Philadelphia, 3401 Civic Center 
+      Boulevard, Philadelphia, Pennsylvania 19104, United States. RINGGOLD: 6567
+AD  - Department of Radiology, Perelman School of Medicine, University of Pennsylvania, 
+      3400 Spruce Street, Philadelphia, Pennsylvania 19104, United States.
+FAU - Huang, Hao
+AU  - Huang H
+AUID- ORCID: 0000-0002-9103-4382
+AD  - Department of Radiology, Children's Hospital of Philadelphia, 3401 Civic Center 
+      Boulevard, Philadelphia, Pennsylvania 19104, United States. RINGGOLD: 6567
+AD  - Department of Radiology, Perelman School of Medicine, University of Pennsylvania, 
+      3400 Spruce Street, Philadelphia, Pennsylvania 19104, United States.
+LA  - eng
+PT  - Journal Article
+PT  - Review
+DEP - 20251112
+PL  - United States
+TA  - Chem Biomed Imaging
+JT  - Chemical & biomedical imaging
+JID - 9918574388106676
+PMC - PMC13126364
+OTO - NOTNLM
+OT  - artificial intelligence
+OT  - brain development
+OT  - brain organization
+OT  - brain parcellation
+OT  - clustering
+OT  - feature extraction
+OT  - functional connectivity
+OT  - individual variability
+OT  - resting-state functional MRI
+EDAT- 2026/05/01 06:34
+MHDA- 2026/05/01 06:35
+PMCR- 2025/11/12
+CRDT- 2026/05/01 05:16
+PHST- 2025/06/29 00:00 [received]
+PHST- 2025/11/06 00:00 [revised]
+PHST- 2025/11/06 00:00 [accepted]
+PHST- 2026/05/01 06:35 [medline]
+PHST- 2026/05/01 06:34 [pubmed]
+PHST- 2026/05/01 05:16 [entrez]
+PHST- 2025/11/12 00:00 [pmc-release]
+AID - 10.1021/cbmi.5c00092 [doi]
+PST - epublish
+SO  - Chem Biomed Imaging. 2025 Nov 12;4(4):469-484. doi: 10.1021/cbmi.5c00092. 
+      eCollection 2026 Apr 27.
+
+PMID- 42564573
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+DCOM- 20260807
+LR  - 20260813
+IS  - 2225-2002 (Print)
+IS  - 2225-2010 (Electronic)
+IS  - 2225-2002 (Linking)
+VI  - 15
+IP  - 1
+DP  - 2026
+TI  - Artificial intelligence in haematology laboratory diagnosis: Current 
+      applications, challenges, and future directions.
+PG  - 3130
+LID - 10.4102/ajlm.v15i1.3130 [doi]
+LID - 3130
+AB  - BACKGROUND: Artificial intelligence (AI) is transforming haematology diagnostics 
+      by improving accuracy, efficiency, and reproducibility in workflows traditionally 
+      reliant on manual microscopy and expert interpretation. Integrating AI into 
+      laboratory medicine presents opportunities to enhance diagnostic precision and 
+      reduce variability, particularly in resource-limited settings. AIM: This 
+      narrative review examines the application of AI across major domains of 
+      haematology, morphological diagnosis, flow cytometry, cytogenetics, genomics, and 
+      clinical decision support, while addressing ethical, regulatory, and economic 
+      considerations relevant to global and African laboratory contexts. METHODS: A 
+      comprehensive literature search of PubMed, Scopus, Web of Science, and EMBASE 
+      identified studies describing or evaluating AI algorithms in haematologic 
+      diagnostics, focusing on model performance, validation level, and clinical 
+      applicability. RESULTS: Recent studies demonstrate strong performance of deep 
+      learning models, particularly convolutional neural networks and hybrid 
+      convolutional neural networks-transformer architectures, in automating blood and 
+      bone marrow morphology, detecting subtle dysplastic changes, and supporting 
+      digital workflows. In flow cytometry, AI enhances automated gating and rare event 
+      detection, while cytogenetic and genomic tools aid in karyotyping, variant 
+      classification, and structural abnormality recognition. Decision-support systems 
+      further assist in diagnostic triage and treatment planning. However, widespread 
+      implementation is limited by data heterogeneity, inadequate multicentre 
+      validation, and evolving ethical and regulatory frameworks. CONCLUSION: Advancing 
+      AI integration in haematology will require robust validation studies, explainable 
+      AI approaches, and equitable adoption strategies. Strengthening African 
+      laboratory systems through such innovations offers a pathway toward improved 
+      diagnostic capacity and sustainable digital transformation. WHAT THIS STUDY ADDS: 
+      The current study highlighted that AI is improving haematology laboratory tasks 
+      such as cell identification, differential diagnosis assistance, and result 
+      interpretation, but still faces challenges in validation, bias, and workflow 
+      integration. Future progress depends on stronger external validation, better 
+      explainable models, and closer collaboration between laboratory experts and AI 
+      specialists.
+CI  - © 2026. The Author.
+FAU - Osman, Hussam A
+AU  - Osman HA
+AUID- ORCID: 0000-0002-2017-2331
+AD  - Department of Health and Laboratory Science, College of Medical and Health 
+      Sciences, Liwa University, Abu Dhabi, United Arab Emirates.
+LA  - eng
+PT  - Journal Article
+PT  - Review
+DEP - 20260723
+PL  - South Africa
+TA  - Afr J Lab Med
+JT  - African journal of laboratory medicine
+JID - 101603205
+PMC - PMC13443926
+OTO - NOTNLM
+OT  - artificial intelligence
+OT  - automated cell classification
+OT  - computational pathology
+OT  - deep learning
+OT  - digital morphology
+OT  - federated learning
+OT  - haematology diagnostics
+OT  - machine learning
+COIS- The author declares that no financial or personal relationships inappropriately 
+      influenced the writing of this article.
+EDAT- 2026/08/07 06:35
+MHDA- 2026/08/07 06:36
+PMCR- 2026/07/23
+CRDT- 2026/08/07 05:50
+PHST- 2025/11/21 00:00 [received]
+PHST- 2026/03/19 00:00 [accepted]
+PHST- 2026/08/07 06:36 [medline]
+PHST- 2026/08/07 06:35 [pubmed]
+PHST- 2026/08/07 05:50 [entrez]
+PHST- 2026/07/23 00:00 [pmc-release]
+AID - AJLM-15-3130 [pii]
+AID - 10.4102/ajlm.v15i1.3130 [doi]
+PST - epublish
+SO  - Afr J Lab Med. 2026 Jul 23;15(1):3130. doi: 10.4102/ajlm.v15i1.3130. eCollection 
+      2026.
+
+PMID- 41899891
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+DCOM- 20260328
+LR  - 20260813
+IS  - 2306-5354 (Print)
+IS  - 2306-5354 (Electronic)
+IS  - 2306-5354 (Linking)
+VI  - 13
+IP  - 3
+DP  - 2026 Mar 19
+TI  - Digital Gait Biomarkers for Parkinson's Disease: Subject-Wise Validated 
+      Explainable AI Framework Using Vertical Ground Reaction Force Signals.
+LID - 10.3390/bioengineering13030360 [doi]
+LID - 360
+AB  - Parkinson's disease (PD) is associated with progressive gait deterioration; 
+      however, widely used clinical scales such as the Hoehn & Yahr (H&Y) stage are 
+      limited in capturing continuous severity changes due to subjectivity and discrete 
+      grading. This study proposes a two-stage explainable AI framework using vertical 
+      ground reaction force (VGRF) signals to achieve reproducible PD detection and 
+      continuous severity estimation. In the first stage, three deep learning models, 
+      temporal convolutional network (TCN), BiGRU with attention, and FCNN-Transformer, 
+      were trained using windowed VGRF signals under repeated subject-wise data 
+      segmentation. All models achieved high discrimination performance (AUC ≥ 0.93), 
+      with FCNN-Transformer showing the highest mean AUC (0.940) and statistically 
+      superior performance (paired Wilcoxon test, p < 0.05). Stability-based 
+      explainable AI using Integrated Gradients consistently identified 
+      variability-related VGRF features as the most informative, which were also 
+      significantly different between groups at the data level (p < 0.001, 
+      FDR-corrected). In the second stage, XGBoost regression was applied to PD 
+      subjects to predict continuous H&Y severity, achieving strong correlation with 
+      clinical grades (Spearman ρ = 0.921, p < 0.001), low error (MAE = 0.158, RMSE = 
+      0.241), and high determination (R(2) = 0.953). This shows that gait-based 
+      features are a sensitive enough signal to continuously quantify disease 
+      progression. In addition, in the TREND prospective longitudinal cohort (n = 696), 
+      wearable walking indicators differed significantly from those of non-patients 
+      prior to diagnosis, and a decline in walking pace was observed approximately four 
+      years before Parkinson's disease diagnosis, providing the basis for early 
+      screening and monitoring using gait-based digital biomarkers. These results 
+      demonstrate that gait-based digital biomarkers can objectively quantify both PD 
+      presence and disease progression. The proposed framework provides a reproducible, 
+      explainable, and clinically interpretable AI-based decision support approach for 
+      PD assessment.
+FAU - Choi, Moonhyeok
+AU  - Choi M
+AD  - Department of Electronic and Communication Engineering, Catholic Kwandong 
+      University, 24 Beomil-ro 579 Beongil, Gangneung-si 25601, Republic of Korea.
+FAU - Jo, Jaehyun
+AU  - Jo J
+AD  - Department of Digital Healthcare, Catholic Kwandong University, 24 Beomil-ro 579 
+      Beongil, Gangneung-si 25601, Republic of Korea.
+FAU - Jeong, Jinhyoung
+AU  - Jeong J
+AUID- ORCID: 0009-0004-7273-7279
+AD  - Department of Healthcare Management, Catholic Kwandong University, 24 Beomil-ro 
+      579 Beongil, Gangneung-si 25601, Republic of Korea.
+LA  - eng
+GR  - This research was supported by the Regional Innovation System & Education(RISE) 
+      program through the Gangwon RISE Center, funded by the Ministry of Education(MOE) 
+      and the Gangwon State(G.S.), Republic of Korea.(2025-RISE-10-001)./This research 
+      was supported by the Regional Innovation System & Education(RISE) program through 
+      the Gangwon RISE Center, funded by the Ministry of Education(MOE) and the Gangwon 
+      State(G.S.), Republic of Korea.(2025-RISE-10-001)./
+PT  - Journal Article
+DEP - 20260319
+PL  - Switzerland
+TA  - Bioengineering (Basel)
+JT  - Bioengineering (Basel, Switzerland)
+JID - 101676056
+PMC - PMC13024558
+OTO - NOTNLM
+OT  - Parkinson’s disease
+OT  - explainable artificial intelligence
+OT  - severity estimation
+OT  - vertical ground reaction force
+COIS- The authors declare no conflicts of interest.
+EDAT- 2026/03/28 06:39
+MHDA- 2026/03/28 06:40
+PMCR- 2026/03/19
+CRDT- 2026/03/28 01:27
+PHST- 2026/01/30 00:00 [received]
+PHST- 2026/03/06 00:00 [revised]
+PHST- 2026/03/13 00:00 [accepted]
+PHST- 2026/03/28 06:40 [medline]
+PHST- 2026/03/28 06:39 [pubmed]
+PHST- 2026/03/28 01:27 [entrez]
+PHST- 2026/03/19 00:00 [pmc-release]
+AID - bioengineering13030360 [pii]
+AID - bioengineering-13-00360 [pii]
+AID - 10.3390/bioengineering13030360 [doi]
+PST - epublish
+SO  - Bioengineering (Basel). 2026 Mar 19;13(3):360. doi: 
+      10.3390/bioengineering13030360.
+
+PMID- 42685163
+OWN - NLM
+STAT- Publisher
+LR  - 20260902
+IS  - 1558-2531 (Electronic)
+IS  - 0018-9294 (Linking)
+VI  - PP
+DP  - 2026 Sep 2
+TI  - EMBC Special Issue: PhyNet: A Physiology-Constrained Monotonic Neural Network for 
+      Safe and Explainable Blood Glucose Forecasting.
+LID - 10.1109/TBME.2026.3730324 [doi]
+AB  - OBJECTIVE: Deep learning (DL) has become state-of-the-art for blood glucose (BG) 
+      forecasting in type 1 diabetes (T1D). However, its black-box nature raises safety 
+      and reliability concerns regarding its use for therapeutic decision-support. This 
+      study aims to: (1) highlight potential risks associated with standard DL-based BG 
+      forecasting, and (2) address them with PhyNet, a physiology-constrained monotonic 
+      neural network. METHODS: Two large-scale datasets (T1DEXI and MetaboNet, 
+      848 subjects in total) were used to develop PhyNet-which enforces physiological 
+      consistency through a multi-branch structure and weight constraints-and compare 
+      it against six DL baselines (convolutional, recurrent, and transformer-based 
+      architectures). Models predicted BG levels up to 90-minute ahead using continuous 
+      glucose monitoring (CGM) data, carbohydrate intake, and insulin dosing, and were 
+      assessed for: (i) predictive accuracy with standard metrics, and (ii) adherence 
+      to physiological principles (i.e., carbohydrates increase BG, insulin lowers it) 
+      using explainable AI. Specifically, we evaluated model-predicted responses to 
+      varying carbohydrate and insulin intakes, and generated counterfactual 
+      explanations to identify model-recommended actions for avoiding adverse events. 
+      RESULTS: At a 30-minute horizon, predictive accuracy was similar across models 
+      (RMSE: 19.39-21.00 mg/dL; Time Gain: 10.45-13.35 min). Despite this, only PhyNet 
+      consistently captured the physiological effects of carbohydrates and insulin, 
+      yielding 0% unsafe recommendations versus up to 64.3% for baselines. CONCLUSION: 
+      Standard DL models can achieve state-of-the-art performance while failing to 
+      respect physiology, posing clinical risk. PhyNet preserves accuracy while 
+      enhancing physiological fidelity, supporting safer integration into T1D 
+      technologies. SIGNIFICANCE: Evaluating physiological consistency alongside 
+      predictive accuracy is essential for responsible clinical translation of DL-based 
+      BG forecasting.
+FAU - Calzavara, Andrea
+AU  - Calzavara A
+FAU - Prendin, Francesco
+AU  - Prendin F
+FAU - Cappon, Giacomo
+AU  - Cappon G
+FAU - Favero, Simone Del
+AU  - Favero SD
+FAU - Facchinetti, Andrea
+AU  - Facchinetti A
+LA  - eng
+PT  - Journal Article
+DEP - 20260902
+PL  - United States
+TA  - IEEE Trans Biomed Eng
+JT  - IEEE transactions on bio-medical engineering
+JID - 0012737
+SB  - IM
+EDAT- 2026/09/03 01:13
+MHDA- 2026/09/03 01:13
+CRDT- 2026/09/02 14:13
+PHST- 2026/09/03 01:13 [medline]
+PHST- 2026/09/03 01:13 [pubmed]
+PHST- 2026/09/02 14:13 [entrez]
+AID - 10.1109/TBME.2026.3730324 [doi]
+PST - aheadofprint
+SO  - IEEE Trans Biomed Eng. 2026 Sep 2;PP. doi: 10.1109/TBME.2026.3730324.
+
+PMID- 40900798
+OWN - NLM
+STAT- PubMed-not-MEDLINE
+DCOM- 20250915
+LR  - 20250915
+IS  - 2234-943X (Print)
+IS  - 2234-943X (Electronic)
+IS  - 2234-943X (Linking)
+VI  - 15
+DP  - 2025
+TI  - Hybrid feature fusion in cervical cancer cytology: a novel dual-module approach 
+      framework for lesion detection and classification using radiomics, deep learning, 
+      and reproducibility.
+PG  - 1595980
+LID - 10.3389/fonc.2025.1595980 [doi]
+LID - 1595980
+AB  - OBJECTIVE: Cervical cancer screening through cytology remains the gold standard 
+      for early detection, but manual analysis is time-consuming, labor-intensive, and 
+      prone to inter-observer variability. This study proposes an automated deep 
+      learning-based framework that integrates lesion detection, feature extraction, 
+      and classification to enhance the accuracy and efficiency of cytological 
+      diagnosis. MATERIALS AND METHODS: A dataset of 4,236 cervical cytology samples 
+      was collected from six medical centers, with lesion annotations categorized into 
+      six diagnostic classes (NILM, ASC-US, ASC-H, LSIL, HSIL, SCC). Four deep learning 
+      models, Swin Transformer, YOLOv11, Faster R-CNN, and DETR (DEtection 
+      TRansformer), were employed for lesion detection, and their performance was 
+      compared using mAP, IoU, precision, recall, and F1-score. From detected lesion 
+      regions, radiomics features (n=71) and deep learning features (n=1,792) extracted 
+      from EfficientNet were analyzed. Dimensionality reduction techniques (PCA, LASSO, 
+      ANOVA, MI, t-SNE) were applied to optimize feature selection before 
+      classification using XGBoost, Random Forest, CatBoost, TabNet, and 
+      TabTransformer. Additionally, an end-to-end classification model using 
+      EfficientNet was evaluated. The framework was validated using internal 
+      cross-validation and external testing on APCData (3,619 samples). RESULTS: The 
+      Swin Transformer achieved the highest lesion detection accuracy (mAP: 0.94 
+      external), outperforming YOLOv11, Faster R-CNN, and DETR. Combining radiomics and 
+      deep features with TabTransformer yielded superior classification (test accuracy: 
+      94.6%, AUC: 95.9%, recall: 94.1%), exceeding both single-modality and end-to-end 
+      models. Ablation studies confirmed the importance of both the detection module 
+      and hybrid feature fusion. External validation demonstrated high generalizability 
+      (accuracy: 92.8%, AUC: 95.1%). Comprehensive statistical analyses, including 
+      bootstrapped confidence intervals and Delong's test, further substantiated the 
+      robustness and reliability of the proposed framework. CONCLUSIONS: The proposed 
+      AI-driven cytology analysis framework offers superior lesion detection, feature 
+      fusion-based classification, and robust generalizability, providing a scalable 
+      solution for automated cervical cancer screening. Future efforts should focus on 
+      explainable AI (XAI), real-time deployment, and larger-scale validation to 
+      facilitate clinical integration.
+CI  - Copyright © 2025 Niu, Zhang, Wang, Zhang and Liu.
+FAU - Niu, Shurong
+AU  - Niu S
+AD  - Department of Obstetrics and Gynecology, Shanxi Medical University Second 
+      Hospital, Taiyuan, China.
+FAU - Zhang, Lili
+AU  - Zhang L
+AD  - Department of Obstetrics and Gynecology, Shanxi Medical University Second 
+      Hospital, Taiyuan, China.
+FAU - Wang, Lina
+AU  - Wang L
+AD  - Department of Obstetrics and Gynecology, Shanxi Medical University Second 
+      Hospital, Taiyuan, China.
+FAU - Zhang, Xue
+AU  - Zhang X
+AD  - Department of Obstetrics and Gynecology, Shanxi Medical University Second 
+      Hospital, Taiyuan, China.
+FAU - Liu, Erniao
+AU  - Liu E
+AD  - Department of Obstetrics and Gynecology, Shanxi Medical University Second 
+      Hospital, Taiyuan, China.
+LA  - eng
+PT  - Journal Article
+DEP - 20250818
+PL  - Switzerland
+TA  - Front Oncol
+JT  - Frontiers in oncology
+JID - 101568867
+PMC - PMC12400031
+OTO - NOTNLM
+OT  - automated screening
+OT  - cervical cytology
+OT  - deep learning
+OT  - feature fusion
+OT  - machine learning
+OT  - radiomics
+COIS- The authors declare that the research was conducted in the absence of any 
+      commercial or financial relationships that could be construed as a potential 
+      conflict of interest.
+EDAT- 2025/09/03 18:35
+MHDA- 2025/09/03 18:36
+PMCR- 2025/08/18
+CRDT- 2025/09/03 12:07
+PHST- 2025/03/19 00:00 [received]
+PHST- 2025/07/18 00:00 [accepted]
+PHST- 2025/09/03 18:36 [medline]
+PHST- 2025/09/03 18:35 [pubmed]
+PHST- 2025/09/03 12:07 [entrez]
+PHST- 2025/08/18 00:00 [pmc-release]
+AID - 10.3389/fonc.2025.1595980 [doi]
+PST - epublish
+SO  - Front Oncol. 2025 Aug 18;15:1595980. doi: 10.3389/fonc.2025.1595980. eCollection 
+      2025.
+
+PMID- 41197436
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20260114
+LR  - 20260124
+IS  - 1875-595X (Electronic)
+IS  - 0020-6539 (Print)
+IS  - 0020-6539 (Linking)
+VI  - 76
+IP  - 1
+DP  - 2026 Feb
+TI  - Graph-Contrastive Convolutional Neural Network for Extracting and Classifying 
+      Peptide-Based Periodontal Immunomodulatory and Anti-Inflammatory Signatures.
+PG  - 103986
+LID - S0020-6539(25)03269-1 [pii]
+LID - 10.1016/j.identj.2025.103986 [doi]
+LID - 103986
+AB  - INTRODUCTION: Periodontitis is a chronic inflammatory disease that occurs when 
+      the body's immune system fails to respond properly to microbial biofilms. 
+      Peptides exhibiting anti-inflammatory and immunomodulatory properties are 
+      promising as biomarkers and therapeutic agents; however, identifying functional 
+      peptide signatures remains a significant challenge due to sequence variability 
+      and limited data availability. The aim of this study was to develop a 
+      graph-contrastive convolutional neural network (GCCNN) framework for accurately 
+      categorizing periodontitis-related peptides into immunomodulatory and 
+      anti-inflammatory classes, to enhance model interpretability, and facilitate 
+      customized peptide-based therapies. METHODS: In this research, we introduce a 
+      Graph-Contrastive Convolutional Neural Network (GCCNN) framework for classifying 
+      peptide sequences relevant to periodontal health into anti-inflammatory peptides 
+      (AIPs) and immunomodulatory peptides (IMPs). Our model combines a 1D CNN encoder 
+      with SimCLR-style contrastive learning to obtain motif-level representations from 
+      peptide sequences that remain unchanged. To fix a big class imbalance, 
+      pre-trained representations are fine-tuned using supervised learning with 
+      class-weighted binary cross-entropy. RESULTS: On a curated peptide dataset, GCCNN 
+      performed well with AIPs (F1 = 0.94, ROC-AUC = 0.98), but struggled to generalize 
+      IMP predictions due to insufficient data (F1 = 0.04, ROC-AUC = 0.54). Using t-SNE 
+      to visualize the latent space revealed that AIP clusters were closely grouped, 
+      whereas IMP embeddings were more widely dispersed. SHAP-based interpretation 
+      revealed conserved sequence motifs that contribute to AIP predictions, 
+      highlighting the model's transparency. CONCLUSION: This study demonstrates the 
+      effectiveness of contrastive learning for peptide signature extraction and 
+      provides a foundation for improving minority-class peptide classification in 
+      biomedical sequence tasks.
+CI  - Copyright © 2025 The Authors. Published by Elsevier Inc. All rights reserved.
+FAU - Natarajan, Prabhu Manickam
+AU  - Natarajan PM
+AD  - Department of Clinical Sciences, Center of Medical and Bio-allied Health Sciences 
+      and Research, College of Dentistry, Ajman University, Ajman, UAE.
+FAU - Yadalam, Pradeep Kumar
+AU  - Yadalam PK
+AD  - Department of Periodontics, Saveetha Dental College and Hospitals, Saveetha 
+      Institute of Medical and Technical Sciences (SIMATS), Saveetha University 
+      (SIMATS), Chennai-77, India. Electronic address: pradeepkumar.sdc@saveetha.com.
+FAU - V, Sree Devi
+AU  - V SD
+AD  - Department of Prosthodontics, Sree Balaji Dental College and Hospital, Bharath 
+      Institute of Higher Education and Research (Deemed University), Chennai, Tamil 
+      Nadu, India.
+LA  - eng
+PT  - Journal Article
+DEP - 20251105
+PL  - England
+TA  - Int Dent J
+JT  - International dental journal
+JID - 0374714
+RN  - 0 (Peptides)
+RN  - 0 (Anti-Inflammatory Agents)
+RN  - 0 (Immunologic Factors)
+RN  - 0 (Biomarkers)
+SB  - IM
+MH  - *Neural Networks, Computer
+MH  - Humans
+MH  - *Peptides/classification
+MH  - *Periodontitis/immunology
+MH  - *Anti-Inflammatory Agents/classification
+MH  - *Immunologic Factors/classification
+MH  - Biomarkers
+MH  - Convolutional Neural Networks
+PMC - PMC12637048
+OTO - NOTNLM
+OT  - Anti-inflammatory peptides
+OT  - CNN
+OT  - Contrastive learning
+OT  - Immunomodulatory peptides
+OT  - Periodontitis
+COIS- Conflict of interest None disclosed.
+EDAT- 2025/11/07 00:27
+MHDA- 2026/01/14 07:05
+PMCR- 2025/11/05
+CRDT- 2025/11/06 18:07
+PHST- 2025/07/01 00:00 [received]
+PHST- 2025/09/08 00:00 [revised]
+PHST- 2025/10/03 00:00 [accepted]
+PHST- 2026/01/14 07:05 [medline]
+PHST- 2025/11/07 00:27 [pubmed]
+PHST- 2025/11/06 18:07 [entrez]
+PHST- 2025/11/05 00:00 [pmc-release]
+AID - S0020-6539(25)03269-1 [pii]
+AID - 103986 [pii]
+AID - 10.1016/j.identj.2025.103986 [doi]
+PST - ppublish
+SO  - Int Dent J. 2026 Feb;76(1):103986. doi: 10.1016/j.identj.2025.103986. Epub 2025 
+      Nov 5.
+
+PMID- 42136288
+OWN - NLM
+STAT- Publisher
+LR  - 20260515
+IS  - 1873-4316 (Electronic)
+IS  - 1389-2010 (Linking)
+DP  - 2026 May 8
+TI  - Unified Multi-task Learning for Colorectal Cancer Diagnosis via Uncertainty-aware 
+      Routing, Cross-task Consistency, and Resolution-adaptive Training Process.
+LID - 10.2174/0113892010424732260119011055 [doi]
+AB  - INTRODUCTION: The study aims to develop a unified multi-task learning framework 
+      for colorectal cancer diagnosis using whole-slide histopathology images. 
+      Specifically, it targets joint tissue segmentation and tumor grading, enhancing 
+      label efficiency, robustness, and generalization, while minimizing the redundancy 
+      and annotation burden typically associated with treating these tasks 
+      independently. METHODS: 1. Hierarchical Uncertainty-Gated Task Routing (HUGTR): 
+      Dynamically allocates encoder features to decoders based on aleatoric and 
+      epistemic uncertainty. 2. Cross-Task Consistency Attention Matrix (CTCAM): 
+      Enforces spatial coherence between segmentation and grading by aligning attention 
+      maps across tasks. 3. Adaptive Label Denoising with Structural Priors (ALDSP): 
+      Employs graph convolutional autoencoders guided by structural priors from tissue 
+      segmentation. 4. Contrastive Segmentation-Grading Latent Embedding (CSGLE): 
+      Implements a two-headed contrastive learning module to align the latent 
+      representation spaces of segmentation. 5. Curriculum-Based Multi-Resolution Task 
+      Cascade (CMRTC): Trains the model progressively from low to high resolution 
+      images, adapting it to different spatial scales and complexity levels in 
+      whole-slide images (WSIs). RESULTS: 6.8% increase in tumor grading AUC, +3.5% 
+      improvement in segmentation Dice score, and 27% reduction in model 
+      parameters,14.3% decrease in inter-observer variability Discussion: The 
+      combination of uncertainty-aware routing, cross-task alignment, and label 
+      denoising significantly enhances both diagnostic precision and model efficiency. 
+      By treating segmentation and grading as interrelated rather than isolated tasks, 
+      the model better captures shared pathological patterns and domain priors. The 
+      incorporation of contrastive learning and multi-resolution training further 
+      supports generalization across patients and datasets. CONCLUSION: This unified 
+      multi-task framework sets a new benchmark in histopathological analysis for 
+      colorectal cancer by effectively integrating tissue segmentation and tumor 
+      grading. The method's innovations enable better use of annotations, improved 
+      diagnostic consistency, and enhanced scalability, positioning it as a robust AI 
+      tool in pathology workflows.
+CI  - Copyright© Bentham Science Publishers; For any queries, please email at 
+      epub@benthamscience.net.
+FAU - Midhunchakkaravarthy, Divya
+AU  - Midhunchakkaravarthy D
+AD  - Department of Electronics and Communication Engineering, Lincoln University 
+      College, Petaling Jaya, 47301, Malaysia.
+FAU - Nagamani, G Muni
+AU  - Nagamani GM
+AD  - Department of Computer Science and Engineering, Lincoln University College, 
+      Petaling Jaya, 47301, Malaysia.
+FAU - V, Lakshman Narayana
+AU  - V LN
+AD  - Department of Computer Science and Engineering, Vignan's Nirula Institute of 
+      Technology and Science for Women, Guntur, 522009, India.
+LA  - eng
+PT  - Journal Article
+DEP - 20260508
+PL  - Netherlands
+TA  - Curr Pharm Biotechnol
+JT  - Current pharmaceutical biotechnology
+JID - 100960530
+SB  - IM
+OTO - NOTNLM
+OT  - Colorectal cancer
+OT  - histopathology
+OT  - multi-task learning
+OT  - process.
+OT  - tissue segmentation
+OT  - tumor grading
+EDAT- 2026/05/15 06:30
+MHDA- 2026/05/15 06:30
+CRDT- 2026/05/15 03:13
+PHST- 2025/08/04 00:00 [received]
+PHST- 2025/10/27 00:00 [revised]
+PHST- 2025/11/03 00:00 [accepted]
+PHST- 2026/05/15 06:30 [medline]
+PHST- 2026/05/15 06:30 [pubmed]
+PHST- 2026/05/15 03:13 [entrez]
+AID - CPB-EPUB-155436 [pii]
+AID - 10.2174/0113892010424732260119011055 [doi]
+PST - aheadofprint
+SO  - Curr Pharm Biotechnol. 2026 May 8. doi: 10.2174/0113892010424732260119011055.
