@@ -126,6 +126,12 @@ que existe: si no se anota, el PR queda esperando para siempre.
   Task: — (PR #4 se mergeó con ese archivo adentro por una carrera de tiempos; #7 lo
   saca de `main`)
 
+- PR #9 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
+  Toca: CLAUDE.md, tesis/TASKS.md
+  Task: — (fija Referencias_seminario.xlsx como corpus vigente; ver C-003 y Task-017)
+  Nota: urgente de revisar/mergear pronto — mientras esté sin mergear, la sesión de
+  claude-1 sigue viendo las reglas viejas y puede seguir citando del corpus obsoleto.
+
 (PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
 `Prototipo_Preliminar.ipynb` línea por línea, ver comentario en el PR.
 PR #6 —.gitignore del autor humano + Task-015 de claude-1 agregado como commits
