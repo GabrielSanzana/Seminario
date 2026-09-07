@@ -127,6 +127,11 @@ que existe: si no se anota, el PR queda esperando para siempre.
   Nota: urgente de revisar/mergear pronto — mientras esté sin mergear, la sesión de
   claude-1 sigue viendo las reglas viejas y puede seguir citando del corpus obsoleto.
 
+- PR #8 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
+  Toca: secciones/00_resumen.tex, secciones/01_introduccion.tex,
+  secciones/07_conclusiones.tex, TASKS.md
+  Task: Task-016 (resuelve C-002)
+
 (PR #7 —.gitignore + elimina `.claude/settings.local.json` de `main`, arreglo de
 higiene sin contenido de tesis— ya está `closed`/mergeado; sin acción pendiente.
 PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
