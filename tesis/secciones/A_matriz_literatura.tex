@@ -1,0 +1,47 @@
+%% ============================================================
+%%  Anexo A: matriz de revision sistematica
+%%  Duenio inicial: claude-2
+%%  Reglas: ver ../../CLAUDE.md
+%%  No editar si TASKS.md marca este archivo IN_PROGRESS por otro agente.
+%% ============================================================
+
+\section{Matriz de revisión sistemática de literatura}
+
+La tabla siguiente sintetiza, para cada trabajo del corpus núcleo, la metodología empleada, sus hallazgos principales y su relación concreta con la propuesta de esta tesis.
+
+{\small
+\begin{longtable}{P{0.19}P{0.25}P{0.28}P{0.28}}
+\caption{Matriz de revisión sistemática de literatura (corpus núcleo, 22 referencias).}\label{tab:matriz}\\
+\toprule
+\textbf{Trabajo} & \textbf{Metodología} & \textbf{Hallazgos clave} & \textbf{Aporte a la tesis}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Trabajo} & \textbf{Metodología} & \textbf{Hallazgos clave} & \textbf{Aporte a la tesis}\\
+\midrule
+\endhead
+\cite{reichstein2019deep} & Perspectiva sobre integración de aprendizaje profundo y conocimiento físico en ciencias de la Tierra. & El aprendizaje profundo en ciencias de la Tierra debe ser interpretable para generar conocimiento, no solo predecir. & Justifica el objetivo central: convertir la atención en una hipótesis relacional que explique el fenómeno.\\
+\cite{lapuschkin2019unmasking} & LRP y análisis espectral de relevancia (SpRAy) sobre Fisher Vectors, CNN y agentes de aprendizaje por refuerzo. & Modelos de alta precisión pueden aprender atajos espurios; la exactitud por sí sola no garantiza confiabilidad. & Motiva el perfil ``atajo predictivo'' de la matriz de diagnóstico combinado.\\
+\cite{abnar2020quantifying} & Attention rollout y attention flow sobre encoder Transformer. & Rollout y flow correlacionan mejor con la importancia real que la atención cruda; la información se mezcla entre capas. & Insumo directo: fundamenta la agregación por rollout previa a la extracción del grafo, y su advertencia justifica tratar $G$ como hipótesis.\\
+\cite{slack2020fooling} & Ataque adversarial que entrena un clasificador oculto para engañar el muestreo de perturbación de LIME y SHAP. & Las explicaciones post-hoc pueden ocultar deliberadamente la influencia de atributos sensibles. & Refuerza por qué el framework valida cada arista con paradigmas independientes en lugar de una métrica única.\\
+\cite{chefer2021transformer} & LRP combinada con gradientes, específica para bloques de atención de Transformers. & Supera a rollout y a la atención cruda en mapas de relevancia. & Baseline atribucional que el framework extiende de mapa de relevancia a grafo relacional validado.\\
+\cite{jakubowski2022performance} & Comparación sistemática de LIME, SHAP y Explainable Boosting Machine sobre predicción de fallas de activos. & SHAP es más estable que LIME, pero las métricas disponibles no aíslan el origen del sesgo. & Justifica ordenar los eslabones: el eslabón en que una arista falla es el diagnóstico de por qué falla. Aporta baseline al segundo dominio candidato.\\
+\cite{liu2024itransformer} & Invierte el Transformer: cada variable, y no cada paso temporal, es un token. & Supera a Transformers convencionales en pronóstico multivariado al capturar correlaciones entre variables. & Valida externamente la decisión arquitectónica clave: tratar variables como tokens para obtener $A\in\mathbb{R}^{n\times n}$.\\
+\cite{cai2024msgnet} & Análisis en dominio de frecuencia y convolución de grafo adaptativa para correlaciones inter-serie multiescala. & Aprende automáticamente correlaciones inter-serie y generaliza fuera de distribución. & Antecedente de extracción de grafo entre variables, comparable en espíritu a $\Phi$, pero sin validación multicriterio.\\
+\cite{vrahatis2024graph} & Revisión exhaustiva de arquitecturas Graph Attention Network y sus aplicaciones. & Las GAT son interpretables vía pesos de atención, pero requieren un grafo predefinido como entrada. & Motiva el enfoque inverso: en lugar de asumir un grafo, se extrae de la atención de un Transformer estándar.\\
+\cite{petrosian2024solar} & Evaluación comparativa de modelos de aprendizaje automático con SHAP sobre el mejor modelo. & Identifica los factores ambientales dominantes en el pronóstico de generación solar. & Ejemplo representativo de XAI que entrega solo importancia marginal; el framework añade cómo esas variables se relacionan.\\
+\cite{tew2024kans} & Descubrimiento no supervisado de grafo por similitud coseno entre embeddings de sensores, sin topología predefinida. & Identifica correlaciones entre sensores sin grafo previo. & Baseline de descubrimiento de estructura independiente de la atención; su simetría contrasta con la asimetría de $A$.\\
+\cite{zhu2025attention} & Extracción iterativa de dos etapas de un grafo causal de Granger desde matrices de atención de un Transformer de pronóstico. & Es posible derivar estructura causal desde atención ya entrenada. & Antecedente más cercano; se diferencia en corrida única, criterio de validación lineal y ausencia de ablación por arista.\\
+\cite{chatterjee2025multicriteria} & Agregación multicriterio basada en rangos de métricas XAI en conflicto. & La agregación permite ordenar explicaciones cuando las métricas discrepan. & Se conserva la lógica multicriterio y se rechaza la agregación escalar: el vector diagnóstico se mantiene sin colapsar.\\
+\cite{klotz2025xai} & Evaluación de diez métricas XAI en cinco categorías sobre tres conjuntos de teledetección. & Las métricas de fidelidad heredan las patologías de los métodos de perturbación; robustez y aleatorización son más estables. & Restricción de diseño vinculante: la fidelidad es uno de cinco eslabones y se implementa con renormalización.\\
+\cite{han2026tscad} & Transformer con atención colectiva combinando características temporales y espectrales de sensores industriales. & Mejora la detección de anomalías multivariadas sin convertir las dependencias en explicación auditable. & Dominio de aplicación directa: $\Phi$ convertiría su matriz interna en un grafo dirigido auditable.\\
+\cite{qin2026multisensor} & Transformer espacial multi-sensor y temporal multiescala guiado por atención en dominio de frecuencia. & Modela correlaciones entre canales para vida útil remanente con desempeño competitivo. & Primer candidato a segundo dominio: satisface los cinco criterios de selección declarados.\\
+\cite{ewuzie2026robust} & Autoencoder y LSTM con teoría de Dempster--Shafer y atención de características sobre proceso químico de referencia. & Mejora la precisión del diagnóstico ante sensores conflictivos. & Dominio que requiere adaptación: la atención existe pero su eje es temporal o de características.\\
+\cite{zhang2026ehtgnn} & Grafos temporales aprendidos con atención para predecir tasa de penetración en perforación. & Mejora la precisión e interpreta relaciones entre parámetros operacionales. & Ejemplo de grafo aprendido de extremo a extremo: auditarlo exige reentrenar, limitación que el framework elimina.\\
+\cite{kapoor2026fustt} & Transformer espacio-temporal con inversión dimensional y atención de doble etapa sobre variables ambientales. & Captura dependencias entre estresores, pero recurre a SHAP para explicar. & Ilustra el patrón que el framework corrige: disponer de $A$ y descartarla en favor de importancia marginal.\\
+\cite{zhou2026causal} & Máscara causal esparsa derivada de entropía de transferencia y refinada con aprendizaje autorregresivo vectorial. & Suprime dependencias no informativas y separa autocorrelación de efectos cruzados. & Criterio informacional próximo a un paradigma del framework, pero impuesto en entrenamiento y no como validación posterior.\\
+\cite{zhao2026causalguided} & Graph Transformer guiado por un grafo causal de propagación de fallas construido con conocimiento de proceso. & Mejora el diagnóstico de fallas al incorporar causalidad conocida; el análisis de interpretabilidad se hace sobre esa estructura. & Caso más exigente de estructura impuesta: el grafo es insumo y no admite falsación. El framework invierte la dirección y lo somete a un modelo nulo.\\
+\cite{khayitov2026stgeonet} & Atención espacio-temporal para predicción del factor de seguridad en taludes a cielo abierto. & Robusta ante ruido y semillas; los mapas se alinean con superficies de falla numéricas. & Caso de validación visual sin métrica de concordancia ni modelo nulo: ilustra el límite del mapa de calor como explicación.\\
+\bottomrule
+\end{longtable}
+}
