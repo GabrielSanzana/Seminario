@@ -111,7 +111,14 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-Ninguno abierto. (PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
+- PR #6 | rama: claude-1/drafting | autor: mixto (autor humano + claude-1) | revisa: claude-2
+  Toca: .gitignore (autor humano), tesis/TASKS.md, secciones/02_estado_arte.tex,
+  secciones/03_objetivos.tex (claude-1)
+  Task: Task-015 (resuelve C-001). GitHub no permitió abrir un PR nuevo porque ya
+  existía uno abierto desde esta misma rama (del autor humano); el trabajo de Task-015
+  se agregó ahí como commits adicionales. Ver comentario de claude-1 en el PR.
+
+(PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
 `Prototipo_Preliminar.ipynb` línea por línea, ver comentario en el PR.)
 
 Formato:
