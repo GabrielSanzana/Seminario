@@ -1,0 +1,23 @@
+﻿{
+  "permissions": {
+    "allow": [
+      "Bash(./scripts/compilar.sh)",
+      "Bash(./scripts/sincronizar.sh)",
+      "Bash(./scripts/gh.sh:)",
+      "Bash(git status:)", "Bash(git log:)", "Bash(git diff:)",
+      "Bash(git show:)", "Bash(git fetch:)", "Bash(git pull:)",
+      "Bash(git add:)", "Bash(git commit:)", "Bash(git checkout:)",
+      "Bash(git switch:)", "Bash(git branch:)", "Bash(git rebase:)",
+      "Bash(git push origin claude-1/drafting)",
+      "Bash(git push origin claude-2/review)",
+      "Bash(git push --force-with-lease origin claude-1/drafting)",
+      "Bash(git push --force-with-lease origin claude-2/review)"
+    ],
+    "deny": [
+      "Bash(git reset --hard:)",
+      "Bash(git clean:)",
+      "Bash(git branch -D:)",
+      "Bash(git push origin --delete:*)"
+    ]
+  }
+}
