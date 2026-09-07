@@ -23,14 +23,14 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `secciones/00_resumen.tex` | `IN_PROGRESS` | claude-1 | 3 | Task-016: matiza estado de avance (C-002) |
-| `secciones/01_introduccion.tex` | `IN_PROGRESS` | claude-1 | 43 | Task-016: matiza estado de avance (C-002) |
+| `secciones/00_resumen.tex` | `NEED_REVIEW` | claude-1 | 10 | Task-016: matiza estado de avance (C-002) |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 49 | Task-016: matiza estado de avance (C-002) |
 | `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 76 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
 | `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 24 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
 | `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado |
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
-| `secciones/07_conclusiones.tex` | `IN_PROGRESS` | claude-1 | 10 | Task-016: matiza estado de avance (C-002) |
+| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 16 | Task-016: matiza estado de avance (C-002) |
 | `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 47 | 22 `\bibitem`, append-only |
 | `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Task-013 mergeado a `main` en PR #4 |
 
@@ -54,13 +54,6 @@ Dos hechos del documento que condicionan el trabajo:
 
 ## Cola de tareas
 
-- **Task-016** — Resolver la contradicción de alcance registrada como **C-002** más
-  abajo: el resumen, la introducción y las conclusiones declaran que la cadena de
-  evidencia completa está "sin ejecutar", pero `Prototipo_Preliminar.ipynb` ya ejecutó
-  el primer eslabón con resultados cuantitativos. Requiere editar prosa en
-  `secciones/00_resumen.tex`, `secciones/01_introduccion.tex` y
-  `secciones/07_conclusiones.tex` (propiedad de claude-1; claude-2 no las reescribe).
-  Ver motivo detallado en C-002. [claude-1]
 - **Task-017** — Resolver la contradicción de corpus registrada como **C-003** más
   abajo: reemplazar en la prosa las referencias que no pertenecen al corpus vigente de
   `Protocolo PRISMA/Referencias_seminario.xlsx` por las que sí, leyendo los PDF en
@@ -72,22 +65,29 @@ Dos hechos del documento que condicionan el trabajo:
   `secciones/99_bibliografia.tex` (append-only, no lo edita claude-1 directamente). Ver
   motivo detallado en C-003. [claude-1]
 
-(Task-010, Task-011, Task-012, Task-013, Task-014 y Task-015 completadas y mergeadas;
-ver `Estado de secciones` arriba y las notas de cierre abajo. Se sacan de la cola para
-que no se vuelvan a tomar por error.)
+(Task-010 a Task-016 completadas y mergeadas o en revisión; ver `Estado de secciones`
+arriba y las notas de cierre abajo. Se sacan de la cola para que no se vuelvan a tomar
+por error.)
 
 ### Cerradas por claude-1 en esta sesión
 
-- **Task-015** — Aplicado el fix propuesto en **C-001**: se agregó, en
-  `secciones/03_objetivos.tex` (objetivo específico 4), la cláusula "...ortogonales al
-  enfoque frecuentista ya empleado en el eslabón de consenso estadístico (objetivo
-  específico anterior)... que sumados a ese enfoque completan la triangulación de cinco
-  paradigmas declarada en el resumen y la introducción"; y en `secciones/02_estado_arte.tex`
-  (fila (d) de `tab:familias`) la coletilla "...adicionales al probabilístico de (c), que
-  juntos completan los cinco". No se tocó `00_resumen.tex` ni `01_introduccion.tex`: ya
-  eran correctos y C-001 pide expresamente no alterar su "cinco". Compila en 18 páginas.
-  Pendiente de revisión de claude-2 (ver PR abajo); C-001 sigue `ABIERTA` hasta que se
-  confirme y mergee.
+- **Task-015** — (cerrada en sesión previa) Mergeada a `main` en PR #6; C-001 quedó
+  `RESUELTA`, confirmado por claude-2.
+- **Task-016** — Aplicado el fix propuesto en **C-002**. Se matizó el cierre de
+  "La propuesta" en `secciones/01_introduccion.tex`: en vez de declarar la cadena
+  completa "aún no ejecutada", se precisa que los eslabones 1 y 2 (estabilidad continua
+  y estructural) cuentan con evidencia preliminar sobre el prototipo --núcleo estable en
+  el 76--78\% de 50 modelos con semillas distintas, Jaccard promedio 0.195--0.204, y sin
+  punto crítico al variar el umbral $K\in\{3,5,7,10\}$--, mientras que los eslabones 3 a 5
+  y el resto de la triangulación de paradigmas siguen sin ejecutarse. Se aplicó la misma
+  precisión, de forma más breve, en el cierre de `00_resumen.tex` y en
+  `07_conclusiones.tex`. claude-1 verificó estas cifras directamente contra
+  `Prototipo_Preliminar.ipynb` (celda 16, análisis de sensibilidad al umbral K) antes de
+  escribirlas, además de las que ya había cotejado claude-2 en Task-011/C-002. No se
+  afirma que el sistema
+  multicriterio esté validado: el texto sigue siendo literal sobre lo pendiente
+  (eslabones 3-5). Compila en 18 páginas. Pendiente de revisión de claude-2 (ver PR
+  abajo); C-002 sigue `ABIERTA` hasta que se confirme y mergee.
 
 ### Cerradas por claude-2 en esta sesión
 
@@ -212,9 +212,10 @@ Formato:
   conjunto sigue pendiente de ejecución: eso sigue siendo cierto para eslabones 3-5.
   Detectada por: claude-2, auditoría de Task-011 sobre `Prototipo_Preliminar.ipynb`,
   2026-09-07.
-  Estado: ABIERTA — bloquea el merge de 00_resumen.tex, 01_introduccion.tex y
-  07_conclusiones.tex hasta que claude-1 aplique Task-016. No bloquea el resto del
-  documento, que ya está mergeado a `main`.
+  Estado: ABIERTA — fix aplicado por claude-1 (Task-016), pendiente de revisión de
+  claude-2 en el PR abierto abajo. Sigue bloqueando el merge de 00_resumen.tex,
+  01_introduccion.tex y 07_conclusiones.tex hasta que se confirme y mergee; pasa a
+  `RESUELTA` recién entonces.
 
 - [C-003] Secciones implicadas: 02_estado_arte.tex (principal), 99_bibliografia.tex,
   A_matriz_literatura.tex, y por revisar 00_resumen.tex/01_introduccion.tex
