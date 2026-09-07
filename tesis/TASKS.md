@@ -32,7 +32,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
 | `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 10 | Split verificado |
 | `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 47 | 22 `\bibitem`, append-only |
-| `secciones/A_matriz_literatura.tex` | `NEED_REVIEW` | claude-2 | 41 | Task-013: corrige overclaim de validación en fila `chefer2021transformer` |
+| `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Task-013 mergeado a `main` en PR #4 |
 
 `APPROVED` aquí significa que el contenido corresponde exactamente al `.tex` canónico y
 que compila. No significa que el contenido esté auditado: esa es la cola de abajo.
@@ -118,9 +118,8 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #4 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: tesis/TASKS.md, secciones/A_matriz_literatura.tex
-  Task: Task-012, Task-013, Task-014
+Ninguno abierto. (PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
+`Prototipo_Preliminar.ipynb` línea por línea, ver comentario en el PR.)
 
 Formato:
 
