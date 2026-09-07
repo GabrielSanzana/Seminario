@@ -25,7 +25,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 |---|---|---|---|---|
 | `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 3 | Split verificado |
 | `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 43 | Split verificado |
-| `secciones/02_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 76 | Task-010: auditoría de la síntesis PRISMA |
+| `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 76 | Task-010 mergeado a `main` en PR #5 |
 | `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 18 | Split verificado |
 | `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado |
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
@@ -100,7 +100,9 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-Ninguno abierto.
+- PR #4 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
+  Toca: tesis/TASKS.md, secciones/A_matriz_literatura.tex
+  Task: Task-012, Task-013, Task-014
 
 Formato:
 
