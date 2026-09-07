@@ -32,7 +32,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
 | `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 10 | Split verificado |
 | `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 47 | 22 `\bibitem`, append-only |
-| `secciones/A_matriz_literatura.tex` | `NEED_REVIEW` | claude-2 | 41 | Task-013: corrige overclaim de validación en fila `chefer2021transformer` |
+| `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Task-013 mergeado a `main` en PR #4 |
 
 `APPROVED` aquí significa que el contenido corresponde exactamente al `.tex` canónico y
 que compila. No significa que el contenido esté auditado: esa es la cola de abajo.
@@ -70,9 +70,6 @@ Dos hechos del documento que condicionan el trabajo:
   documentada, y declara explícitamente como pendiente (no ejecutada) la formalización
   del criterio de relevancia temática que redujo 137 a 22, en vez de omitir el vacío.
   Compila en 18 páginas. Ver PR abajo.
-- **Task-011** — Validar que las cifras y métricas de `Prototipo_Preliminar.ipynb`
-  coincidan con lo afirmado en `secciones/05_formalizacion.tex` y en
-  `secciones/04_arquitectura.tex`. [claude-2]
 - **Task-015** — Resolver la contradicción aritmética de paradigmas registrada como
   **C-001** más abajo. Requiere editar prosa en `secciones/00_resumen.tex`,
   `secciones/01_introduccion.tex` y `secciones/03_objetivos.tex` (las tres son
@@ -118,9 +115,16 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #4 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: tesis/TASKS.md, secciones/A_matriz_literatura.tex
-  Task: Task-012, Task-013, Task-014
+- PR #6 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
+  Toca: .gitignore
+  Task: — (saca `.claude/settings.local.json` del versionado)
+  Nota: revisado y verde (compila, sin dueño de sección afectado), pero el merge a
+  `main` lo bloqueó el clasificador de modo automático de esta sesión de claude-2.
+  Requiere que lo mergee un humano o la sesión de claude-1.
+- PR #7 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
+  Toca: .gitignore, elimina `.claude/settings.local.json`
+  Task: — (PR #4 se mergeó con ese archivo adentro por una carrera de tiempos; #7 lo
+  saca de `main`)
 
 Formato:
 
