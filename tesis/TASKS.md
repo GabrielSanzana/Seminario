@@ -78,6 +78,13 @@ Dos hechos del documento que condicionan el trabajo:
   `secciones/01_introduccion.tex` y `secciones/03_objetivos.tex` (las tres son
   propiedad de claude-1; claude-2 no las reescribe). Ver motivo detallado en C-001.
   [claude-1]
+- **Task-016** — Resolver la contradicción de alcance registrada como **C-002** más
+  abajo: el resumen, la introducción y las conclusiones declaran que la cadena de
+  evidencia completa está "sin ejecutar", pero `Prototipo_Preliminar.ipynb` ya ejecutó
+  el primer eslabón con resultados cuantitativos. Requiere editar prosa en
+  `secciones/00_resumen.tex`, `secciones/01_introduccion.tex` y
+  `secciones/07_conclusiones.tex` (propiedad de claude-1; claude-2 no las reescribe).
+  Ver motivo detallado en C-002. [claude-1]
 
 ### Cerradas por claude-2 en esta sesión
 
@@ -93,6 +100,17 @@ Dos hechos del documento que condicionan el trabajo:
   relacional sujeto a validación multicriterio". Compilado y verificado (18 páginas).
 - **Task-014** — Auditado. No se borra ningún número; ver **C-001** para el detalle y
   **Task-015** para la resolución, que corresponde a claude-1 por ser prosa ajena.
+- **Task-011** — Cotejadas las cifras de `secciones/04_arquitectura.tex` y
+  `secciones/05_formalizacion.tex` contra `Prototipo_Preliminar.ipynb`: coinciden
+  exactamente. Encoder Conv2D 3×3 stride 2 (dos capas, 32→embed_dim), `d_model=128`,
+  `num_heads=4`, `num_layers=2`, decoder ConvTranspose2D×2 + interpolación bicúbica
+  (`F.interpolate(..., mode="bicubic")`), rollout con fracción residual
+  ($\gamma I + (1-\gamma)\bar A$, `residual_fraction` en el código) — todo verificado
+  línea por línea. La discontinuidad del operador Top-K que describe
+  `05_formalizacion.tex` es exactamente el bug que el notebook documenta y corrige
+  ("FIX BUG: Top-K fijo en vez de umbral mean+std"). Sin acción requerida sobre estos
+  dos archivos. Se encontró, en cambio, una contradicción de alcance en archivos ajenos
+  (00/01/07): ver **C-002** y **Task-016**.
 
 ## PR abiertos
 
@@ -138,6 +156,47 @@ Formato:
   Estado: ABIERTA — bloquea el merge de 00_resumen.tex, 01_introduccion.tex,
   03_objetivos.tex y 02_estado_arte.tex hasta que claude-1 aplique Task-015. No bloquea
   el resto del documento, que ya está mergeado a `main`.
+
+- [C-002] Secciones implicadas: 00_resumen.tex, 01_introduccion.tex, 07_conclusiones.tex
+  Descripción: las tres afirman, en bloque, que la cadena de evidencia completa (los
+  cinco eslabones y la triangulación de paradigmas) está "diseñada y especificada" pero
+  "aún no ejecutada", y que su ejecución es "el programa de trabajo de la tesis" — como
+  si nada se hubiera corrido todavía. `Prototipo_Preliminar.ipynb` contradice ese
+  blanqueo total: contiene dos experimentos ejecutados (10 y 50 semillas,
+  `stability_experiment_50seeds_v2.py`) que corresponden al primer eslabón (estabilidad
+  continua de $A$) con resultados cuantitativos reales: Jaccard promedio 0.195-0.204,
+  arista dominante presente en 76-78% de los modelos, "núcleo estable pero periferia
+  varía". El propio notebook concluye sobre esta corrida: "Esto valida el supuesto
+  central de la tesis" (celda de 10 semillas). El mismo script de 50 semillas también
+  computa análisis espectral (autovalores del Laplaciano, gap espectral) y estructural
+  de grafo (PageRank, HITS, comunidades Louvain, roles nodales hub/source/bridge,
+  reciprocidad, modularidad) — un prototipo parcial del paradigma geométrico-topológico
+  de la triangulación, no solo del primer eslabón.
+  Lo que SÍ sigue sin ejecutarse, confirmado por ausencia total en el notebook (cero
+  ocurrencias de los términos): el modelo nulo binomial con corrección de
+  Bonferroni/Benjamini-Hochberg (eslabón 3), la ablación de fidelidad con
+  renormalización (eslabón 4), y los tres baselines deterministas restantes de la
+  triangulación (Pearson, Granger, Erdős-Rényi por Z-score) junto con los paradigmas
+  intervencional e informacional. Sobre esa parte, "diseñado, no ejecutado" es preciso.
+  Auditoría: no corresponde borrar "no ejecutado" en general, sino dejar de aplicarlo de
+  forma pareja a los cinco eslabones. El eslabón 1 (y parcialmente el paradigma
+  geométrico-topológico) tiene evidencia preliminar real y citable; los eslabones 3 y 4
+  y el resto de los baselines no. Tratar ambos como igualmente "sin ejecutar" subestima
+  el avance real del prototipo y desaprovecha evidencia que sostiene justamente la
+  premisa de inestabilidad entre semillas que 01_introduccion.tex plantea en "El
+  problema".
+  Corrección propuesta (para quien la aplique, ver Task-016): matizar la frase de
+  cierre de 01_introduccion.tex ("...aún no ejecutado") para acotarla a los eslabones
+  3-5 y a la triangulación de baselines, y citar el resultado preliminar del eslabón 1
+  (Jaccard ~0.20, núcleo estable en ~76-78% de los modelos sobre 50 semillas) como
+  evidencia ya obtenida en el prototipo. Aplicar la misma precisión en 00_resumen.tex y
+  07_conclusiones.tex. No eliminar la afirmación de que el sistema multicriterio en su
+  conjunto sigue pendiente de ejecución: eso sigue siendo cierto para eslabones 3-5.
+  Detectada por: claude-2, auditoría de Task-011 sobre `Prototipo_Preliminar.ipynb`,
+  2026-09-07.
+  Estado: ABIERTA — bloquea el merge de 00_resumen.tex, 01_introduccion.tex y
+  07_conclusiones.tex hasta que claude-1 aplique Task-016. No bloquea el resto del
+  documento, que ya está mergeado a `main`.
 
 Formato de registro:
 
