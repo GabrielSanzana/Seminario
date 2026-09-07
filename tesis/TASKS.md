@@ -32,7 +32,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
 | `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 10 | Split verificado |
 | `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 47 | 22 `\bibitem`, append-only |
-| `secciones/A_matriz_literatura.tex` | `IN_PROGRESS` | claude-2 | 41 | Task-013: corrige overclaim de validación en fila `chefer2021transformer` |
+| `secciones/A_matriz_literatura.tex` | `NEED_REVIEW` | claude-2 | 41 | Task-013: corrige overclaim de validación en fila `chefer2021transformer` |
 
 `APPROVED` aquí significa que el contenido corresponde exactamente al `.tex` canónico y
 que compila. No significa que el contenido esté auditado: esa es la cola de abajo.
@@ -73,17 +73,26 @@ Dos hechos del documento que condicionan el trabajo:
 - **Task-011** — Validar que las cifras y métricas de `Prototipo_Preliminar.ipynb`
   coincidan con lo afirmado en `secciones/05_formalizacion.tex` y en
   `secciones/04_arquitectura.tex`. [claude-2]
-- **Task-012** — Verificar que cada clave de `\cite` resuelva a un `\bibitem` de
-  `secciones/99_bibliografia.tex` y que no haya `\bibitem` sin citar. [claude-2]
-- **Task-013** — Revisar consistencia del estado de avance entre resumen, introducción,
-  formalización y conclusiones: el sistema de validación está diseñado y especificado, no
-  ejecutado. Cualquier frase que sugiera lo contrario es una contradicción. [claude-2]
-- **Task-014** — Revisar la aritmética de los paradigmas. El resumen y la introducción
-  hablan de **cinco** paradigmas de triangulación; el objetivo específico 4 habla de
-  **cuatro** ortogonales al enfoque frecuentista, y la fila (d) de `tab:familias` dice
-  cuatro. Determinar si es la distinción entre "cinco en total incluyendo el
-  probabilístico" y "cuatro además de él", y si lo es, hacerla explícita en el texto.
-  [claude-2]
+- **Task-015** — Resolver la contradicción aritmética de paradigmas registrada como
+  **C-001** más abajo. Requiere editar prosa en `secciones/00_resumen.tex`,
+  `secciones/01_introduccion.tex` y `secciones/03_objetivos.tex` (las tres son
+  propiedad de claude-1; claude-2 no las reescribe). Ver motivo detallado en C-001.
+  [claude-1]
+
+### Cerradas por claude-2 en esta sesión
+
+- **Task-012** — Verificado: 22 claves de `\cite` distintas en uso, 22 `\bibitem` en
+  `secciones/99_bibliografia.tex`, correspondencia 1:1. Cero `\cite` colgantes, cero
+  `\bibitem` sin citar. Sin acción requerida.
+- **Task-013** — Revisado el estado de avance en resumen, introducción, arquitectura,
+  formalización y conclusiones: todos declaran el sistema de validación como diseñado y
+  no ejecutado, de forma consistente. Se encontró una excepción en
+  `secciones/A_matriz_literatura.tex` (fila `chefer2021transformer`), propiedad de
+  claude-2: la columna "Aporte a la tesis" decía que el framework produce un "grafo
+  relacional validado", lo que sugiere validación ya ejecutada. Corregido a "grafo
+  relacional sujeto a validación multicriterio". Compilado y verificado (18 páginas).
+- **Task-014** — Auditado. No se borra ningún número; ver **C-001** para el detalle y
+  **Task-015** para la resolución, que corresponde a claude-1 por ser prosa ajena.
 
 ## PR abiertos
 
@@ -103,7 +112,30 @@ Formato:
 
 ## Contradicciones abiertas
 
-Ninguna registrada.
+- [C-001] Secciones implicadas: 00_resumen.tex, 01_introduccion.tex, 03_objetivos.tex,
+  02_estado_arte.tex (`tab:familias`, fila (d))
+  Descripción: el resumen y la introducción afirman una triangulación de **cinco**
+  paradigmas (probabilístico, intervencional, geométrico-topológico, informacional,
+  baselines deterministas). El objetivo específico 4 y la fila (d) de `tab:familias`
+  afirman **cuatro** paradigmas "ortogonales al enfoque frecuentista" (intervencional,
+  geométrico-topológico, informacional, baselines deterministas), sin el probabilístico.
+  Auditoría: no es un error aritmético sino una distinción real no explicitada. El
+  paradigma probabilístico/frecuentista ya se emplea en el eslabón 3 (modelo nulo
+  binomial con corrección de Bonferroni/Benjamini-Hochberg, objetivo específico 3); el
+  objetivo específico 4 triangula con cuatro paradigmas *adicionales* a ese, ortogonales
+  a él. "Cinco" cuenta el total de la triangulación completa; "cuatro" cuenta los que se
+  suman al probabilístico ya usado. Ambos números son correctos en su propio contexto,
+  pero el texto no lo dice, por lo que un lector no puede reconstruir la distinción.
+  Corrección propuesta (para quien la aplique, ver Task-015): en el objetivo específico 4
+  y en la fila (d) de `tab:familias`, agregar una cláusula breve del tipo "...cuatro
+  paradigmas ortogonales al enfoque frecuentista ya empleado en el eslabón de consenso
+  estadístico (objetivo específico 3), que sumados a este completan la triangulación de
+  cinco paradigmas declarada en el resumen y la introducción". No borrar "cinco" de
+  00_resumen.tex/01_introduccion.tex ni "cuatro" de 03_objetivos.tex/02_estado_arte.tex.
+  Detectada por: claude-2, auditoría de Task-014, 2026-09-07.
+  Estado: ABIERTA — bloquea el merge de 00_resumen.tex, 01_introduccion.tex,
+  03_objetivos.tex y 02_estado_arte.tex hasta que claude-1 aplique Task-015. No bloquea
+  el resto del documento, que ya está mergeado a `main`.
 
 Formato de registro:
 
