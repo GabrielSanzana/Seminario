@@ -1,11 +1,37 @@
 %% ============================================================
 %%  Aplicabilidad a otros dominios
 %%  Duenio inicial: claude-1
-%%  Estado: TODO - pendiente split del .tex canonico de Overleaf
 %%  Reglas: ver ../../CLAUDE.md
 %%  No editar si TASKS.md marca este archivo IN_PROGRESS por otro agente.
 %% ============================================================
 
 \section{Aplicabilidad a otros dominios}
 
-TODO: contenido pendiente del split.
+El framework opera como una capa de análisis post-hoc: la única entrada requerida es una matriz $A\in\mathbb{R}^{n\times n}$ cuyas filas y columnas correspondan a variables del fenómeno y cuya lectura $A_{ij}$ admita la interpretación ``cuánto la variable $i$ atiende a la variable $j$''. En consecuencia, la pregunta por la aplicabilidad a otro dominio no es una pregunta sobre el fenómeno estudiado, sino sobre el tipo de representación relacional que los modelos publicados de ese dominio exponen. Esa pregunta admite tres respuestas, y solo tres.
+
+Hay dominios de \emph{aplicación directa}, en los que el modelo publicado ya calcula atención entre variables y la matriz puede extraerse sin modificar nada: es el caso de la detección de anomalías multivariadas en entornos industriales conectados \cite{han2026tscad}, del pronóstico de vida útil remanente en mantenimiento predictivo \cite{qin2026multisensor} y de los transformers espacio-temporales que incorporan inversión dimensional para variables ambientales \cite{kapoor2026fustt}. Hay dominios que \emph{requieren adaptación}, en los que existe atención accesible pero su eje no son las variables: opera sobre parches espaciales, sobre pasos temporales o sobre un grafo predefinido. Es la situación del diagnóstico de fallas en procesos químicos, donde la atención es temporal o de características \cite{ewuzie2026robust} o bien está condicionada por un grafo causal construido de antemano \cite{zhao2026causalguided}, y la de la geotecnia minera, donde la atención combina ejes temporal y espacial \cite{khayitov2026stgeonet}. Y hay dominios que \emph{requieren un modelo nuevo}, en los que la práctica dominante son ensambles de árboles explicados con SHAP y no existe matriz de atención alguna que extraer.
+
+Esta clasificación tiene una consecuencia práctica que conviene enunciar de forma general: el obstáculo para transferir el framework nunca es la naturaleza física del dominio, sino la disposición de los tokens en el modelo disponible. Un modelo cuya atención opere entre parches espaciales de una sola variable no es una entrada válida, con independencia de cuán relacionado esté su fenómeno con el caso de estudio, porque sus entradas no denotan relación entre magnitudes físicas distintas sino entre localizaciones de una misma magnitud: aplicar $\Phi$ produciría un grafo de vecindad espacial y no una hipótesis relacional. A la inversa, un modelo de un dominio remoto pero con tokens que son variables es directamente utilizable.
+
+De ello se derivan los criterios de selección del segundo dominio, ordenados por peso: (1) tipo de representación relacional expuesta, es decir, tokens que sean variables; (2) acceso al modelo y no solo a la matriz, requisito del eslabón de fidelidad, que exige intervenir y volver a predecir; (3) costo de entrenamiento compatible con un ensamble de varias decenas de semillas; (4) disponibilidad pública y reproducibilidad de los datos; y (5) existencia de conocimiento físico o de ingeniería previo contra el cual contrastar cualitativamente el grafo obtenido. Bajo estos criterios, los candidatos más realistas son el mantenimiento predictivo sobre datos públicos de degradación \cite{qin2026multisensor}, que satisface los cinco y para el que existe además un baseline XAI documentado sobre el mismo tipo de datos contra el cual contrastar \cite{jakubowski2022performance}, y los entornos industriales instrumentados \cite{han2026tscad,tew2024kans}, que aportan un método de descubrimiento de estructura independiente de la atención utilizable como baseline determinista. Se descartan los dominios cuyos datos operacionales son propietarios y aquellos que exigirían redefinir qué constituye un nodo del grafo.
+
+{\small
+\begin{longtable}{P{0.21}P{0.31}P{0.19}P{0.29}}
+\caption{Tipo de representación relacional expuesta por dominio y factibilidad de aplicar $\Phi$.}\label{tab:dominios}\\
+\toprule
+\textbf{Dominio} & \textbf{Representación disponible} & \textbf{Factibilidad} & \textbf{Observación}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Dominio} & \textbf{Representación disponible} & \textbf{Factibilidad} & \textbf{Observación}\\
+\midrule
+\endhead
+IoT e Industria 4.0 & Atención colectiva entre sensores \cite{han2026tscad}; estructura por similitud entre embeddings \cite{tew2024kans} & Directa & El segundo método aporta un baseline independiente de la atención\\
+Mantenimiento predictivo & Atención entre canales de sensores para vida útil remanente \cite{qin2026multisensor} & Directa & Baseline XAI documentado sobre datos públicos \cite{jakubowski2022performance}; requiere encoder unidimensional\\
+Monitoreo ambiental multivariable & Inversión dimensional y atención entre variables \cite{kapoor2026fustt} & Directa & El trabajo original retrocede a SHAP pese a disponer de $A$\\
+Perforación y minería & Grafo temporal aprendido entre parámetros operacionales \cite{zhang2026ehtgnn} & Directa sobre el grafo aprendido & Datos operacionales habitualmente propietarios\\
+Procesos químicos & Atención temporal o de características \cite{ewuzie2026robust}; atención guiada por grafo causal previo \cite{zhao2026causalguided} & Requiere adaptación & La atención existe, pero su eje es el tiempo o está condicionada por una estructura impuesta\\
+Geotecnia & Atención temporal y espacial combinadas \cite{khayitov2026stgeonet} & Requiere adaptación & Validación actual visual, sin métrica de concordancia\\
+\bottomrule
+\end{longtable}
+}

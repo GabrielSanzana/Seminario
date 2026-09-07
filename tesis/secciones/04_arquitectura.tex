@@ -1,11 +1,48 @@
 %% ============================================================
-%%  Arquitectura instrumental
+%%  Arquitectura instrumental: el ConvTransformer de índices
 %%  Duenio inicial: claude-2
-%%  Estado: TODO - pendiente split del .tex canonico de Overleaf
 %%  Reglas: ver ../../CLAUDE.md
 %%  No editar si TASKS.md marca este archivo IN_PROGRESS por otro agente.
 %% ============================================================
 
 \section{Arquitectura instrumental: el ConvTransformer de índices}
 
-TODO: contenido pendiente del split.
+\subsection{Limitaciones del Transformer estándar}
+
+Un Transformer estándar, tal como se utiliza en procesamiento de lenguaje natural o en visión por computadora, aplica la atención entre tokens que típicamente representan posiciones espaciales (parches de una imagen) o posiciones en una secuencia. En problemas multivariables donde el objetivo es modelar dependencias entre variables --no entre posiciones-- esta configuración presenta dos limitaciones: la atención se diluye entre miles de tokens espaciales, ocultando las relaciones entre variables, y no existe una matriz de atención $A \in \mathbb{R}^{n\times n}$ explícita entre variables que pueda extraerse y analizarse.
+
+La evidencia externa converge, en cambio, en que tratar las variables como tokens es una decisión efectiva y no solo conveniente para la interpretabilidad: invertir las dimensiones de entrada de modo que cada serie univariada completa constituya un token mejora el desempeño en pronóstico multivariado de largo plazo \cite{liu2024itransformer}, y el aprendizaje explícito de correlaciones inter-serie a múltiples escalas produce ganancias adicionales \cite{cai2024msgnet}. La arquitectura empleada aquí se inscribe en esa familia de decisiones de diseño.
+
+\subsection{Diseño y posición: un instrumento, no una contribución}
+
+El modelo utilizado modifica el Transformer estándar en cinco aspectos, todos orientados a producir una matriz de atención explícita entre variables:
+
+\begin{enumerate}
+\item \textbf{Tokens = variables}: cada uno de los $n$ índices (o sensores, o variables de proceso) se trata como un token independiente. La dimensión $n$ es configurable y no está fijada al dominio del caso de estudio.
+\item \textbf{Encoder convolucional por token}: cada variable, de dimensiones $H \times W$, se procesa independientemente con un bloque Conv2D $3\times 3$ (stride $=2$) que reduce la resolución espacial y extrae características locales. El encoder es compartido entre tokens, de modo que $A$ no refleje capacidades desiguales de codificación.
+\item \textbf{Proyección a espacio latente}: las características convolucionales de cada variable se aplanan y proyectan a un espacio de embedding mediante una capa lineal.
+\item \textbf{Multi-Head Attention entre variables}: se aplica atención multi-cabeza sobre los $n$ tokens. La atención se calcula entre variables, no entre posiciones espaciales ni entre pasos temporales, lo que produce explícitamente una matriz $A \in \mathbb{R}^{n\times n}$ por cada cabeza y capa.
+\item \textbf{Decoder convolucional}: la salida del Transformer se decodifica con ConvTranspose2D seguido de interpolación bicúbica para reconstruir la resolución original.
+\end{enumerate}
+
+Es necesario delimitar el alcance de este componente. El ConvTransformer de índices no constituye la novedad del trabajo: es un vehículo instrumental cuya única función es producir, de manera controlada, una matriz $A$ entre variables interpretables, sin depender de un grafo predefinido. La contribución reclamada la constituyen las transformaciones $\Phi$, $\Psi$ y $F$ junto al sistema de validación multicriterio.
+
+Esta delimitación importa por dos razones. La primera es de honestidad comparativa: trabajos como los citados en la familia (f) compiten en desempeño predictivo bajo protocolos de benchmarking establecidos \cite{liu2024itransformer,cai2024msgnet}. Este trabajo no compite en ese terreno ni reclama superioridad predictiva; el desempeño se reporta únicamente como condición de admisibilidad, para verificar que la representación de la que se extrae $A$ proviene de un modelo que efectivamente aprendió algo del fenómeno. La segunda razón es de generalidad: por diseño, $\Phi$ no depende del origen de $A$ sino solo de sus propiedades algebraicas, de modo que en principio debería poder aplicarse, sin modificar los pesos, a la matriz de atención inter-variable de otras arquitecturas. Las matrices producidas por métodos que infieren dependencia sin topología predefinida \cite{tew2024kans} no satisfacen necesariamente esas propiedades y requerirían una normalización previa cuyo efecto sobre $\Phi$ está aún por evaluar. Este carácter post-hoc distingue al framework de las aproximaciones que integran la estructura relacional en el entrenamiento \cite{zhang2026ehtgnn,zhou2026causal}.
+
+\subsection{Por qué esta estructura}
+
+La arquitectura está diseñada para que el modelo aprenda relaciones entre variables y para que dichas relaciones sean extraíbles como una matriz $A$ interpretable. Si la atención se aplicara entre posiciones espaciales, se obtendría una matriz de tamaño $HW \times HW$, inmanejable y sin significado relacional claro entre variables. Al aplicar la atención entre los $n$ índices, $A$ tiene tamaño $n \times n$ y cada celda $A_{ij}$ representa cuánto la variable $i$ atiende a la variable $j$ al producir su predicción.
+
+Esta arquitectura es agnóstica al dominio en sentido matemático: los $n$ tokens pueden ser índices vegetacionales, sensores industriales o variables de proceso, y solo se requiere que cada variable tenga una representación espacial o tabular procesable por el encoder. Este agnosticismo matemático no debe confundirse con el agnosticismo empírico, que exigiría validación en al menos dos dominios reales distintos y en un conjunto sintético con estructura conocida.
+
+\subsection{Agregación: attention rollout}
+
+El modelo produce $L \times h$ matrices de atención, una por capa y cabeza. Para obtener una única matriz $A$ que represente al modelo completo se emplea attention rollout \cite{abnar2020quantifying}:
+
+\begin{equation}
+\tilde{A} = \prod_{\ell=1}^{L}\left( \gamma I + (1-\gamma) \bar{A}^{(\ell)} \right)
+\end{equation}
+
+donde $\bar{A}^{(\ell)}$ es el promedio de las $h$ cabezas en la capa $\ell$, $I$ es la identidad que simula la conexión residual y $\gamma$ es la fracción residual. El resultado se normaliza por filas para ser estocástico.
+
+Conviene recoger también la advertencia que acompaña a ese mismo trabajo: en un Transformer la información se mezcla progresivamente entre tokens al atravesar capas y conexiones residuales, por lo que los pesos de atención crudos dejan de corresponder de manera confiable a los tokens de entrada \cite{abnar2020quantifying}. El rollout mitiga parcialmente esa mezcla, pero no la elimina ni convierte a $\tilde{A}$ en una medida de importancia validada. De ahí que el grafo extraído mediante $\Phi$ deba tratarse como una hipótesis sujeta a verificación independiente y no como una lectura directa del mecanismo interno del modelo, que es precisamente la función de la cadena de evidencia.

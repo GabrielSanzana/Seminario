@@ -24,11 +24,15 @@ Ningún agente escribe en esas rutas.
 
 ```
 tesis/
-  main.tex              solo el autor humano lo edita
-  referencias.bib       append-only, ver regla abajo
-  TASKS.md              panel de control y mecanismo de reserva
-  secciones/*.tex       una sección por archivo, un dueño por archivo
+  main.tex                        solo el autor humano lo edita
+  TASKS.md                        panel de control y mecanismo de reserva
+  secciones/*.tex                 una sección por archivo, un dueño por archivo
+  secciones/99_bibliografia.tex   append-only, ver regla abajo
 ```
+
+El documento no usa BibTeX: la bibliografía es un entorno `thebibliography` que vive en
+`secciones/99_bibliografia.tex`. Las claves de `\cite` se resuelven contra los
+`\bibitem` de ese archivo, no contra un `.bib`.
 
 ## Toolchain
 
@@ -38,8 +42,11 @@ Compilación completa desde `tesis/`:
 
 ```bash
 export PATH="/c/Users/patru/AppData/Roaming/TinyTeX/bin/windows:$PATH"
-pdflatex -interaction=nonstopmode main.tex && bibtex main && pdflatex main && pdflatex main
+pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex
 ```
+
+Dos pasadas, no cuatro: la segunda resuelve el índice y las referencias cruzadas. No se
+ejecuta `bibtex`. El documento vigente compila en 18 páginas.
 
 Si falta un paquete, instalarlo con `tlmgr install <paquete>` (usar `tlmgr.bat` desde
 PowerShell; no está en el PATH de bash).
@@ -61,7 +68,7 @@ No toca `main.tex`. No corrige formato en archivos ajenos.
 Revisa lo que produjo claude-1. Verifica que compile, corrige `\label`, `\ref` y `\cite`
 colgantes, entornos de figura y tabla, y coherencia conceptual: que las cifras y métricas
 citadas en la prosa coincidan con las del notebook. Dueño de las secciones técnicas:
-arquitectura, formalización, matriz de literatura.
+arquitectura, formalización, bibliografía y matriz de literatura.
 
 **No reescribe prosa ajena.** Si el contenido está mal, lo marca `NEED_REWRITE` en
 `TASKS.md` con el motivo y lo devuelve a claude-1.
@@ -88,8 +95,9 @@ arquitectura, formalización, matriz de literatura.
 - Ramas: `claude-1/drafting` para contenido, `claude-2/review` para auditoría y formato.
 - `main.tex` lo edita solo el autor humano. Si una sección nueva necesita un `\input`,
   pedirlo en `TASKS.md` en vez de agregarlo.
-- `referencias.bib` es **append-only**: agregar entradas nuevas al final, nunca reordenar
-  ni reformatear el archivo. Reordenarlo genera conflictos enormes sin ningún beneficio.
+- `secciones/99_bibliografia.tex` es **append-only**: agregar `\bibitem` nuevos al final,
+  nunca reordenar ni reformatear los existentes. Reordenarlo genera conflictos enormes sin
+  ningún beneficio, y renumera las citas de todo el documento.
 - Los archivos auxiliares de LaTeX (`.aux`, `.log`, `.toc`, `.out`, `.bbl`, `.blg`) están
   en `.gitignore`. No forzar su commit: cambian en cada compilación y colisionan siempre.
 

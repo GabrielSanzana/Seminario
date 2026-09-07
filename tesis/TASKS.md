@@ -21,50 +21,57 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 ## Estado de secciones
 
-| Archivo | Estado | Dueño | Commit | Nota |
+| Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `secciones/00_resumen.tex` | `BLOCKED` | — | — | Espera `.tex` canónico de Overleaf |
-| `secciones/01_introduccion.tex` | `BLOCKED` | — | — | Espera `.tex` canónico de Overleaf |
-| `secciones/02_estado_arte.tex` | `BLOCKED` | — | — | Espera `.tex` canónico de Overleaf |
-| `secciones/03_objetivos.tex` | `BLOCKED` | — | — | Espera `.tex` canónico de Overleaf |
-| `secciones/04_arquitectura.tex` | `BLOCKED` | — | — | Espera `.tex` canónico de Overleaf |
-| `secciones/05_formalizacion.tex` | `BLOCKED` | — | — | Espera `.tex` canónico de Overleaf |
-| `secciones/06_aplicabilidad.tex` | `BLOCKED` | — | — | Espera `.tex` canónico de Overleaf |
-| `secciones/07_conclusiones.tex` | `BLOCKED` | — | — | Espera `.tex` canónico de Overleaf |
-| `secciones/A_matriz_literatura.tex` | `BLOCKED` | — | — | Espera `.tex` canónico de Overleaf |
+| `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 3 | Split verificado |
+| `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 43 | Split verificado |
+| `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 68 | Incluye `tab:familias` |
+| `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 18 | Split verificado |
+| `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado |
+| `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
+| `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
+| `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 10 | Split verificado |
+| `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 47 | 22 `\bibitem`, append-only |
+| `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Incluye `tab:matriz` |
 
-## Bloqueador activo
+`APPROVED` aquí significa que el contenido corresponde exactamente al `.tex` canónico y
+que compila. No significa que el contenido esté auditado: esa es la cola de abajo.
 
-**Task-000 — Traer el `.tex` canónico desde Overleaf.** Responsable: autor humano.
+## Estado del split
 
-El PDF `Template_Latex__Formato_Informes__Copy_ (1).pdf` (18 páginas, 7 secciones más
-anexo A) es la versión vigente y reestructurada de la tesis, pero su archivo fuente `.tex`
-no está en el repositorio: vive en Overleaf. El monolito local `tesis_actualizada.tex`
-(1923 líneas) corresponde a una estructura anterior y distinta, con secciones que el PDF
-ya no incluye.
+Resuelto. El `.tex` canónico se partió en diez archivos y el resultado se verificó
+comparando el texto extraído del PDF del monolito contra el del `main.tex` dividido:
+**idéntico**, 18 páginas, mismo tamaño de PDF. El split no perdió ni alteró contenido.
 
-Mientras el `.tex` canónico no esté en `tesis/`, el split de secciones no puede hacerse y
-todas las secciones quedan `BLOCKED`. Los archivos actuales en `secciones/` son
-plantillas vacías que solo garantizan que `main.tex` compile.
+Dos hechos del documento que condicionan el trabajo:
+
+1. **No usa BibTeX.** La bibliografía es un entorno `thebibliography` con 22 `\bibitem`.
+   No existe `referencias.bib` en el flujo de compilación.
+2. **El preámbulo es el real**, no uno provisional: incluye `\newcolumntype{P}` para
+   columnas proporcionales y `LTchunksize` para estabilidad de `longtable`. Las tres
+   tablas del documento dependen de ambos, así que no se toca el preámbulo sin revisar
+   las tablas.
 
 ## Cola de tareas
 
-Se desbloquean cuando Task-000 esté resuelta.
-
-- **Task-001** — Partir el `.tex` canónico en los nueve archivos de `secciones/`, sin
-  reescribir contenido: solo cortar y pegar. Verificar que el PDF resultante sea
-  idéntico al original. [autor humano o claude-2]
-- **Task-002** — Reemplazar el preámbulo provisional de `main.tex` por el preámbulo real
-  del template. [autor humano]
-- **Task-010** — Sintetizar el protocolo PRISMA (137 referencias) en
-  `secciones/02_estado_arte.tex`, con la lectura de la brecha. [claude-1]
+- **Task-010** — Auditar la síntesis del estado del arte en
+  `secciones/02_estado_arte.tex` contra el `Protocolo PRISMA/` (137 referencias). El
+  documento declara un corpus núcleo de 22; verificar que el criterio de reducción de 137
+  a 22 esté enunciado en alguna parte, y si no lo está, señalarlo. [claude-1]
 - **Task-011** — Validar que las cifras y métricas de `Prototipo_Preliminar.ipynb`
-  coincidan con lo afirmado en `secciones/05_formalizacion.tex`. [claude-2]
-- **Task-012** — Verificar que `referencias.bib` cubra todos los `\cite` del documento y
-  que no haya entradas huérfanas. [claude-2]
-- **Task-013** — Revisar que el estado de avance declarado sea consistente entre
-  introducción, formalización y conclusiones: el sistema de validación está diseñado y
-  especificado, no ejecutado. [claude-2]
+  coincidan con lo afirmado en `secciones/05_formalizacion.tex` y en
+  `secciones/04_arquitectura.tex`. [claude-2]
+- **Task-012** — Verificar que cada clave de `\cite` resuelva a un `\bibitem` de
+  `secciones/99_bibliografia.tex` y que no haya `\bibitem` sin citar. [claude-2]
+- **Task-013** — Revisar consistencia del estado de avance entre resumen, introducción,
+  formalización y conclusiones: el sistema de validación está diseñado y especificado, no
+  ejecutado. Cualquier frase que sugiera lo contrario es una contradicción. [claude-2]
+- **Task-014** — Revisar la aritmética de los paradigmas. El resumen y la introducción
+  hablan de **cinco** paradigmas de triangulación; el objetivo específico 4 habla de
+  **cuatro** ortogonales al enfoque frecuentista, y la fila (d) de `tab:familias` dice
+  cuatro. Determinar si es la distinción entre "cinco en total incluyendo el
+  probabilístico" y "cuatro además de él", y si lo es, hacerla explícita en el texto.
+  [claude-2]
 
 ## Contradicciones abiertas
 
