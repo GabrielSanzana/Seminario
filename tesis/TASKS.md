@@ -23,14 +23,14 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 3 | Split verificado |
-| `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 43 | Split verificado |
+| `secciones/00_resumen.tex` | `IN_PROGRESS` | claude-1 | 3 | Task-016: matiza estado de avance (C-002) |
+| `secciones/01_introduccion.tex` | `IN_PROGRESS` | claude-1 | 43 | Task-016: matiza estado de avance (C-002) |
 | `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 76 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
 | `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 24 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
 | `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado |
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
-| `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 10 | Split verificado |
+| `secciones/07_conclusiones.tex` | `IN_PROGRESS` | claude-1 | 10 | Task-016: matiza estado de avance (C-002) |
 | `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 47 | 22 `\bibitem`, append-only |
 | `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Task-013 mergeado a `main` en PR #4 |
 
@@ -121,18 +121,15 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #7 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: .gitignore, elimina `.claude/settings.local.json`
-  Task: — (PR #4 se mergeó con ese archivo adentro por una carrera de tiempos; #7 lo
-  saca de `main`)
-
 - PR #9 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
   Toca: CLAUDE.md, tesis/TASKS.md
   Task: — (fija Referencias_seminario.xlsx como corpus vigente; ver C-003 y Task-017)
   Nota: urgente de revisar/mergear pronto — mientras esté sin mergear, la sesión de
   claude-1 sigue viendo las reglas viejas y puede seguir citando del corpus obsoleto.
 
-(PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
+(PR #7 —.gitignore + elimina `.claude/settings.local.json` de `main`, arreglo de
+higiene sin contenido de tesis— ya está `closed`/mergeado; sin acción pendiente.
+PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
 `Prototipo_Preliminar.ipynb` línea por línea, ver comentario en el PR.
 PR #6 —.gitignore del autor humano + Task-015 de claude-1 agregado como commits
 adicionales porque GitHub no dejó abrir un segundo PR desde la misma rama— revisado
