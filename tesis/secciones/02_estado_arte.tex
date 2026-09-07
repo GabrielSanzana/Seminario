@@ -9,6 +9,8 @@
 
 Contrastar el framework trabajo por trabajo produciría una enumeración sin poder discriminativo, porque trabajos muy distintos en apariencia comparten la misma limitación estructural. Esta sección organiza el contraste en familias metodológicas, definidas por el tipo de objeto que cada método entrega como explicación y por el momento del ciclo de vida del modelo en que ese objeto se produce. El framework se posiciona como una capa de análisis post-hoc sobre modelos ya entrenados, y en cada familia se explicita el mecanismo concreto con el que aborda la limitación correspondiente.
 
+El corpus que sostiene este contraste proviene de una revisión sistemática guiada por el protocolo PRISMA 2020: la búsqueda en Scopus, Web of Science y PubMed produjo 319 registros, reducidos a 137 tras deduplicación, filtro por identificador DOI y disponibilidad de texto completo. La reducción posterior de esos 137 registros al corpus núcleo de 22 referencias citado en este documento se resolvió mediante un juicio de relevancia temática registrado individualmente por referencia, no mediante un umbral cuantitativo único; ese criterio de relevancia no está aún formalizado como regla explícita dentro del protocolo, lo que se declara aquí como una tarea pendiente de la revisión sistemática y no de esta síntesis.
+
 \subsection{Atribución marginal por variable}
 
 Esta familia estima la contribución de cada variable mediante valores de Shapley, perturbación local u oclusión, y es hoy la práctica dominante de XAI aplicada: se emplea, por ejemplo, para determinar qué factores ambientales dominan el pronóstico de generación solar \cite{petrosian2024solar}. Responde a la pregunta ``¿qué variables contribuyeron a la predicción?'' y entrega un vector de $n$ escalares ordenables.

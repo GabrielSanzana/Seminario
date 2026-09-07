@@ -25,7 +25,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 |---|---|---|---|---|
 | `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 3 | Split verificado |
 | `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 43 | Split verificado |
-| `secciones/02_estado_arte.tex` | `IN_PROGRESS` | claude-1 | 68 | Task-010: auditoría de la síntesis PRISMA |
+| `secciones/02_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 76 | Task-010: auditoría de la síntesis PRISMA |
 | `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 18 | Split verificado |
 | `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado |
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
@@ -58,6 +58,18 @@ Dos hechos del documento que condicionan el trabajo:
   `secciones/02_estado_arte.tex` contra el `Protocolo PRISMA/` (137 referencias). El
   documento declara un corpus núcleo de 22; verificar que el criterio de reducción de 137
   a 22 esté enunciado en alguna parte, y si no lo está, señalarlo. [claude-1]
+  **Resultado (NEED_REVIEW):** el criterio no estaba enunciado en ninguna parte. La
+  `Bítacora_revision_sistematica.docx` documenta con precisión la cadena 319→221→201→137
+  (deduplicación, filtro DOI, disponibilidad de texto completo), pero su Etapa 6
+  ("Extracción de datos") solo remite a las planillas de trabajo y su Etapa 7
+  ("Redacción del estudio") figura `Pendiente`; ninguna de las dos planillas
+  (`Analisis 137 referencias.xlsx`, `Referencias_seminario.xlsx`) registra un umbral o
+  regla explícita para la reducción de 137 a los 22 `\bibitem` de
+  `secciones/99_bibliografia.tex` — solo una justificación cualitativa por referencia.
+  Se agregó un párrafo a `secciones/02_estado_arte.tex` que declara la cadena numérica
+  documentada, y declara explícitamente como pendiente (no ejecutada) la formalización
+  del criterio de relevancia temática que redujo 137 a 22, en vez de omitir el vacío.
+  Compila en 18 páginas. Ver PR abajo.
 - **Task-011** — Validar que las cifras y métricas de `Prototipo_Preliminar.ipynb`
   coincidan con lo afirmado en `secciones/05_formalizacion.tex` y en
   `secciones/04_arquitectura.tex`. [claude-2]
