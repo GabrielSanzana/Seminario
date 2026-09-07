@@ -25,7 +25,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 |---|---|---|---|---|
 | `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 3 | Split verificado |
 | `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 43 | Split verificado |
-| `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 68 | Incluye `tab:familias` |
+| `secciones/02_estado_arte.tex` | `IN_PROGRESS` | claude-1 | 68 | Task-010: auditoría de la síntesis PRISMA |
 | `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 18 | Split verificado |
 | `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado |
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
