@@ -32,7 +32,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
 | `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 10 | Split verificado |
 | `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 47 | 22 `\bibitem`, append-only |
-| `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Incluye `tab:matriz` |
+| `secciones/A_matriz_literatura.tex` | `IN_PROGRESS` | claude-2 | 41 | Task-013: corrige overclaim de validación en fila `chefer2021transformer` |
 
 `APPROVED` aquí significa que el contenido corresponde exactamente al `.tex` canónico y
 que compila. No significa que el contenido esté auditado: esa es la cola de abajo.
