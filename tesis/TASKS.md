@@ -25,8 +25,8 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 |---|---|---|---|---|
 | `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 3 | Split verificado |
 | `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 43 | Split verificado |
-| `secciones/02_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 76 | Task-015: aclara fila (d) de `tab:familias` (C-001) |
-| `secciones/03_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-015: aclara objetivo específico 4 (C-001) |
+| `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 76 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
+| `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 24 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
 | `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado |
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
@@ -111,15 +111,16 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #6 | rama: claude-1/drafting | autor: mixto (autor humano + claude-1) | revisa: claude-2
-  Toca: .gitignore (autor humano), tesis/TASKS.md, secciones/02_estado_arte.tex,
-  secciones/03_objetivos.tex (claude-1)
-  Task: Task-015 (resuelve C-001). GitHub no permitió abrir un PR nuevo porque ya
-  existía uno abierto desde esta misma rama (del autor humano); el trabajo de Task-015
-  se agregó ahí como commits adicionales. Ver comentario de claude-1 en el PR.
+- PR #7 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
+  Toca: .gitignore, elimina `.claude/settings.local.json`
+  Task: — (PR #4 se mergeó con ese archivo adentro por una carrera de tiempos; #7 lo
+  saca de `main`)
 
 (PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
-`Prototipo_Preliminar.ipynb` línea por línea, ver comentario en el PR.)
+`Prototipo_Preliminar.ipynb` línea por línea, ver comentario en el PR.
+PR #6 —.gitignore del autor humano + Task-015 de claude-1 agregado como commits
+adicionales porque GitHub no dejó abrir un segundo PR desde la misma rama— revisado
+y mergeado por claude-2 a `main`.)
 
 Formato:
 
@@ -152,9 +153,14 @@ Formato:
   cinco paradigmas declarada en el resumen y la introducción". No borrar "cinco" de
   00_resumen.tex/01_introduccion.tex ni "cuatro" de 03_objetivos.tex/02_estado_arte.tex.
   Detectada por: claude-2, auditoría de Task-014, 2026-09-07.
-  Estado: ABIERTA — fix aplicado por claude-1 (Task-015), pendiente de revisión de
-  claude-2 en el PR abierto abajo. Sigue bloqueando el merge de 03_objetivos.tex y
-  02_estado_arte.tex hasta que se confirme y mergee; pasa a `RESUELTA` recién entonces.
+  Estado: RESUELTA — claude-2 revisó el fix de claude-1 (Task-015) línea por línea:
+  en `03_objetivos.tex` la cláusula ancla el "cuatro" al "enfoque frecuentista ya
+  empleado en el eslabón de consenso estadístico (objetivo específico anterior)" y
+  cierra con "que sumados a ese enfoque completan la triangulación de cinco
+  paradigmas"; en `02_estado_arte.tex` (fila (d) de `tab:familias`) queda "cuatro
+  paradigmas adicionales al probabilístico de (c), que juntos completan los cinco" —
+  ancla directo a la fila (c), que es precisamente el modelo nulo/binomial. Ningún
+  número se borró. Mergeado a `main` en PR #6.
 
 - [C-002] Secciones implicadas: 00_resumen.tex, 01_introduccion.tex, 07_conclusiones.tex
   Descripción: las tres afirman, en bloque, que la cadena de evidencia completa (los
