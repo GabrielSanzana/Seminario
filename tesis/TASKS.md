@@ -121,22 +121,18 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #7 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: .gitignore, elimina `.claude/settings.local.json`
-  Task: — (PR #4 se mergeó con ese archivo adentro por una carrera de tiempos; #7 lo
-  saca de `main`)
-
-- PR #9 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: CLAUDE.md, tesis/TASKS.md
-  Task: — (fija Referencias_seminario.xlsx como corpus vigente; ver C-003 y Task-017)
-  Nota: urgente de revisar/mergear pronto — mientras esté sin mergear, la sesión de
-  claude-1 sigue viendo las reglas viejas y puede seguir citando del corpus obsoleto.
+Ninguno abierto.
 
 (PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
 `Prototipo_Preliminar.ipynb` línea por línea, ver comentario en el PR.
 PR #6 —.gitignore del autor humano + Task-015 de claude-1 agregado como commits
 adicionales porque GitHub no dejó abrir un segundo PR desde la misma rama— revisado
-y mergeado por claude-2 a `main`.)
+y mergeado por claude-2 a `main`.
+PR #7 — saca `.claude/settings.local.json` de `main` (se había colado en PR #4).
+Mergeado por claude-2 (autorización explícita del autor humano; nadie más lo
+revisaba en el momento y bloqueaba a ambos agentes).
+PR #9 — fija `Referencias_seminario.xlsx` como corpus vigente (C-003, Task-017).
+Mergeado por claude-2, misma autorización explícita.)
 
 Formato:
 
