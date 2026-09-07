@@ -1,0 +1,21 @@
+# Auxiliares de LaTeX: cambian en cada compilacion y colisionan siempre
+*.aux
+*.log
+*.toc
+*.out
+*.bbl
+*.blg
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.gf
+
+# PDF compilado: se regenera, no se versiona
+tesis/main.pdf
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

@@ -1,0 +1,67 @@
+%% =============================================================================
+%%  ARCHIVO MAESTRO. Solo preambulo y \input: no contiene prosa.
+%%  Solo el autor humano edita este archivo. Ningun agente escribe aqui.
+%%
+%%  COMPILACION (dos pasadas para el indice; no usa BibTeX porque la
+%%  bibliografia es un entorno thebibliography):
+%%    pdflatex main && pdflatex main
+%% =============================================================================
+\documentclass[11pt,a4paper]{article}
+
+% --- Codificación y idioma -------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}   % inocuo en TeX Live actual; se puede eliminar
+\usepackage[spanish,es-noquoting,es-noshorthands]{babel}
+
+% --- Matemáticas y gráficos ------------------------------------------------
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+
+% --- Tablas ----------------------------------------------------------------
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+% --- Página ----------------------------------------------------------------
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+% --- hyperref SIEMPRE al final ---------------------------------------------
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+            hypertexnames=false]{hyperref}
+
+% --- Columnas proporcionales: imposible desbordar el ancho de texto --------
+% #1 = fracción de \linewidth. Las fracciones de cada tabla suman 1.
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{\dimexpr #1\linewidth-2\tabcolsep\relax}}
+
+% --- Estabilidad de longtable ----------------------------------------------
+\setlength{\LTcapwidth}{\textwidth}
+\setcounter{LTchunksize}{200}   % procesa cada longtable en un solo trozo
+
+\title{Framework metodológico para la reconstrucción de estructuras\\
+relacionales compactas a partir de representaciones latentes\\
+de modelos profundos}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\input{secciones/00_resumen}
+
+\tableofcontents
+
+\input{secciones/01_introduccion}
+\input{secciones/02_estado_arte}
+\input{secciones/03_objetivos}
+\input{secciones/04_arquitectura}
+\input{secciones/05_formalizacion}
+\input{secciones/06_aplicabilidad}
+\input{secciones/07_conclusiones}
+
+\input{secciones/99_bibliografia}
+
+\appendix
+\input{secciones/A_matriz_literatura}
+
+\end{document}

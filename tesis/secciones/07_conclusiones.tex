@@ -1,0 +1,16 @@
+%% ============================================================
+%%  Conclusiones
+%%  Duenio inicial: claude-1
+%%  Reglas: ver ../../CLAUDE.md
+%%  No editar si TASKS.md marca este archivo IN_PROGRESS por otro agente.
+%% ============================================================
+
+\section{Conclusiones}
+
+Este trabajo parte de una constatación y propone una respuesta. La constatación es que la literatura dispone hoy de múltiples rutas maduras para obtener una estructura relacional entre variables desde un modelo profundo, pero no de un criterio para decidir si esa estructura merece crédito. Obtener el grafo es el paso fácil; sostenerlo es el paso que falta.
+
+La respuesta propuesta es un framework que compone $A\xrightarrow{\Phi}G\xrightarrow{\Psi}H\xrightarrow{F}\mathbb{R}$ como capa post-hoc sobre modelos ya entrenados, sin reentrenamiento ni modificación arquitectónica, y que somete cada arista resultante a una cadena de cinco eslabones acumulativos triangulada con cinco paradigmas que no comparten supuestos. La contribución metodológica no consiste en proponer un método para obtener un grafo Top-K, tarea algorítmicamente sencilla, sino en construir un sistema de validación que permita decidir, con criterios explícitos declarados de antemano, cuándo una relación extraída de la atención de un modelo merece tratarse como hipótesis científica y cuándo debe descartarse como atajo predictivo, artefacto de arquitectura o ruido estocástico.
+
+Corresponde delimitar el estado de esta afirmación. Existen trabajos que extraen estructura desde atención \cite{zhu2025attention}, trabajos que la aprenden como parte del modelo \cite{cai2024msgnet,tew2024kans,zhang2026ehtgnn,zhou2026causal} y trabajos que evalúan la calidad de las explicaciones con métricas agregadas \cite{klotz2025xai,chatterjee2025multicriteria}, pero no se encontró uno que integre extracción post-hoc, consenso estadístico frente a un modelo nulo, fidelidad por ablación arista por arista, triangulación no probabilística y taxonomía diagnóstica. Esa integración es lo que se reclama como aporte, y su ejecución sobre el caso de estudio constituye el programa de trabajo de la tesis.
+
+Finalmente, el framework es matemáticamente agnóstico al dominio por construcción, dado que $\Phi$ no depende del origen de $A$ sino de sus propiedades algebraicas. El agnosticismo empírico, en cambio, permanece como afirmación por demostrar mediante un conjunto sintético con estructura conocida y un segundo dominio real, y constituye el último de los objetivos específicos declarados.
