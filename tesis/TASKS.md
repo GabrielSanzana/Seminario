@@ -25,8 +25,8 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 |---|---|---|---|---|
 | `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 3 | Split verificado |
 | `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 43 | Split verificado |
-| `secciones/02_estado_arte.tex` | `IN_PROGRESS` | claude-1 | 76 | Task-015: aclara fila (d) de `tab:familias` (C-001) |
-| `secciones/03_objetivos.tex` | `IN_PROGRESS` | claude-1 | 18 | Task-015: aclara objetivo específico 4 (C-001) |
+| `secciones/02_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 76 | Task-015: aclara fila (d) de `tab:familias` (C-001) |
+| `secciones/03_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-015: aclara objetivo específico 4 (C-001) |
 | `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado |
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
@@ -54,30 +54,6 @@ Dos hechos del documento que condicionan el trabajo:
 
 ## Cola de tareas
 
-- **Task-010** — Auditar la síntesis del estado del arte en
-  `secciones/02_estado_arte.tex` contra el `Protocolo PRISMA/` (137 referencias). El
-  documento declara un corpus núcleo de 22; verificar que el criterio de reducción de 137
-  a 22 esté enunciado en alguna parte, y si no lo está, señalarlo. [claude-1]
-  **Resultado (NEED_REVIEW):** el criterio no estaba enunciado en ninguna parte. La
-  `Bítacora_revision_sistematica.docx` documenta con precisión la cadena 319→221→201→137
-  (deduplicación, filtro DOI, disponibilidad de texto completo), pero su Etapa 6
-  ("Extracción de datos") solo remite a las planillas de trabajo y su Etapa 7
-  ("Redacción del estudio") figura `Pendiente`; ninguna de las dos planillas
-  (`Analisis 137 referencias.xlsx`, `Referencias_seminario.xlsx`) registra un umbral o
-  regla explícita para la reducción de 137 a los 22 `\bibitem` de
-  `secciones/99_bibliografia.tex` — solo una justificación cualitativa por referencia.
-  Se agregó un párrafo a `secciones/02_estado_arte.tex` que declara la cadena numérica
-  documentada, y declara explícitamente como pendiente (no ejecutada) la formalización
-  del criterio de relevancia temática que redujo 137 a 22, en vez de omitir el vacío.
-  Compila en 18 páginas. Ver PR abajo.
-- **Task-011** — Validar que las cifras y métricas de `Prototipo_Preliminar.ipynb`
-  coincidan con lo afirmado en `secciones/05_formalizacion.tex` y en
-  `secciones/04_arquitectura.tex`. [claude-2]
-- **Task-015** — Resolver la contradicción aritmética de paradigmas registrada como
-  **C-001** más abajo. Requiere editar prosa en `secciones/00_resumen.tex`,
-  `secciones/01_introduccion.tex` y `secciones/03_objetivos.tex` (las tres son
-  propiedad de claude-1; claude-2 no las reescribe). Ver motivo detallado en C-001.
-  [claude-1]
 - **Task-016** — Resolver la contradicción de alcance registrada como **C-002** más
   abajo: el resumen, la introducción y las conclusiones declaran que la cadena de
   evidencia completa está "sin ejecutar", pero `Prototipo_Preliminar.ipynb` ya ejecutó
@@ -85,6 +61,23 @@ Dos hechos del documento que condicionan el trabajo:
   `secciones/00_resumen.tex`, `secciones/01_introduccion.tex` y
   `secciones/07_conclusiones.tex` (propiedad de claude-1; claude-2 no las reescribe).
   Ver motivo detallado en C-002. [claude-1]
+
+(Task-010, Task-011, Task-012, Task-013, Task-014 y Task-015 completadas y mergeadas;
+ver `Estado de secciones` arriba y las notas de cierre abajo. Se sacan de la cola para
+que no se vuelvan a tomar por error.)
+
+### Cerradas por claude-1 en esta sesión
+
+- **Task-015** — Aplicado el fix propuesto en **C-001**: se agregó, en
+  `secciones/03_objetivos.tex` (objetivo específico 4), la cláusula "...ortogonales al
+  enfoque frecuentista ya empleado en el eslabón de consenso estadístico (objetivo
+  específico anterior)... que sumados a ese enfoque completan la triangulación de cinco
+  paradigmas declarada en el resumen y la introducción"; y en `secciones/02_estado_arte.tex`
+  (fila (d) de `tab:familias`) la coletilla "...adicionales al probabilístico de (c), que
+  juntos completan los cinco". No se tocó `00_resumen.tex` ni `01_introduccion.tex`: ya
+  eran correctos y C-001 pide expresamente no alterar su "cinco". Compila en 18 páginas.
+  Pendiente de revisión de claude-2 (ver PR abajo); C-001 sigue `ABIERTA` hasta que se
+  confirme y mergee.
 
 ### Cerradas por claude-2 en esta sesión
 
@@ -152,9 +145,9 @@ Formato:
   cinco paradigmas declarada en el resumen y la introducción". No borrar "cinco" de
   00_resumen.tex/01_introduccion.tex ni "cuatro" de 03_objetivos.tex/02_estado_arte.tex.
   Detectada por: claude-2, auditoría de Task-014, 2026-09-07.
-  Estado: ABIERTA — bloquea el merge de 00_resumen.tex, 01_introduccion.tex,
-  03_objetivos.tex y 02_estado_arte.tex hasta que claude-1 aplique Task-015. No bloquea
-  el resto del documento, que ya está mergeado a `main`.
+  Estado: ABIERTA — fix aplicado por claude-1 (Task-015), pendiente de revisión de
+  claude-2 en el PR abierto abajo. Sigue bloqueando el merge de 03_objetivos.tex y
+  02_estado_arte.tex hasta que se confirme y mergee; pasa a `RESUELTA` recién entonces.
 
 - [C-002] Secciones implicadas: 00_resumen.tex, 01_introduccion.tex, 07_conclusiones.tex
   Descripción: las tres afirman, en bloque, que la cadena de evidencia completa (los
