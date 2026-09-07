@@ -61,6 +61,16 @@ Dos hechos del documento que condicionan el trabajo:
   `secciones/00_resumen.tex`, `secciones/01_introduccion.tex` y
   `secciones/07_conclusiones.tex` (propiedad de claude-1; claude-2 no las reescribe).
   Ver motivo detallado en C-002. [claude-1]
+- **Task-017** — Resolver la contradicción de corpus registrada como **C-003** más
+  abajo: reemplazar en la prosa las referencias que no pertenecen al corpus vigente de
+  `Protocolo PRISMA/Referencias_seminario.xlsx` por las que sí, leyendo los PDF en
+  `PDF seleccionados para el seminario/`. Afecta sobre todo
+  `secciones/02_estado_arte.tex` (propiedad de claude-1); revisar también
+  `secciones/00_resumen.tex` y `secciones/01_introduccion.tex` por si citan alguna de
+  las 19 referencias obsoletas. Los `\bibitem` nuevos que hagan falta se piden aquí en
+  `TASKS.md` (título + DOI) para que claude-2 los agregue a
+  `secciones/99_bibliografia.tex` (append-only, no lo edita claude-1 directamente). Ver
+  motivo detallado en C-003. [claude-1]
 
 (Task-010, Task-011, Task-012, Task-013, Task-014 y Task-015 completadas y mergeadas;
 ver `Estado de secciones` arriba y las notas de cierre abajo. Se sacan de la cola para
@@ -115,6 +125,12 @@ que existe: si no se anota, el PR queda esperando para siempre.
   Toca: .gitignore, elimina `.claude/settings.local.json`
   Task: — (PR #4 se mergeó con ese archivo adentro por una carrera de tiempos; #7 lo
   saca de `main`)
+
+- PR #9 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
+  Toca: CLAUDE.md, tesis/TASKS.md
+  Task: — (fija Referencias_seminario.xlsx como corpus vigente; ver C-003 y Task-017)
+  Nota: urgente de revisar/mergear pronto — mientras esté sin mergear, la sesión de
+  claude-1 sigue viendo las reglas viejas y puede seguir citando del corpus obsoleto.
 
 (PR #4 revisado y mergeado por claude-1: cifras cotejadas contra
 `Prototipo_Preliminar.ipynb` línea por línea, ver comentario en el PR.
@@ -202,6 +218,82 @@ Formato:
   Estado: ABIERTA — bloquea el merge de 00_resumen.tex, 01_introduccion.tex y
   07_conclusiones.tex hasta que claude-1 aplique Task-016. No bloquea el resto del
   documento, que ya está mergeado a `main`.
+
+- [C-003] Secciones implicadas: 02_estado_arte.tex (principal), 99_bibliografia.tex,
+  A_matriz_literatura.tex, y por revisar 00_resumen.tex/01_introduccion.tex
+  Descripción: `secciones/99_bibliografia.tex` trae 22 `\bibitem` heredados del
+  documento monolítico previo al flujo multiagente. Cotejados por DOI contra
+  `Protocolo PRISMA/Referencias_seminario.xlsx` (el corpus vigente, 25 referencias,
+  todas `Leído`, con PDF completo en `PDF seleccionados para el seminario/`):
+  **solo 3 de los 22 coinciden** — `reichstein2019deep` (fila 24),
+  `liu2024itransformer` (fila 3), `zhao2026causalguided` (fila 16). Los 19 restantes
+  (`lapuschkin2019unmasking`, `abnar2020quantifying`, `slack2020fooling`,
+  `chefer2021transformer`, `jakubowski2022performance`, `cai2024msgnet`,
+  `vrahatis2024graph`, `petrosian2024solar`, `tew2024kans`, `zhu2025attention`,
+  `chatterjee2025multicriteria`, `klotz2025xai`, `han2026tscad`, `qin2026multisensor`,
+  `ewuzie2026robust`, `zhang2026ehtgnn`, `kapoor2026fustt`, `zhou2026causal`,
+  `khayitov2026stgeonet`) no están en `Referencias_seminario.xlsx`: pertenecen al
+  corpus obsoleto (`Analisis 137 referencias.xlsx` / `PDF primera iteración/`) que
+  `CLAUDE.md` ahora excluye explícitamente. En sentido inverso, 22 de las 25 filas del
+  excel vigente no se citan en ninguna parte del documento — todas menos las filas 3
+  (`liu2024itransformer`), 16 (`zhao2026causalguided`) y 24 (`reichstein2019deep`).
+  Filas sin citar, con su PDF correspondiente en `PDF seleccionados para el seminario/`
+  bajo el mismo número: 1 Quantifying Attention Flow in Transformers; 2 Transformer
+  Interpretability Beyond Attention Visualization; 4 Mechanistic Interpretability for
+  Transformer-based Time Series Classification; 5 Evaluating the Faithfulness of
+  Causality in Saliency-Based Explanations of Deep Learning Models for Temporal Colour
+  Constancy; 6 Instability and interpretability discrepancies between CNNs and vision
+  transformers in keratoconus detection; 7 Explainability and Evaluation of Vision
+  Transformers: An In-Depth Experimental Study; 8 Explanation Variability in Text
+  Classification: Humans vs. LLMs; 9 Fooling LIME and SHAP: Adversarial Attacks on Post
+  hoc Explanation Methods; 10 Unmasking Clever Hans Predictors and Assessing What
+  Machines Really Learn; 11 Understanding Transformer-Based Classifications of Medical
+  Text Using a Large Language Model for the Attribution of Feature Importance:
+  Proof-of-Concept Algorithm Development and Validation Study; 12 A comprehensive
+  analysis of perturbation methods in explainable AI feature attribution validation
+  for neural time series classifiers; 13 Explaining time series classifiers through
+  meaningful perturbation and optimisation; 14 Dynamic Causal Graph Network for
+  Reliable Pipeline Leak Detection; 15 MSGNet: Learning Multi-Scale Inter-Series
+  Correlations for Multivariate Time Series Forecasting; 17 A global model-agnostic
+  rule-based XAI method based on Parameterized Event Primitives for time series
+  classifiers; 18 SENTINEL: Multi-Patch Transformer with Temporal and Channel
+  Attention for Time Series Forecasting; 19 Unlocking the Power of Patch: Patch-Based
+  MLP for Long-Term Time Series Forecasting; 20 ConvLSTM-GCN-Transformer:
+  Spatiotemporal graph-attention model for vegetation index map forecasting; 21
+  Disentangling Regional Impacts of Joint Teleconnections Using Causal Representation
+  Learning; 22 An end-to-end explainability framework for spatio-temporal predictive
+  modeling; 23 Explainable AI in Rotorcraft Aerodynamics: Autonomous Discovery and
+  Dynamic Tracking of Vortex Ring State Mechanisms via Vision Transformers; 25 Remote
+  Sensing for Precision Agriculture: Sentinel-2 Improved Features and Applications.
+  Los 19 `\bibitem` obsoletos con su DOI actual, para localizarlos en
+  `99_bibliografia.tex`: lapuschkin2019unmasking, abnar2020quantifying,
+  slack2020fooling, chefer2021transformer, jakubowski2022performance, cai2024msgnet,
+  vrahatis2024graph, petrosian2024solar, tew2024kans, zhu2025attention,
+  chatterjee2025multicriteria, klotz2025xai, han2026tscad, qin2026multisensor,
+  ewuzie2026robust, zhang2026ehtgnn, kapoor2026fustt, zhou2026causal,
+  khayitov2026stgeonet.
+  Auditoría: esto no es un error puntual, es que la selección de corpus completa que
+  sostiene `secciones/02_estado_arte.tex` (las seis "familias metodológicas" y
+  `tab:familias`) se construyó sobre el corpus viejo antes de que
+  `Referencias_seminario.xlsx` existiera como fuente vigente. La matriz de revisión
+  sistemática en `secciones/A_matriz_literatura.tex` (`tab:matriz`, propiedad de
+  claude-2) también está construida fila por fila sobre esas mismas 22 referencias
+  obsoletas, y habrá que reconstruirla una vez que claude-1 reemplace el corpus citado
+  en la prosa.
+  Corrección propuesta (para quien la aplique, ver Task-017): claude-1 revisa las 25
+  filas de `Referencias_seminario.xlsx` (con ayuda de la hoja `Aporte por sección`, que
+  marca a qué sección aporta cada una) y reescribe `02_estado_arte.tex` (y lo que
+  corresponda de 00/01) citando ese corpus en vez del heredado. Pide en `TASKS.md` los
+  `\bibitem` que falten (título + DOI) para que claude-2 los agregue a
+  `99_bibliografia.tex`. Los 3 `\bibitem` ya vigentes (reichstein2019deep,
+  liu2024itransformer, zhao2026causalguided) se conservan; los 19 obsoletos se retiran
+  de la prosa cuando ya no los cite nadie, y claude-2 los quita de
+  `99_bibliografia.tex` recién en ese momento (append-only no impide borrar un
+  `\bibitem` que quedó sin ningún `\cite`, solo impide reordenar los que quedan).
+  Detectada por: claude-2, a pedido explícito del autor humano, 2026-09-07.
+  Estado: ABIERTA — bloquea el merge de cambios futuros a 02_estado_arte.tex y
+  A_matriz_literatura.tex hasta que claude-1 aplique Task-017 y claude-2 reconstruya
+  `tab:matriz` sobre el corpus vigente. No revierte lo ya mergeado a `main`.
 
 Formato de registro:
 

@@ -15,10 +15,34 @@ extraída merece tratarse como hipótesis científica.
 Fuentes primarias, de solo lectura:
 
 - `Presentación preliminar del tema de investigación.pdf` — introducción, objetivos, justificación.
-- `Protocolo PRISMA/` — revisión sistemática, 137 referencias, exports de Zotero (WOS, Scopus, PUBMED).
+- `Protocolo PRISMA/` — revisión sistemática, exports de Zotero (WOS, Scopus, PUBMED).
 - `Prototipo_Preliminar.ipynb` — implementación, métricas, resultados experimentales.
 
 Ningún agente escribe en esas rutas.
+
+### Corpus de referencias: cuál usar y cuál no
+
+Dentro de `Protocolo PRISMA/` hay dos generaciones del cribado. Solo la segunda es
+válida:
+
+- **Vigente, usar esta:** `Protocolo PRISMA/Referencias_seminario.xlsx`, hoja
+  `Referencias` — 25 referencias, cada una con DOI y estado `Leído`. La hoja
+  `Aporte por sección` marca con `X` a qué sección de la tesis aporta cada referencia
+  (Resumen, Introducción, Objetivos, Estado del arte, Marco Teórico, Plan de trabajo,
+  Propuesta, Conclusiones); úsala para decidir dónde citar cada una. Los PDF completos
+  de estas 25 referencias, numerados 1-25 en el mismo orden que la hoja, están en
+  `Protocolo PRISMA/PDF seleccionados para el seminario/`.
+- **Obsoleto, ignorar por completo:** `Protocolo PRISMA/Analisis 137 referencias.xlsx`
+  y `Protocolo PRISMA/PDF primera iteración/`. Corresponden a una iteración anterior
+  del cribado, superada por `Referencias_seminario.xlsx`. Ningún agente los lee ni cita
+  desde ellos, aunque aparezcan en `Bítacora_revision_sistematica.docx` o en el corpus
+  núcleo original de 22 referencias que trae `secciones/99_bibliografia.tex` desde antes
+  de que este flujo multiagente existiera.
+
+Toda entrada nueva en `secciones/99_bibliografia.tex` debe corresponder a una fila de
+`Referencias_seminario.xlsx` (mismo DOI). Una entrada que no resuelve contra esa hoja es
+del corpus obsoleto y debe reemplazarse o justificarse explícitamente, no darse por
+buena solo porque ya estaba en el documento heredado.
 
 ## Estructura editable
 
@@ -59,7 +83,14 @@ PowerShell; no está en el PATH de bash).
 
 Lee las fuentes primarias y produce prosa en `secciones/*.tex`. Dueño de la narrativa:
 resumen, introducción, estado del arte, síntesis del protocolo PRISMA, aplicabilidad,
-conclusiones. Agrega entradas a `referencias.bib`.
+conclusiones.
+
+Toda referencia que cite debe salir de `Protocolo PRISMA/Referencias_seminario.xlsx`
+(ver "Corpus de referencias" más arriba), leyendo el PDF correspondiente en
+`PDF seleccionados para el seminario/`. Si necesita citar una referencia de esa hoja que
+todavía no tiene `\bibitem` en `secciones/99_bibliografia.tex`, no la agrega él mismo:
+ese archivo es de claude-2 y es append-only. La pide en `TASKS.md` (título, DOI, y en qué
+frase la va a usar) para que claude-2 la agregue.
 
 No toca `main.tex`. No corrige formato en archivos ajenos.
 
@@ -69,6 +100,12 @@ Revisa lo que produjo claude-1. Verifica que compile, corrige `\label`, `\ref` y
 colgantes, entornos de figura y tabla, y coherencia conceptual: que las cifras y métricas
 citadas en la prosa coincidan con las del notebook. Dueño de las secciones técnicas:
 arquitectura, formalización, bibliografía y matriz de literatura.
+
+Agrega los `\bibitem` que claude-1 pida en `TASKS.md` (append-only, ver regla más abajo),
+y audita que todo `\cite` de la prosa resuelva contra una referencia de
+`Referencias_seminario.xlsx`, no contra el corpus obsoleto de 22 que traía el documento
+heredado. Un `\cite` que no resuelve contra esa hoja se marca `NEED_REWRITE` con el DOI
+esperado.
 
 **No reescribe prosa ajena.** Si el contenido está mal, lo marca `NEED_REWRITE` en
 `TASKS.md` con el motivo y lo devuelve a claude-1.
@@ -120,7 +157,9 @@ agente revisor verifica explícitamente:
    sección llama a la transformación `Phi` y otra la llama `F`, se unifica antes de
    mergear.
 4. **Referencias.** Todo `\cite` resuelve a un `\bibitem` existente en
-   `secciones/99_bibliografia.tex`, y la afirmación que sostiene corresponde a lo que ese
+   `secciones/99_bibliografia.tex`, ese `\bibitem` corresponde a una fila de
+   `Protocolo PRISMA/Referencias_seminario.xlsx` (mismo DOI, no al corpus obsoleto de
+   `Analisis 137 referencias.xlsx`), y la afirmación que sostiene corresponde a lo que ese
    trabajo dice de verdad.
 
 Las contradicciones se reportan en el PR con
