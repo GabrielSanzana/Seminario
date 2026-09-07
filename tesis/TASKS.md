@@ -24,13 +24,13 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
 | `secciones/00_resumen.tex` | `NEED_REVIEW` | claude-1 | 10 | Task-016: matiza estado de avance (C-002) |
-| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 49 | Task-016: matiza estado de avance (C-002) |
-| `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 76 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 49 | Task-016 (C-002) + Task-017 (C-003): corpus de referencias reemplazado |
+| `secciones/02_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 76 | Task-017: reescrita sobre el corpus vigente (C-003) |
 | `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 24 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
 | `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado |
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
-| `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 31 | Incluye `tab:dominios` |
-| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 16 | Task-016: matiza estado de avance (C-002) |
+| `secciones/06_aplicabilidad.tex` | `NEED_REVIEW` | claude-1 | 36 | Task-017: `tab:dominios` reescrita sobre el corpus vigente (C-003) |
+| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 16 | Task-016 (C-002) + Task-017 (C-003): corpus de referencias reemplazado |
 | `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 47 | 22 `\bibitem`, append-only |
 | `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Task-013 mergeado a `main` en PR #4 |
 
@@ -54,20 +54,60 @@ Dos hechos del documento que condicionan el trabajo:
 
 ## Cola de tareas
 
-- **Task-017** — Resolver la contradicción de corpus registrada como **C-003** más
-  abajo: reemplazar en la prosa las referencias que no pertenecen al corpus vigente de
-  `Protocolo PRISMA/Referencias_seminario.xlsx` por las que sí, leyendo los PDF en
-  `PDF seleccionados para el seminario/`. Afecta sobre todo
-  `secciones/02_estado_arte.tex` (propiedad de claude-1); revisar también
-  `secciones/00_resumen.tex` y `secciones/01_introduccion.tex` por si citan alguna de
-  las 19 referencias obsoletas. Los `\bibitem` nuevos que hagan falta se piden aquí en
-  `TASKS.md` (título + DOI) para que claude-2 los agregue a
-  `secciones/99_bibliografia.tex` (append-only, no lo edita claude-1 directamente). Ver
-  motivo detallado en C-003. [claude-1]
+- **Task-018** — `04_arquitectura.tex` y `A_matriz_literatura.tex` (ambos propiedad de
+  claude-2) también citan referencias del corpus obsoleto y no fueron cubiertos por
+  Task-017 porque son archivos ajenos a claude-1. Ver el detalle completo, cita por
+  cita, en la nota de cierre de Task-017 más abajo. [claude-2]
 
-(Task-010 a Task-016 completadas y mergeadas o en revisión; ver `Estado de secciones`
+(Task-010 a Task-017 completadas y mergeadas o en revisión; ver `Estado de secciones`
 arriba y las notas de cierre abajo. Se sacan de la cola para que no se vuelvan a tomar
 por error.)
+
+### Solicitud de `\bibitem` nuevos para `secciones/99_bibliografia.tex` (Task-017)
+
+`secciones/99_bibliografia.tex` es append-only y no la edita claude-1 directamente.
+Los siguientes 12 `\bibitem` faltan y ya se citan (con estas mismas claves) en
+`02_estado_arte.tex`, `01_introduccion.tex`, `07_conclusiones.tex` y
+`06_aplicabilidad.tex`; el DOI resuelve la referencia completa. `./scripts/compilar.sh`
+reporta 42 citas colgantes por esto — es esperado, no es un error de LaTeX (`compilar.sh`
+distingue `FALLO` de `ADVERTENCIA` para exactamente este caso).
+
+```
+mechinterp2025ts        Mechanistic Interpretability for Transformer-based Time Series
+                         Classification — 10.48550/arXiv.2511.21514
+keratoconus2026instability  Instability and interpretability discrepancies between CNNs
+                         and vision transformers in keratoconus detection —
+                         10.1016/j.patrec.2026.03.020
+vitexplain2024evaluation Explainability and Evaluation of Vision Transformers: An
+                         In-Depth Experimental Study — 10.3390/electronics13010175
+medtext2026attribution   Understanding Transformer-Based Classifications of Medical
+                         Text Using a Large Language Model for the Attribution of
+                         Feature Importance — 10.2196/81644
+pipeline2026causalgraph  Dynamic Causal Graph Network for Reliable Pipeline Leak
+                         Detection — 10.1016/j.ress.2026.112795
+rulexai2024events        A global model-agnostic rule-based XAI method based on
+                         Parameterized Event Primitives for time series classifiers —
+                         10.3389/frai.2024.1381921
+sentinel2025multipatch   SENTINEL: Multi-Patch Transformer with Temporal and Channel
+                         Attention for Time Series Forecasting —
+                         10.48550/arXiv.2503.17658
+patchmlp2025unlocking    Unlocking the Power of Patch: Patch-Based MLP for Long-Term
+                         Time Series Forecasting — 10.48550/arXiv.2405.13575
+convlstmgcn2026vegetation ConvLSTM-GCN-Transformer: Spatiotemporal graph-attention
+                         model for vegetation index map forecasting —
+                         10.1016/j.eswa.2026.131596
+teleconnections2026causal Disentangling Regional Impacts of Joint Teleconnections
+                         Using Causal Representation Learning — 10.1175/JCLI-D-25-0700.1
+spatiotemporal2024e2e    An end-to-end explainability framework for spatio-temporal
+                         predictive modeling — 10.1007/s10994-024-06733-6
+rotorcraft2026vortexring Explainable AI in Rotorcraft Aerodynamics: Autonomous
+                         Discovery and Dynamic Tracking of Vortex Ring State Mechanisms
+                         via Vision Transformers — 10.3390/aerospace13070590
+```
+
+Todas están en `Protocolo PRISMA/Referencias_seminario.xlsx` (hoja `Referencias`) con
+descripción, metodología, resultados y conclusión ya documentados, y su PDF completo en
+`PDF seleccionados para el seminario/`.
 
 ### Cerradas por claude-1 en esta sesión
 
@@ -88,6 +128,50 @@ por error.)
   multicriterio esté validado: el texto sigue siendo literal sobre lo pendiente
   (eslabones 3-5). Compila en 18 páginas. Pendiente de revisión de claude-2 (ver PR
   abajo); C-002 sigue `ABIERTA` hasta que se confirme y mergee.
+- **Task-017** — Aplicado el fix propuesto en **C-003**. Antes de reescribir, se
+  recotejaron por título (no solo por DOI) los 19 `\bibitem` que C-003 marcó
+  obsoletos contra las 25 filas de `Referencias_seminario.xlsx`: **5 de los 19 son en
+  realidad la misma obra que ya está en `99_bibliografia.tex`**, solo que citada con el
+  DOI del preprint de arXiv en vez del DOI de la versión publicada (o viceversa) —
+  `lapuschkin2019unmasking` (fila 10), `abnar2020quantifying` (fila 1),
+  `slack2020fooling` (fila 9), `chefer2021transformer` (fila 3) y `cai2024msgnet`
+  (fila 15). Estas 5 no se reemplazan ni se piden de nuevo: ya resuelven contra el
+  corpus vigente, la comparación de C-003 solo comparó DOI y no título. Los 14
+  restantes sí son obsoletos de verdad (obra distinta, sin equivalente en las 25
+  filas): `jakubowski2022performance`, `vrahatis2024graph`, `petrosian2024solar`,
+  `tew2024kans`, `zhu2025attention`, `chatterjee2025multicriteria`, `klotz2025xai`,
+  `han2026tscad`, `qin2026multisensor`, `ewuzie2026robust`, `zhang2026ehtgnn`,
+  `kapoor2026fustt`, `zhou2026causal`, `khayitov2026stgeonet`.
+
+  Se reescribió por completo `secciones/02_estado_arte.tex` (6 familias metodológicas
+  nuevas + `tab:familias`) sobre las 18 filas de `Referencias_seminario.xlsx`
+  etiquetadas "Estado del arte" en la hoja `Aporte por sección`: 6 ya tenían
+  `\bibitem` vigente (las 3 de C-003 más las 4 de las 5 recotejadas que aplican aquí:
+  `chefer2021transformer`, `slack2020fooling`, `lapuschkin2019unmasking`,
+  `cai2024msgnet`, `zhao2026causalguided`, `liu2024itransformer`) y 12 necesitan
+  `\bibitem` nuevo (pedidos arriba). Se corrigieron además las citas obsoletas en
+  `secciones/01_introduccion.tex` (contexto, problema y justificación) y
+  `secciones/07_conclusiones.tex` (delimitación del aporte), y se reescribió
+  `secciones/06_aplicabilidad.tex` completa (`tab:dominios`, 5 dominios en vez de 6)
+  porque su argumento de aplicabilidad dependía enteramente de referencias del corpus
+  obsoleto y ninguna de las 25 filas vigentes está etiquetada para "Aplicabilidad" en
+  la hoja `Aporte por sección` --se reconstruyó con las filas de Estado del arte que
+  mejor calzan (redes de sensores, industria, vegetación, aerodinámica, clima).
+  `secciones/00_resumen.tex` y `secciones/03_objetivos.tex` no citan nada: sin cambios.
+
+  Hallazgo adicional que excede el alcance de Task-017: `secciones/04_arquitectura.tex`
+  y `secciones/A_matriz_literatura.tex` (ambos de claude-2) también citan
+  profusamente el corpus obsoleto y C-003 no los había cubierto. Registrado como
+  **Task-018** arriba, con el detalle exacto de qué cita en qué línea abajo en la
+  descripción de C-003 actualizada.
+
+  `./scripts/compilar.sh` → `OK: main.pdf compilado, 18 paginas`,
+  `ADVERTENCIA: 42 referencias o citas sin resolver` — las 12 `\bibitem` pedidos
+  arriba, esperado hasta que claude-2 los agregue. Pendiente de revisión de claude-2
+  (ver PR abajo); C-003 sigue `ABIERTA` para `02_estado_arte.tex`,
+  `01_introduccion.tex`, `06_aplicabilidad.tex` y `07_conclusiones.tex` hasta que se
+  agreguen los `\bibitem`, se confirme y se mergee; sigue abierta sin fecha para
+  `04_arquitectura.tex` y `A_matriz_literatura.tex` (Task-018).
 
 ### Cerradas por claude-2 en esta sesión
 
@@ -129,8 +213,15 @@ que existe: si no se anota, el PR queda esperando para siempre.
 
 - PR #8 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
   Toca: secciones/00_resumen.tex, secciones/01_introduccion.tex,
+  secciones/02_estado_arte.tex, secciones/06_aplicabilidad.tex,
   secciones/07_conclusiones.tex, TASKS.md
-  Task: Task-016 (resuelve C-002)
+  Task: Task-016 (resuelve C-002) + Task-017 (resuelve C-003 salvo `04_arquitectura.tex`
+  y `A_matriz_literatura.tex`, ver Task-018)
+  Nota: no se pudo abrir PR nuevo porque #8 seguía abierto sobre la misma rama; Task-017
+  se agregó ahí como commits adicionales, igual que pasó antes con el PR #6.
+  Requiere que claude-2 agregue los 12 `\bibitem` pedidos arriba antes de compilar sin
+  advertencias (`compilar.sh` da `OK` + `ADVERTENCIA: 42 referencias sin resolver`, no
+  `FALLO`).
 
 (PR #7 —.gitignore + elimina `.claude/settings.local.json` de `main`, arreglo de
 higiene sin contenido de tesis— ya está `closed`/mergeado; sin acción pendiente.
@@ -222,8 +313,9 @@ Formato:
   01_introduccion.tex y 07_conclusiones.tex hasta que se confirme y mergee; pasa a
   `RESUELTA` recién entonces.
 
-- [C-003] Secciones implicadas: 02_estado_arte.tex (principal), 99_bibliografia.tex,
-  A_matriz_literatura.tex, y por revisar 00_resumen.tex/01_introduccion.tex
+- [C-003] Secciones implicadas: 02_estado_arte.tex (principal), 01_introduccion.tex,
+  06_aplicabilidad.tex, 07_conclusiones.tex, 99_bibliografia.tex, 04_arquitectura.tex y
+  A_matriz_literatura.tex (estas dos últimas, ver Task-018)
   Descripción: `secciones/99_bibliografia.tex` trae 22 `\bibitem` heredados del
   documento monolítico previo al flujo multiagente. Cotejados por DOI contra
   `Protocolo PRISMA/Referencias_seminario.xlsx` (el corpus vigente, 25 referencias,
@@ -294,9 +386,23 @@ Formato:
   `99_bibliografia.tex` recién en ese momento (append-only no impide borrar un
   `\bibitem` que quedó sin ningún `\cite`, solo impide reordenar los que quedan).
   Detectada por: claude-2, a pedido explícito del autor humano, 2026-09-07.
-  Estado: ABIERTA — bloquea el merge de cambios futuros a 02_estado_arte.tex y
-  A_matriz_literatura.tex hasta que claude-1 aplique Task-017 y claude-2 reconstruya
-  `tab:matriz` sobre el corpus vigente. No revierte lo ya mergeado a `main`.
+
+  Corrección de claude-1 sobre el propio C-003 (Task-017): el cotejo por DOI de los
+  19 "obsoletos" tenía 5 falsos positivos. `lapuschkin2019unmasking`,
+  `abnar2020quantifying`, `slack2020fooling`, `chefer2021transformer` y
+  `cai2024msgnet` son la misma obra que las filas 10, 1, 9, 3 y 15 de
+  `Referencias_seminario.xlsx` respectivamente, citada con el DOI del preprint de
+  arXiv en `99_bibliografia.tex` en vez del DOI de la versión publicada (o viceversa):
+  DOI distinto, obra idéntica. Comparar por título además de por DOI lo muestra de
+  inmediato. Estas 5 no son obsoletas y no se piden de nuevo. Los 14 restantes sí lo
+  son. Ver detalle completo en la nota de cierre de Task-017.
+
+  Estado: ABIERTA para `02_estado_arte.tex`, `01_introduccion.tex`,
+  `06_aplicabilidad.tex` y `07_conclusiones.tex` — fix aplicado por claude-1
+  (Task-017), pendiente de que claude-2 agregue los 12 `\bibitem` solicitados arriba,
+  confirme y mergee. Sigue ABIERTA sin fecha para `04_arquitectura.tex` y
+  `A_matriz_literatura.tex` (Task-018, de claude-2). No revierte lo ya mergeado a
+  `main`.
 
 Formato de registro:
 
