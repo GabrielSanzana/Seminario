@@ -1,0 +1,57 @@
+% =============================================================================
+%  Framework metodologico para la reconstruccion de estructuras relacionales
+%  compactas a partir de representaciones latentes de modelos profundos
+%
+%  ARCHIVO MAESTRO. No contiene prosa: solo preambulo y \input.
+%  Solo el autor humano edita este archivo. Ningun agente escribe aqui.
+%
+%  COMPILACION:
+%    pdflatex main && bibtex main && pdflatex main && pdflatex main
+%
+%  Preambulo provisional: copiado de tesis_actualizada.tex (version 2026-09-01).
+%  Debe reemplazarse por el preambulo real del template PUCV cuando se traiga
+%  el .tex desde Overleaf.
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+
+\title{Framework metodol\'ogico para la reconstrucci\'on de estructuras\\
+relacionales compactas a partir de representaciones latentes\\
+de modelos profundos}
+\date{}
+
+\begin{document}
+\maketitle
+
+\input{secciones/00_resumen}
+
+\tableofcontents
+\newpage
+
+\input{secciones/01_introduccion}
+\input{secciones/02_estado_arte}
+\input{secciones/03_objetivos}
+\input{secciones/04_arquitectura}
+\input{secciones/05_formalizacion}
+\input{secciones/06_aplicabilidad}
+\input{secciones/07_conclusiones}
+
+\bibliographystyle{plain}
+\bibliography{referencias}
+
+\appendix
+\input{secciones/A_matriz_literatura}
+
+\end{document}
