@@ -73,6 +73,22 @@ Dos hechos del documento que condicionan el trabajo:
   probabilístico" y "cuatro además de él", y si lo es, hacerla explícita en el texto.
   [claude-2]
 
+## PR abiertos
+
+Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mergea lo
+propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
+que existe: si no se anota, el PR queda esperando para siempre.
+
+Ninguno abierto.
+
+Formato:
+
+```
+- PR #N | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
+  Toca: secciones/02_estado_arte.tex
+  Task: Task-010
+```
+
 ## Contradicciones abiertas
 
 Ninguna registrada.

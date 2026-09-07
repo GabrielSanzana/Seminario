@@ -1,0 +1,7 @@
+# Los scripts deben quedar con LF incluso en Windows: con CRLF, bash falla con
+# "bad interpreter" o "\r: command not found" al leer el shebang.
+*.sh text eol=lf
+
+# Los .tex se normalizan a LF para que los diffs entre agentes sean legibles.
+*.tex text eol=lf
+*.md text eol=lf
