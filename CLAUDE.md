@@ -304,6 +304,10 @@ matices, aunque el registro de esas cifras y de dónde salieron sigue en el hist
 `TASKS.md` para cuando la entrega que sí las incluya se retome.
 
 Antes de aprobar o mergear un PR con prosa nueva (o al escribir prosa propia en las
-secciones que sí posee), usar la skill `thesis-prose-audit` para revisar tells de
-escritura de IA — no es opcional, es parte de la revisión igual que el resto del
-protocolo de contradicciones.
+secciones que sí posee), pasar una auditoría de tells de escritura de IA — es parte de
+la revisión igual que el resto del protocolo de contradicciones, no un paso opcional.
+`thesis-prose-audit` (una skill instalada solo en el entorno de claude-2, con el mapeo
+de esos patrones al español académico) es una forma de hacerlo; `humanizer` a secas
+cubre el mismo conjunto de patrones y sirve igual si la primera no está disponible en
+la máquina de quien revisa. Ninguna de las dos vive en el repositorio, así que no
+asumir que el otro agente la tiene instalada solo porque esta regla la nombra.

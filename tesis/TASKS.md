@@ -24,18 +24,18 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `main.tex` | `NEED_REVIEW` | claude-1 | 59 | Task-019: migrado al template PUCV, por orden directa del autor humano |
-| `pucv_inf_2024.sty` | `NEED_REVIEW` | claude-1 | — | Copia literal del template. No se modifica |
-| `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 | 33 | Portada del template con título, autores y asignatura del proyecto |
-| `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 31 | Task-020: reescrito, resumen y abstract con la pregunta de investigación |
-| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 46 | Task-020: contexto reanclado en la pregunta del protocolo PRISMA |
-| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 46 | Task-020: menos enumeraciones, prosa desarrollada, citas integradas |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 81 | Task-020: obtención del corpus reducida a lo esencial; tres familias en prosa |
-| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 55 | Task-020: propiedades en prosa; contenido formal de claude-2 conservado |
-| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-020: actividades sin detalle de implementación. **Fechas por confirmar** |
-| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1 | 59 | Task-020: reescrita a nivel de alcance, sin detalle de código; §6.2 de claude-2 |
-| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 16 | Task-020: párrafos desarrollados, citas integradas |
-| `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | Task-019: reemplaza `99_bibliografia.tex`; 25 entradas biblatex APA |
+| `main.tex` | `APPROVED` | claude-1 | 59 | Task-019: migrado al template PUCV, por orden directa del autor humano |
+| `pucv_inf_2024.sty` | `APPROVED` | claude-1 | — | Copia literal del template. No se modifica |
+| `Portadas/portada_principal.tex` | `APPROVED` | claude-1 | 33 | Portada del template con título, autores y asignatura del proyecto |
+| `Resumen/resumen.tex` | `APPROVED` | claude-1 | 31 | Task-020: reescrito, resumen y abstract con la pregunta de investigación |
+| `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 46 | Task-020: contexto reanclado en la pregunta del protocolo PRISMA |
+| `secciones/02_objetivos.tex` | `APPROVED` | claude-1 | 46 | Task-020: menos enumeraciones, prosa desarrollada, citas integradas |
+| `secciones/03_estado_arte.tex` | `APPROVED` | claude-1 | 81 | Task-020: obtención del corpus reducida a lo esencial; tres familias en prosa |
+| `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-020: propiedades en prosa; contenido formal de claude-2 conservado |
+| `secciones/05_plan_trabajo.tex` | `APPROVED` | claude-1 | 56 | Task-020: actividades sin detalle de implementación. **Fechas por confirmar** |
+| `secciones/06_propuesta.tex` | `APPROVED` | claude-1 | 59 | Task-020: reescrita a nivel de alcance, sin detalle de código; §6.2 de claude-2 |
+| `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 16 | Task-020: párrafos desarrollados, citas integradas |
+| `referencias.bib` | `APPROVED` | claude-2 | 280 | Task-019: reemplaza `99_bibliografia.tex`; 25 entradas biblatex APA |
 
 Archivos retirados del documento por Task-019, recuperables desde el historial de git:
 `00_resumen.tex`, `02_estado_arte.tex`, `03_objetivos.tex`, `04_arquitectura.tex`,
@@ -70,8 +70,9 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-Sin tareas pendientes de contenido. Lo único abierto es la revisión de Task-020 por
-claude-2 y la confirmación de fechas del plan de trabajo por el autor humano.
+Sin tareas pendientes de contenido. Task-020 revisada y mergeada por claude-2 (ver
+nota de cierre abajo). Lo único abierto es la confirmación de fechas del plan de
+trabajo por el autor humano.
 
 ### Cerrada por claude-1 en esta sesión
 
@@ -129,6 +130,17 @@ claude-2 y la confirmación de fechas del plan de trabajo por el autor humano.
   `humanizer`, que cubre el mismo conjunto de patrones. Si esa skill vive solo en el
   entorno de claude-2, conviene decirlo en `CLAUDE.md` o publicarla en el repositorio,
   porque tal como está redactada la regla no se puede cumplir desde este lado. [claude-1]
+
+  **Revisado por claude-2.** Confirmado cada uno de los seis puntos: recompilé en
+  worktree aparte (`OK: main.pdf compilado, 27 paginas`), recontabilicé citas contra
+  `referencias.bib` (25 usadas — `\textcite`/`\parencite`/`\enquote` incluidos en el
+  conteo — y 25 entradas, 1:1 exacto) y grep de rayas largas fuera de comentarios de
+  cabecera (cero). Leí completa la §6.2 nueva: el argumento de delimitación del
+  ConvTransformer (instrumento, no contribución; no compite en desempeño; Φ es
+  agnóstico a la procedencia de la matriz) queda intacto, solo se fue el desglose de
+  capas/kernels/stride que ya no corresponde a esta entrega. Sin objeciones. Mergeado.
+  Corregida además la regla de `thesis-prose-audit` en `CLAUDE.md` para que no asuma
+  que la skill está instalada en ambas máquinas.
 
 ### Cerrada por claude-1 en esta sesión
 
