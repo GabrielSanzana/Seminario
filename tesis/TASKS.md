@@ -15,6 +15,7 @@ Reglas completas en [`../CLAUDE.md`](../CLAUDE.md).
 | `NEED_REWRITE` | Auditoría lo rechazó. Vuelve a claude-1 con motivo |
 | `APPROVED` | Auditado y mergeado a `main` |
 | `BLOCKED` | Depende de otra tarea o de una decisión humana |
+| `OBSOLETO` | El archivo sale del documento. No editar: su contenido ya migró a otro |
 
 Protocolo de reserva: cambiar el estado a `IN_PROGRESS`, hacer commit y push, **y después**
 editar. El cambio de estado y el trabajo terminado van en el mismo commit al cerrar.
@@ -23,16 +24,24 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 10 | Task-016 mergeado a `main` en PR #8; C-002 resuelta |
-| `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 49 | Task-016+017 mergeado a `main` en PR #8; C-002 resuelta |
-| `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 76 | Task-017 mergeado a `main` en PR #8; 12 `\bibitem` agregados en PR #10 |
-| `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 24 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
-| `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado; corpus obsoleto pendiente (Task-018) |
-| `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
-| `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 36 | Task-017 mergeado a `main` en PR #8; `tab:dominios` sobre corpus vigente |
-| `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 16 | Task-016+017 mergeado a `main` en PR #8; C-002 resuelta |
-| `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 59 | Task-017 (PR #10) mergeado a `main`: 12 `\bibitem` nuevos, 22 anteriores intactos |
-| `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Task-013 mergeado a `main` en PR #4; corpus obsoleto pendiente (Task-018) |
+| `main.tex` | `IN_PROGRESS` | claude-1 | — | Task-019: migración al template PUCV, por orden directa del autor humano |
+| `Resumen/resumen.tex` | `IN_PROGRESS` | claude-1 | — | Task-019: resumen + abstract + palabras clave (formato template) |
+| `secciones/01_introduccion.tex` | `IN_PROGRESS` | claude-1 | — | Task-019 |
+| `secciones/02_objetivos.tex` | `IN_PROGRESS` | claude-1 | — | Task-019 (reemplaza `03_objetivos.tex`) |
+| `secciones/03_estado_arte.tex` | `IN_PROGRESS` | claude-1 | — | Task-019 (reemplaza `02_estado_arte.tex`; agrega PRISMA) |
+| `secciones/04_marco_teorico.tex` | `IN_PROGRESS` | claude-1 | — | Task-019: absorbe `05_formalizacion.tex` (contenido de claude-2, migrado sin reescribir) |
+| `secciones/05_plan_trabajo.tex` | `IN_PROGRESS` | claude-1 | — | Task-019: sección nueva que pide la rúbrica |
+| `secciones/06_propuesta.tex` | `IN_PROGRESS` | claude-1 | — | Task-019: absorbe `04_arquitectura.tex` (de claude-2) y `06_aplicabilidad.tex` |
+| `secciones/07_conclusiones.tex` | `IN_PROGRESS` | claude-1 | — | Task-019: conclusiones preliminares, sin resultados de código |
+| `referencias.bib` | `IN_PROGRESS` | claude-1 | — | Task-019: reemplaza `99_bibliografia.tex`; 25 entradas, biblatex APA |
+| `secciones/00_resumen.tex` | `OBSOLETO` | claude-1 | 10 | Task-019: su contenido pasa a `Resumen/resumen.tex` |
+| `secciones/02_estado_arte.tex` | `OBSOLETO` | claude-1 | 76 | Task-019: renombrado a `03_estado_arte.tex` |
+| `secciones/03_objetivos.tex` | `OBSOLETO` | claude-1 | 24 | Task-019: renombrado a `02_objetivos.tex` |
+| `secciones/04_arquitectura.tex` | `OBSOLETO` | claude-2 | 48 | Task-019: absorbido por `06_propuesta.tex` |
+| `secciones/05_formalizacion.tex` | `OBSOLETO` | claude-2 | 41 | Task-019: absorbido por `04_marco_teorico.tex` |
+| `secciones/06_aplicabilidad.tex` | `OBSOLETO` | claude-1 | 36 | Task-019: absorbido por `06_propuesta.tex` |
+| `secciones/99_bibliografia.tex` | `OBSOLETO` | claude-2 | 59 | Task-019: reemplazado por `referencias.bib` (biblatex) |
+| `secciones/A_matriz_literatura.tex` | `OBSOLETO` | claude-2 | 47 | Task-019: la rúbrica de la entrega no contempla anexo de matriz |
 
 `APPROVED` aquí significa que el contenido corresponde exactamente al `.tex` canónico y
 que compila. No significa que el contenido esté auditado: esa es la cola de abajo.
@@ -54,10 +63,29 @@ Dos hechos del documento que condicionan el trabajo:
 
 ## Cola de tareas
 
+- **Task-019** — Migración completa al template PUCV
+  (`Template_Latex__Formato_Informes__Copy_/`) y reestructuración del documento según la
+  rúbrica de la entrega de avance. **Instrucción directa del autor humano**, que además
+  fijó cuatro condiciones: (a) el informe cita solo las 25 referencias de
+  `Referencias_seminario.xlsx`, ni una más; (b) el estado del arte debe explicar el
+  protocolo PRISMA, porque ahí se evidencia cómo se obtuvieron los documentos; (c) esta
+  entrega **no** reporta resultados de código, así que las cifras del prototipo que
+  Task-016 había agregado salen del texto; (d) sin rayas largas (`--`) en la prosa.
+
+  Esto obliga a tocar archivos de claude-2 (`04_arquitectura.tex`,
+  `05_formalizacion.tex`, `99_bibliografia.tex`) y `main.tex`, que normalmente claude-1
+  no toca. Se hace porque el autor humano lo pidió explícitamente y porque una migración
+  de formato no se puede partir por dueño sin dejar el documento sin compilar a la
+  mitad. **El contenido técnico de claude-2 se migra sin reescribirlo**: cambia de
+  archivo y se le limpian las citas obsoletas, nada más. claude-2 queda como dueño de
+  esas partes dentro de los archivos nuevos y puede reescribirlas cuando quiera.
+  [claude-1]
+
 - **Task-018** — `04_arquitectura.tex` y `A_matriz_literatura.tex` (ambos propiedad de
   claude-2) también citan referencias del corpus obsoleto y no fueron cubiertos por
-  Task-017 porque son archivos ajenos a claude-1. Ver el detalle completo, cita por
-  cita, en la nota de cierre de Task-017 más abajo. [claude-2]
+  Task-017 porque son archivos ajenos a claude-1. **Queda absorbida por Task-019**: los
+  dos archivos salen del documento y su contenido migra ya sin citas obsoletas. Se deja
+  registrada para que no se retome. [claude-2]
 
 (Task-010 a Task-017 completadas y mergeadas o en revisión; ver `Estado de secciones`
 arriba y las notas de cierre abajo. Se sacan de la cola para que no se vuelvan a tomar
