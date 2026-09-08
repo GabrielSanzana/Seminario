@@ -1,0 +1,31 @@
+%% ============================================================
+%%  Resumen y Abstract
+%%  Duenio inicial: claude-1
+%%  Reglas: ver ../../CLAUDE.md
+%%  No editar si TASKS.md marca este archivo IN_PROGRESS por otro agente.
+%% ============================================================
+
+\chapter*{Resumen}
+\addcontentsline{toc}{chapter}{Resumen/Abstract\vspace{-0.5cm}}
+
+Los modelos profundos basados en atención superan a los modelos clásicos en desempeño predictivo sobre problemas multivariables, pero no entregan una descripción de las relaciones entre variables que sostiene esa predicción. Los métodos de explicabilidad disponibles tampoco la entregan: asignan importancia a cada variable por separado, dibujan la relevancia como un mapa continuo, o parten de un grafo conocido de antemano. Ninguno de esos objetos puede enunciarse fuera del modelo que lo produjo, compararse con conocimiento previo del fenómeno ni someterse a refutación.
+
+Este trabajo propone un framework metodológico que transforma la matriz de atención de un modelo ya entrenado en una hipótesis relacional compacta, es decir, un grafo dirigido y ponderado sobre variables con nombre, sin reentrenar el modelo ni modificar su arquitectura. La contribución no está en extraer el grafo, operación algorítmicamente sencilla, sino en el criterio que decide cuándo una relación extraída merece tratarse como hipótesis científica. Ese criterio se organiza como una cadena de evidencia acumulativa de cinco eslabones: estabilidad de la representación ante la semilla de entrenamiento, estabilidad estructural ante el criterio de discretización, consenso frente a un modelo nulo explícito, fidelidad predictiva por ablación dirigida, y especificidad junto a robustez y compacidad. La cadena se triangula con paradigmas que no comparten supuestos, de modo que la conclusión sobre una relación no dependa de una sola familia de métodos.
+
+A la fecha de este informe de avance el framework está formalizado y el protocolo de validación está especificado, con umbrales de aprobación e indicadores de fallo declarados antes de su ejecución. Aplicarlo sobre el caso de estudio, un conjunto de índices espectrales derivados de imágenes satelitales, constituye el programa de trabajo de la etapa siguiente. El estado del arte que respalda el diseño proviene de una revisión sistemática conducida bajo el protocolo PRISMA 2020.
+
+{\bf Palabras clave:} interpretabilidad, mecanismos de atención, grafo relacional, series de tiempo multivariadas, revisión sistemática.
+
+\vspace{2cm}
+\begingroup
+\let\clearpage\relax
+\chapter*{Abstract}
+
+Attention-based deep models outperform classical models on multivariate prediction tasks, yet they do not expose the relations among variables that support those predictions. Available explainability methods do not expose them either: they assign importance to each variable in isolation, render relevance as a continuous map, or start from a graph that is known beforehand. None of these objects can be stated outside the model that produced it, compared against prior knowledge of the phenomenon, or subjected to refutation.
+
+This work proposes a methodological framework that turns the attention matrix of an already trained model into a compact relational hypothesis, that is, a weighted directed graph over named variables, without retraining the model or modifying its architecture. The contribution does not lie in extracting the graph, which is algorithmically simple, but in the criterion that decides when an extracted relation deserves to be treated as a scientific hypothesis. That criterion is organised as a cumulative chain of evidence with five links: stability of the representation under the training seed, structural stability under the discretisation criterion, consensus against an explicit null model, predictive faithfulness under targeted ablation, and specificity together with robustness and compactness. The chain is triangulated with paradigms that do not share assumptions, so that the verdict on a relation does not rest on a single family of methods.
+
+As of this progress report the framework is formalised and the validation protocol is specified, with approval thresholds and failure indicators declared before execution. Running it on the case study, a set of spectral indices derived from satellite imagery, is the work programme for the next stage. The state of the art supporting the design comes from a systematic review conducted under the PRISMA 2020 protocol.
+
+{\bf Keywords:} interpretability, attention mechanisms, relational graph, multivariate time series, systematic review.
+\endgroup

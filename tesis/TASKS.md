@@ -15,6 +15,7 @@ Reglas completas en [`../CLAUDE.md`](../CLAUDE.md).
 | `NEED_REWRITE` | Auditoría lo rechazó. Vuelve a claude-1 con motivo |
 | `APPROVED` | Auditado y mergeado a `main` |
 | `BLOCKED` | Depende de otra tarea o de una decisión humana |
+| `OBSOLETO` | El archivo sale del documento. No editar: su contenido ya migró a otro |
 
 Protocolo de reserva: cambiar el estado a `IN_PROGRESS`, hacer commit y push, **y después**
 editar. El cambio de estado y el trabajo terminado van en el mismo commit al cerrar.
@@ -23,47 +24,122 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 10 | Task-016 mergeado a `main` en PR #8; C-002 resuelta |
-| `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 49 | Task-016+017 mergeado a `main` en PR #8; C-002 resuelta |
-| `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 76 | Task-017 mergeado a `main` en PR #8; 12 `\bibitem` pendientes (ver abajo) |
-| `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 24 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
-| `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado; corpus obsoleto pendiente (Task-018) |
-| `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
-| `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 36 | Task-017 mergeado a `main` en PR #8; `tab:dominios` sobre corpus vigente |
-| `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 16 | Task-016+017 mergeado a `main` en PR #8; C-002 resuelta |
-| `secciones/99_bibliografia.tex` | `NEED_REVIEW` | claude-2 | 59 | 12 `\bibitem` nuevos agregados (Task-017); 22 anteriores intactos |
-| `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Task-013 mergeado a `main` en PR #4; corpus obsoleto pendiente (Task-018) |
+| `main.tex` | `NEED_REVIEW` | claude-1 | 59 | Task-019: migrado al template PUCV, por orden directa del autor humano |
+| `pucv_inf_2024.sty` | `NEED_REVIEW` | claude-1 | — | Copia literal del template. No se modifica |
+| `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 | 33 | Portada del template con título, autores y asignatura del proyecto |
+| `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 31 | Task-019: resumen, abstract y palabras clave |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 44 | Task-019: contexto, problema, qué se ha hecho, propuesta y contribución |
+| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 43 | Task-019: general más específicos en estudio, desarrollo y validación |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 96 | Task-019: PRISMA, seis familias con pro y contra, contribución |
+| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 72 | Task-019: absorbe `05_formalizacion.tex`, migrado sin reescribir la prosa |
+| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-019: sección nueva. **Fechas por confirmar con el autor humano** |
+| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1 | 91 | Task-019: la sección 6.2 viene de `04_arquitectura.tex` (autoría claude-2) |
+| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 16 | Task-019: conclusiones preliminares, sin resultados de código |
+| `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | Task-019: reemplaza `99_bibliografia.tex`; 25 entradas biblatex APA |
+
+Archivos retirados del documento por Task-019, recuperables desde el historial de git:
+`00_resumen.tex`, `02_estado_arte.tex`, `03_objetivos.tex`, `04_arquitectura.tex`,
+`05_formalizacion.tex`, `06_aplicabilidad.tex`, `99_bibliografia.tex` y
+`A_matriz_literatura.tex`.
 
 `APPROVED` aquí significa que el contenido corresponde exactamente al `.tex` canónico y
 que compila. No significa que el contenido esté auditado: esa es la cola de abajo.
 
-## Estado del split
+## Hechos del documento que condicionan el trabajo
 
-Resuelto. El `.tex` canónico se partió en diez archivos y el resultado se verificó
-comparando el texto extraído del PDF del monolito contra el del `main.tex` dividido:
-**idéntico**, 18 páginas, mismo tamaño de PDF. El split no perdió ni alteró contenido.
+Tras Task-019 el documento cambió de formato. Cuatro hechos que hay que tener presentes
+antes de tocar nada:
 
-Dos hechos del documento que condicionan el trabajo:
-
-1. **No usa BibTeX.** La bibliografía es un entorno `thebibliography` con 22 `\bibitem`.
-   No existe `referencias.bib` en el flujo de compilación.
-2. **El preámbulo es el real**, no uno provisional: incluye `\newcolumntype{P}` para
-   columnas proporcionales y `LTchunksize` para estabilidad de `longtable`. Las tres
-   tablas del documento dependen de ambos, así que no se toca el preámbulo sin revisar
-   las tablas.
+1. **Formato: template PUCV.** `main.tex` usa `\documentclass{report}` con
+   `pucv_inf_2024.sty`, copiado sin modificar desde
+   `Template_Latex__Formato_Informes__Copy_/`. Las secciones son `\chapter`, no
+   `\section`. El `.sty` no se edita: si algo del formato molesta, se resuelve en
+   `main.tex`.
+2. **Sí usa biblatex con backend biber.** La bibliografía vive en `referencias.bib` y ya
+   no existe `thebibliography`. Compilar exige la secuencia
+   `pdflatex`, `biber`, `pdflatex`, `pdflatex`, que es lo que hace `./scripts/compilar.sh`.
+   El repositorio necesita los paquetes `biblatex`, `biblatex-apa`, `biber`, `glossaries`,
+   `nomencl`, `titlesec`, `fancyhdr`, `algorithms`, `algorithmicx`, `caption`,
+   `koma-script`, `courier`, `csquotes` e `hyphen-spanish`, todos instalables con
+   `tlmgr install`.
+3. **El corpus de citas está cerrado en 25.** `referencias.bib` contiene exactamente las
+   25 filas de `Referencias_seminario.xlsx` y el documento cita las 25, sin sobrantes ni
+   colgantes. Agregar una cita implica agregar antes una fila a esa hoja.
+4. **El preámbulo define `\newcolumntype{P}`** para columnas proporcionales y fija
+   `LTchunksize`. Las tres tablas del documento dependen de ambos.
 
 ## Cola de tareas
 
+Sin tareas pendientes de contenido. Lo único abierto es la revisión de Task-019 por
+claude-2 y la confirmación de fechas del plan de trabajo por el autor humano.
+
+### Cerrada por claude-1 en esta sesión
+
+- **Task-019** — Migración completa al template PUCV
+  (`Template_Latex__Formato_Informes__Copy_/`) y reestructuración del documento según la
+  rúbrica de la entrega de avance. **Instrucción directa del autor humano**, que además
+  fijó cuatro condiciones: (a) el informe cita solo las 25 referencias de
+  `Referencias_seminario.xlsx`, ni una más; (b) el estado del arte debe explicar el
+  protocolo PRISMA, porque ahí se evidencia cómo se obtuvieron los documentos; (c) esta
+  entrega **no** reporta resultados de código, así que las cifras del prototipo que
+  Task-016 había agregado salen del texto; (d) sin rayas largas (`--`) en la prosa.
+
+  Esto obliga a tocar archivos de claude-2 (`04_arquitectura.tex`,
+  `05_formalizacion.tex`, `99_bibliografia.tex`) y `main.tex`, que normalmente claude-1
+  no toca. Se hace porque el autor humano lo pidió explícitamente y porque una migración
+  de formato no se puede partir por dueño sin dejar el documento sin compilar a la
+  mitad. **El contenido técnico de claude-2 se migra sin reescribirlo**: cambia de
+  archivo y se le limpian las citas obsoletas, nada más. claude-2 queda como dueño de
+  esas partes dentro de los archivos nuevos y puede reescribirlas cuando quiera.
+  [claude-1]
+
+  **Resultado.** El documento quedó con la estructura que pide la rúbrica: resumen y
+  abstract, introducción con contexto, problema, estado previo y contribución, objetivos
+  separados en estudio, desarrollo y validación, estado del arte con el protocolo PRISMA
+  y seis familias con su pro y su contra, marco teórico con la definición formal del
+  problema y las técnicas necesarias, plan de trabajo con actividades y fechas,
+  propuesta en detalle y conclusiones preliminares. Cuerpo de 18 páginas, dentro del
+  rango de 10 a 20 que pide la entrega, más portada, índices y referencias.
+
+  Las cuatro condiciones del autor humano quedaron cumplidas y verificadas:
+
+  1. *Solo 25 citas.* Recuento automático sobre los `.tex`: 25 claves distintas citadas
+     y 25 entradas en `referencias.bib`, correspondencia exacta, cero colgantes y cero
+     entradas sin citar. Las 14 referencias del corpus obsoleto salieron del documento.
+  2. *PRISMA explicado.* Sección 3.1, con la pregunta PICO, la cadena de búsqueda, la
+     tabla de registros por base (Scopus 191, Web of Science 100, PubMed 28, total 319)
+     y la depuración 319 → 221 → 201 → 137 hasta las 25 incluidas. Se declara ahí mismo
+     que el paso de 137 a 25 no tiene umbral cuantitativo explícito.
+  3. *Sin resultados de código.* Se retiraron del resumen, la introducción y las
+     conclusiones las cifras del prototipo que Task-016 había agregado (Jaccard,
+     porcentaje de persistencia entre semillas, sensibilidad al umbral K). El texto
+     vuelve a declarar el sistema como diseñado y no ejecutado, que es lo que
+     corresponde a esta entrega.
+  4. *Sin rayas largas.* `grep` sobre los diez archivos de prosa: cero ocurrencias de
+     `--` fuera de los comentarios de cabecera y de los rangos de página del `.bib`.
+
+  **Pendiente para el autor humano:** las fechas del plan de trabajo (tabla
+  \texttt{tab:plan}) son una propuesta construida sobre la única fecha documentada, que
+  es la de la bitácora de revisión sistemática. Hay que contrastarlas con el calendario
+  real de la asignatura antes de entregar.
+
+  **Nota menor de corpus para claude-2:** la fila 5 del excel registra el título
+  *Evaluating the Faithfulness of Causality in Saliency-Based Explanations...* con año
+  2024, pero el DOI que trae, `10.48550/arXiv.2211.07982`, resuelve a un preprint de
+  2022 titulado *Evaluating the Faithfulness of Saliency-based Explanations...*, sin la
+  palabra *Causality*. La entrada `rizzo2022faithfulness` se construyó con lo que
+  devuelve el DOI. Conviene verificar si existe una versión publicada posterior.
+
 - **Task-018** — `04_arquitectura.tex` y `A_matriz_literatura.tex` (ambos propiedad de
   claude-2) también citan referencias del corpus obsoleto y no fueron cubiertos por
-  Task-017 porque son archivos ajenos a claude-1. Ver el detalle completo, cita por
-  cita, en la nota de cierre de Task-017 más abajo. [claude-2]
+  Task-017 porque son archivos ajenos a claude-1. **Queda absorbida por Task-019**: los
+  dos archivos salen del documento y su contenido migra ya sin citas obsoletas. Se deja
+  registrada para que no se retome. [claude-2]
 
-(Task-010 a Task-017 completadas y mergeadas o en revisión; ver `Estado de secciones`
-arriba y las notas de cierre abajo. Se sacan de la cola para que no se vuelvan a tomar
-por error.)
+(Task-010 a Task-017 completadas y mergeadas; ver `Estado de secciones` arriba y las
+notas de cierre abajo. Se sacan de la cola para que no se vuelvan a tomar por error.)
 
-### Cerradas por claude-1 en esta sesión
+### Cerradas en sesiones anteriores por claude-1
 
 - **Task-015** — (cerrada en sesión previa) Mergeada a `main` en PR #6; C-001 quedó
   `RESUELTA`, confirmado por claude-2.
@@ -169,11 +245,22 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #10 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: CLAUDE.md, tesis/TASKS.md, secciones/99_bibliografia.tex
-  Task: — (agrega los 12 `\bibitem` de Task-017; cierra C-002 y C-003 salvo Task-018)
+- PR #12 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
+  Toca: `main.tex`, `pucv_inf_2024.sty`, `Portadas/`, `Resumen/`, las siete secciones,
+  `referencias.bib`, `scripts/compilar.sh`, `.gitignore` y `TASKS.md`
+  Task: Task-019 (migración al template PUCV y ajuste a la rúbrica)
+  Nota: es un PR grande y toca archivos de claude-2, por orden directa del autor humano.
+  El contenido técnico de claude-2 se migró sin reescribirlo; el detalle de qué revisar
+  está en el cuerpo del PR. Compila limpio con `pdflatex` + `biber`, cuerpo de 18
+  páginas, 25 citas y 25 entradas en el `.bib`.
 
-(PR #9 — fija `Referencias_seminario.xlsx` como corpus vigente (C-003, Task-017).
+(PR #10 — agrega los 12 `\bibitem` de Task-017. Revisado y mergeado por claude-1:
+compilado en worktree aparte (`OK: main.pdf compilado, 19 paginas`, cero referencias
+sin resolver, 34 `\cite`/34 `\bibitem` recontados 1:1), y verificada la metadata de 2
+de los 12 `\bibitem` contra Crossref/arXiv por DOI (autores, volumen, página y
+transliteración LaTeX de diacríticos coinciden exactamente) — detalle en el comentario
+del PR.
+PR #9 — fija `Referencias_seminario.xlsx` como corpus vigente (C-003, Task-017).
 Mergeado por claude-2, autorización explícita del autor humano.
 PR #8 — Task-016 (resuelve C-002) + Task-017 (resuelve C-003 salvo `04_arquitectura.tex`
 y `A_matriz_literatura.tex`, ver Task-018). Revisado a fondo por claude-2: verificado

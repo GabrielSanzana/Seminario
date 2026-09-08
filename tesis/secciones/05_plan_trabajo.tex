@@ -1,0 +1,56 @@
+%% ============================================================
+%%  Plan de trabajo
+%%  Duenio inicial: claude-1
+%%  Reglas: ver ../../CLAUDE.md
+%%  OJO: el calendario propuesto esta pendiente de confirmacion del autor
+%%  humano contra las fechas reales de la asignatura.
+%% ============================================================
+
+\chapter{Plan de trabajo}
+\label{cap:plan}
+
+\section{Estado a la fecha de este informe}
+
+El trabajo se organiza en tres etapas, que corresponden a los tres grupos de objetivos específicos del capítulo \ref{cap:objetivos}. La etapa de estudio está concluida: la revisión sistemática recorrió las seis primeras etapas del protocolo PRISMA, desde la formulación de la pregunta hasta la extracción de datos, y produjo el corpus de 25 referencias sobre el que se apoya el capítulo \ref{cap:estado_arte}. La séptima etapa del protocolo, la redacción del estudio, se cierra con este informe.
+
+La etapa de desarrollo está concluida en su parte formal. Las transformaciones que componen el pipeline están definidas, la cadena de evidencia está especificada eslabón por eslabón y la taxonomía diagnóstica está formulada. Lo que queda pendiente es la ejecución, que constituye la etapa de validación y ocupa el resto del calendario.
+
+\section{Actividades y calendario}
+
+La tabla \ref{tab:plan} detalla las actividades. Las tres primeras filas registran trabajo ya concluido y se incluyen para dejar constancia del punto de partida. El resto corresponde a la etapa de validación, ordenada por dependencia: cada eslabón de la cadena de evidencia solo tiene sentido si el anterior fue superado, de modo que el orden de las filas es también el orden de ejecución obligado.
+
+{\small
+\begin{longtable}{P{0.46}P{0.24}P{0.26}}
+\caption{Actividades del plan de trabajo, con periodo estimado y estado.}\label{tab:plan}\\
+\toprule
+\textbf{Actividad} & \textbf{Periodo} & \textbf{Estado}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Actividad} & \textbf{Periodo} & \textbf{Estado}\\
+\midrule
+\endhead
+Revisión sistemática bajo protocolo PRISMA 2020, etapas 1 a 6 & Hasta septiembre 2026 & Concluida\\
+Formalización de las transformaciones del pipeline y de la condición de admisibilidad & Hasta septiembre 2026 & Concluida\\
+Especificación de la cadena de evidencia y de la taxonomía diagnóstica & Hasta septiembre 2026 & Concluida\\
+Redacción del informe de avance y cierre de la etapa 7 del protocolo & Septiembre 2026 & En curso\\
+Implementación del pipeline sobre el caso de estudio y entrenamiento del ensamble multi-semilla & Octubre 2026 & Pendiente\\
+Eslabón 1, estabilidad continua de la representación ante la semilla & Octubre 2026 & Pendiente\\
+Eslabón 2, estabilidad estructural ante el criterio de discretización & Octubre 2026 & Pendiente\\
+Eslabón 3, consenso frente al modelo nulo con corrección por comparaciones múltiples & Noviembre 2026 & Pendiente\\
+Eslabón 4, fidelidad predictiva por ablación dirigida con renormalización & Noviembre 2026 & Pendiente\\
+Eslabón 5, especificidad, robustez y compacidad & Noviembre a diciembre 2026 & Pendiente\\
+Triangulación con los cuatro paradigmas ortogonales y los baselines deterministas & Diciembre 2026 & Pendiente\\
+Construcción de la matriz de perfiles diagnósticos sobre los resultados & Diciembre 2026 & Pendiente\\
+Validación sobre conjunto sintético con estructura conocida & Enero 2027 & Pendiente\\
+Validación sobre un segundo dominio real & Enero a febrero 2027 & Pendiente\\
+Redacción del informe final & Marzo 2027 & Pendiente\\
+\bottomrule
+\end{longtable}
+}
+
+\section{Dependencias y riesgos}
+
+Tres dependencias condicionan el calendario. La primera es de cómputo: los eslabones 1 y 2 requieren entrenar varias decenas de modelos con semillas distintas, de modo que el costo por corrida fija cuánto puede avanzarse por semana. La segunda es la disponibilidad del segundo dominio, que exige acceso al modelo y no solo a su matriz de atención, porque el eslabón de fidelidad necesita intervenir y volver a predecir. La tercera es la construcción del conjunto sintético, cuya estructura conocida es la única referencia externa disponible para el caso de estudio, dado que entre índices espectrales no existe una topología física verificada.
+
+El riesgo principal del plan es que la cadena de evidencia se detenga en un eslabón temprano, es decir, que las relaciones extraídas no superen el umbral de estabilidad y no quede nada que evaluar en los eslabones siguientes. Ese desenlace no invalida el trabajo, porque la cadena está diseñada para que el eslabón en que una relación falla sea, por construcción, el diagnóstico de por qué falla. Un resultado de ese tipo se reportaría como tal.
