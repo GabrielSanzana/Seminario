@@ -25,13 +25,13 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 |---|---|---|---|---|
 | `secciones/00_resumen.tex` | `APPROVED` | claude-1 | 10 | Task-016 mergeado a `main` en PR #8; C-002 resuelta |
 | `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 49 | Task-016+017 mergeado a `main` en PR #8; C-002 resuelta |
-| `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 76 | Task-017 mergeado a `main` en PR #8; 12 `\bibitem` pendientes (ver abajo) |
+| `secciones/02_estado_arte.tex` | `APPROVED` | claude-1 | 76 | Task-017 mergeado a `main` en PR #8; 12 `\bibitem` agregados en PR #10 |
 | `secciones/03_objetivos.tex` | `APPROVED` | claude-1 | 24 | Task-015 mergeado a `main` en PR #6; C-001 resuelta |
 | `secciones/04_arquitectura.tex` | `APPROVED` | claude-2 | 42 | Split verificado; corpus obsoleto pendiente (Task-018) |
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 36 | Task-017 mergeado a `main` en PR #8; `tab:dominios` sobre corpus vigente |
 | `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 16 | Task-016+017 mergeado a `main` en PR #8; C-002 resuelta |
-| `secciones/99_bibliografia.tex` | `NEED_REVIEW` | claude-2 | 59 | 12 `\bibitem` nuevos agregados (Task-017); 22 anteriores intactos |
+| `secciones/99_bibliografia.tex` | `APPROVED` | claude-2 | 59 | Task-017 (PR #10) mergeado a `main`: 12 `\bibitem` nuevos, 22 anteriores intactos |
 | `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Task-013 mergeado a `main` en PR #4; corpus obsoleto pendiente (Task-018) |
 
 `APPROVED` aquí significa que el contenido corresponde exactamente al `.tex` canónico y
@@ -169,11 +169,15 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #10 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: CLAUDE.md, tesis/TASKS.md, secciones/99_bibliografia.tex
-  Task: — (agrega los 12 `\bibitem` de Task-017; cierra C-002 y C-003 salvo Task-018)
+Ninguno abierto.
 
-(PR #9 — fija `Referencias_seminario.xlsx` como corpus vigente (C-003, Task-017).
+(PR #10 — agrega los 12 `\bibitem` de Task-017. Revisado y mergeado por claude-1:
+compilado en worktree aparte (`OK: main.pdf compilado, 19 paginas`, cero referencias
+sin resolver, 34 `\cite`/34 `\bibitem` recontados 1:1), y verificada la metadata de 2
+de los 12 `\bibitem` contra Crossref/arXiv por DOI (autores, volumen, página y
+transliteración LaTeX de diacríticos coinciden exactamente) — detalle en el comentario
+del PR.
+PR #9 — fija `Referencias_seminario.xlsx` como corpus vigente (C-003, Task-017).
 Mergeado por claude-2, autorización explícita del autor humano.
 PR #8 — Task-016 (resuelve C-002) + Task-017 (resuelve C-003 salvo `04_arquitectura.tex`
 y `A_matriz_literatura.tex`, ver Task-018). Revisado a fondo por claude-2: verificado
