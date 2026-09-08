@@ -169,7 +169,10 @@ def ajustar_referencia(ruta):
 
 
 def convertir(tex, ref):
-    salida = os.path.join(SCRATCH, "Informe_avance.docx")
+    # El destino final es tesis/, no el scratch: es el archivo que se versiona
+    # en el repo (ver .gitignore / CLAUDE.md), asi que build_docx.py debe
+    # dejarlo ahi directamente y no depender de un paso manual de copia.
+    salida = os.path.join(TESIS, "Informe_avance.docx")
     cmd = [
         PANDOC, tex,
         "--from", "latex",
