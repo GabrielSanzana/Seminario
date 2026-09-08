@@ -365,3 +365,19 @@ de esos patrones al español académico) es una forma de hacerlo; `humanizer` a 
 cubre el mismo conjunto de patrones y sirve igual si la primera no está disponible en
 la máquina de quien revisa. Ninguna de las dos vive en el repositorio, así que no
 asumir que el otro agente la tiene instalada solo porque esta regla la nombra.
+
+**Sin código, umbrales ni métricas de ejecución en esta entrega.** La prosa se ciñe a
+la formulación matemática del framework ($\Phi$, $\Psi$, la composición completa) y a
+la defensa conceptual de la idea: por qué la estructura emerge de la representación
+aprendida y no de un supuesto previo, por qué hace falta un criterio de validación de
+varias etapas y qué distingue una relación genuina de un atajo predictivo, un artefacto
+de arquitectura o ruido. No corresponde a esta entrega: detalles de implementación o
+arquitectura (ConvTransformer, encoder/decoder, capas, dimensiones — eso ya lo excluía
+la nota sobre `Framework.py` de más arriba, para toda la prosa y no solo para la
+Propuesta), parámetros operativos concretos (el valor de $K$ del criterio Top-$K$,
+métodos específicos de perturbación) y nombres de métricas que se aplicarán en la
+ejecución (Jaccard, fidelidad, etc.), en la misma línea que la exclusión de cifras de
+ejecución del prototipo ya vigente desde Task-019. La cadena de preguntas del criterio
+de validación y la taxonomía de resultados (relación genuina / atajo / artefacto /
+ruido) sí se mantienen: son la idea que esta entrega defiende, no un detalle operativo.
+Instrucción explícita del autor humano, 2026-09-08 (ver Task-025 en `TASKS.md`).
