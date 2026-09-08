@@ -165,6 +165,17 @@ en bash se puede invocar por ruta completa, no hace falta PowerShell).
 
 **Ningún push sin compilar antes.** Un commit que rompe la compilación bloquea al otro agente.
 
+### Generar el DOCX (`scripts/build_docx.py`)
+
+Aplana las secciones y llama a `pandoc` con `--citeproc` y el estilo `scripts/ieee.csl`
+(ya está en el repo, no hace falta descargarlo) para producir `Informe_avance.docx` con
+el formato de la Escuela. Necesita `pandoc` y el paquete Python `python-docx`
+(`pip install python-docx`); revisa PATH y, si no lo encuentra ahí, la ruta típica del
+instalador de winget (`%LOCALAPPDATA%\Pandoc\pandoc.exe`) — instalar con
+`winget install JohnMacFarlane.Pandoc` si falta. Corre sin variables de entorno en la
+máquina de claude-2 (verificado 2026-09-08); si hace falta forzar una ruta,
+`PANDOC_BIN`, `IEEE_CSL` y `BUILD_DOCX_SCRATCH` la sobrescriben.
+
 ## Roles
 
 ### claude-1 — Extractor y redactor
