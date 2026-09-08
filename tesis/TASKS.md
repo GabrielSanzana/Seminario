@@ -28,13 +28,13 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `pucv_inf_2024.sty` | `NEED_REVIEW` | claude-1 | 87 | Task-021: unica linea cambiada, biblatex apa -> ieee (citas numericas) |
 | `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 | 32 | Portada del template con titulo, autores y asignatura |
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 30 | Task-021: reescrito, dos familias y modelo alternativo |
-| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-021: contexto en la pregunta PRISMA; encuadre de dos familias |
-| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-021: 1 general y 3 especificos, sin subdivision |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 89 | Task-024: nota de procedencia de citas y de analisis de citas como trabajo futuro. Task-023: recortadas 5 cifras de precision de algoritmo que no eran resultado de explicabilidad |
-| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 58 | Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
-| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-021: actividades. **Fechas por confirmar** |
-| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 93 | Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
-| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
+| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 89 | Task-025: "calibrar sus umbrales" -> "calibrar su criterio de contraste". Task-024: nota de procedencia de citas y de analisis de citas como trabajo futuro. Task-023: recortadas 5 cifras de precision de algoritmo que no eran resultado de explicabilidad |
+| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 58 | **Pendiente para claude-2 (Task-025, ver Cola de tareas):** revisar si la arquitectura ConvTransformer (encoder/decoder, capas, dimensiones) debe salir o reducirse a mención instrumental, misma regla que ya aplica al resto de la prosa. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
+| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-025: "umbrales de decisión" -> "criterio de validación". Task-021: actividades. **Fechas por confirmar** |
+| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 93 | Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
+| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | 25 entradas, ahora renderizadas en estilo IEEE numerico |
 
 Archivos retirados del documento por Task-019, recuperables desde el historial de git:
@@ -70,8 +70,81 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-Sin tareas de contenido pendientes. Queda solo la confirmación de fechas del plan de
-trabajo por el autor humano (`secciones/05_plan_trabajo.tex`, tabla `tab:plan`).
+Una tarea abierta para claude-2 (ver Task-025 más abajo); el resto son pendientes del
+autor humano: confirmar las fechas del plan de trabajo (`secciones/05_plan_trabajo.tex`,
+tabla `tab:plan`).
+
+- **Para claude-2 (`secciones/04_marco_teorico.tex`), a raíz de Task-025:** la sección
+  "Del Transformer estándar al ConvTransformer de índices" describe la arquitectura del
+  modelo instrumental (encoder convolucional, atención multi-cabeza, decoder,
+  dimensiones) con detalle de implementación. Task-025 retiró ese nivel de detalle de
+  todo lo que sí toca claude-1 (ver más abajo) por instrucción explícita del autor
+  humano: esta entrega se limita a la formulación matemática del framework y a la
+  defensa conceptual de la idea, no a cómo se implementa. No se toca este archivo
+  directamente porque es de claude-2 (regla de aislamiento, `CLAUDE.md`); se deja
+  anotado aquí para que claude-2 decida si reduce esa sección a mención instrumental o
+  la conserva con justificación. No es `NEED_REWRITE` (no hay error, es una decisión de
+  alcance del propio dueño del archivo).
+
+### Task-025 — cerrada por claude-1 en esta sesión
+
+- **Task-025** — Instrucción directa del autor humano, 2026-09-08: "no escribas de
+  código en el informe, solo que retrates la formulación matemática del framework; los
+  temas de umbrales, métricas y resultados del código no son necesarios mencionarlos
+  ahora, únicamente debemos defender la idea." Se preguntó al autor humano el alcance
+  exacto de dos decisiones antes de tocar prosa (ver respuestas abajo) y se aplicó de
+  forma consistente en los seis archivos de claude-1/mixtos que mencionaban umbrales o
+  detalle operativo:
+
+  1. `secciones/01_introduccion.tex`: "cadena de evidencia acumulativa cuyos umbrales
+     se declaran antes de ejecutarla" -> "...cuyos criterios se declaran...".
+  2. `secciones/02_objetivos.tex`: el objetivo 2 ya no promete "umbrales declarados
+     antes de la ejecución"; queda en construir el criterio en términos de estabilidad
+     y fidelidad, sin el compromiso operativo. Se conservan las dos citas de literatura
+     que motivan por qué el criterio necesita ambas propiedades por separado
+     (`keratoconus2026instability`, `simic2025perturbation`) porque describen hallazgos
+     de trabajos ajenos, no el método propio.
+  3. `secciones/03_estado_arte.tex`: "calibrar sus umbrales contra un modelo nulo
+     propio" -> "calibrar su criterio de contraste contra un modelo nulo propio".
+  4. `secciones/05_plan_trabajo.tex`: "fijar los umbrales de decisión antes de mirar
+     cualquier resultado" -> "fijar su criterio de validación antes de mirar cualquier
+     resultado".
+  5. `secciones/06_propuesta.tex` (el cambio más grande, con respuesta explícita del
+     autor humano sobre qué conservar):
+     - §Transformación matriz-grafo: se retiró el compromiso concreto con un criterio
+       Top-$K$ fijo (y su ecuación) porque fija un parámetro operativo ($K$); se
+       mantiene la definición general $E = \{(v_i,v_j): A_{ij} > \tau\}$ y se declara
+       que la forma concreta de $\tau$ se fija en la etapa de ejecución, no en el
+       diseño. El párrafo que seguía (sobre el "efecto de $K$") se reescribió para
+       enlazar la misma idea —que todo criterio de selección es en sí mismo fuente de
+       variación— con la segunda pregunta del criterio de validación, sin nombrar $K$.
+     - §Criterio de validación: por decisión explícita del autor humano, se **mantuvo**
+       la cadena de 5 preguntas y la taxonomía de 4 resultados (relación genuina /
+       atajo / artefacto / ruido) porque es la idea que esta entrega defiende, y se
+       **retiró** el detalle operativo del párrafo de la cuarta pregunta (el método
+       generativo de `meng2023perturbation` como "el que adopta el criterio de esta
+       propuesta", y el nombre de la "métrica de fidelidad más extendida" de
+       `simic2025perturbation`), dejando el punto conceptual (medir esto exige cuidado
+       metodológico, la elección se justifica en la etapa de ejecución) sin comprometer
+       un método ni una métrica concretos.
+     - §Alcance de esta etapa: "la especificación del criterio de validación con sus
+       umbrales" -> "...con la taxonomía anterior" (se retira "con sus umbrales").
+  6. `secciones/07_conclusiones.tex`: "criterio de validación con umbrales fijados
+     antes de ejecutarlo" -> "...con sus condiciones fijadas antes de ejecutarlo".
+
+  **Verificación de citas:** las cuatro claves cuya única mención operativa se recortó
+  en `06_propuesta.tex` (`bogaert2026variability`, `meng2023perturbation`,
+  `simic2025perturbation`, mas `rizzo2022faithfulness` que no se tocó) se recontaron
+  antes y después del cambio: las cuatro siguen con 3 usos exactos (mínimo que exige
+  `CLAUDE.md`), porque se reescribió el párrafo que las cita en vez de borrarlo. Recuento
+  automático completo sobre los 8 archivos con prosa: 25 claves, todas con 3 usos o más,
+  sin cambios respecto del recuento de Task-023/Task-024.
+
+  No se tocó `secciones/04_marco_teorico.tex` (ConvTransformer, propiedad de claude-2):
+  ver el ítem de arriba en esta misma cola.
+
+  `./scripts/compilar.sh` -> `OK: main.pdf compilado, 28 paginas`, sin referencias ni
+  citas sin resolver. Pendiente de revisión de claude-2 (ver PR abajo). [claude-1]
 
 ### Cerradas en esta sesión (ejecución directa, ver nota de proceso abajo)
 
@@ -770,3 +843,14 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
   y dos notas de alcance (procedencia de citas, análisis de citas como trabajo futuro).
   Se instaló además `biblatex-ieee`, paquete que faltaba en la máquina y que Task-021
   necesitaba sin haberlo declarado en `CLAUDE.md`.
+- **2026-09-08** — El autor humano pide, en una sesión posterior de claude-1, que el
+  informe deje de mencionar código, umbrales, métricas y resultados de ejecución, y se
+  concentre en la formulación matemática del framework y en la defensa conceptual de la
+  idea (Task-025). Preguntado el alcance exacto antes de tocar prosa: (a) la cadena de 5
+  preguntas y la taxonomía de 4 resultados del criterio de validación en
+  `06_propuesta.tex` se **mantienen** (son la idea que se defiende), solo se retira el
+  detalle operativo (método de perturbación, métrica de fidelidad, el valor de $K$ del
+  criterio Top-$K$); (b) la arquitectura ConvTransformer en `04_marco_teorico.tex` no se
+  toca directamente por ser archivo de claude-2, se anota en la cola para que claude-2
+  decida. Ver detalle completo en Task-025 arriba y en `CLAUDE.md` ("Sin código,
+  umbrales ni métricas de ejecución en esta entrega").
