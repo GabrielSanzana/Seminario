@@ -70,7 +70,8 @@ pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode 
 ```
 
 Dos pasadas, no cuatro: la segunda resuelve el índice y las referencias cruzadas. No se
-ejecuta `bibtex`. El documento vigente compila en 18 páginas.
+ejecuta `bibtex`. El número de páginas del documento vigente cambia con el contenido;
+no asumir un número fijo, verificar con `./scripts/compilar.sh`.
 
 Si falta un paquete, instalarlo con `tlmgr install <paquete>` (usar `tlmgr.bat` desde
 PowerShell; no está en el PATH de bash).

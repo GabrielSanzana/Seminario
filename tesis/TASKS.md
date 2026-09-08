@@ -31,7 +31,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `secciones/05_formalizacion.tex` | `APPROVED` | claude-2 | 35 | Split verificado |
 | `secciones/06_aplicabilidad.tex` | `APPROVED` | claude-1 | 36 | Task-017 mergeado a `main` en PR #8; `tab:dominios` sobre corpus vigente |
 | `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 16 | Task-016+017 mergeado a `main` en PR #8; C-002 resuelta |
-| `secciones/99_bibliografia.tex` | `IN_PROGRESS` | claude-2 | 47 | Agregando 12 `\bibitem` pedidos por claude-1 (Task-017) |
+| `secciones/99_bibliografia.tex` | `NEED_REVIEW` | claude-2 | 59 | 12 `\bibitem` nuevos agregados (Task-017); 22 anteriores intactos |
 | `secciones/A_matriz_literatura.tex` | `APPROVED` | claude-2 | 41 | Task-013 mergeado a `main` en PR #4; corpus obsoleto pendiente (Task-018) |
 
 `APPROVED` aquí significa que el contenido corresponde exactamente al `.tex` canónico y
@@ -62,52 +62,6 @@ Dos hechos del documento que condicionan el trabajo:
 (Task-010 a Task-017 completadas y mergeadas o en revisión; ver `Estado de secciones`
 arriba y las notas de cierre abajo. Se sacan de la cola para que no se vuelvan a tomar
 por error.)
-
-### Solicitud de `\bibitem` nuevos para `secciones/99_bibliografia.tex` (Task-017)
-
-`secciones/99_bibliografia.tex` es append-only y no la edita claude-1 directamente.
-Los siguientes 12 `\bibitem` faltan y ya se citan (con estas mismas claves) en
-`02_estado_arte.tex`, `01_introduccion.tex`, `07_conclusiones.tex` y
-`06_aplicabilidad.tex`; el DOI resuelve la referencia completa. `./scripts/compilar.sh`
-reporta 42 citas colgantes por esto — es esperado, no es un error de LaTeX (`compilar.sh`
-distingue `FALLO` de `ADVERTENCIA` para exactamente este caso).
-
-```
-mechinterp2025ts        Mechanistic Interpretability for Transformer-based Time Series
-                         Classification — 10.48550/arXiv.2511.21514
-keratoconus2026instability  Instability and interpretability discrepancies between CNNs
-                         and vision transformers in keratoconus detection —
-                         10.1016/j.patrec.2026.03.020
-vitexplain2024evaluation Explainability and Evaluation of Vision Transformers: An
-                         In-Depth Experimental Study — 10.3390/electronics13010175
-medtext2026attribution   Understanding Transformer-Based Classifications of Medical
-                         Text Using a Large Language Model for the Attribution of
-                         Feature Importance — 10.2196/81644
-pipeline2026causalgraph  Dynamic Causal Graph Network for Reliable Pipeline Leak
-                         Detection — 10.1016/j.ress.2026.112795
-rulexai2024events        A global model-agnostic rule-based XAI method based on
-                         Parameterized Event Primitives for time series classifiers —
-                         10.3389/frai.2024.1381921
-sentinel2025multipatch   SENTINEL: Multi-Patch Transformer with Temporal and Channel
-                         Attention for Time Series Forecasting —
-                         10.48550/arXiv.2503.17658
-patchmlp2025unlocking    Unlocking the Power of Patch: Patch-Based MLP for Long-Term
-                         Time Series Forecasting — 10.48550/arXiv.2405.13575
-convlstmgcn2026vegetation ConvLSTM-GCN-Transformer: Spatiotemporal graph-attention
-                         model for vegetation index map forecasting —
-                         10.1016/j.eswa.2026.131596
-teleconnections2026causal Disentangling Regional Impacts of Joint Teleconnections
-                         Using Causal Representation Learning — 10.1175/JCLI-D-25-0700.1
-spatiotemporal2024e2e    An end-to-end explainability framework for spatio-temporal
-                         predictive modeling — 10.1007/s10994-024-06733-6
-rotorcraft2026vortexring Explainable AI in Rotorcraft Aerodynamics: Autonomous
-                         Discovery and Dynamic Tracking of Vortex Ring State Mechanisms
-                         via Vision Transformers — 10.3390/aerospace13070590
-```
-
-Todas están en `Protocolo PRISMA/Referencias_seminario.xlsx` (hoja `Referencias`) con
-descripción, metodología, resultados y conclusión ya documentados, y su PDF completo en
-`PDF seleccionados para el seminario/`.
 
 ### Cerradas por claude-1 en esta sesión
 
@@ -175,6 +129,16 @@ descripción, metodología, resultados y conclusión ya documentados, y su PDF c
 
 ### Cerradas por claude-2 en esta sesión
 
+- **Task-017 (bibitem)** — Agregados los 12 `\bibitem` pedidos por claude-1 al final de
+  `secciones/99_bibliografia.tex` (append-only: los 22 anteriores no se tocaron).
+  Metadata (autores, revista, volumen, páginas) obtenida de Crossref por DOI para los
+  9 artículos de revista, y de la API de arXiv para los 3 preprints
+  (`mechinterp2025ts`, `sentinel2025multipatch`, `patchmlp2025unlocking`), ya que
+  Crossref no resuelve DOIs `10.48550/arXiv.*`. `./scripts/compilar.sh` →
+  `OK: main.pdf compilado, 19 paginas`, cero referencias sin resolver. Con esto,
+  `02_estado_arte.tex`, `01_introduccion.tex`, `06_aplicabilidad.tex` y
+  `07_conclusiones.tex` quedan sin pendientes de Task-017; solo falta Task-018
+  (`04_arquitectura.tex` y `A_matriz_literatura.tex`, ambos de claude-2).
 - **Task-012** — Verificado: 22 claves de `\cite` distintas en uso, 22 `\bibitem` en
   `secciones/99_bibliografia.tex`, correspondencia 1:1. Cero `\cite` colgantes, cero
   `\bibitem` sin citar. Sin acción requerida.
@@ -397,12 +361,12 @@ Formato:
   son. Ver detalle completo en la nota de cierre de Task-017.
 
   Estado: RESUELTA para `02_estado_arte.tex`, `01_introduccion.tex`,
-  `06_aplicabilidad.tex` y `07_conclusiones.tex` — claude-2 revisó el fix de claude-1
-  (Task-017) a fondo: confirmadas por título las 5 correcciones al cotejo de C-003,
-  compilado en worktree aparte (`OK, 18 páginas` + las 42 advertencias exactas
-  esperadas por los 12 `\bibitem` faltantes, nada más). Mergeado a `main` en PR #8;
-  los 12 `\bibitem` se agregan a continuación en esta misma sesión. Sigue ABIERTA sin
-  fecha para `04_arquitectura.tex` y `A_matriz_literatura.tex` (Task-018, de
+  `06_aplicabilidad.tex`, `07_conclusiones.tex` y `99_bibliografia.tex` — claude-2
+  revisó el fix de claude-1 (Task-017) a fondo (confirmadas por título las 5
+  correcciones al cotejo de C-003, compilado en worktree aparte antes de mergear) y
+  agregó los 12 `\bibitem` pedidos. `./scripts/compilar.sh` final:
+  `OK: main.pdf compilado, 19 paginas`, cero referencias sin resolver. Sigue ABIERTA
+  sin fecha para `04_arquitectura.tex` y `A_matriz_literatura.tex` (Task-018, de
   claude-2).
 
 Formato de registro:
