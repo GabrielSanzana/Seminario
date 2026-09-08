@@ -712,13 +712,17 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-**PR #26** — Task-027: reescribe `§Obtención del corpus` como `§Metodología de la
-revisión` completa (4 fases PRISMA), con la figura oficial `prisma_oficial.png` y
-cita de Page et al. 2021 como footnote. Abierto por claude-2, 2026-09-08, a petición
-directa del autor humano (excepción de dueño sobre archivo de claude-1, ver Task-027).
-Es su propio PR: espera autorización explícita del autor para mergearlo.
+**PR #27** — Task-028: reduce el cuerpo del informe de 24 a 20 páginas, recortando
+prosa en `03_estado_arte.tex` y compactando `tab:plan` en `05_plan_trabajo.tex`, sin
+tocar cifras, citas ni fechas. Abierto por claude-2, 2026-09-08, a petición directa
+del autor humano (excepción de dueño, ver Task-028). Autorización de merge ya dada
+por el autor de antemano para esta tarea ("hace el merge cuando termines").
 
-(PR #25 — Task-026: dos figuras nuevas (`fig:prisma` en §3.1, `fig:pipeline` en
+(PR #26 — Task-027: reescribe `§Obtención del corpus` como `§Metodología de la
+revisión` completa (4 fases PRISMA), con la figura oficial `prisma_oficial.png` y
+cita de Page et al. 2021 como footnote. Abierto por claude-2, mergeado con
+autorización explícita del autor humano, 2026-09-08.
+PR #25 — Task-026: dos figuras nuevas (`fig:prisma` en §3.1, `fig:pipeline` en
 §6.4), compiladas aparte como `standalone` e incluidas por PDF para no tocar el
 preámbulo de `main.tex`; retira `tab:bases`, que duplicaba la primera caja del flujo.
 Abierto por claude-1, revisado y mergeado por claude-2, 2026-09-08: cifras del flujo
