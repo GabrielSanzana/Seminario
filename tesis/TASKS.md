@@ -871,3 +871,18 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
   toca directamente por ser archivo de claude-2, se anota en la cola para que claude-2
   decida. Ver detalle completo en Task-025 arriba y en `CLAUDE.md` ("Sin código,
   umbrales ni métricas de ejecución en esta entrega").
+- **2026-09-08** — El autor humano deja de versionar `tesis/main.pdf` y pide versionar
+  `tesis/Informe_avance.docx` en su lugar (el `.gitignore` y `CLAUDE.md` se actualizan
+  para reflejarlo). Poco después sube `Formato_Informes_Proyecto_Título-2024.pdf` (raíz
+  del repo): es la fuente de autoridad del formato exacto que debe seguir ese DOCX.
+  claude-2 revisa el documento contra ese PDF y encuentra que `build_docx.py`
+  (agregado en Task-021) no implementaba portada, ni la numeración de página
+  romano/arábiga, ni el salto de página por capítulo que exige el formato. Se agregan
+  los tres: portada reconstruida a mano con `python-docx` (pandoc no resuelve de forma
+  confiable el `titlepage` crudo de `Portadas/portada_principal.tex`), tres secciones
+  DOCX reales con `w:pgNumType` distinto para lograr romano antes de la Introducción y
+  arábigo desde ahí, y `page_break_before` en el estilo de capítulo. Corregido en el
+  camino un bug real de la primera versión: comparar `id()` de objetos `lxml` para
+  detectar "qué párrafos son nuevos" corrompía el documento (lxml no garantiza
+  identidad de objeto estable entre llamadas), moviendo ~50 párrafos de más sin ningún
+  error visible. Detalle completo en `CLAUDE.md`, sección "Generar el DOCX".
