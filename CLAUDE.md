@@ -16,7 +16,15 @@ Fuentes primarias, de solo lectura:
 
 - `Presentación preliminar del tema de investigación.pdf` — introducción, objetivos, justificación.
 - `Protocolo PRISMA/` — revisión sistemática, exports de Zotero (WOS, Scopus, PUBMED).
-- `Prototipo_Preliminar.ipynb` — implementación, métricas, resultados experimentales.
+- `Framework.py` — implementación del framework (sucesor de `Prototipo_Preliminar.ipynb`,
+  reemplazado por el autor humano el 2026-09-07). Es código fuente puro, sin salidas de
+  celda: las cifras experimentales ya citadas en la prosa (Jaccard, % de arista
+  dominante, sensibilidad a K) se verificaron contra las celdas ejecutadas del notebook
+  anterior, que ya no está en el repositorio. Antes de citar una cifra nueva desde
+  `Framework.py`, confirmar que efectivamente se ejecutó (no solo que el código existe)
+  y con qué parámetros; varias fórmulas de índices cambiaron respecto al notebook
+  (MARI, ARI, CHL\_REDEDGE, PSRI), así que una cifra del notebook viejo no se
+  reafirma automáticamente ejecutando este archivo.
 
 Ningún agente escribe en esas rutas.
 
@@ -60,12 +68,13 @@ El documento no usa BibTeX: la bibliografía es un entorno `thebibliography` que
 
 ## Toolchain
 
-LaTeX local instalado: TinyTeX en `C:\Users\patru\AppData\Roaming\TinyTeX\bin\windows`.
+LaTeX local instalado: TinyTeX en `$HOME/AppData/Roaming/TinyTeX/bin/windows` (por
+máquina; `./scripts/compilar.sh` ya lo detecta así, no usa un usuario hardcodeado).
 
 Compilación completa desde `tesis/`:
 
 ```bash
-export PATH="/c/Users/patru/AppData/Roaming/TinyTeX/bin/windows:$PATH"
+export PATH="$HOME/AppData/Roaming/TinyTeX/bin/windows:$PATH"
 pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex
 ```
 
@@ -99,7 +108,10 @@ No toca `main.tex`. No corrige formato en archivos ajenos.
 
 Revisa lo que produjo claude-1. Verifica que compile, corrige `\label`, `\ref` y `\cite`
 colgantes, entornos de figura y tabla, y coherencia conceptual: que las cifras y métricas
-citadas en la prosa coincidan con las del notebook. Dueño de las secciones técnicas:
+citadas en la prosa coincidan con las de `Framework.py` cuando haya evidencia de que se
+ejecutó, o con el registro histórico de resultados ya verificados en `TASKS.md` cuando
+la fuente original que los produjo (el notebook) ya no esté en el repositorio. Dueño de
+las secciones técnicas:
 arquitectura, formalización, bibliografía y matriz de literatura.
 
 Agrega los `\bibitem` que claude-1 pida en `TASKS.md` (append-only, ver regla más abajo),
