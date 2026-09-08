@@ -176,6 +176,45 @@ instalador de winget (`%LOCALAPPDATA%\Pandoc\pandoc.exe`) — instalar con
 máquina de claude-2 (verificado 2026-09-08); si hace falta forzar una ruta,
 `PANDOC_BIN`, `IEEE_CSL` y `BUILD_DOCX_SCRATCH` la sobrescriben.
 
+**El formato exacto que debe seguir el DOCX está en
+`Formato_Informes_Proyecto_Título-2024.pdf`** (raíz del repo, subido por el autor
+humano el 2026-09-08). Es la fuente de autoridad para cómo se ve el documento —
+`pucv_inf_2024.sty` cubre el PDF, este script cubre el DOCX, y ninguno de los dos se
+asume correcto solo porque compila: hay que verificar contra ese PDF si algo del
+formato cambia. Lo que `build_docx.py` ya implementa siguiendo ese documento (sección
+del PDF entre paréntesis):
+
+- Márgenes 2,5 cm, papel carta, Times New Roman 12, sangría de 1 cm, interlineado
+  sencillo, control de líneas viudas/huérfanas (1.1–1.2).
+- Encabezados de capítulo en mayúscula negrita 14, cada uno en página nueva; secciones
+  y subsecciones en negrita 14/12 sin mayúscula (1.2).
+- Portada reconstruida a mano con `python-docx` (imagen institucional, título 18pt
+  negrita, autores, "Seminario de Título" + "Informe de avance" + fecha), **no** vía
+  pandoc: `Portadas/portada_principal.tex` usa `\begin{titlepage}`, `\makeatletter` y
+  macros (`\@title`, `\@author`) que el lector LaTeX de pandoc no resuelve de forma
+  confiable (2).
+- Numeración de página abajo a la derecha: la portada no lleva número; de Resumen a
+  Objetivos va en romano minúsculo empezando en "i"; de Introducción en adelante, en
+  arábigo empezando en 1 (1.3). Esto exige tres secciones DOCX reales (no solo
+  saltos de página) con `w:pgNumType` distinto cada una — python-docx no lo expone
+  como propiedad de alto nivel, `build_docx.py` lo arma con XML crudo
+  (`_insertar_salto_seccion_antes`, `_fijar_numeracion`).
+
+  **Bug real encontrado y corregido el 2026-09-08, para no repetirlo:** identificar
+  "qué párrafos son nuevos" comparando `id()` de objetos `lxml` antes/después de
+  insertarlos corrompe el documento — lxml puede devolver un envoltorio Python con
+  `id()` distinto para el mismo nodo XML en cada llamada a `iterchildren()`, así que la
+  comparación por identidad captura decenas de párrafos de más (todo el resto del
+  documento, en la práctica) y termina moviendo contenido a un lugar equivocado sin
+  lanzar ningún error. La forma segura es contar por posición (cuántos `<w:p>` había
+  antes, tomar los que sobran después), no por identidad de objeto.
+
+No implementado todavía, pendiente si hace falta más precisión: la regla de 1.2 sobre
+trasladar una sección completa a la página siguiente cuando su primer párrafo no
+alcanza dos líneas (se aproxima con `widow_control`, que no es exactamente lo mismo).
+La extensión máxima de 30 páginas (Introducción a Conclusiones, sección 4 del formato)
+es responsabilidad de quien escribe la prosa, no de este script.
+
 ## Roles
 
 ### claude-1 — Extractor y redactor
