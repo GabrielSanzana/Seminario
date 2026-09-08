@@ -1,0 +1,43 @@
+%% ============================================================
+%%  Objetivos
+%%  Duenio inicial: claude-1
+%%  Reglas: ver ../../CLAUDE.md
+%%  No editar si TASKS.md marca este archivo IN_PROGRESS por otro agente.
+%% ============================================================
+
+\chapter{Objetivos}
+\label{cap:objetivos}
+
+\section{Objetivo general}
+
+Desarrollar un framework metodológico, independiente del dominio, que transforme la representación latente aprendida por un modelo profundo ya entrenado en una hipótesis relacional compacta, interpretable y evaluable, y que la valide mediante una cadena de evidencia multicriterio capaz de integrar estabilidad estadística, fidelidad predictiva y contraste contra criterios no probabilísticos.
+
+\section{Objetivos específicos}
+
+Los objetivos específicos se agrupan en tres etapas. La primera fija qué hay que conocer antes de diseñar, la segunda construye el artefacto y la tercera decide si el artefacto funciona.
+
+\subsection{Estudio}
+
+\begin{enumerate}
+\item Conducir una revisión sistemática de la literatura bajo el protocolo PRISMA 2020 que permita identificar las familias metodológicas existentes, sus limitaciones y el espacio que deja abierto la propuesta.
+\item Caracterizar la variabilidad de la representación interna de un modelo de atención frente a la semilla de entrenamiento, apoyándose en la evidencia de que una explicación más estable no es necesariamente más fiel al modelo que la produce \cite{keratoconus2026instability}.
+\item Determinar qué métricas resultan adecuadas para evaluar la propuesta, considerando que la métrica de fidelidad más extendida presenta fallas cuando se traslada a datos temporales \cite{simic2025perturbation}, y que una estructura explicativa debe evaluarse a la vez por fidelidad y por tamaño \cite{rulexai2024events}.
+\end{enumerate}
+
+\subsection{Desarrollo}
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item Formalizar matemáticamente las transformaciones $\Phi$, $\Psi$ y $F$ que componen el pipeline del framework, junto con las condiciones que debe cumplir una representación para ser entrada válida.
+\item Construir una cadena de evidencia acumulativa de cinco eslabones, a saber, estabilidad continua de la representación, estabilidad estructural bajo distintas reglas de discretización, consenso estadístico frente a un modelo nulo explícito, fidelidad predictiva por ablación dirigida y especificidad junto a robustez y compacidad, con umbrales de aprobación e indicadores de fallo declarados antes de la ejecución.
+\item Formular una taxonomía diagnóstica que permita distinguir de forma operativa una relación estructural genuina de un atajo predictivo, de un artefacto de tipo sumidero de atención y de ruido estocástico.
+\end{enumerate}
+
+\subsection{Validación}
+
+\begin{enumerate}
+\setcounter{enumi}{6}
+\item Ejecutar la cadena de evidencia sobre el caso de estudio de índices espectrales y reportar, arista por arista, en qué eslabón sobrevive o falla cada relación extraída.
+\item Triangular la evidencia con cuatro paradigmas ortogonales al enfoque frecuentista que ya emplea el eslabón de consenso estadístico, esto es, el intervencional, el geométrico-topológico, el de teoría de la información y el de baselines deterministas. Sumados a ese enfoque completan los cinco paradigmas de la triangulación.
+\item Demostrar la generalidad del framework aplicándolo a un conjunto sintético con estructura conocida y a un segundo dominio real distinto del caso de estudio principal.
+\end{enumerate}

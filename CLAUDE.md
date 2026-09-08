@@ -47,24 +47,58 @@ válida:
   núcleo original de 22 referencias que trae `secciones/99_bibliografia.tex` desde antes
   de que este flujo multiagente existiera.
 
-Toda entrada nueva en `secciones/99_bibliografia.tex` debe corresponder a una fila de
+Toda entrada nueva en `referencias.bib` debe corresponder a una fila de
 `Referencias_seminario.xlsx` (mismo DOI). Una entrada que no resuelve contra esa hoja es
 del corpus obsoleto y debe reemplazarse o justificarse explícitamente, no darse por
-buena solo porque ya estaba en el documento heredado.
+buena solo porque ya estaba en el documento heredado. Desde el 2026-09-08 el corpus está
+además **cerrado en exactamente 25**: el informe de avance cita las 25 filas de la hoja
+y nada más (instrucción explícita del autor humano, ver historial de `TASKS.md`). Si el
+documento vuelve a crecer más allá del informe de avance, esta restricción de "cerrado
+en 25" se levanta primero con el autor humano; el resto de la regla (toda cita nueva
+sale de esa hoja) sigue aplicando siempre.
+
+Nota de calidad de datos: la fila 5 de la hoja trae un título ("...Faithfulness of
+Causality in Saliency-Based Explanations...") que no coincide con el título real del
+DOI que la acompaña (sin "Causality"). Usar el título que resuelve el DOI, no el de la
+celda, cuando difieran — ya se verificó para esa fila (`rizzo2022faithfulness` en
+`referencias.bib` usa el título correcto).
 
 ## Estructura editable
 
+Desde el 2026-09-08 el documento usa el template institucional PUCV (Task-019,
+instrucción directa del autor humano — ver `TASKS.md` para el detalle completo de la
+migración). La estructura anterior (`secciones/00_resumen.tex`...`99_bibliografia.tex`,
+`thebibliography`) ya no existe; no asumir que sigue vigente si esta sección parece
+desactualizada, verificar contra `tesis/main.tex`.
+
 ```
 tesis/
-  main.tex                        solo el autor humano lo edita
+  main.tex                        solo el autor humano lo edita (ver excepción abajo)
+  pucv_inf_2024.sty               copia literal del template PUCV, no se edita
   TASKS.md                        panel de control y mecanismo de reserva
-  secciones/*.tex                 una sección por archivo, un dueño por archivo
-  secciones/99_bibliografia.tex   append-only, ver regla abajo
+  Portadas/portada_principal.tex  portada; datos de autor/asignatura, no prosa
+  Resumen/resumen.tex             resumen + abstract + palabras clave
+  referencias.bib                 bibliografía biblatex, ver regla de corpus arriba
+  secciones/
+    01_introduccion.tex
+    02_objetivos.tex
+    03_estado_arte.tex
+    04_marco_teorico.tex           absorbe el contenido de la antigua formalización
+    05_plan_trabajo.tex
+    06_propuesta.tex               su §6.2 absorbe el contenido de la antigua arquitectura
+    07_conclusiones.tex
 ```
 
-El documento no usa BibTeX: la bibliografía es un entorno `thebibliography` que vive en
-`secciones/99_bibliografia.tex`. Las claves de `\cite` se resuelven contra los
-`\bibitem` de ese archivo, no contra un `.bib`.
+El documento usa **biblatex con backend biber** (estilo APA), no BibTeX ni
+`thebibliography`. Las claves de `\cite` se resuelven contra las entradas `@...{clave,...}`
+de `referencias.bib`. Compilar exige la secuencia `pdflatex → biber → pdflatex → pdflatex`;
+`./scripts/compilar.sh` ya la implementa, no compilar a mano con solo `pdflatex`.
+
+`referencias.bib` funciona con la misma disciplina que tenía el `thebibliography`
+anterior: es de claude-2, y aunque técnicamente no es "append-only" en el sentido de
+BibTeX (las entradas no tienen un orden que preservar), se trata igual como tal para
+evitar colisiones — agregar entradas nuevas al final, no reordenar ni reformatear las
+existentes al agregar una.
 
 ## Toolchain
 
@@ -82,8 +116,12 @@ Dos pasadas, no cuatro: la segunda resuelve el índice y las referencias cruzada
 ejecuta `bibtex`. El número de páginas del documento vigente cambia con el contenido;
 no asumir un número fijo, verificar con `./scripts/compilar.sh`.
 
-Si falta un paquete, instalarlo con `tlmgr install <paquete>` (usar `tlmgr.bat` desde
-PowerShell; no está en el PATH de bash).
+El template PUCV necesita paquetes que una instalación mínima de TinyTeX no trae por
+defecto: `titlesec`, `lipsum`, `fancyhdr`, `algorithms`, `algorithmicx`, `glossaries`,
+`nomencl`, `biblatex`, `biblatex-apa`, `biber`, `csquotes`, `caption`, `enumitem`,
+`etoolbox`, `koma-script`, `psnfss`, `hyphen-spanish`. Si falta alguno, instalarlo con
+`tlmgr install <paquete>` (el binario es `tlmgr.bat` dentro de la carpeta de TinyTeX;
+en bash se puede invocar por ruta completa, no hace falta PowerShell).
 
 **Ningún push sin compilar antes.** Un commit que rompe la compilación bloquea al otro agente.
 
@@ -92,17 +130,19 @@ PowerShell; no está en el PATH de bash).
 ### claude-1 — Extractor y redactor
 
 Lee las fuentes primarias y produce prosa en `secciones/*.tex`. Dueño de la narrativa:
-resumen, introducción, estado del arte, síntesis del protocolo PRISMA, aplicabilidad,
-conclusiones.
+resumen (`Resumen/resumen.tex`), introducción, objetivos, estado del arte, síntesis del
+protocolo PRISMA, plan de trabajo, conclusiones, y de §6.1/§6.3+ de `06_propuesta.tex`
+(§6.2 es de claude-2, ver abajo).
 
 Toda referencia que cite debe salir de `Protocolo PRISMA/Referencias_seminario.xlsx`
 (ver "Corpus de referencias" más arriba), leyendo el PDF correspondiente en
 `PDF seleccionados para el seminario/`. Si necesita citar una referencia de esa hoja que
-todavía no tiene `\bibitem` en `secciones/99_bibliografia.tex`, no la agrega él mismo:
-ese archivo es de claude-2 y es append-only. La pide en `TASKS.md` (título, DOI, y en qué
-frase la va a usar) para que claude-2 la agregue.
+todavía no tiene entrada en `referencias.bib`, no la agrega él mismo: ese archivo es de
+claude-2. La pide en `TASKS.md` (título, DOI, y en qué frase la va a usar) para que
+claude-2 la agregue.
 
-No toca `main.tex`. No corrige formato en archivos ajenos.
+No toca `main.tex` ni `pucv_inf_2024.sty` salvo instrucción explícita del autor humano
+(como ocurrió con la migración de Task-019). No corrige formato en archivos ajenos.
 
 ### claude-2 — Auditor de consistencia y LaTeX
 
@@ -111,14 +151,15 @@ colgantes, entornos de figura y tabla, y coherencia conceptual: que las cifras y
 citadas en la prosa coincidan con las de `Framework.py` cuando haya evidencia de que se
 ejecutó, o con el registro histórico de resultados ya verificados en `TASKS.md` cuando
 la fuente original que los produjo (el notebook) ya no esté en el repositorio. Dueño de
-las secciones técnicas:
-arquitectura, formalización, bibliografía y matriz de literatura.
+`04_marco_teorico.tex` (formalización), `referencias.bib` (bibliografía) y §6.2 de
+`06_propuesta.tex` (arquitectura instrumental). La antigua matriz de revisión
+sistemática en apéndice (`A_matriz_literatura.tex`) salió del documento en Task-019; si
+se repone, sigue siendo de claude-2.
 
-Agrega los `\bibitem` que claude-1 pida en `TASKS.md` (append-only, ver regla más abajo),
-y audita que todo `\cite` de la prosa resuelva contra una referencia de
-`Referencias_seminario.xlsx`, no contra el corpus obsoleto de 22 que traía el documento
-heredado. Un `\cite` que no resuelve contra esa hoja se marca `NEED_REWRITE` con el DOI
-esperado.
+Agrega las entradas que claude-1 pida en `TASKS.md` a `referencias.bib`, y audita que
+todo `\cite` de la prosa resuelva contra una referencia de `Referencias_seminario.xlsx`,
+no contra el corpus obsoleto. Un `\cite` que no resuelve se marca `NEED_REWRITE` con el
+DOI esperado.
 
 **No reescribe prosa ajena.** Si el contenido está mal, lo marca `NEED_REWRITE` en
 `TASKS.md` con el motivo y lo devuelve a claude-1.
@@ -146,13 +187,16 @@ esperado.
 - Nunca dos agentes en el mismo archivo. La reserva en `TASKS.md` es la autoridad.
 - `main` es la rama sincronizada con Overleaf. Ningún agente escribe directo en `main`.
 - Ramas: `claude-1/drafting` para contenido, `claude-2/review` para auditoría y formato.
-- `main.tex` lo edita solo el autor humano. Si una sección nueva necesita un `\input`,
-  pedirlo en `TASKS.md` en vez de agregarlo.
-- `secciones/99_bibliografia.tex` es **append-only**: agregar `\bibitem` nuevos al final,
-  nunca reordenar ni reformatear los existentes. Reordenarlo genera conflictos enormes sin
-  ningún beneficio, y renumera las citas de todo el documento.
-- Los archivos auxiliares de LaTeX (`.aux`, `.log`, `.toc`, `.out`, `.bbl`, `.blg`) están
-  en `.gitignore`. No forzar su commit: cambian en cada compilación y colisionan siempre.
+- `main.tex` lo edita solo el autor humano. Si una sección nueva necesita un `\include`,
+  pedirlo en `TASKS.md` en vez de agregarlo. La excepción del 2026-09-08 (Task-019,
+  migración al template PUCV) fue por instrucción directa del autor humano y no
+  establece precedente: sigue haciendo falta esa misma instrucción explícita para
+  volver a tocarlo.
+- `referencias.bib` se trata como append-only en la práctica (ver "Estructura editable"):
+  agregar entradas al final, no reordenar ni reformatear las existentes.
+- Los archivos auxiliares de LaTeX (`.aux`, `.log`, `.toc`, `.out`, `.bbl`, `.blg`,
+  `.bcf`, `.run.xml`, `.nlo`, `.nls`, `.glo`, `.gls`, `.ist`) están en `.gitignore`. No
+  forzar su commit: cambian en cada compilación y colisionan siempre.
 
 ## Protocolo de contradicciones
 
@@ -169,11 +213,10 @@ agente revisor verifica explícitamente:
 3. **Nomenclatura.** Los símbolos y nombres se usan igual en todas las secciones. Si una
    sección llama a la transformación `Phi` y otra la llama `F`, se unifica antes de
    mergear.
-4. **Referencias.** Todo `\cite` resuelve a un `\bibitem` existente en
-   `secciones/99_bibliografia.tex`, ese `\bibitem` corresponde a una fila de
-   `Protocolo PRISMA/Referencias_seminario.xlsx` (mismo DOI, no al corpus obsoleto de
-   `Analisis 137 referencias.xlsx`), y la afirmación que sostiene corresponde a lo que ese
-   trabajo dice de verdad.
+4. **Referencias.** Todo `\cite` resuelve a una entrada existente en `referencias.bib`,
+   esa entrada corresponde a una fila de `Protocolo PRISMA/Referencias_seminario.xlsx`
+   (mismo DOI, no al corpus obsoleto de `Analisis 137 referencias.xlsx`), y la
+   afirmación que sostiene corresponde a lo que ese trabajo dice de verdad.
 
 Las contradicciones se reportan en el PR con
 `./scripts/gh.sh pr-comentar <n> <comentario.md>` y se anotan en la sección
@@ -195,7 +238,11 @@ Antes de mergear el PR ajeno, el revisor:
 
 1. `./scripts/sincronizar.sh` y `./scripts/gh.sh pr-ver <n>` para ver qué archivos toca.
 2. Verifica que solo toque archivos cuyo dueño sea el autor del PR. Un PR que modifica
-   una sección ajena es un fallo del protocolo de reserva: no se mergea, se comenta.
+   una sección ajena es un fallo del protocolo de reserva: no se mergea, se comenta. La
+   única excepción es una migración de formato que el autor humano ordenó explícitamente
+   (como Task-019): ahí sí toca archivos ajenos, siempre que el PR lo documente
+   (instrucción del autor humano, qué se movió y por qué, contenido técnico migrado sin
+   reescribir) y que el revisor confirme ambas cosas antes de mergear.
 3. Hace checkout de la rama del PR y corre `./scripts/compilar.sh`. **Esta compuerta
    reemplaza la revisión humana.** Si falla, no se mergea.
 4. Recorre los cuatro puntos del protocolo de contradicciones sobre el diff.
@@ -239,4 +286,15 @@ porque el problema no es el conflicto sino que la reserva falló.
 Español académico, tercera persona, sin primera persona del plural retórica. Los términos
 técnicos en inglés que no tienen traducción establecida se dejan en inglés y en redonda
 (`attention rollout`, `baseline`, `token`). Las afirmaciones sobre el estado de avance son
-literales: lo que está diseñado pero no ejecutado se declara como tal.
+literales: lo que está diseñado pero no ejecutado se declara como tal. Desde Task-019, por
+condición explícita del autor humano para esta entrega: sin rayas largas (`--`) en la
+prosa (los rangos numéricos del `.bib`, p. ej. páginas, no cuentan), y esta entrega en
+particular no reporta cifras de ejecución del prototipo (Jaccard, persistencia entre
+semillas, sensibilidad a K) — el estado declarado es "diseñado, no ejecutado" sin
+matices, aunque el registro de esas cifras y de dónde salieron sigue en el historial de
+`TASKS.md` para cuando la entrega que sí las incluya se retome.
+
+Antes de aprobar o mergear un PR con prosa nueva (o al escribir prosa propia en las
+secciones que sí posee), usar la skill `thesis-prose-audit` para revisar tells de
+escritura de IA — no es opcional, es parte de la revisión igual que el resto del
+protocolo de contradicciones.

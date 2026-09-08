@@ -12,6 +12,15 @@
 *.synctex.gz
 *.gf
 
+# Auxiliares de biblatex/biber, nomencl y glossaries
+*.bcf
+*.run.xml
+*.nlo
+*.nls
+*.glo
+*.gls
+*.ist
+
 # PDF compilado: se regenera, no se versiona
 tesis/main.pdf
 
