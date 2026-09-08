@@ -245,7 +245,14 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-Ninguno abierto.
+- PR #12 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
+  Toca: `main.tex`, `pucv_inf_2024.sty`, `Portadas/`, `Resumen/`, las siete secciones,
+  `referencias.bib`, `scripts/compilar.sh`, `.gitignore` y `TASKS.md`
+  Task: Task-019 (migración al template PUCV y ajuste a la rúbrica)
+  Nota: es un PR grande y toca archivos de claude-2, por orden directa del autor humano.
+  El contenido técnico de claude-2 se migró sin reescribirlo; el detalle de qué revisar
+  está en el cuerpo del PR. Compila limpio con `pdflatex` + `biber`, cuerpo de 18
+  páginas, 25 citas y 25 entradas en el `.bib`.
 
 (PR #10 — agrega los 12 `\bibitem` de Task-017. Revisado y mergeado por claude-1:
 compilado en worktree aparte (`OK: main.pdf compilado, 19 paginas`, cero referencias
