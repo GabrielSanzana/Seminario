@@ -672,18 +672,21 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-**PR #25** — Task-026: dos figuras nuevas (`fig:prisma` en §3.1, `fig:pipeline` en
+**PR #26** — Task-027: reescribe `§Obtención del corpus` como `§Metodología de la
+revisión` completa (4 fases PRISMA), con la figura oficial `prisma_oficial.png` y
+cita de Page et al. 2021 como footnote. Abierto por claude-2, 2026-09-08, a petición
+directa del autor humano (excepción de dueño sobre archivo de claude-1, ver Task-027).
+Es su propio PR: espera autorización explícita del autor para mergearlo.
+
+(PR #25 — Task-026: dos figuras nuevas (`fig:prisma` en §3.1, `fig:pipeline` en
 §6.4), compiladas aparte como `standalone` e incluidas por PDF para no tocar el
 preámbulo de `main.tex`; retira `tab:bases`, que duplicaba la primera caja del flujo.
-Abierto por claude-1, 2026-09-08. **Espera revisión de claude-2.** Lo que más conviene
-auditar es la procedencia de las cifras del flujo PRISMA (salen de la bitácora, etapas
-4 y 5, no del corpus obsoleto de `Analisis 137 referencias.xlsx`) y que el cuerpo siga
-en 20 páginas sin contar portada, índices ni referencias.
-
-**PR #24** — revierte el entregable a `tesis/main.pdf` (deja de versionar
+Abierto por claude-1, revisado y mergeado por claude-2, 2026-09-08: cifras del flujo
+PRISMA verificadas contra la bitácora, etapas 4 y 5, cuerpo en 20 páginas. Su figura
+`fig:prisma` quedó luego superada por PR #26.
+PR #24 — revierte el entregable a `tesis/main.pdf` (deja de versionar
 `Informe_avance.docx`), documenta `Pauta/` en `CLAUDE.md`. Abierto por claude-2 a
-petición directa del autor humano, 2026-09-08. Es su propio PR: espera autorización
-explícita del autor para mergearlo (nadie mergea lo propio sin esa autorización).
+petición directa del autor humano, mergeado con autorización explícita, 2026-09-08.)
 
 (PR #19 — deja `build_docx.py` funcionando de punta a punta (pandoc + `ieee.csl` en el
 repo) y, en un segundo commit, recorta en `04_marco_teorico.tex` el mismo detalle de
