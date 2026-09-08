@@ -9,11 +9,29 @@ import os
 import re
 import subprocess
 import shutil
+import tempfile
 
-TESIS = r"C:\Users\patru\Downloads\archivos tesis\Seminario-claude-1\tesis"
-SCRATCH = r"C:\Users\patru\AppData\Local\Temp\claude\C--Users-patru-Downloads-archivos-tesis-Seminario-main\3e009d46-31a1-4eb3-a0ec-2a923d717f71\scratchpad"
-PANDOC = os.path.join(SCRATCH, "pandoc-3.1.11", "pandoc.exe")
-CSL = os.path.join(SCRATCH, "ieee.csl")
+# Rutas por maquina, no por repo: usar variables de entorno o resolverlas de
+# forma relativa en vez de hardcodear el usuario de quien escribio el script
+# (bug real encontrado el 2026-09-08: traia rutas de C:\Users\patru\... que no
+# existen en otras maquinas, igual que paso antes con TinyTeX en compilar.sh).
+TESIS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tesis")
+SCRATCH = os.environ.get("BUILD_DOCX_SCRATCH") or os.path.join(tempfile.gettempdir(), "build_docx")
+os.makedirs(SCRATCH, exist_ok=True)
+PANDOC = os.environ.get("PANDOC_BIN") or shutil.which("pandoc") or os.path.join(SCRATCH, "pandoc-3.1.11", "pandoc.exe")
+CSL = os.environ.get("IEEE_CSL") or os.path.join(SCRATCH, "ieee.csl")
+
+if not os.path.isfile(PANDOC):
+    raise SystemExit(
+        f"FALLO: no se encontro pandoc en '{PANDOC}'. Instalarlo y/o fijar "
+        "PANDOC_BIN a la ruta del ejecutable."
+    )
+if not os.path.isfile(CSL):
+    raise SystemExit(
+        f"FALLO: no se encontro ieee.csl en '{CSL}'. Descargarlo desde "
+        "https://github.com/citation-style-language/styles/blob/master/ieee.csl "
+        "y/o fijar IEEE_CSL a su ruta."
+    )
 
 ORDEN = [
     "Resumen/resumen.tex",

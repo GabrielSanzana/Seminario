@@ -161,6 +161,46 @@ que no existe. La compuerta de compilación sí se corrió en cada paso
 reemplazo de la revisión humana; lo que no ocurrió es la revisión cruzada entre dos
 agentes independientes, porque no había dos agentes independientes en esta sesión.
 
+**Revisión cruzada independiente, hecha por claude-2 después (la que faltaba):**
+`main` ya tenía estos commits (se empujaron directo, sin PR, por la razón de arriba),
+así que no hay nada que mergear — se audita lo que ya está.
+
+- Recompilado desde cero: `OK: main.pdf compilado, 28 paginas`.
+- Recuento automático de citas sobre los 8 archivos con prosa: 89 apariciones,
+  25 claves distintas, las 25 con 3 usos o más (mínimo 3, máximo 6 —
+  `liu2024itransformer`), 25/25 contra `referencias.bib`, cero colgantes, cero sin usar.
+  Coincide exacto con lo que reporta Task-023.
+- Verificada la frase de jerarquía en `06_propuesta.tex` §6.1: "el fin de este trabajo
+  no es explicar un modelo de aprendizaje automático, sino producir una hipótesis
+  relacional sobre el fenómeno... Explicar el modelo... es un paso instrumental hacia
+  ese fin, no el fin en sí mismo." Correcta y en el lugar que pide `CLAUDE.md`.
+- Confirmado que la regla inventada de "cinco condiciones, en este orden" ya no está.
+  En su lugar: "no hay una regla única ni un orden fijo de condiciones que el
+  framework imponga de antemano". Correcto.
+- Releídos los cinco recortes de cifras de desempeño en `03_estado_arte.tex`
+  (`zhao2026causalguided`, `pipeline2026causalgraph`, `cai2024msgnet`,
+  `convlstmgcn2026vegetation`, `rotorcraft2026vortexring`): en los cinco casos se
+  conservó el resultado de explicabilidad y se retiró la cifra de desempeño del
+  algoritmo, exactamente como describe Task-023. La mención de "exactitud" que queda en
+  `rulexai2024events` es correcta: ahí es una de las cinco métricas con que el propio
+  método de explicabilidad se evalúa a sí mismo, no el desempeño del clasificador
+  destilado.
+- Verificadas las dos notas de Task-024 en `03_estado_arte.tex` §3.1: procedencia de
+  citas ("la mayoría... un número menor... con apoyo de asistencia de IA") y alcance
+  futuro del análisis de citas, ambas en términos cualitativos, sin cifras inventadas.
+  Coincide con la nota de verificación de claude-1 sobre las columnas de
+  `Referencias_seminario.xlsx`.
+- **Hallazgo nuevo, corregido:** `scripts/build_docx.py` (agregado en Task-021) traía
+  rutas absolutas hardcodeadas a `C:\Users\patru\...` — mismo bug de portabilidad que
+  tuvo `compilar.sh` con TinyTeX antes de esta sesión, aquí sin corregir. Cambiado a
+  rutas relativas al propio script y variables de entorno (`PANDOC_BIN`, `IEEE_CSL`,
+  `BUILD_DOCX_SCRATCH`) con mensajes de error explícitos si pandoc o `ieee.csl` no
+  están. **No pude probarlo de punta a punta**: no hay pandoc instalado en esta
+  máquina. Si alguien lo corre, confirmar que sigue generando el DOCX correctamente
+  con las rutas nuevas.
+
+Sin objeciones de fondo. El trabajo de Task-022/023/024 queda auditado y confirmado.
+
 ### Cerrada por claude-1 en esta sesión
 
 - **Task-021** — Correcciones del autor humano sobre el informe de Task-020, más
