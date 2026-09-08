@@ -1,0 +1,96 @@
+%% ============================================================
+%%  Estado del arte
+%%  Duenio inicial: claude-1
+%%  Reglas: ver ../../CLAUDE.md
+%%  No editar si TASKS.md marca este archivo IN_PROGRESS por otro agente.
+%% ============================================================
+
+\chapter{Estado del arte}
+\label{cap:estado_arte}
+
+\section{Obtención del corpus: protocolo PRISMA 2020}
+
+La revisión de literatura se condujo bajo el protocolo PRISMA 2020, de modo que la selección de los trabajos que se contrastan más abajo sea trazable y reproducible por un tercero. El protocolo se organizó en siete etapas: definición de la pregunta de investigación, diseño del protocolo, diseño de la cadena de búsqueda, búsqueda en bases de datos, aplicación de filtros de inclusión y exclusión, extracción de datos y redacción.
+
+La pregunta se formuló en formato PICO, con la población en los modelos Transformer cuya atención se calcula entre tokens que representan variables con significado físico, la intervención en su condición de caja negra y en la inestabilidad de sus matrices entre ejecuciones, el comparador en los métodos tradicionales de explicabilidad, y el resultado esperado en la reconstrucción de una hipótesis relacional compacta, dirigida y falsable. De esa formulación se derivó la cadena de búsqueda, con cuatro bloques de términos unidos por \texttt{AND}, uno por componente PICO, y sinónimos unidos por \texttt{OR} dentro de cada bloque.
+
+La búsqueda se ejecutó sobre tres bases de datos, con los resultados de la tabla \ref{tab:bases}, y se complementó con búsquedas adicionales por citas y registros.
+
+\begin{table}[htbp]
+\centering
+\caption{Registros identificados por base de datos.}
+\label{tab:bases}
+\begin{tabular}{lr}
+\toprule
+\textbf{Base de datos} & \textbf{Registros} \\
+\midrule
+Scopus & 191 \\
+Web of Science & 100 \\
+PubMed & 28 \\
+\midrule
+\textbf{Total identificado} & \textbf{319} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Los criterios de inclusión fueron tres: publicación entre 2022 y 2026, idioma inglés, y tipo de documento restringido a artículos de investigación primaria y trabajos de conferencia en Scopus y Web of Science. En PubMed no se restringió por tipo de documento, para no perder literatura técnica no clínica. La depuración posterior se hizo en Zotero y avanzó en tres pasos: la deduplicación dejó 221 registros, el filtro por identificador DOI auditable dejó 201, y el filtro por disponibilidad de texto completo dejó 137 registros elegibles.
+
+De ese conjunto elegible se seleccionaron, tras lectura de texto completo, las 25 referencias que componen el corpus de este informe. Para cada una se registró descripción, muestra, metodología, resultados y conclusión, junto con la sección del informe a la que aporta. Conviene declarar una limitación del protocolo en este punto: el paso que va de los 137 registros elegibles a las 25 referencias incluidas se resolvió mediante un juicio de relevancia temática documentado caso por caso, y no mediante un umbral cuantitativo explícito. Formalizar ese criterio es parte del trabajo pendiente de la revisión.
+
+\section{Trabajos similares}
+
+El contraste se organiza por familias metodológicas y no trabajo por trabajo, porque trabajos que se ven distintos comparten la misma limitación estructural. Cada familia se define por el tipo de objeto que entrega como explicación y por el momento del ciclo de vida del modelo en que ese objeto se produce.
+
+\subsection{Atribución y relevancia posteriores al entrenamiento}
+
+Esta familia calcula relevancia sobre un modelo ya entrenado, y es la práctica dominante cuando hay que explicar un modelo opaco sin tocarlo. La descomposición de Taylor propagada por capas, que incluye las conexiones residuales, supera a los mapas de atención crudos en tareas de segmentación y perturbación \cite{chefer2021transformer}. Sobre un clasificador Transformer de texto médico, SHAP y gradientes integrados alcanzan una fidelidad comparable, cercana a 0,22, aunque solo correlacionan de forma moderada entre sí \cite{medtext2026attribution}, es decir, dos métodos igualmente fieles ordenan las variables de manera distinta. Una evaluación sistemática sobre Vision Transformers agrava el punto: métricas que dicen medir la misma propiedad convergen mínimamente, de modo que el orden de mérito entre métodos depende de cuál métrica se elija \cite{vitexplain2024evaluation}. El límite de la familia es el tipo de objeto que produce, una importancia por variable o un mapa continuo, que no es una estructura de dependencias enumerable.
+
+\subsection{Evidencia sobre la fiabilidad de las explicaciones}
+
+Esta familia no propone explicaciones, sino que mide cuánto se puede confiar en ellas, y por eso condiciona el diseño de la propuesta en lugar de competir con ella. El muestreo de perturbación de LIME y SHAP puede engañarse de forma deliberada, al punto de que un clasificador abiertamente sesgado logra que ninguno de los dos señale el atributo protegido \cite{slack2020fooling}. Un modelo con exactitud de estado del arte puede estar resolviendo la tarea por un atajo espurio invisible a las métricas agregadas \cite{lapuschkin2019unmasking}. Y al reentrenar redes convolucionales y Transformers de visión con siete semillas sobre la misma tarea, el Transformer resulta más estable entre semillas pero menos fiel, porque borrar las regiones que destaca apenas cambia su confianza \cite{keratoconus2026instability}. Su límite es que diagnostican sin entregar un procedimiento de decisión.
+
+\subsection{Estructura relacional aprendida o impuesta}
+
+Aquí la estructura es parte del modelo. La convolución de grafo adaptativa combinada con descomposición en frecuencia aprende correlaciones entre series a varias escalas y expone un grafo interpretable \cite{cai2024msgnet}. Un Transformer de grafo recibe un grafo de propagación de fallos construido de antemano por cribado de causalidad de Granger y lo usa para condicionar el cálculo de la atención \cite{zhao2026causalguided}. Un tercer trabajo reemplaza el grafo de correlaciones entre sensores por uno de dependencias condicionales y lo contrasta con la topología física real de una instalación de tuberías \cite{pipeline2026causalgraph}, que es el único caso del corpus con una referencia externa verificable. Un cuarto destila un clasificador en un conjunto compacto de reglas y lo evalúa a la vez por fidelidad y por tamaño \cite{rulexai2024events}. El límite es común a los cuatro: cuando el grafo es componente entrenado existe porque fue entrenado para existir y auditarlo obliga a reentrenar, y cuando es supuesto previo no admite hipótesis nula frente a la cual pueda resultar improbable.
+
+\subsection{Extracción de estructura por intervención sobre el modelo}
+
+Esta es la familia más cercana a la propuesta. Traslada técnicas de interpretabilidad mecanicista desde el procesamiento de lenguaje a un Transformer de clasificación de series temporales y construye grafos causales del flujo interno de información entre cabezas de atención, mediante parcheo de activaciones, saliencia de atención y autocodificadores dispersos \cite{mechinterp2025ts}. Obtiene, entonces, el mismo tipo de objeto que este trabajo busca. Su límite está en el precio: interviene el modelo y necesita acceso a sus estados internos, lo que la vuelve inaplicable sobre un modelo desplegado del que solo se dispone de la matriz de atención.
+
+\subsection{Decisiones arquitectónicas sobre el eje de la atención}
+
+Esta familia no aborda interpretabilidad, sino dónde conviene aplicar la atención. Invertir el Transformer de modo que cada variable sea un token mejora el pronóstico multivariado de largo plazo \cite{liu2024itransformer}, y combinar atención de canal con atención temporal mediante parches múltiples iguala o supera el estado del arte \cite{sentinel2025multipatch}. En sentido contrario, un trabajo sostiene que buena parte del mérito atribuido a los Transformers procede del mecanismo de parcheo y muestra que un perceptrón multicapa sobre parches iguala a arquitecturas más complejas \cite{patchmlp2025unlocking}. La familia respalda la condición que hace posible este trabajo, que exista una matriz de atención entre variables, pero no zanja si la ganancia viene de la atención o del parcheo, y en todos los casos la matriz se descarta después de la propagación.
+
+\subsection{Aplicaciones en dominios afines}
+
+Esta familia aplica arquitecturas de grafo o de atención a dominios cercanos al caso de estudio. Un modelo que combina memoria convolucional, convolución de grafo y Transformer predice mapas de índices de vegetación con buen error y transfiere entre sensores, sin auditar qué relación entre índices aprendió \cite{convlstmgcn2026vegetation}. Un segundo inserta un grafo acíclico dirigido con sentido físico en el espacio latente de un autocodificador variacional y valida el resultado contra experimentos numéricos \cite{teleconnections2026causal}. Un tercero genera explicaciones agnósticas al modelo para redes de sensores espacio-temporales y muestra que las herramientas pensadas para datos tabulares o de imagen resultan inefectivas ahí \cite{spatiotemporal2024e2e}. Un cuarto documenta un Transformer de visión cuya atención converge por sí sola sobre una banda de frecuencia que la teoría aerodinámica predice de forma independiente \cite{rotorcraft2026vortexring}, que es el único caso del corpus donde la atención recupera un mecanismo verificable por fuera del modelo. Su límite es que la estructura aprendida no se audita, y que esa coincidencia con la teoría es un hallazgo puntual y no un procedimiento repetible.
+
+\section{Contribución de la propuesta}
+
+La tabla \ref{tab:familias} resume el contraste. Leídas en conjunto, las seis familias muestran un patrón asimétrico: obtener un objeto relacional está resuelto por varias vías, mientras que decidir si ese objeto merece crédito no lo está.
+
+La dimensión vacía es la falsación de una estructura leída, es decir, ni aprendida, ni impuesta, ni obtenida por intervención sobre el modelo. Los trabajos que evalúan explicaciones lo hacen sobre atribuciones por variable y con métricas que no convergen entre sí \cite{vitexplain2024evaluation,medtext2026attribution}, no sobre aristas de un grafo. Los que aplican estas arquitecturas a dominios afines, incluido uno en el mismo dominio de índices espectrales, predicen bien sin auditar la estructura que aprendieron \cite{convlstmgcn2026vegetation,spatiotemporal2024e2e}. Y el único caso en que la atención cruda demuestra ser informativa lo hace por coincidencia con un mecanismo ya conocido por otra vía \cite{rotorcraft2026vortexring}.
+
+La propuesta ocupa ese vacío combinando cinco elementos que la literatura revisada tiene por separado y no reúne: extracción posterior al entrenamiento sin reentrenar ni intervenir activaciones, consenso estadístico contra un modelo nulo explícito, fidelidad medida por ablación arista por arista, triangulación con paradigmas que no comparten supuestos, y una taxonomía que distingue relación genuina de atajo predictivo, artefacto y ruido. Cada elemento tiene precedente aislado; la contribución está en su composición.
+
+{\small
+\begin{longtable}{P{0.20}P{0.24}P{0.28}P{0.28}}
+\caption{Familias metodológicas del estado del arte, con su aporte y su límite.}\label{tab:familias}\\
+\toprule
+\textbf{Familia} & \textbf{Trabajos} & \textbf{A favor} & \textbf{En contra}\\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Familia} & \textbf{Trabajos} & \textbf{A favor} & \textbf{En contra}\\
+\midrule
+\endhead
+Atribución y relevancia post-entrenamiento & \cite{chefer2021transformer,medtext2026attribution,vitexplain2024evaluation} & Aplicables sin reentrenar, maduras y disponibles & Entregan importancia por variable o mapa continuo; las métricas que las comparan no convergen\\
+Fiabilidad de las explicaciones & \cite{slack2020fooling,lapuschkin2019unmasking,keratoconus2026instability} & Acotan el problema con evidencia experimental & Diagnostican sin dar un procedimiento de decisión\\
+Estructura aprendida o impuesta & \cite{cai2024msgnet,zhao2026causalguided,pipeline2026causalgraph,rulexai2024events} & Estructura explícita; un caso la contrasta con topología física & Auditarla exige reentrenar, o bien es supuesto previo sin hipótesis nula\\
+Extracción por intervención & \cite{mechinterp2025ts} & Grafo causal verificable del interior del modelo & Requiere parchear activaciones y acceso a estados internos\\
+Eje de la atención & \cite{liu2024itransformer,sentinel2025multipatch,patchmlp2025unlocking} & Respaldan tratar cada variable como token & No zanjan si la ganancia viene de la atención o del parcheo\\
+Dominios afines & \cite{convlstmgcn2026vegetation,teleconnections2026causal,spatiotemporal2024e2e,rotorcraft2026vortexring} & Viabilidad demostrada en dominios cercanos & No auditan la estructura aprendida; la coincidencia con la teoría es puntual\\
+\textbf{Propuesta} & \multicolumn{3}{p{0.80\linewidth}}{Extracción posterior al entrenamiento sin intervenir el modelo, más cadena de cinco eslabones, modelo nulo explícito, triangulación entre paradigmas y taxonomía diagnóstica}\\
+\bottomrule
+\end{longtable}
+}

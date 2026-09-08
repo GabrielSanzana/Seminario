@@ -1,0 +1,91 @@
+%% ============================================================
+%%  Propuesta
+%%  La seccion 6.2 (instrumento) proviene de 04_arquitectura.tex, autoria de
+%%  claude-2. Se migro sin reescribir la prosa: cambio de archivo, ajuste de
+%%  citas al corpus vigente y eliminacion de rayas largas.
+%%  Reglas: ver ../../CLAUDE.md
+%% ============================================================
+
+\chapter{Propuesta}
+\label{cap:propuesta}
+
+\section{Visión general}
+
+El framework se compone de tres transformaciones encadenadas que se aplican sobre un modelo ya entrenado, sin modificar sus pesos ni su arquitectura:
+
+\begin{equation}
+A \;\xrightarrow{\;\Phi\;}\; G \;\xrightarrow{\;\Psi\;}\; H \;\xrightarrow{\;F\;}\; \mathbb{R}
+\end{equation}
+
+La primera convierte la matriz de atención en un grafo dirigido y ponderado. La segunda reduce ese grafo a una hipótesis relacional compacta. La tercera evalúa esa hipótesis contra el comportamiento del modelo del que salió. Las tres operan después del entrenamiento, que es lo que distingue a la propuesta de los enfoques donde el grafo se aprende como parámetro \cite{cai2024msgnet} o se impone como conocimiento previo \cite{zhao2026causalguided}, y también del enfoque que obtiene estructura causal interviniendo las activaciones del modelo \cite{mechinterp2025ts}.
+
+\section{El instrumento: un ConvTransformer de índices}
+
+Para disponer de una matriz $A$ entre variables hace falta un modelo cuya atención opere sobre ese eje. El modelo empleado modifica el Transformer estándar en cinco aspectos, todos orientados a ese fin:
+
+\begin{enumerate}
+\item \textbf{Tokens iguales a variables.} Cada uno de los $n$ índices se trata como un token independiente. La dimensión $n$ es configurable y no está atada al dominio del caso de estudio.
+\item \textbf{Encoder convolucional por token.} Cada variable, de dimensiones $H \times W$, se procesa con un bloque convolucional que reduce la resolución espacial y extrae características locales. El encoder se comparte entre tokens, de modo que $A$ no refleje capacidades desiguales de codificación.
+\item \textbf{Proyección al espacio latente.} Las características de cada variable se aplanan y se proyectan a un espacio de embedding mediante una capa lineal.
+\item \textbf{Atención multi-cabeza entre variables.} La atención se calcula entre los $n$ tokens, no entre posiciones espaciales ni entre pasos temporales, lo que produce explícitamente una matriz $A \in \mathbb{R}^{n\times n}$ por cabeza y capa.
+\item \textbf{Decoder convolucional.} La salida se decodifica para reconstruir la resolución original.
+\end{enumerate}
+
+Conviene delimitar el alcance de este componente. El ConvTransformer no constituye la novedad del trabajo: es un vehículo instrumental cuya única función es producir, de manera controlada, una matriz $A$ entre variables interpretables sin depender de un grafo predefinido. La contribución reclamada son las transformaciones y el sistema de validación que las acompaña. La delimitación importa por dos razones. Una es de honestidad comparativa: los trabajos que compiten en desempeño predictivo lo hacen bajo protocolos de benchmarking establecidos \cite{liu2024itransformer,sentinel2025multipatch}, y este trabajo no compite ahí, ya que el desempeño se reporta solo como condición de admisibilidad para verificar que la representación proviene de un modelo que aprendió algo del fenómeno. La otra es de generalidad: $\Phi$ depende de las propiedades algebraicas de $A$ y no de su procedencia, de modo que en principio puede aplicarse a la matriz de atención entre variables de otras arquitecturas sin tocar sus pesos.
+
+\section{Transformación $\Phi$: de la matriz al grafo}
+
+La primera transformación produce $G = (V, E, W)$, un grafo ponderado dirigido cuyos nodos $V = \{v_1, \ldots, v_n\}$ son variables interpretables. Para evitar la dependencia de umbrales arbitrarios se emplea un criterio Top-K fijo que selecciona las $K$ aristas más fuertes por fila, con lo cual el grafo nunca queda vacío:
+
+\begin{equation}
+\Phi(A) = \big(V, \{(i,j,A_{ij}) \mid A_{ij} \in \text{Top-}K(A_{i\cdot})\}\big).
+\end{equation}
+
+El operador Top-K rígido presenta una discontinuidad conocida: cuando $A_{i,(K)}$ y $A_{i,(K+1)}$ son numéricamente próximos, perturbaciones pequeñas invierten el orden y cambian el conjunto seleccionado. Por eso el segundo eslabón de la cadena contempla evaluar operadores alternativos, entre ellos Top-P adaptativo y $\alpha$-entmax, y medir cuánto cambia la hipótesis al cambiar la regla. Tratar la discretización como parámetro medible, y no como detalle de implementación, responde a la observación de que dos configuraciones que coinciden en la predicción pueden diferir en la explicación \cite{bogaert2026variability}.
+
+\section{Transformación $\Psi$: del grafo a la hipótesis}
+
+La segunda transformación reduce $G$ a $H = (E_H, R)$, con $E_H$ el conjunto de relaciones que sobreviven y $R$ su interpretación semántica. La reducción se plantea como el problema de compresión enunciado en el capítulo \ref{cap:marco}: el menor $H$ que preserve al menos $\epsilon$ de la información del grafo. La doble exigencia de fidelidad y tamaño sigue el criterio de los métodos que destilan un modelo en un conjunto compacto de reglas y lo evalúan por ambas dimensiones a la vez \cite{rulexai2024events}.
+
+El resultado de este paso es lo que distingue a la propuesta de la familia de mapas continuos. Un conjunto finito de aristas dirigidas sobre variables con nombre admite una operación que un mapa de relevancia no admite: eliminar una unidad concreta y medir qué pasa.
+
+\section{Transformación $F$: la cadena de evidencia}
+
+La tercera transformación no es una métrica única. Es una cadena de cinco eslabones acumulativos, con umbrales declarados antes de ejecutarla, donde cada eslabón solo se evalúa sobre las relaciones que superaron el anterior.
+
+\begin{enumerate}
+\item \textbf{Estabilidad continua.} Se entrena un ensamble de modelos con semillas distintas y se mide cuánto varía $A$ entre corridas. Una relación que solo aparece en una corrida no es candidata a hipótesis. Este eslabón atiende directamente el hecho de que la explicación de un modelo de atención cambia al reentrenar \cite{keratoconus2026instability}.
+\item \textbf{Estabilidad estructural.} Se varía la regla de discretización, en particular el valor de $K$ y el operador empleado, y se mide cuánto cambia el conjunto de aristas seleccionadas. Una relación que aparece solo bajo un corte específico se descarta.
+\item \textbf{Consenso frente a un modelo nulo.} Se contrasta la frecuencia con que una arista persiste entre semillas contra la probabilidad de que persista por azar, $P_{\text{azar}} = K/(N-1)$, mediante una prueba binomial exacta. Como la prueba se aplica sobre las $N(N-1)$ aristas posibles, se corrige por comparaciones múltiples con Bonferroni y con Benjamini-Hochberg.
+\item \textbf{Fidelidad por ablación dirigida.} Se anula la entrada $(i,j)$ de la matriz y se renormaliza la fila para preservar su estocasticidad, de modo que el modelo siga recibiendo una entrada válida, y se mide la caída de desempeño. La renormalización responde al problema documentado de que una perturbación destructiva mide la fragilidad del modelo y no la relevancia de lo perturbado \cite{meng2023perturbation}. La métrica concreta se elige con las precauciones que señala el análisis de métodos de perturbación sobre clasificadores temporales \cite{simic2025perturbation}.
+\item \textbf{Especificidad, robustez y compacidad.} Se verifica que la caída de desempeño sea específica de la arista ablacionada y no un efecto general, que la hipótesis resista ruido sobre $A$, y que su tamaño se mantenga acotado.
+\end{enumerate}
+
+Ordenar los eslabones cumple una función diagnóstica. Cuando las métricas de explicabilidad se aplican en paralelo informan que algo falla sin indicar dónde, que es la crítica documentada sobre su falta de convergencia \cite{vitexplain2024evaluation}. En una cadena ordenada, el eslabón en que una relación cae es la respuesta a por qué cayó.
+
+\section{Triangulación entre paradigmas}
+
+Los cinco eslabones comparten, en parte, familia de supuestos. Para que el veredicto sobre una arista no dependa de una sola familia, la evidencia se triangula con cinco paradigmas: el probabilístico, que ya opera en el tercer eslabón, más cuatro ortogonales a él. El intervencional interviene la matriz y vuelve a predecir. El geométrico-topológico compara los grafos por distancia espectral del laplaciano, distancia de edición y estabilidad de los roles de cada nodo. El de teoría de la información mide dependencia sin suponer linealidad. El de baselines deterministas contrasta el grafo obtenido contra cuatro referencias construidas por fuera del modelo: correlación de Pearson, causalidad de Granger, un grafo aleatorio de Erdős-Rényi evaluado por Z-score y un grafo de vecindad espectral.
+
+El baseline de Pearson se lee de forma invertida respecto de lo habitual. Si el grafo extraído coincide en alto grado con el de correlación lineal, la conclusión es que el modelo no aprendió nada que no estuviera ya en la correlación, y que el framework no aportó valor en ese caso. Es un criterio de falsación de la propia contribución.
+
+\section{Taxonomía diagnóstica}
+
+Cada arista termina caracterizada por un vector de cinco coordenadas, una por eslabón, que no se colapsa en un escalar. La discordancia entre coordenadas es informativa y un promedio ponderado la perdería. El vector se mapea a cuatro perfiles:
+
+\begin{itemize}
+\item \textbf{Relación estructural genuina}: estable entre semillas, estable ante la discretización, improbable bajo el modelo nulo y fiel bajo ablación.
+\item \textbf{Atajo predictivo}: fiel bajo ablación, porque el modelo efectivamente la usa, pero sin respaldo en los paradigmas ortogonales ni correspondencia con conocimiento del fenómeno.
+\item \textbf{Artefacto de arquitectura}: estable y frecuente, pero sin efecto al ablacionarla, lo que caracteriza a un sumidero de atención.
+\item \textbf{Ruido estocástico}: inestable ya en el primer eslabón.
+\end{itemize}
+
+La distinción entre las dos primeras categorías es la que motiva todo el diseño, y recoge la evidencia de que un modelo con métricas excelentes puede estar apoyándose en un atajo espurio invisible al desempeño agregado \cite{lapuschkin2019unmasking}.
+
+\section{Aplicabilidad a otros dominios}
+
+Como $\Phi$ solo exige que $A$ cumpla la condición de admisibilidad, la pregunta por la transferencia a otro dominio no es sobre el fenómeno sino sobre el eje de la atención del modelo disponible. La respuesta admite tres casos.
+
+Hay dominios de aplicación directa, donde el modelo publicado ya expone una representación relacional entre variables, como las redes de sensores espacio-temporales documentadas sobre calidad del aire, generación solar y plantas fotovoltaicas \cite{spatiotemporal2024e2e} o la reconstrucción de dependencias condicionales entre sensores industriales \cite{pipeline2026causalgraph}. Hay dominios que requieren adaptación, donde existe atención accesible pero su eje no son las variables nombradas, como la predicción de mapas de vegetación \cite{convlstmgcn2026vegetation} o el modelo de aerodinámica cuya atención opera sobre espectrogramas \cite{rotorcraft2026vortexring}. Y hay dominios que requieren un modelo nuevo, donde la estructura se impone de antemano en el espacio latente en lugar de leerse de una representación entrenada \cite{teleconnections2026causal}.
+
+Para elegir el segundo dominio de validación se aplican cinco criterios ordenados por peso: que los tokens sean variables, que haya acceso al modelo y no solo a la matriz, porque el cuarto eslabón exige intervenir y volver a predecir, que el costo de entrenamiento admita un ensamble de varias decenas de semillas, que los datos sean públicos, y que exista conocimiento previo del fenómeno contra el cual contrastar el grafo. El candidato más realista bajo esos criterios son las redes de sensores ambientales con datos públicos \cite{spatiotemporal2024e2e}.

@@ -11,7 +11,16 @@ if ! command -v pdflatex >/dev/null 2>&1; then
   exit 1
 fi
 
-# Dos pasadas: la segunda resuelve indice y referencias cruzadas.
+if ! command -v biber >/dev/null 2>&1; then
+  echo "FALLO: biber no esta en el PATH. Instalar con: tlmgr install biber biblatex biblatex-apa" >&2
+  exit 1
+fi
+
+# El documento usa biblatex con backend biber, no bibtex ni thebibliography.
+# pdflatex -> biber -> pdflatex -> pdflatex: la primera pasada deja el .bcf que
+# biber necesita, y las dos ultimas resuelven citas, indice y referencias cruzadas.
+pdflatex -interaction=nonstopmode main.tex >/dev/null 2>&1
+biber main >/dev/null 2>&1
 pdflatex -interaction=nonstopmode main.tex >/dev/null 2>&1
 out=$(pdflatex -interaction=nonstopmode main.tex 2>&1)
 

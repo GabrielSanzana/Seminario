@@ -1,67 +1,59 @@
 %% =============================================================================
-%%  ARCHIVO MAESTRO. Solo preambulo y \input: no contiene prosa.
-%%  Solo el autor humano edita este archivo. Ningun agente escribe aqui.
+%%  ARCHIVO MAESTRO. Solo preambulo y \include: no contiene prosa.
 %%
-%%  COMPILACION (dos pasadas para el indice; no usa BibTeX porque la
-%%  bibliografia es un entorno thebibliography):
-%%    pdflatex main && pdflatex main
+%%  Formato: template PUCV Escuela de Ingenieria Informatica (pucv_inf_2024.sty).
+%%
+%%  COMPILACION (usa biblatex + biber, ya no bibtex ni thebibliography):
+%%    pdflatex main && biber main && pdflatex main && pdflatex main
+%%  o simplemente ./scripts/compilar.sh
 %% =============================================================================
-\documentclass[11pt,a4paper]{article}
+\documentclass[12pt, letterpaper]{report}
 
-% --- Codificación y idioma -------------------------------------------------
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}   % inocuo en TeX Live actual; se puede eliminar
+\usepackage{pucv_inf_2024}
+
 \usepackage[spanish,es-noquoting,es-noshorthands]{babel}
-
-% --- Matemáticas y gráficos ------------------------------------------------
-\usepackage{amsmath,amssymb}
-\usepackage{graphicx}
-
-% --- Tablas ----------------------------------------------------------------
+\usepackage{csquotes}   % biblatex lo pide cuando hay babel cargado
+\usepackage{longtable}
 \usepackage{array}
 \usepackage{booktabs}
-\usepackage{longtable}
+\usepackage{amsmath,amssymb}
 
-% --- Página ----------------------------------------------------------------
-\usepackage{geometry}
-\geometry{margin=2.5cm}
-
-% --- hyperref SIEMPRE al final ---------------------------------------------
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
-            hypertexnames=false]{hyperref}
-
-% --- Columnas proporcionales: imposible desbordar el ancho de texto --------
-% #1 = fracción de \linewidth. Las fracciones de cada tabla suman 1.
+% Columnas proporcionales para las tablas anchas: la suma de las fracciones
+% de cada tabla es 1, de modo que ninguna desborda el ancho de texto.
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{\dimexpr #1\linewidth-2\tabcolsep\relax}}
-
-% --- Estabilidad de longtable ----------------------------------------------
 \setlength{\LTcapwidth}{\textwidth}
-\setcounter{LTchunksize}{200}   % procesa cada longtable en un solo trozo
+\setcounter{LTchunksize}{200}
 
-\title{Framework metodológico para la reconstrucción de estructuras\\
-relacionales compactas a partir de representaciones latentes\\
-de modelos profundos}
-\author{}
-\date{}
+% El indice llega hasta seccion: con subsecciones ocupa tres paginas y el
+% informe de avance tiene un limite de extension.
+\setcounter{tocdepth}{1}
+
+\addbibresource{referencias.bib}
 
 \begin{document}
-\maketitle
 
-\input{secciones/00_resumen}
+\include{Portadas/portada_principal.tex}
 
+\include{Resumen/resumen.tex}
+
+\newpage\addcontentsline{toc}{chapter}{Índice General\vspace{-0.5cm}}
 \tableofcontents
 
-\input{secciones/01_introduccion}
-\input{secciones/02_estado_arte}
-\input{secciones/03_objetivos}
-\input{secciones/04_arquitectura}
-\input{secciones/05_formalizacion}
-\input{secciones/06_aplicabilidad}
-\input{secciones/07_conclusiones}
+\newpage\addcontentsline{toc}{chapter}{Lista de Tablas\vspace{-0.5cm}}
+\listoftables
 
-\input{secciones/99_bibliografia}
+\newpage
+\pagenumbering{arabic}
 
-\appendix
-\input{secciones/A_matriz_literatura}
+\include{secciones/01_introduccion}
+\include{secciones/02_objetivos}
+\include{secciones/03_estado_arte}
+\include{secciones/04_marco_teorico}
+\include{secciones/05_plan_trabajo}
+\include{secciones/06_propuesta}
+\include{secciones/07_conclusiones}
+
+\newpage\addcontentsline{toc}{chapter}{Referencias\vspace{-0.5cm}}
+\printbibliography[title=Referencias]
 
 \end{document}
