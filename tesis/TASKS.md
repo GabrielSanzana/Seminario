@@ -30,10 +30,10 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 30 | Task-021: reescrito, dos familias y modelo alternativo |
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 89 | Task-025: "calibrar sus umbrales" -> "calibrar su criterio de contraste". Task-024: nota de procedencia de citas y de analisis de citas como trabajo futuro. Task-023: recortadas 5 cifras de precision de algoritmo que no eran resultado de explicabilidad |
+| `secciones/03_estado_arte.tex` | `IN_PROGRESS` | claude-1 | 89 | Task-025: "calibrar sus umbrales" -> "calibrar su criterio de contraste". Task-024: nota de procedencia de citas y de analisis de citas como trabajo futuro. Task-023: recortadas 5 cifras de precision de algoritmo que no eran resultado de explicabilidad |
 | `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
 | `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-025: "umbrales de decisión" -> "criterio de validación". Task-021: actividades. **Fechas por confirmar** |
-| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 93 | Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
+| `secciones/06_propuesta.tex` | `IN_PROGRESS` | claude-1/claude-2 | 93 | Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
 | `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | 25 entradas, ahora renderizadas en estilo IEEE numerico |
 
@@ -70,7 +70,31 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-Sin tareas de contenido pendientes. Queda solo la confirmación de fechas del plan de
+### Task-026 — `IN_PROGRESS` por claude-1
+
+- **Task-026 — dos esquemas: composición del framework y cribado PRISMA.**
+  Origen: la rúbrica `Pauta/` que claude-2 documentó en `CLAUDE.md` (PR #24) es
+  autoridad sobre el contenido, no solo sobre el formato, y su dimensión
+  **Presentación (10 pts)** pide explícitamente "índices, esquemas, gráficos, tablas y
+  figuras bien presentadas, de excelente nivel y calidad". El documento vigente tiene
+  tres tablas y **cero figuras**: sin un esquema es imposible alcanzar la banda alta de
+  esa dimensión, y además la composición
+  $X \to M_\theta \to A \to G \to H \to \mathbb{R}$, que es el centro de lo que
+  esta entrega defiende, solo existe hoy como una ecuación en línea.
+  Archivos reservados: `secciones/03_estado_arte.tex`, `secciones/06_propuesta.tex` y
+  el directorio nuevo `figuras/` (ambas secciones son de claude-1; no se toca
+  `04_marco_teorico.tex` ni §6.2, de claude-2).
+  Restricción dura: el cuerpo no puede pasar de 20 páginas sin contar portada, índices
+  ni referencias (instrucción del autor humano). Hoy va exactamente en 20, con la
+  última prácticamente vacía, así que las figuras tienen que caber en ese hueco.
+  Restricción de herramienta: `main.tex` no se toca (regla de aislamiento), así que las
+  figuras **no** se dibujan con TikZ dentro del documento —eso exigiría cargar el
+  paquete en el preámbulo— sino que se compilan aparte como PDF independientes y se
+  incluyen con `\includegraphics`, que ya viene cargado por `pucv_inf_2024.sty`. Se
+  versiona el fuente `.tex` de cada figura junto al `.pdf` para que sean
+  reproducibles.
+
+Sin otras tareas de contenido pendientes. Queda la confirmación de fechas del plan de
 trabajo por el autor humano (`secciones/05_plan_trabajo.tex`, tabla `tab:plan`).
 
 - **Resuelta por claude-2 — `secciones/04_marco_teorico.tex`, a raíz de Task-025:**
