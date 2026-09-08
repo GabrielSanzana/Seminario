@@ -1,18 +1,27 @@
 %% =============================================================================
 %%  ARCHIVO MAESTRO. Solo preambulo y \include: no contiene prosa.
 %%
-%%  Formato: template PUCV Escuela de Ingenieria Informatica (pucv_inf_2024.sty).
+%%  Formato: template PUCV Escuela de Ingenieria Informatica (pucv_inf_2024.sty),
+%%  ajustado al documento "Formato_Informes_Proyecto_Titulo-2024.pdf":
+%%    - hyperref para que el indice sea navegable
+%%    - parskip 0 y titlespacing 0 antes de encabezado, porque el formato pide
+%%      que el fin de una seccion y el encabezado siguiente no queden separados
+%%      por espacios adicionales
+%%    - citas numericas entre corchetes (estilo IEEE), ver pucv_inf_2024.sty
 %%
-%%  COMPILACION (usa biblatex + biber, ya no bibtex ni thebibliography):
+%%  COMPILACION (biblatex + biber):
 %%    pdflatex main && biber main && pdflatex main && pdflatex main
 %%  o simplemente ./scripts/compilar.sh
 %% =============================================================================
 \documentclass[12pt, letterpaper]{report}
 
+% hyperref va antes del .sty porque biblatex debe cargarse despues de hyperref.
+\usepackage[hidelinks]{hyperref}
+
 \usepackage{pucv_inf_2024}
 
 \usepackage[spanish,es-noquoting,es-noshorthands]{babel}
-\usepackage{csquotes}   % biblatex lo pide cuando hay babel cargado
+\usepackage{csquotes}
 \usepackage{longtable}
 \usepackage{array}
 \usepackage{booktabs}
@@ -24,9 +33,16 @@
 \setlength{\LTcapwidth}{\textwidth}
 \setcounter{LTchunksize}{200}
 
-% El indice llega hasta seccion: con subsecciones ocupa tres paginas y el
-% informe de avance tiene un limite de extension.
-\setcounter{tocdepth}{1}
+% Formato de parrafo que pide la Escuela: sangria de 1 cm, interlineado
+% sencillo y sin espacio extra entre parrafos ni antes de los encabezados.
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{1cm}
+\titlespacing*{\chapter}{0cm}{0pt}{8pt}
+\titlespacing*{\section}{0cm}{10pt}{0pt}
+\titlespacing*{\subsection}{0cm}{8pt}{0pt}
+
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
 
 \addbibresource{referencias.bib}
 
@@ -36,10 +52,10 @@
 
 \include{Resumen/resumen.tex}
 
-\newpage\addcontentsline{toc}{chapter}{Índice General\vspace{-0.5cm}}
+\newpage\addcontentsline{toc}{chapter}{\texorpdfstring{Índice General\vspace{-0.5cm}}{Índice General}}
 \tableofcontents
 
-\newpage\addcontentsline{toc}{chapter}{Lista de Tablas\vspace{-0.5cm}}
+\newpage\addcontentsline{toc}{chapter}{\texorpdfstring{Lista de Tablas\vspace{-0.5cm}}{Lista de Tablas}}
 \listoftables
 
 \newpage
@@ -53,7 +69,7 @@
 \include{secciones/06_propuesta}
 \include{secciones/07_conclusiones}
 
-\newpage\addcontentsline{toc}{chapter}{Referencias\vspace{-0.5cm}}
+\newpage\addcontentsline{toc}{chapter}{\texorpdfstring{Referencias\vspace{-0.5cm}}{Referencias}}
 \printbibliography[title=Referencias]
 
 \end{document}

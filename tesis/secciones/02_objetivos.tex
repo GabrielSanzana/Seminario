@@ -2,7 +2,6 @@
 %%  Objetivos
 %%  Duenio inicial: claude-1
 %%  Reglas: ver ../../CLAUDE.md
-%%  No editar si TASKS.md marca este archivo IN_PROGRESS por otro agente.
 %% ============================================================
 
 \chapter{Objetivos}
@@ -10,37 +9,16 @@
 
 \section{Objetivo general}
 
-Desarrollar un framework metodológico, independiente del dominio, que transforme la representación latente aprendida por un modelo profundo ya entrenado en una hipótesis relacional compacta, interpretable y evaluable, y que la someta a un criterio de validación multicriterio capaz de integrar estabilidad estadística, fidelidad respecto del modelo y contraste contra referencias construidas por fuera de él.
+Desarrollar un framework metodológico que transforme la representación relacional aprendida por un modelo de aprendizaje automático, entrenado sobre los mismos datos que el modelo principal del dominio, en una hipótesis relacional compacta e interpretable sobre las variables del fenómeno, y establecer el criterio que decide cuándo esa hipótesis puede sostenerse.
 
 \section{Objetivos específicos}
 
-Los objetivos específicos siguen las tres etapas del trabajo. La primera fija qué hay que conocer antes de diseñar, la segunda construye el artefacto y la tercera decide si el artefacto sirve.
-
-\subsection{Estudio}
-
-La etapa de estudio delimita el terreno. Además de mapear qué se ha hecho, tiene que dejar resueltas dos preguntas que condicionan el diseño posterior: cuánto varía la representación interna de un modelo entre corridas equivalentes, y con qué métricas tiene sentido evaluar una explicación cuando el dato es temporal. Sobre la primera, \textcite{keratoconus2026instability} documenta un compromiso que el diseño tiene que administrar desde el principio, ya que en su comparación entre redes convolucionales y Transformers de visión la arquitectura más estable entre semillas resultó ser la menos fiel. Sobre la segunda, \textcite{simic2025perturbation} muestran que la métrica de fidelidad más extendida falla al trasladarse a series temporales, y \textcite{rulexai2024events} añaden el criterio de que una estructura explicativa se evalúa a la vez por fidelidad y por tamaño.
+Los tres objetivos siguientes cubren, en orden, la formalización del método, la construcción del criterio con que se lo evalúa y su aplicación sobre el caso de estudio. Su alcance está acotado deliberadamente al trabajo que puede completarse dentro del periodo de la tesis.
 
 \begin{enumerate}
-\item Revisar sistemáticamente la literatura bajo el protocolo PRISMA 2020, identificando las familias metodológicas existentes, sus límites y el espacio que dejan abierto para la propuesta.
-\item Establecer los criterios de evaluación del framework, tanto los que miden estabilidad frente a la variabilidad del entrenamiento como los que miden fidelidad y compacidad de la estructura resultante.
-\end{enumerate}
+\item Formalizar matemáticamente las transformaciones que llevan de la matriz de interacción entre variables al grafo dirigido, y de este a la hipótesis relacional compacta, junto con las condiciones que debe cumplir una representación para ser entrada válida del framework.
 
-\subsection{Desarrollo}
+\item Construir el criterio de validación de la hipótesis reconstruida, definiendo las medidas de estabilidad frente a la variabilidad del entrenamiento y de fidelidad respecto del modelo, con umbrales declarados antes de la ejecución. La construcción de ese criterio recoge dos advertencias del estado del arte: que una explicación más estable no es necesariamente más fiel \cite{keratoconus2026instability}, y que la métrica de fidelidad más extendida presenta fallas al trasladarse a datos temporales \cite{simic2025perturbation}. A ellas se suma la exigencia de evaluar la estructura resultante también por su tamaño, siguiendo el criterio doble de fidelidad y compacidad que plantean \textcite{rulexai2024events}.
 
-La etapa de desarrollo produce el artefacto. Comprende la definición matemática de las transformaciones que componen el pipeline, junto con las condiciones que debe cumplir una representación para ser entrada válida, y el criterio de decisión que se aplicará sobre cada relación extraída.
-
-\begin{enumerate}
-\setcounter{enumi}{2}
-\item Formalizar las transformaciones que llevan de la matriz de atención al grafo, del grafo a la hipótesis relacional compacta y de la hipótesis a su evaluación contra el modelo.
-\item Construir el criterio de validación como una cadena de evidencia acumulativa, con umbrales declarados antes de la ejecución, y formular la taxonomía que permita distinguir una relación estructural genuina de un atajo predictivo, de un artefacto de la arquitectura y de ruido estocástico.
-\end{enumerate}
-
-\subsection{Validación}
-
-La etapa de validación pone a prueba el diseño. Se aplica primero sobre el caso de estudio y después sobre escenarios donde exista una referencia externa contra la cual contrastar, que es la única manera de saber si el procedimiento distingue lo que dice distinguir.
-
-\begin{enumerate}
-\setcounter{enumi}{4}
-\item Aplicar la cadena de evidencia sobre el caso de estudio y reportar, relación por relación, en qué punto del recorrido cada una sobrevive o queda descartada.
-\item Evaluar la generalidad del framework sobre un conjunto sintético de estructura conocida y sobre un segundo dominio real distinto del caso de estudio principal.
+\item Aplicar el framework sobre el caso de estudio de índices espectrales y evaluar la hipótesis obtenida con el criterio anterior, reportando relación por relación cuáles se sostienen y cuáles quedan descartadas.
 \end{enumerate}

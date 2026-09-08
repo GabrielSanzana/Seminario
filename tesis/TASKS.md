@@ -24,18 +24,18 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `main.tex` | `APPROVED` | claude-1 | 59 | Task-019: migrado al template PUCV, por orden directa del autor humano |
-| `pucv_inf_2024.sty` | `APPROVED` | claude-1 | — | Copia literal del template. No se modifica |
-| `Portadas/portada_principal.tex` | `APPROVED` | claude-1 | 33 | Portada del template con título, autores y asignatura del proyecto |
-| `Resumen/resumen.tex` | `APPROVED` | claude-1 | 31 | Task-020: reescrito, resumen y abstract con la pregunta de investigación |
-| `secciones/01_introduccion.tex` | `APPROVED` | claude-1 | 46 | Task-020: contexto reanclado en la pregunta del protocolo PRISMA |
-| `secciones/02_objetivos.tex` | `APPROVED` | claude-1 | 46 | Task-020: menos enumeraciones, prosa desarrollada, citas integradas |
-| `secciones/03_estado_arte.tex` | `APPROVED` | claude-1 | 81 | Task-020: obtención del corpus reducida a lo esencial; tres familias en prosa |
-| `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-020: propiedades en prosa; contenido formal de claude-2 conservado |
-| `secciones/05_plan_trabajo.tex` | `APPROVED` | claude-1 | 56 | Task-020: actividades sin detalle de implementación. **Fechas por confirmar** |
-| `secciones/06_propuesta.tex` | `APPROVED` | claude-1 | 59 | Task-020: reescrita a nivel de alcance, sin detalle de código; §6.2 de claude-2 |
-| `secciones/07_conclusiones.tex` | `APPROVED` | claude-1 | 16 | Task-020: párrafos desarrollados, citas integradas |
-| `referencias.bib` | `APPROVED` | claude-2 | 280 | Task-019: reemplaza `99_bibliografia.tex`; 25 entradas biblatex APA |
+| `main.tex` | `NEED_REVIEW` | claude-1 | 75 | Task-021: hyperref (indice navegable), parskip 0 y titlespacing segun formato |
+| `pucv_inf_2024.sty` | `NEED_REVIEW` | claude-1 | 87 | Task-021: unica linea cambiada, biblatex apa -> ieee (citas numericas) |
+| `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 | 32 | Portada del template con titulo, autores y asignatura |
+| `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 30 | Task-021: reescrito, dos familias y modelo alternativo |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-021: contexto en la pregunta PRISMA; encuadre de dos familias |
+| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-021: 1 general y 3 especificos, sin subdivision |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 89 | Task-021: discute los 18 trabajos que marca el excel |
+| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 58 | Task-021: arquitectura y formalizacion (prelim. secs. 2 y 3) |
+| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-021: actividades. **Fechas por confirmar** |
+| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1 | 84 | Task-021: Phi, Psi e interpretacion metodologica (prelim. 4, 5 y 8) |
+| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-021: cierra defendiendo el lugar intermedio de la propuesta |
+| `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | 25 entradas, ahora renderizadas en estilo IEEE numerico |
 
 Archivos retirados del documento por Task-019, recuperables desde el historial de git:
 `00_resumen.tex`, `02_estado_arte.tex`, `03_objetivos.tex`, `04_arquitectura.tex`,
@@ -70,11 +70,58 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-Sin tareas pendientes de contenido. Task-020 revisada y mergeada por claude-2 (ver
-nota de cierre abajo). Lo único abierto es la confirmación de fechas del plan de
-trabajo por el autor humano.
+Sin tareas pendientes de contenido. Lo único abierto es la revisión de Task-021 por
+claude-2 y la confirmación de fechas del plan de trabajo por el autor humano.
 
 ### Cerrada por claude-1 en esta sesión
+
+- **Task-021** — Correcciones del autor humano sobre el informe de Task-020, más
+  incorporación de la formulación matemática y entrega en DOCX. Se corrigió todo lo
+  levantado:
+
+  1. *Formato.* Se tomó como autoridad `Formato_Informes_Proyecto_Titulo-2024.pdf`.
+     `parskip` pasa a 0 y `titlespacing` a 0 antes del encabezado, porque el formato
+     pide que el fin de una sección y el encabezado siguiente no queden separados por
+     espacios adicionales. Se mantienen sangría de 1 cm, interlineado sencillo, Times
+     New Roman 12, márgenes de 2,5 cm y numeración romana antes de la introducción.
+  2. *Índice sin hipervínculos.* Se carga `hyperref` antes del `.sty` (biblatex exige
+     ese orden). El índice quedó navegable y el PDF con marcadores; se limpiaron los
+     títulos de marcador que arrastraban el `space`.
+  3. *Citas.* El formato de la asignatura usa numeración entre corchetes, no autor-año.
+     Se cambió el estilo de biblatex de `apa` a `ieee` en `pucv_inf_2024.sty`, único
+     cambio respecto de la copia original del template, y la prosa usa las tres formas
+     de la guía: mención con autor integrado (`	extcite`), cita indirecta con el número
+     al final (`\cite`) y una cita directa entrecomillada.
+  4. *Resumen.* Reescrito: se habla de aprendizaje automático y no de "modelos
+     profundos", se plantean las dos familias (modelos matemáticos rígidos frente a
+     aprendizaje automático opaco) y el framework se presenta como lo que es, un modelo
+     alternativo entrenado sobre los mismos datos del modelo principal, con tokens por
+     variable, del que se obtienen hipótesis relacionales por consenso entre
+     repeticiones. Ese encuadre se propagó a introducción, propuesta y conclusiones.
+  5. *Formulación matemática.* Se incorporaron las secciones 2 a 5 y 8 de la
+     presentación preliminar: arquitectura del ConvTransformer de índices y agregación
+     por rollout más formalización del operador relacional en el marco teórico;
+     transformación matriz-grafo, grafo-hipótesis e interpretación metodológica en la
+     propuesta. Quedaron fuera las secciones 6 y 7 (evaluación por perturbación y
+     análisis espectral), que son las que el autor humano pidió no incluir en esta
+     entrega.
+  6. *Objetivos.* Un objetivo general y exactamente tres específicos, sin subdivisión
+     interna y acotados al tamaño de la tesis.
+  7. *Estado del arte.* Pasó de discutir cuatro trabajos a discutir los dieciocho que la
+     hoja `Aporte por sección` marca para esa sección, con su muestra, su método y su
+     resultado. El capítulo creció alrededor de dos páginas.
+  8. *Extensión.* Cuerpo de 18 páginas entre introducción y conclusiones, bajo el máximo
+     de 20 que fijó el autor humano sin contar portada, índices ni referencias.
+
+  **Entrega en DOCX.** El repositorio conserva el LaTeX como fuente y el PDF compilado.
+  Además se generó `Informe_avance.docx` con pandoc, usando `citeproc` con `ieee.csl`
+  para las citas y un `reference.docx` ajustado al formato de la Escuela. El DOCX sale
+  con 36 encabezados jerarquizados, 25 referencias numeradas, 74 ecuaciones en formato
+  nativo de Word y campo de índice automático. El binario de pandoc no se versiona: se
+  descarga aparte, y el script de construcción queda documentado en el PR.
+
+  Pendiente del autor humano: confirmar las fechas de la tabla del plan de trabajo.
+  [claude-1]
 
 - **Task-020** — Correcciones de redacción y de alcance sobre el informe ya migrado.
   El autor humano revisó el PDF resultante de Task-019 y levantó seis observaciones.
