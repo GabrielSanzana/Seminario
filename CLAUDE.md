@@ -165,6 +165,34 @@ en bash se puede invocar por ruta completa, no hace falta PowerShell).
 
 **Ningún push sin compilar antes.** Un commit que rompe la compilación bloquea al otro agente.
 
+### Figuras (`tesis/figuras/`) — desde Task-026, 2026-09-08
+
+Las figuras del documento **no se dibujan dentro de `main.tex`**. Cada una es un
+documento `standalone` independiente en `tesis/figuras/<nombre>.tex` que se compila
+aparte y entra al informe como PDF vía `\includegraphics`, que ya viene cargado por
+`pucv_inf_2024.sty`. La razón es la regla de aislamiento: dibujar con TikZ dentro del
+documento obligaría a cargar el paquete en el preámbulo de `main.tex`, que solo edita
+el autor humano.
+
+Consecuencias prácticas:
+
+- Se versionan **los dos archivos**, el `.tex` fuente y el `.pdf` compilado. El PDF es
+  el que ve el documento; el fuente es lo que hace la figura reproducible y editable.
+  Cambiar una figura significa editar su `.tex`, recompilarlo y comitear ambos.
+- Regenerar una figura:
+  `cd tesis/figuras && pdflatex -interaction=nonstopmode <nombre>.tex`. Necesita los
+  paquetes `pgf` (TikZ) y `standalone`, que **no** vienen en TinyTeX por defecto:
+  `tlmgr install pgf standalone`. El documento principal no los necesita.
+- Overleaf compila `main.tex` y no las figuras, así que el PDF de cada figura tiene que
+  estar comiteado o el informe no compila allá.
+- Cuidado al escribir estos `.tex` desde una herramienta que pase por el shell: un
+  `heredoc` puede colapsar `\\` en `\` y romper los saltos de línea de los nodos TikZ
+  sin que el error apunte a la causa. Verificar el archivo escrito antes de compilar.
+
+Pendiente para el autor humano: `main.tex` tiene `\listoftables` pero no
+`\listoffigures`, de modo que las figuras no aparecen en ningún índice. Agregarlo es
+una línea en `main.tex`, que ningún agente toca sin instrucción explícita.
+
 ### Generar el DOCX (`scripts/build_docx.py`) — en desuso desde el 2026-09-08
 
 El entregable volvió a ser `tesis/main.pdf` (ver "Reglas de aislamiento"). Este script

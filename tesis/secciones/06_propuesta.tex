@@ -66,7 +66,14 @@ El framework completo puede expresarse como la composición
 X \to M_\theta \to A \xrightarrow{\ \Phi\ } G \xrightarrow{\ \Psi\ } H \xrightarrow{\ F\ } \mathbb{R},
 \end{equation}
 
-donde $F$ evalúa la fidelidad de la hipótesis respecto del comportamiento del modelo. Esta formulación es la que permite diferenciar la propuesta de lo que ya existe.
+donde $F$ evalúa la fidelidad de la hipótesis respecto del comportamiento del modelo. La figura \ref{fig:pipeline} despliega esa misma cadena indicando qué objeto entrega cada eslabón y en qué punto interviene el consenso entre repeticiones. Esta formulación es la que permite diferenciar la propuesta de lo que ya existe.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{figuras/framework_pipeline.pdf}
+\caption{Composición del framework: de los datos del fenómeno a una hipótesis relacional evaluada por fidelidad.}
+\label{fig:pipeline}
+\end{figure}
 
 Frente a los modelos matemáticos tradicionales, la diferencia está en el origen de la estructura: allí es impuesta previamente mediante supuestos, y aquí emerge desde la representación aprendida. Frente a los métodos de interpretabilidad clásicos, como el de \textcite{chefer2021transformer}, la diferencia está en el objeto entregado: esos métodos calculan un mapa de relevancia por variable de entrada, no relaciones entre variables. Frente a la estructura que se aprende como parámetro del propio modelo, como el grafo por escala temporal de \textcite{cai2024msgnet}, la diferencia es que aquí la estructura se obtiene de un modelo construido para ser legible desde el inicio y no como subproducto de una arquitectura orientada a predecir. Frente a la interpretabilidad mecanicista, que recupera circuitos internos mediante intervención directa sobre las activaciones, la diferencia es de objetivo y de costo: ese enfoque explica el modelo y exige acceso a sus estados internos, tal como se aprecia al contrastar con el trabajo de \textcite{mechinterp2025ts}, mientras que aquí el modelo se usa como instrumento para hablar del fenómeno sin necesidad de intervenirlo. Y frente a los grafos causales construidos con conocimiento previo, como el de \textcite{zhao2026causalguided}, la diferencia es que la propuesta no requiere una estructura causal preexistente, con lo cual evita sesgar la explicación hacia un conocimiento que podría estar incompleto.
 
