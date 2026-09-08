@@ -1,59 +1,84 @@
 %% ============================================================
 %%  Propuesta
-%%  La seccion 6.2 corresponde al contenido de la antigua 04_arquitectura.tex,
-%%  autoria de claude-2. Por instruccion del autor humano esta entrega define
-%%  alcance y no detalle de implementacion, de modo que la descripcion
-%%  arquitectonica quedo reducida a su argumento de delimitacion.
+%%  Incorpora las secciones 4, 5 y 8 de la presentacion preliminar del tema
+%%  de investigacion (transformacion matriz-grafo, grafo-hipotesis e
+%%  interpretacion metodologica), por instruccion del autor humano.
 %%  Reglas: ver ../../CLAUDE.md
 %% ============================================================
 
 \chapter{Propuesta}
 \label{cap:propuesta}
 
-\section{Qué propone el framework}
+\section{Planteamiento}
 
-La propuesta consiste en tratar la matriz de atención de un modelo ya entrenado como material de análisis y no como un subproducto que se descarta después de predecir. Sobre esa matriz operan tres transformaciones encadenadas,
+La propuesta parte de una decisión que conviene dejar explícita, porque de ella depende todo lo demás: el framework no intenta abrir el modelo que ya está en producción ni modificarlo. En lugar de eso entrena un modelo alternativo sobre los mismos datos con los que se entrenó el principal, diseñado desde el inicio para que su representación interna sea legible. Ese modelo alternativo es el ConvTransformer descrito en el capítulo \ref{cap:marco}, cuya única función es producir de manera controlada una matriz de interacción entre las variables del fenómeno.
+
+La elección tiene dos consecuencias que conviene defender. La primera es que el objeto de estudio deja de ser el modelo de producción y pasa a ser el fenómeno: lo que se busca no es explicar por qué el sistema en operación predijo lo que predijo, sino qué estructura relacional está presente en los datos y resulta recuperable desde una representación aprendida. La segunda es que el modelo instrumental no compite en desempeño. Los trabajos que sí compiten lo hacen bajo protocolos de benchmarking establecidos \cite{liu2024itransformer, sentinel2025multipatch}, y este trabajo no reclama superioridad predictiva; el desempeño se reporta apenas como condición de admisibilidad, para verificar que la representación de la que se extrae la matriz proviene de un modelo que efectivamente aprendió algo.
+
+A eso se suma el tratamiento de la inestabilidad. Como una sola corrida no informa sobre su propia reproducibilidad, el entrenamiento del modelo alternativo se repite muchas veces con inicializaciones distintas y la unidad de análisis deja de ser la matriz de una corrida: pasa a ser la frecuencia con que una relación reaparece entre repeticiones. Sobre la estructura que sobrevive a ese filtro operan las transformaciones que siguen.
+
+\section{Transformación matriz-grafo}
+
+La primera transformación del framework corresponde a
 
 \begin{equation}
-A \;\xrightarrow{\;\Phi\;}\; G \;\xrightarrow{\;\Psi\;}\; H \;\xrightarrow{\;F\;}\; \mathbb{R},
+\Phi : A \to G,
 \end{equation}
 
-donde la primera convierte la matriz en un grafo dirigido y ponderado sobre las variables, la segunda reduce ese grafo a una hipótesis relacional compacta, y la tercera evalúa esa hipótesis contra el comportamiento del modelo del que salió. Las tres actúan después del entrenamiento y ninguna toca los pesos ni la arquitectura.
+donde $G = (V, E, W)$ es un grafo ponderado dirigido. El conjunto de nodos es $V = \{v_1, v_2, \dots, v_n\}$, y cada nodo representa una variable interpretable del fenómeno. El conjunto de aristas se define como
 
-Esa condición marca la distancia con las alternativas revisadas. Un grafo que se aprende como parámetro del modelo, según hacen \textcite{cai2024msgnet}, existe porque el entrenamiento lo hizo existir, y auditarlo obliga a volver a entrenar. Un grafo que se recibe de antemano, como el que condiciona la atención en el trabajo de \textcite{zhao2026causalguided}, es un supuesto de partida y no una conclusión que pueda resultar improbable. Y un grafo obtenido interviniendo el modelo, como el de \textcite{mechinterp2025ts}, exige acceso a sus estados internos, algo que no siempre está disponible. El framework renuncia a las tres vías y se queda con la más restrictiva, leer lo que el modelo ya produjo, precisamente porque es la única aplicable a un modelo desplegado del que solo se tiene la matriz.
+\begin{equation}
+E = \{(v_i, v_j) : A_{ij} > \tau\},
+\end{equation}
 
-La contribución que se reclama, sin embargo, no está en esa lectura. Extraer un grafo desde una matriz es sencillo, y varios de los trabajos citados lo resuelven de una u otra forma. Lo que este trabajo agrega es el criterio que decide si el grafo obtenido merece tratarse como hipótesis sobre el fenómeno, que es lo que las secciones siguientes desarrollan.
+donde $\tau$ corresponde al criterio de selección con que se extraen las relaciones relevantes. Para evitar la dependencia de umbrales arbitrarios se emplea un criterio Top-$K$ fijo, que selecciona las $K$ aristas más fuertes y garantiza que el grafo nunca quede vacío, de modo que la transformación puede escribirse como
 
-\section{El instrumento y su lugar en la propuesta}
+\begin{equation}
+\Phi(A) = \big(V,\ \{(i, j, A_{ij}) \mid A_{ij} \in \text{Top-}K(A)\}\big).
+\end{equation}
 
-Para que exista una matriz de atención entre variables hace falta un modelo cuya atención opere sobre ese eje, y el caso de estudio usa para eso un ConvTransformer donde cada variable es un token independiente, con un codificador compartido entre tokens de modo que la matriz no termine reflejando capacidades desiguales de codificación en lugar de relaciones del fenómeno.
+Esta transformación convierte una representación continua de interacciones en una estructura discreta e interpretable. El precio que cobra es que introduce un parámetro nuevo, y por eso el efecto de $K$ sobre la estructura resultante forma parte de lo que hay que medir, en línea con la advertencia de \textcite{bogaert2026variability} sobre la discretización como fuente de variabilidad.
 
-Conviene delimitar el papel de ese componente, porque de ahí depende cómo se lee el resto del trabajo. El ConvTransformer no es la novedad de la propuesta: es un vehículo instrumental cuya única función consiste en producir, de manera controlada, una matriz entre variables interpretables sin depender de un grafo predefinido. La delimitación importa por dos razones. La primera es de honestidad comparativa, ya que los trabajos que compiten en desempeño predictivo lo hacen bajo protocolos de benchmarking establecidos \parencite{liu2024itransformer,sentinel2025multipatch}, y este trabajo no compite en ese terreno ni reclama superioridad predictiva; el desempeño se reporta apenas como condición de admisibilidad, para verificar que la representación proviene de un modelo que aprendió algo del fenómeno. La segunda es de generalidad: la primera transformación depende de las propiedades algebraicas de la matriz y no de su procedencia, de manera que en principio puede aplicarse a la matriz de atención entre variables de otras arquitecturas sin tocar sus pesos.
+\section{Transformación grafo-hipótesis}
 
-\section{El criterio de validación}
+La segunda transformación corresponde a
 
-El punto donde la propuesta se juega es la tercera transformación, y la decisión de diseño central consiste en que no se resuelve con una métrica. Se resuelve con una cadena de evidencia acumulativa, donde cada relación extraída debe superar una pregunta antes de que tenga sentido hacerle la siguiente, y donde los umbrales quedan declarados antes de ejecutar el procedimiento y no después de ver los resultados.
+\begin{equation}
+\Psi : G \to H,
+\end{equation}
 
-La primera pregunta es si la relación reaparece al reentrenar el modelo con semillas distintas. Una relación que solo existe en una corrida no informa sobre el fenómeno sino sobre esa inicialización particular, y descartarla temprano evita arrastrar ruido por el resto del recorrido. La segunda pregunta es si la relación sobrevive al cambiar la regla con la que se decide qué relaciones entran en la hipótesis, porque una relación que depende del corte elegido es un artefacto de esa decisión. La tercera es si la relación aparece con más frecuencia de la que cabría esperar por azar, para lo cual se contrasta contra una hipótesis nula explícita en lugar de confiar en que una frecuencia alta hable por sí sola. La cuarta pregunta es si el modelo efectivamente depende de esa relación para predecir, lo que separa las relaciones que el modelo usa de las que simplemente aparecen en su representación interna. La quinta y última verifica que el efecto sea específico de la relación examinada y no un efecto general del procedimiento, y que la hipótesis resultante se mantenga acotada en tamaño, criterio doble que sigue el planteamiento de \textcite{rulexai2024events} sobre evaluar una estructura explicativa a la vez por fidelidad y por compacidad.
+donde $H$ representa una hipótesis relacional compacta. Formalmente, $H = (E_H, \mathcal{R})$, con $E_H$ el conjunto reducido de relaciones relevantes y $\mathcal{R}$ su interpretación semántica asociada. La extracción de la hipótesis puede plantearse como un problema de compresión,
 
-El orden importa tanto como las preguntas. Cuando las medidas de calidad se aplican en paralelo informan que algo falla sin señalar dónde, que es la crítica documentada sobre su falta de convergencia \parencite{vitexplain2024evaluation}. En una cadena ordenada, en cambio, el punto donde una relación cae constituye por sí mismo el diagnóstico de por qué cayó.
+\begin{equation}
+\min_{H} |H| \quad \text{sujeto a} \quad I(H, G) \geq \gamma,
+\end{equation}
 
-\section{Contraste entre paradigmas}
+donde $I(H,G)$ mide la información preservada entre el grafo original y la hipótesis reducida, y $\gamma$ es el mínimo aceptable. El objetivo, por lo tanto, no es recuperar todos los circuitos internos del modelo sino obtener una explicación estructural mínima capaz de conservar la información relevante. Esa doble exigencia, que la estructura sea fiel y a la vez lo bastante pequeña para poder inspeccionarse, es la misma que plantean \textcite{rulexai2024events} al evaluar sus reglas por fidelidad y por tamaño de forma simultánea.
 
-Los cinco pasos anteriores comparten parcialmente familia de supuestos, de modo que superarlos todos no descarta la posibilidad de un error común a esa familia. Para acotarlo, la evidencia se contrasta además con paradigmas que razonan de manera distinta: el probabilístico, que ya opera en el tercer paso, más otros cuatro que le son ortogonales. Uno interviene sobre la representación y observa el efecto. Otro compara los grafos por sus propiedades geométricas y topológicas. Un tercero mide dependencia con herramientas de teoría de la información, sin suponer que la relación sea lineal. El cuarto contrasta el grafo obtenido contra referencias construidas por fuera del modelo, entre ellas la correlación lineal entre variables y un grafo generado al azar.
+\section{Interpretación metodológica}
 
-El contraste contra la correlación lineal se lee de forma invertida respecto de lo que sería habitual. Si el grafo extraído coincide en alto grado con ella, la conclusión no es que el resultado esté confirmado sino que el modelo no aprendió nada que no estuviera ya disponible sin él, y que el framework no aportó valor en ese caso. Es, deliberadamente, un criterio de falsación de la propia contribución.
+El framework completo puede expresarse como la composición
 
-\section{Taxonomía de resultados}
+\begin{equation}
+X \to M_\theta \to A \xrightarrow{\ \Phi\ } G \xrightarrow{\ \Psi\ } H \xrightarrow{\ F\ } \mathbb{R},
+\end{equation}
 
-Cada relación termina caracterizada por cómo le fue en cada paso, y esa caracterización se conserva completa en lugar de promediarse en un solo número, porque la discordancia entre criterios es informativa y un promedio la borraría. De ahí salen cuatro lecturas posibles. Una relación estructural genuina es la que se mantiene entre semillas, resiste el cambio de regla de corte, resulta improbable bajo la hipótesis nula y demuestra que el modelo depende de ella. Un atajo predictivo es la que el modelo sí usa, y por eso pasa la prueba de fidelidad, pero que no encuentra respaldo en los paradigmas ortogonales ni corresponde a nada conocido del fenómeno. Un artefacto de la arquitectura aparece de forma estable y frecuente pero sin que el desempeño dependa de ella, patrón característico de un sumidero de atención. Y el ruido estocástico queda descartado ya en la primera pregunta, por no reaparecer entre corridas.
+donde $F$ evalúa la fidelidad de la hipótesis respecto del comportamiento del modelo. Esta formulación es la que permite diferenciar la propuesta de lo que ya existe, y conviene recorrer esa diferenciación con cuidado porque en ella se juega el aporte del trabajo.
 
-Distinguir las dos primeras categorías es lo que motiva todo el diseño, y recoge directamente la evidencia de \textcite{lapuschkin2019unmasking} sobre modelos con métricas excelentes que resuelven la tarea por una vía que nadie había mirado.
+Frente a los modelos matemáticos tradicionales, la diferencia está en el origen de la estructura: allí es impuesta previamente mediante supuestos, y aquí emerge desde la representación aprendida. Frente a los métodos de interpretabilidad clásicos, del tipo SHAP o LIME, la diferencia está en el objeto entregado, ya que esos métodos calculan importancia por variable y no relaciones entre variables. Frente a la visualización de atención como mapa de calor, la diferencia está en que un mapa continuo no constituye una hipótesis ni un modelo compacto que pueda enunciarse fuera de la imagen. Frente a la interpretabilidad mecanicista, que recupera circuitos internos, la diferencia es de objetivo: ese enfoque explica el modelo, mientras que aquí el modelo se usa como instrumento para hablar del fenómeno, tal como se aprecia al contrastar con el trabajo de \textcite{mechinterp2025ts}. Y frente a los grafos causales construidos con conocimiento previo, como el de \textcite{zhao2026causalguided}, la diferencia es que la propuesta no requiere una estructura causal preexistente, con lo cual evita sesgar la explicación hacia un conocimiento que podría estar incompleto.
+
+De ahí se sigue la posición del framework respecto de las dos familias descritas en la introducción. No reemplaza al modelo matemático ni al modelo de aprendizaje automático: se ubica entre ambos, usando la capacidad de ajuste del segundo para descubrir estructura, y devolviendo esa estructura en la forma explícita y discutible que caracteriza al primero. Ese lugar intermedio es la contribución que el trabajo reclama.
+
+\section{Criterio de validación}
+
+Una hipótesis obtenida de esta manera no vale por haber sido obtenida. El criterio que decide si merece sostenerse se organiza como una cadena de preguntas acumulativas, donde cada relación debe superar una antes de que tenga sentido hacerle la siguiente, y donde los umbrales quedan declarados antes de ejecutar el procedimiento y no después de ver los resultados.
+
+La primera pregunta es si la relación reaparece al reentrenar el modelo alternativo con inicializaciones distintas, ya que una relación presente en una sola corrida informa sobre esa inicialización y no sobre el fenómeno. La segunda es si sobrevive al cambiar el criterio de discretización, porque una relación que depende del corte elegido es un artefacto de esa elección. La tercera es si aparece con más frecuencia de la que cabría esperar por azar, para lo cual se contrasta contra una hipótesis nula explícita en lugar de confiar en que una frecuencia alta hable por sí sola. La cuarta es si el modelo efectivamente depende de esa relación para predecir, lo que separa las relaciones que el modelo usa de las que solo están presentes en su representación interna. La quinta verifica que el efecto sea específico de la relación examinada y que la hipótesis resultante se mantenga acotada en tamaño.
+
+El orden importa tanto como las preguntas. Cuando las medidas de calidad se aplican en paralelo informan que algo falla sin señalar dónde, que es la crítica documentada sobre su falta de convergencia \cite{vitexplain2024evaluation}. En una cadena ordenada, el punto donde una relación cae constituye por sí mismo el diagnóstico de por qué cayó. Ese diagnóstico se traduce en cuatro lecturas posibles: una relación estructural genuina, que se mantiene entre repeticiones, resiste el cambio de corte, resulta improbable bajo la hipótesis nula y muestra que el modelo depende de ella; un atajo predictivo, que el modelo sí usa pero que no encuentra respaldo fuera de él; un artefacto de la arquitectura, estable y frecuente pero sin efecto sobre la predicción; y ruido, descartado ya en la primera pregunta. Distinguir las dos primeras categorías es lo que motiva todo el diseño, y recoge directamente la evidencia de \textcite{lapuschkin2019unmasking} sobre modelos con métricas excelentes que resuelven la tarea por una vía que nadie había mirado.
 
 \section{Alcance de esta etapa}
 
-Conviene declarar qué queda dentro y qué queda fuera de lo que este informe compromete. Dentro está el diseño completo del framework, la formalización de sus transformaciones, la especificación del criterio de validación con sus umbrales y la taxonomía anterior. Fuera queda la ejecución sobre el caso de estudio, que corresponde al periodo del capítulo \ref{cap:plan}, y con ella cualquier afirmación sobre resultados. El framework tampoco reclama mejoras de desempeño predictivo, ni pretende reconstruir el mecanismo interno completo del modelo, sino apenas una descripción estructural mínima que pueda ponerse a prueba.
+Conviene declarar qué queda dentro y qué queda fuera de lo que este informe compromete. Dentro está el diseño del framework, la formalización de sus transformaciones, la especificación del criterio de validación con sus umbrales y la taxonomía anterior. Fuera queda la ejecución sobre el caso de estudio, que corresponde al periodo del capítulo \ref{cap:plan}, y con ella cualquier afirmación sobre resultados. El framework tampoco reclama mejoras de desempeño predictivo ni pretende reconstruir el mecanismo interno completo del modelo, sino una descripción estructural mínima que pueda ponerse a prueba.
 
-En cuanto a la transferencia a otros dominios, la pregunta relevante no es sobre el fenómeno estudiado sino sobre el eje de la atención del modelo disponible, y admite tres respuestas. Hay dominios de aplicación directa, donde el modelo publicado ya expone una representación relacional entre variables, como ocurre con las redes de sensores espacio-temporales que documentan \textcite{spatiotemporal2024e2e} o con la reconstrucción de dependencias entre sensores industriales de \textcite{pipeline2026causalgraph}. Hay dominios que requieren adaptación, donde existe atención accesible pero su eje no son las variables nombradas, situación de los modelos de \textcite{convlstmgcn2026vegetation} y \textcite{rotorcraft2026vortexring}. Y hay dominios que requieren un modelo nuevo, donde la estructura viene impuesta de antemano en el espacio latente en lugar de leerse de una representación entrenada, como en el trabajo de \textcite{teleconnections2026causal}.
-
-Para elegir el segundo dominio de validación pesan cinco condiciones, en este orden: que los tokens del modelo sean variables, que haya acceso al modelo y no solo a su matriz, que el costo de entrenamiento admita repetir el experimento con varias decenas de semillas, que los datos sean públicos, y que exista conocimiento previo del fenómeno contra el cual contrastar el resultado. Bajo esas condiciones, las redes de sensores ambientales con datos públicos aparecen como el candidato más realista.
+En cuanto a la transferencia a otros dominios, la pregunta relevante no es sobre el fenómeno estudiado sino sobre el eje de la atención del modelo disponible, y admite tres respuestas. Hay dominios de aplicación directa, donde ya existe una representación relacional entre variables de la que puede partirse, como las redes de sensores espacio-temporales que documentan \textcite{spatiotemporal2024e2e} o la reconstrucción de dependencias entre sensores industriales de \textcite{pipeline2026causalgraph}. Hay dominios que requieren adaptación, donde existe atención accesible pero su eje no son las variables nombradas, situación de los modelos de \textcite{convlstmgcn2026vegetation} y \textcite{rotorcraft2026vortexring}. Y hay dominios que requieren un modelo nuevo, donde la estructura viene impuesta de antemano en el espacio latente en lugar de emerger de una representación entrenada, como en el trabajo de \textcite{teleconnections2026causal}. Para elegir el segundo dominio de validación pesan cinco condiciones, en este orden: que los tokens del modelo sean variables, que haya acceso al modelo y no solo a su matriz, que el costo de entrenamiento admita repetir el experimento muchas veces, que los datos sean públicos, y que exista conocimiento previo del fenómeno contra el cual contrastar el resultado.
