@@ -1,0 +1,137 @@
+
+\documentclass[12pt,letterpaper]{article}
+
+% -----------------------------
+% Paquetes necesarios
+% -----------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{mathptmx} % Fuente Times New Roman
+\usepackage{geometry}
+\geometry{letterpaper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\usepackage{setspace}
+\singlespacing % Interlineado sencillo
+\usepackage{indentfirst}
+\setlength{\parindent}{1cm} % Sangría de 1 cm
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+% Formato de secciones (14pt, negrita, mayúsculas para nivel 1)
+\titleformat{\section}{\normalfont\large\bfseries\uppercase}{\thesection.}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection.}{1em}{}
+
+% Configuración de numeración en pie de página
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+% -----------------------------
+% Documento
+% -----------------------------
+\begin{document}
+
+% --- Portada Breve ---
+\thispagestyle{empty} % Sin numeración en la portada
+\begin{center}
+    \vspace*{3cm}
+    {\fontsize{18}{22}\selectfont\textbf{Framework metodológico para la reconstrucción de estructuras relacionales compactas a partir de representaciones latentes de modelos profundos}}\\[3cm]
+    
+    {\large \textbf{Patricio Javier Figueroa Gallardo}}\\[0.5cm]
+    {\large \textbf{Gabriel Leonardo Sanzana Cuibin}}\\[3cm]
+    
+    \textit{\small (Este formulario constituye la tapa del informe)}
+\end{center}
+\newpage
+
+% Contador de páginas: la siguiente página será la número 1
+\setcounter{page}{1}
+
+% =============================================================
+\section{Descripción del tema}
+% =============================================================
+
+\textbf{Contexto y Problema:} Los modelos profundos, en particular los basados en Transformers, superan predictivamente a los modelos clásicos, pero su naturaleza de ``caja negra'' limita su adopción en dominios críticos. Los métodos de explicabilidad (XAI) actuales se centran en la importancia atribucional de variables (SHAP, LIME), visualización de atención o recuperación de circuitos internos. Sin embargo, ninguno convierte la representación latente en una hipótesis relacional compacta que pueda compararse y validarse entre dominios. Además, las matrices de atención de los Transformers son inestables: pequeñas variaciones en la semilla producen matrices numéricamente distintas, invalidando explicaciones basadas en un único entrenamiento.
+
+\textbf{Propuesta Metodológica:} Se propone un framework agnóstico al dominio que transforma la representación latente aprendida en una hipótesis relacional interpretable y evaluable. El pipeline se formaliza mediante tres transformaciones:
+\begin{enumerate}[leftmargin=*, itemsep=0pt]
+    \item \textbf{$\Phi: A \rightarrow G$ (Matriz a Grafo):} Conversión de la matriz de atención $A \in \mathbb{R}^{n \times n}$ en un grafo dirigido ponderado mediante un criterio Top-$K$, evitando umbrales arbitrarios.
+    \item \textbf{$\Psi: G \rightarrow H$ (Grafo a Hipótesis):} Compresión del grafo en una hipótesis estructural mínima que preserve la información relevante ($\min_H |H|$ sujeto a $I(H,G) \geq \gamma$).
+    \item \textbf{$F: H \times M \rightarrow R$ (Evaluación):} Validación de la hipótesis mediante perturbación dirigida para medir la fidelidad respecto al comportamiento original del modelo.
+\end{enumerate}
+Adicionalmente, se realiza un análisis espectral (SVD, entropía de Shannon, Laplaciano) sobre el operador relacional $A$ para extraer descriptores invariantes del fenómeno aprendido.
+
+\textbf{Caso de Estudio y Resultados Preliminares:} Se utiliza un \textit{ConvTransformer de Índices}, una arquitectura que aplica atención entre variables (tokens) y no entre posiciones espaciales. El caso de estudio utiliza 12 índices espectrales derivados de imágenes Sentinel-2 (2018--2023). Se entrenó un ensamble de 50 modelos para evaluar estabilidad estadística, obteniendo:
+\begin{itemize}[leftmargin=*, itemsep=0pt]
+    \item \textbf{Invarianza espectral macroscópica:} Las métricas de la matriz continua $A$ muestran un coeficiente de variación (CV) menor al 6\% entre los 50 modelos.
+    \item \textbf{Núcleo relacional estable:} Se identificó una arista dominante y reproducible (PSRI $\rightarrow$ NDWI) presente en el 80\% de los modelos.
+    \item \textbf{Periferia estructurada:} La variabilidad de las aristas periféricas posee coherencia estadística significativamente superior al azar (no es ruido blanco).
+\end{itemize}
+
+\textbf{Diferencia con el Estado del Arte:} A diferencia de métodos atribucionales (Chefer, Chen), mecanicistas (Kalnare) o causales con conocimiento previo (Zhao), este framework no impone supuestos previos ni se limita a explicar la arquitectura interna. Utiliza el modelo como instrumento de descubrimiento para extraer relaciones estructurales comparables entre dominios (minería, IoT, energía, etc.).
+
+% =============================================================
+\section{Definición de objetivos}
+% =============================================================
+
+\textbf{Objetivo General:}\\
+Desarrollar un framework metodológico agnóstico al dominio que transforme la representación latente aprendida por modelos profundos en una hipótesis relacional compacta, interpretable y evaluable, validada mediante estabilidad estadística y perturbación dirigida.
+
+\vspace{0.3cm}
+\textbf{Objetivos Específicos:}
+\begin{enumerate}[leftmargin=*, itemsep=0pt]
+    \item Formalizar matemáticamente las transformaciones $\Phi$, $\Psi$ y $F$ que componen el pipeline del framework.
+    \item Implementar el análisis espectral del operador relacional $A$ como descriptor invariante del fenómeno aprendido.
+    \item Evaluar la estabilidad estructural del framework ante variaciones estocásticas del entrenamiento (bootstrap de semillas).
+    \item Identificar y validar el núcleo relacional (aristas estables) frente a la periferia estocástica (aristas variables).
+    \item Demostrar la invarianza espectral macroscópica frente a la variabilidad topológica microscópica.
+    \item Validar la hipótesis reconstruida mediante perturbación dirigida sobre el modelo.
+    \item Demostrar la generalidad del framework mediante su aplicación a un segundo dominio distinto al caso de estudio principal.
+\end{enumerate}
+
+% =============================================================
+\section{Plan de trabajo tentativo}
+% =============================================================
+
+El plan se estructura en dos semestres, abarcando desde la fundamentación hasta la defensa de la tesis:
+
+\vspace{0.3cm}
+\textbf{Semestre 1 --- Fundamentación y Caso Principal:}
+\begin{itemize}[leftmargin=*, itemsep=0pt]
+    \item \textit{Semanas 1-3:} Revisión bibliográfica ampliada, refinamiento del problema y formalización matemática inicial del framework.
+    \item \textit{Semanas 4-5:} Implementación del pipeline completo de extracción de atención y evaluación preliminar (\textit{attention rollout}).
+    \item \textit{Semanas 6-8:} Entrenamiento del ConvTransformer con datos del caso principal y construcción de la representación relacional.
+    \item \textit{Semanas 9-12:} Ejecución del experimento central de estabilidad (múltiples semillas) y análisis espectral de las matrices obtenidas.
+    \item \textit{Semanas 13-15:} Implementación de validación por perturbación dirigida y análisis de fidelidad de la hipótesis reconstruida.
+    \item \textit{Semana 16:} Consolidación del estado del arte, redacción de informe de avance y revisión metodológica.
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Semestre 2 --- Generalización, Comparación y Redacción:}
+\begin{itemize}[leftmargin=*, itemsep=0pt]
+    \item \textit{Semanas 1-3:} Incorporación de técnicas complementarias (ej. SHAP) y comparación cuantitativa con \textit{baselines} clásicos.
+    \item \textit{Semanas 4-5:} Construcción y evaluación de un dataset sintético con \textit{ground truth} conocido para validar la recuperación estructural.
+    \item \textit{Semanas 6-7:} Demostración experimental en un segundo dominio (ej. mantenimiento predictivo o IoT industrial) para evaluar transferibilidad.
+    \item \textit{Semanas 8-9:} Análisis comparativo entre casos, revisión de agnosticismo respecto a la arquitectura (\textit{backbone}) y sensibilidad al contexto.
+    \item \textit{Semanas 10-14:} Redacción completa de la tesis, integración de resultados y discusión crítica de alcances y limitaciones.
+    \item \textit{Semanas 15-16:} Ajustes finales del manuscrito y preparación de la defensa.
+\end{itemize}
+
+% =============================================================
+\section{Referencias utilizadas}
+% =============================================================
+
+\begin{enumerate}[leftmargin=*, itemsep=0pt]
+    \item H. Chefer, S. Gur, and L. Wolf, ``Transformer Interpretability Beyond Attention Visualization,'' in \textit{Proceedings of the IEEE/CVF CVPR}, 2021, pp. 782--791.
+    \item M. Kalnāre, S. Kitharidis, T. Bäck, and N. van Stein, ``Mechanistic Interpretability for Transformer-based Time Series Classification,'' \textit{arXiv preprint arXiv:2511.21514}, 2025.
+    \item S. Zhao, H. Yang, Z. Wang, F. Khan, and Q. Wang, ``A causal-guided graph transformer with interpretability analysis for process fault diagnosis,'' \textit{Journal of Loss Prevention in the Process Industries}, vol. 102, p. 106022, 2026.
+    \item S. Chen et al., ``Developing Interpretable Deep Learning Model for Subtropical Forest Type Classification...,'' \textit{Forests}, vol. 16, no. 11, p. 1709, 2025.
+    \item J. Segarra, M. L. Buchaillot, J. L. Araus, and S. C. Kefauver, ``Remote Sensing for Precision Agriculture: Sentinel-2 Improved Features and Applications,'' \textit{Agronomy}, vol. 10, no. 5, p. 641, 2020.
+    \item D. Varghese et al., ``Reviewing the Potential of Sentinel-2 in Assessing the Drought,'' \textit{Remote Sensing}, vol. 13, no. 17, p. 3355, 2021.
+    \item S. Abnar and W. Zuidema, ``Quantifying Attention Flow in Transformers,'' in \textit{Proceedings of the 58th ACL}, 2020, pp. 4190--4197.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,35 @@
+\title{Título del Tema del TFT}
+\author{Nombre Estudiante 1\\[10pt]Nombre Estudiante 2}
+\newcommand{\prof}{Nombre Profesor}
+\newcommand{\corprof}{Nombre Profesor Correferente}
+\date{Julio 2024}
+
+
+\begin{titlepage}
+  \makeatletter
+  \thispagestyle{empty} % Usa el estilo 'plain' definido para la página de título
+    %\begin{center}
+    
+    \begin{picture}(0,0)
+         \put(-75,-80){\includegraphics[width=20cm]{Portadas/imagenes/encabezado.png}}
+    \end{picture}
+    %\end{center}
+
+  
+  \begin{flushright} % Alinea el contenido a la derecha
+  \vspace*{\fill} % Centra verticalmente el contenido
+    {\textcolor{titlecolor}{\LARGE\bfseries\MakeUppercase{
+    \\[3cm]
+    \@title}}}
+  
+    {\textcolor{titlecolor}{\Large\bfseries\textsc{\@author}}} \\[4cm]
+    
+    {\textcolor{titlecolor}{\large\bfseries\textsc{Profesor Guía: \prof}}} \\[10pt]
+    {\textcolor{titlecolor}{\large\bfseries\textsc{Profesor Correferente: \corprof}}} \\[2cm]
+
+    %\vspace*{\fill} % Centra verticalmente el contenido
+    {\textcolor{titlecolor}{\bfseries\textsc{Informe de Avance/Final Seminario/Proyecto de Título\\[0.2cm]Nombre Carrera\\[0.2cm]\@date
+    }}}
+
+  \end{flushright}  
+\end{titlepage}

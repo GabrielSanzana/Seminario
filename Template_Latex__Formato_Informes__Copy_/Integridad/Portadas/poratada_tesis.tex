@@ -1,0 +1,34 @@
+\title{TÍTULO DE TESIS DE POSGRADO}
+\author{Nombre Estudiante}
+\renewcommand{\prof}{Nombre Supervisor}
+\renewcommand{\corprof}{Nombre Co-supervisor}
+\date{Abril 2024}
+
+\begin{titlepage}
+  \makeatletter
+  \thispagestyle{empty} % Usa el estilo 'plain' definido para la página de título
+    %\begin{center}
+    
+    \begin{picture}(0,0)
+         \put(-75,-80){\includegraphics[width=20cm]{Portadas/imagenes/encabezado.png}}
+    \end{picture}
+    %\end{center}
+
+  
+  \begin{flushleft} % Alinea el contenido a la derecha
+  \vspace*{\fill} % Centra verticalmente el contenido
+    {\textcolor{titlecolor}{\LARGE\bfseries\MakeUppercase{
+    \\[3cm]
+    \@title}}} \\[0.5cm]
+  
+    {\textcolor{titlecolor}{\Large\bfseries\textsc{\@author}}} \\[5cm]
+    
+    {\textcolor{titlecolor}{\large\bfseries\textsc{Supervisor de Tesis: \prof}}} \\[10pt]
+    {\textcolor{titlecolor}{\large\bfseries\textsc{Co-supervisor: \corprof}}} \\[2cm]
+
+    %\vspace*{\fill} % Centra verticalmente el contenido
+    {\textcolor{titlecolor}{\bfseries\textsc{Tesis de Grado\\[0.2cm]Magíster/Doctorado en Ingeniería Informática\\[0.2cm]\@date
+    }}}
+
+  \end{flushleft}  
+\end{titlepage}
