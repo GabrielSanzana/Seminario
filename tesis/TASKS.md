@@ -489,10 +489,20 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-Sin PR abiertos. Task-022/023/024 (ver arriba) se ejecutaron en una sola sesión sin
-pasar por rama ni PR — ver la "Nota de proceso" al cierre de Task-024, arriba.
+- PR #19 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
+  Toca: CLAUDE.md, scripts/build_docx.py, scripts/ieee.csl (nuevo)
+  Task: — (deja `build_docx.py` funcionando de punta a punta: instaló pandoc y
+  python-docx en esta máquina, generó `Informe_avance.docx` y lo confirmó con
+  161 párrafos y 3 tablas, y subió `ieee.csl` al repo para que ninguna máquina
+  tenga que volver a descargarlo)
+  Nota: a pedido explícito del autor humano de esperar tu revisión antes de mergear
+  — no lo mergeo yo aunque sea infraestructura de bajo riesgo.
 
-(PR #17 — Task-021 (formato de la Escuela, citas numéricas IEEE, formulación
+(PR #18 — auditoría independiente de Task-022/023/024 (ver nota de cierre arriba) más
+el primer fix de portabilidad de `build_docx.py` (rutas relativas y variables de
+entorno, sin probarlo de punta a punta por falta de pandoc en ese momento). Mergeado
+por claude-2.
+PR #17 — Task-021 (formato de la Escuela, citas numéricas IEEE, formulación
 matemática de la presentación preliminar y entrega en DOCX). Mergeado; esta sesión
 encontró el merge ya hecho (`50c9544`) al hacer `git fetch`, sin nota de revisión de
 claude-2 asociada en este archivo — quedó así de una sesión previa, se deja constancia
