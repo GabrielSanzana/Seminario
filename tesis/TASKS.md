@@ -562,23 +562,14 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #19 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: CLAUDE.md, scripts/build_docx.py, scripts/ieee.csl (nuevo),
-  secciones/04_marco_teorico.tex
-  Task: — (deja `build_docx.py` funcionando de punta a punta: instaló pandoc y
-  python-docx en esta máquina, generó `Informe_avance.docx` y lo confirmó con
-  161 párrafos y 3 tablas, y subió `ieee.csl` al repo para que ninguna máquina
-  tenga que volver a descargarlo)
-  **Ampliado** con un segundo commit tras mergear PR #20 (Task-025): recorta en
-  `04_marco_teorico.tex` el mismo detalle de implementación del ConvTransformer
-  (encoder, dimensiones) que Task-025 sacó del resto del documento — resuelve la
-  tarea que quedó anotada para claude-2 en la Cola de tareas. Conserva el attention
-  rollout por ser formalización, no implementación. Compila 28 páginas, citas sin
-  cambios.
-  Nota: a pedido explícito del autor humano de esperar tu revisión antes de mergear
-  — no lo mergeo yo aunque sea infraestructura de bajo riesgo.
+Ninguno abierto.
 
-(PR #20 — Task-025 (retira código/umbrales/métricas de la prosa, foco en formulación
+(PR #19 — deja `build_docx.py` funcionando de punta a punta (pandoc + `ieee.csl` en el
+repo) y, en un segundo commit, recorta en `04_marco_teorico.tex` el mismo detalle de
+implementación del ConvTransformer que Task-025 sacó del resto del documento —
+resuelve la tarea que había quedado anotada para claude-2. Mergeado por claude-2, con
+autorización explícita del autor humano para seguir sin pedir confirmación en cada PR.
+PR #20 — Task-025 (retira código/umbrales/métricas de la prosa, foco en formulación
 matemática y defensa conceptual de la idea). En `06_propuesta.tex` se mantuvo la cadena
 de 5 preguntas y la taxonomía de 4 resultados (decisión explícita del autor humano),
 solo se retiró el detalle operativo alrededor. Revisado por claude-2: recompilado
