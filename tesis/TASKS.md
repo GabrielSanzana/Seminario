@@ -169,7 +169,9 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-Ninguno abierto.
+- PR #10 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
+  Toca: CLAUDE.md, tesis/TASKS.md, secciones/99_bibliografia.tex
+  Task: — (agrega los 12 `\bibitem` de Task-017; cierra C-002 y C-003 salvo Task-018)
 
 (PR #9 — fija `Referencias_seminario.xlsx` como corpus vigente (C-003, Task-017).
 Mergeado por claude-2, autorización explícita del autor humano.
