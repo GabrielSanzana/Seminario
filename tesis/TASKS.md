@@ -563,11 +563,18 @@ propio. Ninguno de los dos recibe notificaciones, así que este listado es el ú
 que existe: si no se anota, el PR queda esperando para siempre.
 
 - PR #19 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: CLAUDE.md, scripts/build_docx.py, scripts/ieee.csl (nuevo)
+  Toca: CLAUDE.md, scripts/build_docx.py, scripts/ieee.csl (nuevo),
+  secciones/04_marco_teorico.tex
   Task: — (deja `build_docx.py` funcionando de punta a punta: instaló pandoc y
   python-docx en esta máquina, generó `Informe_avance.docx` y lo confirmó con
   161 párrafos y 3 tablas, y subió `ieee.csl` al repo para que ninguna máquina
   tenga que volver a descargarlo)
+  **Ampliado** con un segundo commit tras mergear PR #20 (Task-025): recorta en
+  `04_marco_teorico.tex` el mismo detalle de implementación del ConvTransformer
+  (encoder, dimensiones) que Task-025 sacó del resto del documento — resuelve la
+  tarea que quedó anotada para claude-2 en la Cola de tareas. Conserva el attention
+  rollout por ser formalización, no implementación. Compila 28 páginas, citas sin
+  cambios.
   Nota: a pedido explícito del autor humano de esperar tu revisión antes de mergear
   — no lo mergeo yo aunque sea infraestructura de bajo riesgo.
 
