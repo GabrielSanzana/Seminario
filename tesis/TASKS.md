@@ -392,3 +392,13 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
   compilación real y no solo sintaxis.
 - **2026-09-07** — Los dos agentes trabajan en el mismo repositorio con ramas separadas y
   pull requests, para que las contradicciones se detecten en la revisión cruzada.
+- **2026-09-07** — El autor humano reemplaza `Prototipo_Preliminar.ipynb` por
+  `Framework.py` directo en `main` (commits `d35e414`, `a8eef14`, `e398528`). Código
+  fuente puro, sin salidas de celda ejecutadas, y con varias fórmulas de índices
+  corregidas respecto al notebook (MARI, ARI, CHL\_REDEDGE, PSRI). Las cifras
+  experimentales ya citadas en la prosa (Jaccard, sensibilidad a K) se verificaron
+  contra el notebook cuando aún existía y quedan documentadas arriba en las notas de
+  cierre de Task-011/Task-016; siguen siendo válidas como lo que efectivamente se
+  ejecutó entonces. Una cifra nueva que se quiera citar desde `Framework.py` requiere
+  confirmar que se ejecutó (no solo que el código está ahí) antes de darla por buena.
+  Ver `CLAUDE.md`, sección "Fuentes primarias".
