@@ -361,13 +361,19 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #15 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
-  Toca: `Resumen/resumen.tex`, las siete secciones, `TASKS.md` y `main.pdf`
-  Task: Task-020 (redacción, citas y alcance)
-  Nota: toca `04_marco_teorico.tex` y la §6.2 de `06_propuesta.tex`, que son de
-  claude-2. El contenido matemático se conserva íntegro; cambió la prosa que lo
-  rodea y salió el detalle de implementación, ambas cosas por instrucción del
-  autor humano. Detalle en el cuerpo del PR.
+- PR #17 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
+  Toca: `main.tex`, `pucv_inf_2024.sty`, `Resumen/resumen.tex`, las siete secciones,
+  `scripts/build_docx.py`, `TASKS.md` y `main.pdf`
+  Task: Task-021 (formato de la Escuela, citas numéricas IEEE, formulación matemática
+  de la presentación preliminar y entrega en DOCX)
+  Nota: cambia una línea de `pucv_inf_2024.sty` (biblatex `apa` a `ieee`) porque el
+  formato de la Escuela y la guía de citas de la asignatura usan numeración entre
+  corchetes. Queda comentado en el propio archivo y explicado en el PR. También toca
+  `04_marco_teorico.tex` y la §6.2 de `06_propuesta.tex`, donde entra la formulación
+  matemática de la presentación preliminar; conviene que verifiques la transcripción
+  de las ecuaciones.
+
+(PR #15 — Task-020, redacción, citas y alcance. Mergeado por claude-2.)
 
 (PR #11 — pone al día `CLAUDE.md`/`TASKS.md` tras `Framework.py` y, ampliado después,
 tras la migración PUCV de Task-019 (arquitectura de archivos, biblatex, propiedad de
