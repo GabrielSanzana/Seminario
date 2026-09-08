@@ -30,9 +30,9 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 30 | Task-021: reescrito, dos familias y modelo alternativo |
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027 la editó claude-2, instrucción directa del autor humano) | 139 | Task-027: §"Obtención del corpus" reemplazada por §"Metodología de la revisión" con las 4 fases PRISMA completas (definición, búsqueda, verificación, análisis), figura oficial `figuras/prisma_oficial.png` y cita de Page et al. 2021 como `\footnote` (no en `referencias.bib`, corpus cerrado en 25). `prisma_flujo.pdf` de Task-026 queda sin referenciar. Ver nota de cierre abajo |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027/028 las editó claude-2, instrucción directa del autor humano) | 111 | Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
 | `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
-| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-025: "umbrales de decisión" -> "criterio de validación". Task-021: actividades. **Fechas por confirmar** |
+| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-028 la editó claude-2, instrucción directa del autor humano) | 54 | Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
 | `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 96 | Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
 | `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `figuras/framework_pipeline.tex` | `NEED_REVIEW` | claude-1 | 57 | Task-026: esquema de la composición, `standalone` + TikZ, se compila aparte |
@@ -71,6 +71,46 @@ antes de tocar nada:
    `LTchunksize`. Las tres tablas del documento dependen de ambos.
 
 ## Cola de tareas
+
+### Task-028 — cerrada por claude-2, pendiente de revisión
+
+- **Task-028 — reducir el cuerpo del informe a 20 páginas.** Instrucción directa del
+  autor humano, 2026-09-08: el contenido está bien, recortar lo irrelevante hasta
+  llegar a 20 páginas (Introducción a Conclusiones, sin contar portada, índices ni
+  referencias) y de paso revisar formato, letra, márgenes e índices requeridos.
+  Punto de partida: 24 páginas de cuerpo (subieron de 20 a 24 con Task-027, ver
+  historial). Archivos tocados, ambos de claude-1 — excepción de dueño por
+  instrucción directa, en la misma línea que Task-019/027, no sienta precedente:
+  - `secciones/03_estado_arte.tex`: la §"Metodología de la revisión" de Task-027 se
+    condensó (las cuatro cadenas booleanas completas de búsqueda se resumieron a
+    términos representativos por componente PICO, subsecciones de una sola oración
+    se fusionaron en prosa corrida) y "Trabajos similares" se recortó en frases
+    evaluativas de relleno ("es la advertencia más incómoda del corpus", ese tipo de
+    cierre), sin tocar ninguna cifra, cita ni el argumento de cada párrafo.
+  - `secciones/05_plan_trabajo.tex`: la tabla `tab:plan` se compactó (`arraystretch`
+    0.72, `tabcolsep` 3pt, columna "Actividad" más ancha para que menos filas
+    envuelvan a dos líneas) y la prosa de §5.1 y §5.3 se ajustó (misma información,
+    menos palabras de enlace) para que el capítulo completo quepa en una página.
+    Nada de esto toca las fechas ni el contenido del calendario, que sigue
+    **pendiente de confirmación** del autor humano.
+  **Lección para no repetir:** `\enlargethispage` parece la solución obvia para
+  forzar que un capítulo quepa en una página, pero el hueco entre el texto normal y
+  el número de página (folio) es más chico que un `\baselineskip`, así que cualquier
+  valor capaz de tragarse un párrafo completo termina con la última línea encima del
+  número de página — hay que verificar el PDF renderizado, no solo el conteo de
+  páginas, porque el conteo "mejora" mientras el pie de página ya se está pisando.
+  La vía segura es reducir espacio real (`arraystretch`, `tabcolsep`, columnas más
+  anchas, prosa más corta), no estirar la página.
+  **Cierre:** `./scripts/compilar.sh` → `OK: main.pdf compilado, 28 paginas` (cuerpo
+  de 20, de "Introducción" a "Referencias", el objetivo exacto). Recuento de citas
+  sin cambios: 25/25 resuelven contra `referencias.bib`, todas con 3 o más usos.
+  Verificado visualmente que ninguna página nueva pisa el margen o el pie de
+  página. Quedan, sin tocar por estar fuera del alcance de esta tarea y ser
+  preexistentes: un overfull hbox menor (columna de $\{v_1, \dots, v_n\}$) en
+  `06_propuesta.tex`, y la alineación de `tab:familias` en `03_estado_arte.tex`
+  (ninguno afecta el conteo de páginas). Formato, letra, márgenes e índices siguen
+  gobernados por `pucv_inf_2024.sty` y `main.tex`, que esta tarea no tocó; `main.tex`
+  sigue sin `\listoffigures` (pendiente para el autor humano desde Task-026).
 
 ### Task-027 — cerrada por claude-2, pendiente de revisión
 
@@ -1018,3 +1058,16 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
   10%, Estructura 10%, Presentación 10%, Redacción y estilo 10%, Citas y referencias
   10%, Contribución 10%) y pide considerarla en la configuración. Detalle completo en
   `CLAUDE.md`, sección "Pauta de evaluación".
+- **2026-09-08** — El autor humano escribe a mano el contenido completo de la
+  metodología de la revisión sistemática (las 4 fases PRISMA) y pide a claude-2
+  reemplazar con eso `§Obtención del corpus` en `03_estado_arte.tex`, formatear en
+  LaTeX, arreglar citas y usar el diagrama oficial PRISMA 2020 que subió a `main`
+  (Task-027). Excepción de dueño sobre archivo de claude-1, documentada arriba.
+- **2026-09-08** — El autor humano pide reducir el cuerpo del informe de 24 a 20
+  páginas, recortando prosa irrelevante sin perder información, y revisar formato,
+  letra, márgenes e índices de paso (Task-028). Afecta `03_estado_arte.tex` (la
+  metodología de Task-027, que había hecho crecer el cuerpo de 20 a 24 páginas) y
+  `05_plan_trabajo.tex` (tabla `tab:plan` compactada). Ambas son excepciones de dueño
+  sobre archivos de claude-1. Detalle completo, incluida la lección sobre
+  `\enlargethispage` pisando el pie de página, en la nota de cierre de Task-028
+  arriba.
