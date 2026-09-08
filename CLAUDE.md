@@ -12,9 +12,28 @@ profundo ya entrenado en una hipótesis relacional compacta (un grafo dirigido y
 sobre variables nombradas), más el protocolo de validación que decide cuándo una relación
 extraída merece tratarse como hipótesis científica.
 
+**El alcance no se agota en explicar el modelo.** El objetivo final es producir una
+hipótesis relacional sobre el fenómeno subyacente a los datos; explicar el modelo (qué
+relaciones aprendió) es un paso instrumental hacia ese fin, no el fin en sí mismo.
+Introducción, objetivos y propuesta deben mantener esta jerarquía sin invertirla —
+ninguna debe presentar la explicabilidad del modelo como el objetivo terminal del
+trabajo. Instrucción explícita del autor humano, 2026-09-08 (ver Task-022 en `TASKS.md`).
+
 Fuentes primarias, de solo lectura:
 
-- `Presentación preliminar del tema de investigación.pdf` — introducción, objetivos, justificación.
+- `Presentación preliminar del tema de investigación.pdf` — sus secciones 3 a 8
+  (formalización matemática: la matriz relacional $A$, $\Phi: A \to G$, $\Psi: G \to H$,
+  análisis estructural del grafo, $F(H,M) \to R$, análisis espectral del operador
+  relacional, y la composición $X \to M_\theta \to A \to G \to H \to R$) son la única
+  formalización matemática vigente del framework y la fuente de autoridad para cualquier
+  ecuación que se cite — aunque no todas se incluyan en cada entrega (ver historial de
+  `TASKS.md` sobre qué se excluyó explícitamente en la entrega vigente). El resto del
+  documento (secciones 1-2 y 9-17: contexto, la arquitectura ConvTransformer del caso de
+  estudio, diferenciación con el estado del arte, aplicabilidad a otros dominios,
+  objetivos, hipótesis, diseño experimental, resultados y hoja de ruta) es información de
+  motivación **aún no formalizada**: no tratarla como axioma ni derivar de ahí reglas
+  nuevas que el documento no plantea como tales (p. ej., no inventar condiciones fijas de
+  selección de dominio a partir de un ejemplo ilustrativo — ver Task-022).
 - `Protocolo PRISMA/` — revisión sistemática, exports de Zotero (WOS, Scopus, PUBMED).
 - `Framework.py` — implementación del framework (sucesor de `Prototipo_Preliminar.ipynb`,
   reemplazado por el autor humano el 2026-09-07). Es código fuente puro, sin salidas de
@@ -24,7 +43,11 @@ Fuentes primarias, de solo lectura:
   `Framework.py`, confirmar que efectivamente se ejecutó (no solo que el código existe)
   y con qué parámetros; varias fórmulas de índices cambiaron respecto al notebook
   (MARI, ARI, CHL\_REDEDGE, PSRI), así que una cifra del notebook viejo no se
-  reafirma automáticamente ejecutando este archivo.
+  reafirma automáticamente ejecutando este archivo. **Es una instancia concreta del
+  framework (el caso de estudio de índices espectrales con el ConvTransformer), no su
+  definición general**: no usar sus detalles de implementación (encoder convolucional,
+  stride, kernel, etc.) para describir el framework en abstracto, y en particular no
+  para la sección Propuesta (ver Task-022 en `TASKS.md`).
 
 Ningún agente escribe en esas rutas.
 
@@ -62,6 +85,19 @@ Causality in Saliency-Based Explanations...") que no coincide con el título rea
 DOI que la acompaña (sin "Causality"). Usar el título que resuelve el DOI, no el de la
 celda, cuando difieran — ya se verificó para esa fila (`rizzo2022faithfulness` en
 `referencias.bib` usa el título correcto).
+
+Procedencia de las citas, a declarar explícitamente donde se describa la metodología de
+revisión (síntesis PRISMA en `03_estado_arte.tex` o similar): la mayoría de las 25
+referencias vigentes salió del protocolo PRISMA, pero no todas — algunas se incorporaron
+por búsqueda propia del autor humano y con asistencia de IA, al margen del cribado
+sistemático. No presentar las 25 como resultado exclusivo del protocolo. Instrucción
+explícita del autor humano, 2026-09-08 (ver Task-024 en `TASKS.md`).
+
+Fuera de alcance, declarado como trabajo futuro: esta tesis no analiza las citas de las
+referencias utilizadas (a quién citan esos 25 trabajos, redes de citación). Donde se
+describa el alcance de la revisión bibliográfica, declararlo como línea de trabajo
+futuro, no como limitación pendiente de esta entrega. Instrucción explícita del autor
+humano, 2026-09-08 (ver Task-024 en `TASKS.md`).
 
 ## Estructura editable
 
@@ -118,8 +154,12 @@ no asumir un número fijo, verificar con `./scripts/compilar.sh`.
 
 El template PUCV necesita paquetes que una instalación mínima de TinyTeX no trae por
 defecto: `titlesec`, `lipsum`, `fancyhdr`, `algorithms`, `algorithmicx`, `glossaries`,
-`nomencl`, `biblatex`, `biblatex-apa`, `biber`, `csquotes`, `caption`, `enumitem`,
-`etoolbox`, `koma-script`, `psnfss`, `hyphen-spanish`. Si falta alguno, instalarlo con
+`nomencl`, `biblatex`, `biblatex-apa`, `biblatex-ieee`, `biber`, `csquotes`, `caption`,
+`enumitem`, `etoolbox`, `koma-script`, `psnfss`, `hyphen-spanish`. `biblatex-ieee` es el
+que trae el estilo `ieee` que usa `pucv_inf_2024.sty` desde Task-021 (citas numéricas);
+sin él, biblatex falla con "Style 'ieee' not found" y en cascada "Command '\cite'
+undefined" en todo el documento — verificado y corregido en esta máquina, 2026-09-08.
+Si falta alguno, instalarlo con
 `tlmgr install <paquete>` (el binario es `tlmgr.bat` dentro de la carpeta de TinyTeX;
 en bash se puede invocar por ruta completa, no hace falta PowerShell).
 
@@ -139,7 +179,17 @@ Toda referencia que cite debe salir de `Protocolo PRISMA/Referencias_seminario.x
 `PDF seleccionados para el seminario/`. Si necesita citar una referencia de esa hoja que
 todavía no tiene entrada en `referencias.bib`, no la agrega él mismo: ese archivo es de
 claude-2. La pide en `TASKS.md` (título, DOI, y en qué frase la va a usar) para que
-claude-2 la agregue.
+claude-2 la agregue. **Toda referencia debe usarse al menos tres veces** en el
+documento (`\cite`/`\textcite`/`\parencite`, en apariciones argumentativas distintas):
+una cita que solo sirve para una ocasión no se pide ni se agrega tal cual — instrucción
+explícita del autor humano, 2026-09-08 (ver Task-023 en `TASKS.md`).
+
+Al resumir un trabajo referenciado (estado del arte, o cualquier comparación en marco
+teórico o propuesta), **no se reporta la precisión ni el desempeño predictivo del
+algoritmo del artículo citado**. Lo único relevante es el resultado obtenido con el
+método de explicabilidad aplicado en ese trabajo: qué reveló, qué error tuvo, sus pros y
+contras. Instrucción explícita del autor humano, 2026-09-08 (ver Task-023 en
+`TASKS.md`).
 
 No toca `main.tex` ni `pucv_inf_2024.sty` salvo instrucción explícita del autor humano
 (como ocurrió con la migración de Task-019). No corrige formato en archivos ajenos.
@@ -225,7 +275,11 @@ agente revisor verifica explícitamente:
 4. **Referencias.** Todo `\cite` resuelve a una entrada existente en `referencias.bib`,
    esa entrada corresponde a una fila de `Protocolo PRISMA/Referencias_seminario.xlsx`
    (mismo DOI, no al corpus obsoleto de `Analisis 137 referencias.xlsx`), y la
-   afirmación que sostiene corresponde a lo que ese trabajo dice de verdad.
+   afirmación que sostiene corresponde a lo que ese trabajo dice de verdad. Además, toda
+   clave se usa (`\cite`/`\textcite`/`\parencite`) al menos **tres veces** en el
+   documento: una referencia citada una sola vez no se aprueba tal cual, se marca
+   `NEED_REWRITE` (ampliarla a al menos 3 apariciones argumentativas distintas, o
+   retirarla).
 
 Las contradicciones se reportan en el PR con
 `./scripts/gh.sh pr-comentar <n> <comentario.md>` y se anotan en la sección

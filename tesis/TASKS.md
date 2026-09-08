@@ -33,7 +33,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 89 | Task-021: discute los 18 trabajos que marca el excel |
 | `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 58 | Task-021: arquitectura y formalizacion (prelim. secs. 2 y 3) |
 | `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-021: actividades. **Fechas por confirmar** |
-| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1 | 84 | Task-021: Phi, Psi e interpretacion metodologica (prelim. 4, 5 y 8) |
+| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1 | 84 | Task-021: Phi, Psi e interpretacion metodologica (prelim. 4, 5 y 8). **Task-022 (pendiente) la reescribe completa: alcance incorrecto, ver Task-022** |
 | `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-021: cierra defendiendo el lugar intermedio de la propuesta |
 | `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | 25 entradas, ahora renderizadas en estilo IEEE numerico |
 
@@ -70,8 +70,93 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-Sin tareas pendientes de contenido. Lo único abierto es la revisión de Task-021 por
-claude-2 y la confirmación de fechas del plan de trabajo por el autor humano.
+Cuatro correcciones nuevas del autor humano, 2026-09-08, sobre el informe de Task-021.
+Se configuran aquí para que cada agente las tome al ser invocado; ninguna se ejecutó
+todavía. Sigue abierta además la revisión de Task-021/PR #17 por claude-2 y la
+confirmación de fechas del plan de trabajo por el autor humano.
+
+- **Task-022** (claude-1; excepción autorizada para tocar también el §6.2, que
+  normalmente es de claude-2 — mismo precedente que Task-019, instrucción directa del
+  autor humano) — Reescribir `secciones/06_propuesta.tex` desde cero. **Depende de que
+  se mergee primero PR #17** (Task-021 toca el mismo archivo).
+
+  Qué está mal: el §6.6 actual ("Alcance de esta etapa") cierra con "para elegir el
+  segundo dominio de validación pesan cinco condiciones, en este orden: que los tokens
+  del modelo sean variables, que haya acceso al modelo y no solo a su matriz, que el
+  costo de entrenamiento admita repetir el experimento muchas veces, que los datos sean
+  públicos, y que exista conocimiento previo del fenómeno contra el cual contrastar el
+  resultado" — presentado como regla general del framework. No lo es: es, a lo sumo, el
+  análisis de un caso particular. El framework está pensado para adaptarse a otras
+  situaciones, no para seguir un algoritmo fijo de selección de dominio. Retirar esa
+  enumeración; no reemplazarla por otra regla igual de rígida.
+
+  Qué corregir en toda la sección:
+  1. El alcance no es "explicar el modelo": es producir una hipótesis relacional sobre
+     el fenómeno. Explicar el modelo es instrumental a eso, no el objetivo (ver
+     `CLAUDE.md`, "Proyecto"). Ninguna frase de la propuesta debe invertir esa
+     jerarquía.
+  2. Idea central a transmitir, en palabras del autor humano: el framework ofrece crear
+     un modelo alternativo que use los mismos datos usados para entrenar un modelo
+     principal, y que en base a un análisis entre tokens (arquitecturas como
+     iTransformer) y la robustez de las iteraciones (repeticiones con semillas
+     distintas), obtenga hipótesis relacionales de los datos entre sí. El
+     ConvTransformer de índices es una instancia de esto (el caso de estudio), no la
+     definición general: no anclar la propuesta a esa arquitectura específica ni a
+     detalles de `Framework.py` (encoder convolucional, stride, kernel — eso es
+     implementación, no propuesta).
+  3. Basarse únicamente en la explicación de
+     `Presentación preliminar del tema de investigación.pdf`, no en `Framework.py`. Esa
+     presentación trae la formalización matemática vigente en sus secciones 3 a 8
+     ($A$, $\Phi:A\to G$, $\Psi:G\to H$, análisis estructural, $F(H,M)\to R$, análisis
+     espectral, la composición $X\to M_\theta\to A\to G\to H\to R$): esa es la base
+     formal a conservar. El resto del PDF (contexto, arquitectura del caso de estudio,
+     diferenciación con el estado del arte, aplicabilidad, objetivos, hipótesis, diseño
+     experimental, resultados, hoja de ruta) es información de motivación **aún no
+     formalizada**: no tratarla como axioma ni derivar de ahí reglas nuevas (como la de
+     los cinco condiciones retirada en el punto anterior).
+
+  Se autoriza a claude-1 a tocar también el §6.2 (arquitectura instrumental, hoy de
+  claude-2) porque la reescritura no se puede partir por dueño sin dejar la sección a
+  medio rehacer. claude-2 sigue siendo dueño de esa parte una vez reescrita y la audita
+  antes de mergear. Documentar en el PR qué cambió y por qué (protocolo de excepciones).
+
+  Al terminar, `./scripts/compilar.sh` y verificar que ninguna clave de
+  `referencias.bib` que la propuesta citaba haya quedado bajo tres usos en todo el
+  documento tras el borrón (ver Task-023): si una cita queda huérfana o con menos de
+  tres usos, decidir si se retira o se reintroduce con argumento propio en otra
+  sección, no dejarla por inercia.
+
+- **Task-023** (claude-2) — Auditoría de dos reglas nuevas del autor humano
+  (2026-09-08) sobre el estado actual del documento (post Task-021, antes de que
+  Task-022 reescriba la propuesta):
+
+  1. *Uso mínimo de citas.* Contar, para cada clave de `referencias.bib`, cuántas veces
+     aparece (`\cite`/`\textcite`/`\parencite`/`\enquote` incluidos) en todo el
+     documento. Marcar aquí, con conteo exacto y sección, cualquier clave con menos de
+     3 usos, para que claude-1 decida si la amplía o la retira. No se corrige por
+     cuenta propia: se marca `NEED_REWRITE` con el detalle.
+  2. *Precisión de algoritmo vs. resultado de explicabilidad.* Releer
+     `secciones/03_estado_arte.tex` (y cualquier otra sección que resuma un trabajo
+     referenciado) buscando cifras de precisión o desempeño predictivo del algoritmo
+     del artículo citado. Marcar cada caso con cita textual y línea: el autor humano
+     solo quiere el resultado del método de explicabilidad aplicado (qué encontró, qué
+     error tuvo, pro y contra), no la precisión del algoritmo en sí.
+
+  Ninguna de las dos se corrige en este task: `03_estado_arte.tex` es de claude-1, el
+  fix vuelve a él vía `NEED_REWRITE`.
+
+- **Task-024** (claude-1) — Dos notas de alcance a declarar explícitamente
+  (instrucción directa del autor humano, 2026-09-08), en `03_estado_arte.tex` (síntesis
+  PRISMA) o en conclusiones/trabajo futuro, la que corresponda mejor a cada una:
+
+  1. *Procedencia de las citas.* La mayoría de las 25 referencias vigentes salió del
+     protocolo PRISMA, pero no todas: algunas se incorporaron por búsqueda propia del
+     autor humano y con asistencia de IA, al margen del cribado sistemático. Declararlo
+     así, sin presentar las 25 como resultado exclusivo del protocolo.
+  2. *Análisis de citas como trabajo futuro.* Esta tesis no analiza las citas de las
+     referencias utilizadas (qué cita a qué, redes de citación). Declararlo
+     explícitamente como línea de trabajo futuro, no como limitación abierta de esta
+     entrega.
 
 ### Cerrada por claude-1 en esta sesión
 
