@@ -30,7 +30,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 30 | Task-021: reescrito, dos familias y modelo alternativo |
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 82 | Task-026: la tabla `tab:bases` se reemplaza por la figura `fig:prisma` (flujo de cribado completo). Task-025: "calibrar sus umbrales" -> "calibrar su criterio de contraste". Task-024: nota de procedencia de citas y de analisis de citas como trabajo futuro. Task-023: recortadas 5 cifras de precision de algoritmo que no eran resultado de explicabilidad |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027 la editó claude-2, instrucción directa del autor humano) | 139 | Task-027: §"Obtención del corpus" reemplazada por §"Metodología de la revisión" con las 4 fases PRISMA completas (definición, búsqueda, verificación, análisis), figura oficial `figuras/prisma_oficial.png` y cita de Page et al. 2021 como `\footnote` (no en `referencias.bib`, corpus cerrado en 25). `prisma_flujo.pdf` de Task-026 queda sin referenciar. Ver nota de cierre abajo |
 | `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
 | `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-025: "umbrales de decisión" -> "criterio de validación". Task-021: actividades. **Fechas por confirmar** |
 | `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 96 | Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
@@ -71,6 +71,48 @@ antes de tocar nada:
    `LTchunksize`. Las tres tablas del documento dependen de ambos.
 
 ## Cola de tareas
+
+### Task-027 — cerrada por claude-2, pendiente de revisión
+
+- **Task-027 — reescritura de la metodología PRISMA en `03_estado_arte.tex`.**
+  El autor humano escribió a mano el contenido completo de una §"Metodología de la
+  revisión" mucho más detallada (las 4 fases del protocolo: definición de la
+  investigación, búsqueda de literatura, verificación de los artículos, análisis de la
+  investigación) y pidió a claude-2 reemplazar con eso la §"Obtención del corpus"
+  vigente, formatear en LaTeX, arreglar las citas y usar el diagrama oficial
+  `Protocolo PRISMA/PRISMA.png` (subido a `main` en el commit `d321474`) como figura.
+  `03_estado_arte.tex` es de claude-1 (ver "Roles" en `CLAUDE.md`); esta es una
+  excepción de dueño por instrucción explícita del autor humano, en la misma línea que
+  la migración de Task-019 — no establece precedente, sigue haciendo falta la misma
+  instrucción explícita para que claude-2 vuelva a tocar prosa de claude-1.
+  El diagrama `figuras/prisma_flujo.pdf` de Task-026 queda **superado**: la nueva
+  figura oficial desglosa identificación por bases de datos vs. otros métodos y el
+  motivo de cada exclusión, algo que el esquema TikZ de 5 cajas no cubría. Se retira
+  la referencia a `fig:prisma` apuntando a `prisma_flujo.pdf` y se deja apuntando a
+  `figuras/prisma_oficial.png` (copia de `Protocolo PRISMA/PRISMA.png` dentro del
+  árbol editable, siguiendo la convención de `figuras/` de Task-026). Los archivos
+  `prisma_flujo.tex`/`.pdf` no se borran, quedan sin referenciar por si se retoman.
+  Cifras verificadas contra `Protocolo PRISMA/PRISMA.png` (que a su vez reproduce
+  `Bítacora_revision_sistematica.docx`, etapas 4-5): 319 = 191+100+28, -98 dedup,
+  -20 sin DOI, -64 sin acceso a texto completo = 137; cribado por resumen -116 = 21
+  buscados, -4 no recuperados = 17 evaluados, -5 (4 redundantes + 1 superado) = 12
+  incluidos de bases de datos; búsqueda complementaria 36 evaluados, -23 (4+8+11 por
+  motivo) = 13 incluidos; total 12+13 = 25. Todo coincide.
+  Cita de la declaración PRISMA 2020 (Page et al., 2021) agregada como `\footnote`,
+  no como entrada de `referencias.bib`: el corpus está cerrado en exactamente 25
+  (regla de "Corpus de referencias" en `CLAUDE.md`) y esa declaración metodológica no
+  es una de las 25 filas de `Referencias_seminario.xlsx`.
+  **Cierre:** `./scripts/compilar.sh` → `OK: main.pdf compilado, 32 paginas` (cuerpo
+  de 24, de "Introducción" a "Referencias"; sigue bajo el máximo de 30). Las cadenas
+  booleanas en `\texttt` sin espacio de separación causaban overfull hbox de hasta
+  102pt en pdflatex (el espacio entre palabras en fuente `pcr`/Courier no estira al
+  justificar); se corrigió con `\raggedright` en ese bloque. Recuento de citas sin
+  cambios: 25/25 resuelven contra `referencias.bib`, todas con 3 o más usos. Se
+  repuso además, al cierre del párrafo de síntesis, la declaración de Task-024 sobre
+  no analizar las citas de las 25 referencias (línea de trabajo futuro) que el
+  borrador nuevo del autor humano no incluía y que sigue siendo obligatoria; de paso
+  se corrigió ahí una raya larga que la versión anterior del párrafo tenía pese a la
+  regla de "Estilo de la prosa" de no usarlas.
 
 ### Task-026 — cerrada por claude-1 en esta sesión, pendiente de revisión
 
@@ -630,18 +672,21 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-**PR #25** — Task-026: dos figuras nuevas (`fig:prisma` en §3.1, `fig:pipeline` en
+**PR #26** — Task-027: reescribe `§Obtención del corpus` como `§Metodología de la
+revisión` completa (4 fases PRISMA), con la figura oficial `prisma_oficial.png` y
+cita de Page et al. 2021 como footnote. Abierto por claude-2, 2026-09-08, a petición
+directa del autor humano (excepción de dueño sobre archivo de claude-1, ver Task-027).
+Es su propio PR: espera autorización explícita del autor para mergearlo.
+
+(PR #25 — Task-026: dos figuras nuevas (`fig:prisma` en §3.1, `fig:pipeline` en
 §6.4), compiladas aparte como `standalone` e incluidas por PDF para no tocar el
 preámbulo de `main.tex`; retira `tab:bases`, que duplicaba la primera caja del flujo.
-Abierto por claude-1, 2026-09-08. **Espera revisión de claude-2.** Lo que más conviene
-auditar es la procedencia de las cifras del flujo PRISMA (salen de la bitácora, etapas
-4 y 5, no del corpus obsoleto de `Analisis 137 referencias.xlsx`) y que el cuerpo siga
-en 20 páginas sin contar portada, índices ni referencias.
-
-**PR #24** — revierte el entregable a `tesis/main.pdf` (deja de versionar
+Abierto por claude-1, revisado y mergeado por claude-2, 2026-09-08: cifras del flujo
+PRISMA verificadas contra la bitácora, etapas 4 y 5, cuerpo en 20 páginas. Su figura
+`fig:prisma` quedó luego superada por PR #26.
+PR #24 — revierte el entregable a `tesis/main.pdf` (deja de versionar
 `Informe_avance.docx`), documenta `Pauta/` en `CLAUDE.md`. Abierto por claude-2 a
-petición directa del autor humano, 2026-09-08. Es su propio PR: espera autorización
-explícita del autor para mergearlo (nadie mergea lo propio sin esa autorización).
+petición directa del autor humano, mergeado con autorización explícita, 2026-09-08.)
 
 (PR #19 — deja `build_docx.py` funcionando de punta a punta (pandoc + `ieee.csl` en el
 repo) y, en un segundo commit, recorta en `04_marco_teorico.tex` el mismo detalle de

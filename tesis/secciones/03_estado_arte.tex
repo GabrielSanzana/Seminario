@@ -7,19 +7,136 @@
 \chapter{Estado del arte}
 \label{cap:estado_arte}
 
-\section{Obtención del corpus}
+\section{Metodología de la revisión}
 
-La revisión se condujo bajo el protocolo PRISMA 2020, elegido porque deja registro de cada decisión de selección y permite que un tercero reconstruya el corpus a partir de ese registro. De la pregunta de investigación se derivó una cadena de búsqueda con cuatro bloques de términos, uno por componente de la pregunta, unidos entre sí con el operador \texttt{AND} y con sinónimos enlazados por \texttt{OR} dentro de cada bloque. Esa cadena se ejecutó sobre Scopus, Web of Science y PubMed, y se complementó con búsquedas por citas y registros; la figura \ref{fig:prisma} resume el recorrido completo, desde los registros identificados hasta el corpus final, con el número de exclusiones que produjo cada filtro. Los criterios de inclusión restringieron el resultado a publicaciones entre 2022 y 2026, en inglés, y a artículos de investigación primaria o trabajos de conferencia, sin restricción de tipo documental en PubMed para no perder literatura técnica no clínica. El cribado posterior se llevó en Zotero, descartando duplicados y registros sin identificador auditable o sin texto completo disponible. La mayoría de las veinticinco referencias que componen el corpus resultó de ese proceso sistemático; un número menor se incorporó por búsqueda dirigida al margen del protocolo, con apoyo de asistencia de IA, para cubrir aspectos del framework que la cadena de búsqueda no cubría por sí sola. Las veinticinco están leídas de forma completa y registradas en una matriz de extracción con su muestra, metodología, resultados y conclusión, independientemente de su vía de incorporación. El análisis de las citas de estas veinticinco referencias —a qué trabajos citan ellas mismas— queda fuera del alcance de esta revisión y se declara como línea de trabajo futuro.
+Esta sección describe el procedimiento seguido para identificar, filtrar y analizar la literatura sobre la conversión de matrices de atención en estructuras relacionales interpretables. El protocolo se registró en siete etapas en la bitácora de revisión sistemática del proyecto, agrupadas aquí en cuatro fases: definición de la investigación, búsqueda de literatura, verificación de los artículos y análisis de la investigación. La revisión siguió las directrices PRISMA 2020\footnote{Page MJ, McKenzie JE, Bossuyt PM, et al. ``The PRISMA 2020 statement: an updated guideline for reporting systematic reviews''. \emph{BMJ}, 372:n71, 2021. \url{https://doi.org/10.1136/bmj.n71}. Plantilla del diagrama de flujo disponible en \url{https://www.prisma-statement.org/prisma-2020-flow-diagram}.}, elegidas porque dejan registro de cada decisión de selección y permiten que un tercero reconstruya el corpus a partir de ese registro.
 
-% La figura reemplaza a la antigua tabla tab:bases (Task-026): esa tabla solo
-% listaba los registros por base, cifra que aqui aparece en la primera caja del
-% flujo, de modo que mantener ambas duplicaba la misma informacion.
+\subsection{Definición de la investigación}
+
+\subsubsection{Área de investigación}
+
+El área de estudio son los modelos de aprendizaje profundo basados en la arquitectura Transformer, en particular aquellos donde la atención se calcula entre tokens que representan variables con significado físico. Dentro de esa área, el foco está en la opacidad de sus mecanismos de decisión y en la inestabilidad estocástica de sus matrices de atención entre distintas ejecuciones de entrenamiento.
+
+\subsubsection{Objetivo de la investigación}
+
+La revisión responde a la siguiente pregunta, formulada según el modelo PICO: ¿es posible desarrollar un framework metodológico que transforme las matrices de atención de modelos Transformer en grafos dirigidos compactos, capaces de generar hipótesis relacionales reproducibles y falsables, con mayor fidelidad al comportamiento del modelo que las técnicas tradicionales de explicabilidad post-hoc?
+
+\subsubsection{Alcance de la investigación}
+
+El alcance queda delimitado por los cuatro componentes de la pregunta y por un marco temporal:
+
+\begin{itemize}
+\item \textbf{Población.} Modelos profundos basados en Transformer cuya atención opera entre tokens que representan variables con significado físico.
+\item \textbf{Intervención.} La condición de caja negra de estos modelos: opacidad del mecanismo de decisión e inestabilidad de la matriz de atención entre ejecuciones.
+\item \textbf{Comparador.} Métodos tradicionales de explicabilidad, es decir técnicas de atribución marginal por variable como SHAP y LIME, y la visualización de mapas continuos de atención.
+\item \textbf{Resultado.} La reconstrucción de una hipótesis relacional compacta, dirigida y falsable sobre las variables, estadísticamente reproducible y fiel al comportamiento del modelo.
+\item \textbf{Marco temporal.} Publicaciones entre 2022 y 2026.
+\end{itemize}
+
+\subsection{Búsqueda de literatura}
+
+\subsubsection{Definición de los términos de búsqueda}
+
+Se construyó un conjunto de términos por cada componente PICO y se combinaron con operadores booleanos: los sinónimos dentro de cada componente se unieron con \texttt{OR} y los cuatro grupos resultantes entre sí con \texttt{AND}.
+
+{\small\raggedright
+\begin{itemize}
+\item \textbf{Población:} \texttt{("Transformer" OR "multivariate Transformer" OR "multivariate time series" OR "time series" OR "MTS" OR "latent representation" OR "latent space" OR "attention matrix" OR "attention weights" OR "tokenization" OR "variable tokenization" OR "channel independence" OR "patching" OR "inverted transformer" OR "iTransformer")}
+\item \textbf{Intervención:} \texttt{("black box" OR "black-box" OR "model opacity" OR "opacity" OR "attention instability" OR "instability" OR "seed variability" OR "seed" OR "variability" OR "stochasticity" OR "spurious shortcuts" OR "shortcut learning" OR "spurious correlation" OR "Clever Hans" OR "uninterpretable" OR "uninterpretability" OR "mechanistic interpretability")}
+\item \textbf{Comparador:} \texttt{("Explainable AI" OR "XAI" OR "SHAP" OR "LIME" OR "feature attribution" OR "saliency maps" OR "saliency" OR "attention maps" OR "integrated gradients" OR "Granger causality" OR "causal inference")}
+\item \textbf{Resultado:} \texttt{("relational graph" OR "directed graph" OR "relational structure" OR "compact graph" OR "graph" OR "knowledge graph" OR "causal graph" OR "falsifiable" OR "falsifiability" OR "auditable" OR "auditability" OR "reproducible" OR "reproducibility" OR "faithfulness" OR "fidelity" OR "sanity checks" OR "post-hoc explanation")}
+\end{itemize}
+}
+
+La cadena resultante se aplicó de forma consistente en las tres bases consultadas, sobre los campos de título, resumen y palabras clave.
+
+\subsubsection{Estrategia de búsqueda}
+
+La búsqueda se realizó en tres bases de datos académicas:
+
+\begin{itemize}
+\item Scopus ($n = 191$)
+\item Web of Science ($n = 100$)
+\item PubMed ($n = 28$)
+\end{itemize}
+
+El total identificado en bases de datos fue de 319 registros; no se consultaron registros de protocolos. La consolidación de los archivos \texttt{.ris} exportados, la deduplicación y el filtrado progresivo se realizaron en Zotero, con la última actualización del conjunto de referencias el 5 de septiembre de 2026.
+
+\subsubsection{Identificación por otros métodos}
+
+Además de las bases de datos se realizó una búsqueda complementaria asistida por inteligencia artificial, que aportó 36 artículos obtenidos a texto completo el 5 de septiembre de 2026, ninguno duplicado respecto de los registros ya recuperados. Al obtenerse ya completos y de forma individual, estos documentos no pasaron por los filtros de deduplicación, identificador DOI ni acceso al texto, ni por el cribado de título y resumen: entraron directamente a la evaluación de elegibilidad con los criterios de contenido de la sección \ref{subsec:verificacion}, y de ellos quedaron 13 incluidos. El diagrama de flujo de la figura \ref{fig:prisma} recoge esa diferencia de recorrido: la columna de otros métodos va de la identificación a la evaluación de elegibilidad, sin cajas de cribado.
+
+De los 25 estudios incluidos, 13 provienen de esta búsqueda complementaria y 12 de las bases de datos. Entre los primeros están las referencias fundacionales de las técnicas que la propuesta emplea, incluida la que introduce la propagación de atención por capas, que la cadena booleana no recuperó.
+
+\subsubsection{Selección por idioma}
+
+Se consideraron únicamente artículos redactados en inglés; los escritos en otros idiomas se descartaron. En total se incluyeron 25 documentos en la revisión, y la figura \ref{fig:prisma} ilustra el flujo detallado de cribado e inclusión según PRISMA 2020.
+
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figuras/prisma_flujo.pdf}
-\caption{Flujo de cribado de la revisión sistemática, según el protocolo PRISMA 2020.}
+\includegraphics[width=\textwidth]{figuras/prisma_oficial.png}
+\caption{Diagrama de flujo PRISMA 2020 del proceso de identificación, cribado y selección de estudios.}
 \label{fig:prisma}
 \end{figure}
+
+\subsection{Verificación de los artículos}
+\label{subsec:verificacion}
+
+El cribado por resumen de los 137 registros y la posterior evaluación a texto completo los realizaron los dos autores, Gabriel Sanzana y Patricio Figueroa, contrastando cada documento con los criterios que se detallan a continuación. Los desacuerdos se resolvieron por discusión hasta alcanzar una decisión común sobre cada estudio.
+
+\subsubsection{Criterios de inclusión}
+
+Se incluyeron los estudios que cumplían:
+
+\begin{itemize}
+\item Periodo de publicación entre 2022 y 2026.
+\item Redacción en idioma inglés.
+\item Tipo de documento en Scopus: artículos de investigación primaria (\emph{Article}) y trabajos de conferencia (\emph{Conference paper}).
+\item Tipo de documento en Web of Science: artículos de investigación primaria (\emph{Article}) y actas de congresos (\emph{Proceeding Paper}).
+\item Tipo de documento en PubMed: sin restricción, para evitar la pérdida de literatura técnica no clínica.
+\end{itemize}
+
+\subsubsection{Criterios de exclusión}
+
+Se descartaron los registros que cumplían alguna de estas condiciones:
+
+\begin{itemize}
+\item Publicación fuera del rango 2022--2026.
+\item Redacción en un idioma distinto al inglés.
+\item Tipo documental no admitido: en Scopus, \emph{Review}, \emph{Conference review}, \emph{Book chapter} o \emph{Editorial}; en Web of Science, cualquiera distinto de \emph{Article} y \emph{Proceeding Paper}.
+\item Registro duplicado, detectado en Zotero (de 319 a 221 registros, $-98$).
+\item Ausencia de identificador DOI auditable (de 221 a 201 registros, $-20$).
+\item Texto completo no disponible a través de los accesos institucionales del equipo (de 201 a 137 registros, $-64$).
+\end{itemize}
+
+Sobre los 137 registros restantes se aplicó el cribado por resumen, que excluyó 116 documentos por no auditar un mecanismo interno de atención ni producir una estructura relacional entre variables. De los 21 estudios buscados a texto completo se recuperaron 17; de estos se excluyeron 5 durante la evaluación de elegibilidad, cuatro por contenido redundante con un estudio ya incluido y uno por quedar superado por evidencia primaria localizada en la búsqueda complementaria. En esa búsqueda se evaluaron los 36 documentos y se excluyeron 23: cuatro por no disponer de un mecanismo interno de atención auditable, ocho por ser revisiones de dominio sin aporte metodológico y once por aplicar explicabilidad post-hoc sin producir ni evaluar estructura relacional entre variables.
+
+\subsubsection{Clasificación y almacenamiento de los artículos}
+
+Los 25 estudios incluidos se clasificaron en seis bloques temáticos según su función en la revisión:
+
+\begin{itemize}
+\item Premisa: la atención como objeto auditable.
+\item Insuficiencia de la explicabilidad tradicional.
+\item Validación por perturbación.
+\item Estructura relacional compacta.
+\item Arquitectura y tokenización.
+\item Dominio y aplicación.
+\end{itemize}
+
+Cada estudio se numeró según el orden de la matriz de extracción y se asoció, mediante una matriz de doble entrada entre estudio y sección, a las secciones del informe a las que aporta; eso admite que un mismo estudio se cite en más de una.
+
+\subsection{Análisis de la investigación}
+
+\subsubsection{Análisis de los artículos seleccionados}
+
+De cada estudio incluido se extrajeron los siguientes campos: título, DOI, descripción del aporte, fecha de publicación, muestra o tamaño de la población analizada, metodología, resultados y conclusión. La extracción se verificó contra el texto completo de cada documento, y no contra su resumen, para corregir las descripciones cuyo detalle experimental no coincidía con lo declarado en el resumen.
+
+\subsubsection{Síntesis crítica de los estudios seleccionados}
+
+Los datos extraídos se analizaron señalando en cada caso el aporte al framework propuesto y sus límites. Se incorporaron a la síntesis tanto los estudios que respaldan la propuesta como aquellos cuyos resultados la cuestionan, entre ellos los que atribuyen la mejora de rendimiento al mecanismo de parcheo y no a la atención, y los que muestran que dos métodos de atribución igualmente fieles ordenan las variables de forma distinta.
+
+El análisis de las citas de estas veinticinco referencias, es decir a qué trabajos citan ellas mismas, queda fuera del alcance de esta revisión y se declara como línea de trabajo futuro.
 
 \section{Trabajos similares}
 
