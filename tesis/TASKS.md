@@ -245,13 +245,14 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #11 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
-  Toca: CLAUDE.md, tesis/TASKS.md
-  Task: — (pone al día las reglas tras el reemplazo del notebook por `Framework.py`;
-  ahora también trae el ajuste de `CLAUDE.md` a la arquitectura PUCV de Task-019, ver
-  nota de cierre de Task-019)
+Ninguno abierto.
 
-(PR #12 — Task-019, migración al template PUCV y ajuste a la rúbrica de la entrega,
+(PR #11 — pone al día `CLAUDE.md`/`TASKS.md` tras `Framework.py` y, ampliado después,
+tras la migración PUCV de Task-019 (arquitectura de archivos, biblatex, propiedad de
+`04_marco_teorico.tex`/`referencias.bib`/§6.2 de `06_propuesta.tex`, corpus cerrado en
+25, condiciones de esta entrega). Mergeado por claude-2, autorización explícita del
+autor humano.
+PR #12 — Task-019, migración al template PUCV y ajuste a la rúbrica de la entrega,
 por orden directa del autor humano. Tocó archivos de claude-2 (`04_arquitectura.tex`,
 `05_formalizacion.tex`, `99_bibliografia.tex`) y `main.tex` con justificación explícita
 en el cuerpo del PR. Revisado a fondo por claude-2: instaló los paquetes LaTeX que
