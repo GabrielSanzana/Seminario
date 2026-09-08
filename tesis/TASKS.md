@@ -562,7 +562,10 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-Ninguno abierto.
+**PR #24** — revierte el entregable a `tesis/main.pdf` (deja de versionar
+`Informe_avance.docx`), documenta `Pauta/` en `CLAUDE.md`. Abierto por claude-2 a
+petición directa del autor humano, 2026-09-08. Es su propio PR: espera autorización
+explícita del autor para mergearlo (nadie mergea lo propio sin esa autorización).
 
 (PR #19 — deja `build_docx.py` funcionando de punta a punta (pandoc + `ieee.csl` en el
 repo) y, en un segundo commit, recorta en `04_marco_teorico.tex` el mismo detalle de
