@@ -30,11 +30,13 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 30 | Task-021: reescrito, dos familias y modelo alternativo |
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `IN_PROGRESS` | claude-1 | 89 | Task-025: "calibrar sus umbrales" -> "calibrar su criterio de contraste". Task-024: nota de procedencia de citas y de analisis de citas como trabajo futuro. Task-023: recortadas 5 cifras de precision de algoritmo que no eran resultado de explicabilidad |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 82 | Task-026: la tabla `tab:bases` se reemplaza por la figura `fig:prisma` (flujo de cribado completo). Task-025: "calibrar sus umbrales" -> "calibrar su criterio de contraste". Task-024: nota de procedencia de citas y de analisis de citas como trabajo futuro. Task-023: recortadas 5 cifras de precision de algoritmo que no eran resultado de explicabilidad |
 | `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
 | `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-025: "umbrales de decisión" -> "criterio de validación". Task-021: actividades. **Fechas por confirmar** |
-| `secciones/06_propuesta.tex` | `IN_PROGRESS` | claude-1/claude-2 | 93 | Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
+| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 96 | Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
 | `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
+| `figuras/framework_pipeline.tex` | `NEED_REVIEW` | claude-1 | 57 | Task-026: esquema de la composición, `standalone` + TikZ, se compila aparte |
+| `figuras/prisma_flujo.tex` | `NEED_REVIEW` | claude-1 | 65 | Task-026: flujo de cribado PRISMA, cifras de la bitácora |
 | `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | 25 entradas, ahora renderizadas en estilo IEEE numerico |
 
 Archivos retirados del documento por Task-019, recuperables desde el historial de git:
@@ -70,7 +72,7 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-### Task-026 — `IN_PROGRESS` por claude-1
+### Task-026 — cerrada por claude-1 en esta sesión, pendiente de revisión
 
 - **Task-026 — dos esquemas: composición del framework y cribado PRISMA.**
   Origen: la rúbrica `Pauta/` que claude-2 documentó en `CLAUDE.md` (PR #24) es
@@ -93,6 +95,48 @@ antes de tocar nada:
   incluyen con `\includegraphics`, que ya viene cargado por `pucv_inf_2024.sty`. Se
   versiona el fuente `.tex` de cada figura junto al `.pdf` para que sean
   reproducibles.
+
+  **Lo que se hizo.** Dos figuras nuevas en `tesis/figuras/`, ambas `standalone` +
+  TikZ, compiladas aparte con `pdflatex` e incluidas con `\includegraphics[width=\textwidth]`:
+
+  1. `prisma_flujo.pdf` (`fig:prisma`, §3.1). Flujo de cribado completo: identificación
+     $n=319$ (Scopus 191, WoS 100, PubMed 28), deduplicación en Zotero $-98 \to 221$,
+     filtro de DOI auditable $-20 \to 201$, filtro de accesibilidad al texto completo
+     $-64 \to 137$, y corpus final $n=25$, con una entrada lateral por las
+     incorporaciones vía búsqueda dirigida al margen del protocolo. **Procedencia de
+     las cifras:** `Protocolo PRISMA/Bítacora_revision_sistematica.docx`, etapas 4 y 5,
+     que las trae explícitas. No se leyó ni se citó nada de
+     `Analisis 137 referencias.xlsx` (corpus obsoleto): el 137 del diagrama es el
+     resultado del tercer filtro según la bitácora, no una cifra tomada de esa planilla.
+     La caja final refleja lo que ya decía la prosa —que no todas las 25 salieron del
+     cribado sistemático— en vez de presentar el corpus como producto exclusivo del
+     protocolo.
+  2. `framework_pipeline.pdf` (`fig:pipeline`, §6.4). La composición
+     $X \to M_\theta \to A \to G \to H \to \mathbb{R}$ desplegada eslabón por
+     eslabón, con el objeto que entrega cada uno, los operadores $\Phi$, $\Psi$ y $F$
+     sobre las flechas, y una nota que sitúa el consenso entre repeticiones en el paso
+     del modelo a la matriz. Los dos extremos quedan rotulados con lo que aporta cada
+     familia (capacidad de ajuste del aprendizaje automático / estructura explícita y
+     discutible), que es el argumento central del documento.
+
+  **Se retiró `tab:bases`.** Esa tabla listaba únicamente los registros por base de
+  datos, cifra que ahora aparece en la primera caja del flujo. Mantener ambas duplicaba
+  la misma información; el documento queda con dos tablas (`tab:familias`, `tab:plan`)
+  y dos figuras. La referencia en prosa se reescribió para apuntar a `fig:prisma`.
+
+  **Presupuesto de páginas.** El cuerpo sigue en 20 páginas sin contar portada, índices
+  ni referencias (`Referencias` arranca en la 21), que es el máximo fijado por el autor
+  humano. Cabe porque la última página estaba prácticamente vacía y porque retirar
+  `tab:bases` liberó espacio. `./scripts/compilar.sh` -> `OK: main.pdf compilado, 28
+  paginas`, sin referencias ni citas colgantes. No se agregó ni se quitó ninguna cita:
+  el recuento sigue en 25 claves con 3 usos o más.
+
+  **Pendiente para el autor humano:** `main.tex` tiene `\listoftables` pero no
+  `\listoffigures`, así que las figuras no entran en ningún índice. Es una línea en
+  `main.tex`, que ningún agente toca sin instrucción explícita. La rúbrica
+  (`Pauta/`, dimensión Presentación) menciona los índices entre lo que evalúa, de modo
+  que conviene agregarla. Documentado también en `CLAUDE.md`, junto al procedimiento
+  para regenerar las figuras (`tlmgr install pgf standalone`). [claude-1]
 
 Sin otras tareas de contenido pendientes. Queda la confirmación de fechas del plan de
 trabajo por el autor humano (`secciones/05_plan_trabajo.tex`, tabla `tab:plan`).
@@ -315,7 +359,7 @@ Sin objeciones de fondo. El trabajo de Task-022/023/024 queda auditado y confirm
   3. *Citas.* El formato de la asignatura usa numeración entre corchetes, no autor-año.
      Se cambió el estilo de biblatex de `apa` a `ieee` en `pucv_inf_2024.sty`, único
      cambio respecto de la copia original del template, y la prosa usa las tres formas
-     de la guía: mención con autor integrado (`	extcite`), cita indirecta con el número
+     de la guía: mención con autor integrado (`\textcite`), cita indirecta con el número
      al final (`\cite`) y una cita directa entrecomillada.
   4. *Resumen.* Reescrito: se habla de aprendizaje automático y no de "modelos
      profundos", se plantean las dos familias (modelos matemáticos rígidos frente a
