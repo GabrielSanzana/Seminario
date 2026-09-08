@@ -197,6 +197,15 @@ DOI esperado.
 - Los archivos auxiliares de LaTeX (`.aux`, `.log`, `.toc`, `.out`, `.bbl`, `.blg`,
   `.bcf`, `.run.xml`, `.nlo`, `.nls`, `.glo`, `.gls`, `.ist`) están en `.gitignore`. No
   forzar su commit: cambian en cada compilación y colisionan siempre.
+- `tesis/main.pdf` **sí se versiona** desde el 2026-09-08 (a pedido explícito del autor
+  humano, para que se pueda ver el documento actualizado en GitHub sin compilar
+  localmente). Es la única excepción a la regla anterior. Recompilar y comitear el PDF
+  junto con el `.tex` que lo generó, en el mismo commit — nunca un commit de solo texto
+  seguido de un commit de solo PDF, porque el PDF es un binario y cualquier commit
+  intermedio de otro agente sobre el mismo archivo genera conflicto sin nada que
+  conservar de ambos lados (a diferencia de `TASKS.md`, un PDF no se puede "conservar
+  ambos lados"). Por eso: recompilar y comitear el PDF solo al cerrar una tarea (paso 7
+  del ciclo obligatorio), nunca en los commits de reserva o intermedios.
 
 ## Protocolo de contradicciones
 

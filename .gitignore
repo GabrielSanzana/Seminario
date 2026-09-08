@@ -21,9 +21,6 @@
 *.gls
 *.ist
 
-# PDF compilado: se regenera, no se versiona
-tesis/main.pdf
-
 # Configuracion local de Claude Code. NO versionar: las reglas de permisos se
 # aplican a cualquiera que clone el repositorio, de modo que versionarlas concede
 # aprobacion automatica de comandos a terceros que nunca la otorgaron. Es politica
