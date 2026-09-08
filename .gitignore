@@ -21,9 +21,10 @@
 *.gls
 *.ist
 
-# PDF compilado: se regenera con ./scripts/compilar.sh, no se versiona. El
-# entregable versionado es tesis/Informe_avance.docx (./scripts/build_docx.py).
-tesis/main.pdf
+# DOCX generado por scripts/build_docx.py: ya no es el entregable versionado
+# (vuelta al PDF, 2026-09-08). El entregable versionado es tesis/main.pdf.
+tesis/Informe_avance.docx
+tesis/*.docx
 
 # Configuracion local de Claude Code. NO versionar: las reglas de permisos se
 # aplican a cualquiera que clone el repositorio, de modo que versionarlas concede

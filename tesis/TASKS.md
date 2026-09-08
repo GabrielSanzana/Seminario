@@ -562,7 +562,10 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-Ninguno abierto.
+**PR #24** — revierte el entregable a `tesis/main.pdf` (deja de versionar
+`Informe_avance.docx`), documenta `Pauta/` en `CLAUDE.md`. Abierto por claude-2 a
+petición directa del autor humano, 2026-09-08. Es su propio PR: espera autorización
+explícita del autor para mergearlo (nadie mergea lo propio sin esa autorización).
 
 (PR #19 — deja `build_docx.py` funcionando de punta a punta (pandoc + `ieee.csl` en el
 repo) y, en un segundo commit, recorta en `04_marco_teorico.tex` el mismo detalle de
@@ -886,3 +889,11 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
   detectar "qué párrafos son nuevos" corrompía el documento (lxml no garantiza
   identidad de objeto estable entre llamadas), moviendo ~50 párrafos de más sin ningún
   error visible. Detalle completo en `CLAUDE.md`, sección "Generar el DOCX".
+- **2026-09-08** — El autor humano vuelve a pedir `tesis/main.pdf` como entregable
+  versionado, revirtiendo el cambio de la entrada anterior (`.gitignore` y `CLAUDE.md`
+  actualizados: `main.pdf` sale del `.gitignore`, `Informe_avance.docx`/`*.docx` entran).
+  `scripts/build_docx.py` queda en el repo funcional pero en desuso. En el mismo mensaje
+  sube `Pauta/` (cuatro capturas de la rúbrica de calificación: Contenido 40%, Resumen
+  10%, Estructura 10%, Presentación 10%, Redacción y estilo 10%, Citas y referencias
+  10%, Contribución 10%) y pide considerarla en la configuración. Detalle completo en
+  `CLAUDE.md`, sección "Pauta de evaluación".
