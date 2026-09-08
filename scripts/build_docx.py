@@ -15,11 +15,31 @@ import tempfile
 # forma relativa en vez de hardcodear el usuario de quien escribio el script
 # (bug real encontrado el 2026-09-08: traia rutas de C:\Users\patru\... que no
 # existen en otras maquinas, igual que paso antes con TinyTeX en compilar.sh).
-TESIS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "tesis")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+TESIS = os.path.join(SCRIPT_DIR, "..", "tesis")
 SCRATCH = os.environ.get("BUILD_DOCX_SCRATCH") or os.path.join(tempfile.gettempdir(), "build_docx")
 os.makedirs(SCRATCH, exist_ok=True)
-PANDOC = os.environ.get("PANDOC_BIN") or shutil.which("pandoc") or os.path.join(SCRATCH, "pandoc-3.1.11", "pandoc.exe")
-CSL = os.environ.get("IEEE_CSL") or os.path.join(SCRATCH, "ieee.csl")
+
+# pandoc: PATH primero, despues la ruta tipica del instalador de winget
+# (JohnMacFarlane.Pandoc no siempre queda en el PATH de una sesion de bash).
+_pandoc_winget = os.path.join(
+    os.environ.get("LOCALAPPDATA", ""), "Pandoc", "pandoc.exe"
+)
+PANDOC = (
+    os.environ.get("PANDOC_BIN")
+    or shutil.which("pandoc")
+    or (_pandoc_winget if os.path.isfile(_pandoc_winget) else None)
+    or os.path.join(SCRATCH, "pandoc-3.1.11", "pandoc.exe")
+)
+
+# ieee.csl vive en el repo (scripts/ieee.csl) para no depender de que cada
+# maquina lo descargue por su cuenta; ver CLAUDE.md para la fuente original.
+_csl_repo = os.path.join(SCRIPT_DIR, "ieee.csl")
+CSL = (
+    os.environ.get("IEEE_CSL")
+    or (_csl_repo if os.path.isfile(_csl_repo) else None)
+    or os.path.join(SCRATCH, "ieee.csl")
+)
 
 if not os.path.isfile(PANDOC):
     raise SystemExit(

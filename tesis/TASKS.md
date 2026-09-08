@@ -31,7 +31,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
 | `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 89 | Task-025: "calibrar sus umbrales" -> "calibrar su criterio de contraste". Task-024: nota de procedencia de citas y de analisis de citas como trabajo futuro. Task-023: recortadas 5 cifras de precision de algoritmo que no eran resultado de explicabilidad |
-| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 58 | **Pendiente para claude-2 (Task-025, ver Cola de tareas):** revisar si la arquitectura ConvTransformer (encoder/decoder, capas, dimensiones) debe salir o reducirse a mención instrumental, misma regla que ya aplica al resto de la prosa. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
+| `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
 | `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-025: "umbrales de decisión" -> "criterio de validación". Task-021: actividades. **Fechas por confirmar** |
 | `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 93 | Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
 | `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
@@ -70,21 +70,21 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-Una tarea abierta para claude-2 (ver Task-025 más abajo); el resto son pendientes del
-autor humano: confirmar las fechas del plan de trabajo (`secciones/05_plan_trabajo.tex`,
-tabla `tab:plan`).
+Sin tareas de contenido pendientes. Queda solo la confirmación de fechas del plan de
+trabajo por el autor humano (`secciones/05_plan_trabajo.tex`, tabla `tab:plan`).
 
-- **Para claude-2 (`secciones/04_marco_teorico.tex`), a raíz de Task-025:** la sección
-  "Del Transformer estándar al ConvTransformer de índices" describe la arquitectura del
-  modelo instrumental (encoder convolucional, atención multi-cabeza, decoder,
-  dimensiones) con detalle de implementación. Task-025 retiró ese nivel de detalle de
-  todo lo que sí toca claude-1 (ver más abajo) por instrucción explícita del autor
-  humano: esta entrega se limita a la formulación matemática del framework y a la
-  defensa conceptual de la idea, no a cómo se implementa. No se toca este archivo
-  directamente porque es de claude-2 (regla de aislamiento, `CLAUDE.md`); se deja
-  anotado aquí para que claude-2 decida si reduce esa sección a mención instrumental o
-  la conserva con justificación. No es `NEED_REWRITE` (no hay error, es una decisión de
-  alcance del propio dueño del archivo).
+- **Resuelta por claude-2 — `secciones/04_marco_teorico.tex`, a raíz de Task-025:**
+  el párrafo de "Del Transformer estándar al ConvTransformer de índices" que describía
+  el encoder convolucional (dimensiones $H\times W$, capa lineal, decoder que
+  reconstruye la resolución) se recortó a la misma altura que el resto del documento:
+  queda el requisito conceptual (encoder compartido entre variables, para que la
+  matriz no confunda capacidad de codificación desigual con relación real) y se declara
+  explícitamente que la arquitectura concreta del encoder es una decisión del caso de
+  estudio, no de la formulación general. Se conservó, en cambio, la sección de
+  agregación entre capas (*attention rollout*, \textcite{abnar2020quantifying}): es una
+  transformación formal con cita, no un detalle de implementación del ConvTransformer,
+  y el resto del documento la mantuvo intacta bajo el mismo criterio (ver
+  `07_conclusiones.tex`). Compila en 28 páginas; no cambió ninguna cita.
 
 ### Task-025 — cerrada por claude-1 en esta sesión
 
@@ -562,23 +562,36 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #20 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
-  Toca: `CLAUDE.md`, `tesis/TASKS.md`, `tesis/main.pdf`, y `secciones/01_introduccion.tex`,
-  `02_objetivos.tex`, `03_estado_arte.tex`, `05_plan_trabajo.tex`, `06_propuesta.tex`,
-  `07_conclusiones.tex`
-  Task: Task-025 (retira código/umbrales/métricas de la prosa, foco en formulación
-  matemática y defensa conceptual de la idea)
-  Nota: en `06_propuesta.tex` se mantiene la cadena de 5 preguntas y la taxonomía de 4
-  resultados del criterio de validación (decisión explícita del autor humano), solo se
-  retira el detalle operativo alrededor de ella. Verificar que ninguna cita quedó bajo
-  el mínimo de 3 usos (recuento en el PR: las 25 claves siguen en 3-6). Deja además una
-  nota pendiente para claude-2 en la Cola de tareas, sobre `04_marco_teorico.tex`
-  (ConvTransformer): no se tocó por ser archivo ajeno.
+- PR #19 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
+  Toca: CLAUDE.md, scripts/build_docx.py, scripts/ieee.csl (nuevo),
+  secciones/04_marco_teorico.tex
+  Task: — (deja `build_docx.py` funcionando de punta a punta: instaló pandoc y
+  python-docx en esta máquina, generó `Informe_avance.docx` y lo confirmó con
+  161 párrafos y 3 tablas, y subió `ieee.csl` al repo para que ninguna máquina
+  tenga que volver a descargarlo)
+  **Ampliado** con un segundo commit tras mergear PR #20 (Task-025): recorta en
+  `04_marco_teorico.tex` el mismo detalle de implementación del ConvTransformer
+  (encoder, dimensiones) que Task-025 sacó del resto del documento — resuelve la
+  tarea que quedó anotada para claude-2 en la Cola de tareas. Conserva el attention
+  rollout por ser formalización, no implementación. Compila 28 páginas, citas sin
+  cambios.
+  Nota: a pedido explícito del autor humano de esperar tu revisión antes de mergear
+  — no lo mergeo yo aunque sea infraestructura de bajo riesgo.
 
-(Task-022/023/024, ver arriba, se ejecutaron en una sola sesión sin pasar por rama ni
+(PR #20 — Task-025 (retira código/umbrales/métricas de la prosa, foco en formulación
+matemática y defensa conceptual de la idea). En `06_propuesta.tex` se mantuvo la cadena
+de 5 preguntas y la taxonomía de 4 resultados (decisión explícita del autor humano),
+solo se retiró el detalle operativo alrededor. Revisado por claude-2: recompilado
+limpio (28 páginas), recuento de citas 25/25 contra `referencias.bib`, todas con 3-6
+usos, sin cambios respecto al conteo anterior. Mergeado.
+Task-022/023/024, ver arriba, se ejecutaron en una sola sesión sin pasar por rama ni
 PR — ver la "Nota de proceso" al cierre de Task-024, arriba.)
 
-(PR #17 — Task-021 (formato de la Escuela, citas numéricas IEEE, formulación
+(PR #18 — auditoría independiente de Task-022/023/024 (ver nota de cierre arriba) más
+el primer fix de portabilidad de `build_docx.py` (rutas relativas y variables de
+entorno, sin probarlo de punta a punta por falta de pandoc en ese momento). Mergeado
+por claude-2.
+PR #17 — Task-021 (formato de la Escuela, citas numéricas IEEE, formulación
 matemática de la presentación preliminar y entrega en DOCX). Mergeado; esta sesión
 encontró el merge ya hecho (`50c9544`) al hacer `git fetch`, sin nota de revisión de
 claude-2 asociada en este archivo — quedó así de una sesión previa, se deja constancia
