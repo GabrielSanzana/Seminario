@@ -1,0 +1,79 @@
+\documentclass[12pt, letterpaper]{report} % Usa la clase report para documentos divididos en capítulos
+
+%Paquete que da el formato al documento
+\usepackage{pucv_inf_2024}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+% Archivo de Referencias
+\addbibresource{referencias.bib}
+
+% Glosario
+\loadglsentries{glosario}
+\makeglossaries
+
+\begin{document}
+
+%% TEX CON PORTADA DEL INFORME
+% Portada para informes en asignaturas
+\include{Portadas/portada_principal.tex}
+
+% Portada para informes de TFT a excepción del final de Proyecto
+%\include{Portadas/portada_TFT_nofinal.tex}
+
+% Portada informe final de proyecto 
+%\include{Portadas/portada_TFT_final.tex}
+
+% Portada para informe de Tesis de Posgrado
+%\include{Portadas/portada_Tesis.tex}
+
+%% DEDICATORIA (incluir solo en TFT y TFG, sino comentar)
+\include{Dedicatoria/dedicatoria.tex}
+
+%% RESUMEN/ABSTRACT DEL INFORME
+\include{Resumen/resumen.tex}
+
+%% INDICE, LISTAS de FIGURAS/TABLAS/ALGORITMOS, GLOSARIO, ETC.
+%% COMENTAR EN CASO DE NO QUERER INCLUIR ALGUNA DE ESTAS LISTAS/INDICES
+\newpage\addcontentsline{toc}{chapter}{Índice General\vspace{-0.5cm}}
+\tableofcontents % Este comando genera el índice
+
+\newpage\addcontentsline{toc}{chapter}{Lista de Figuras\vspace{-0.5cm}}
+\listoffigures % Índice de figuras
+
+\newpage\addcontentsline{toc}{chapter}{Lista de Tablas\vspace{-0.5cm}}
+\listoftables  % Índice de tablas
+\input{MATRIZ_CITAS.tex}
+\newpage\addcontentsline{toc}{chapter}{Lista de Algoritmos\vspace{-0.5cm}}
+\listofalgorithms 
+
+% Lista de Símbolos
+\include{simbolos.tex}
+\newpage\addcontentsline{toc}{chapter}{Lista de Símbolos\vspace{-0.5cm}}
+\printnomenclature
+
+% Imprimir Glosario
+\newpage\addcontentsline{toc}{chapter}{Glosario}
+\printglossary[type=\acronymtype]
+
+\newpage
+\pagenumbering{arabic} % Cambia a numeración arábiga para el resto del documento
+
+% CONTENIDO PRINCIPAL DEL DOCUMENTO
+\include{Configuracion_formato/Configuracion}
+\include{Elementos_texto/Elementos}
+\include{Portada/Portada}
+\include{Indice_complementarios/Indice}
+\include{Extension/Extension}
+\include{Estilo_texto/Estilo}
+\include{Contenidos_secciones/Contenidos}
+\include{TFT_investigacion/Tft}
+\include{Tft_software/Tft}
+\include{Integridad/Integridad}
+\include{IA/Ia}
+
+\include{Portadas/portada_TFT_nofinal.tex}
+\include{Portadas/portada_TFT_final.tex}
+\include{Portadas/portada_Tesis.tex}
+
+\end{document}

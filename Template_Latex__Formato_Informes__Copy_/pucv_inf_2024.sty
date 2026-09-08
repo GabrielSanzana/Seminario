@@ -1,0 +1,84 @@
+% Este es un archivo de estilo LaTeX para informes de la Escuela de Ing. Informática (PUCV)
+% Autor: Escuela de Ingeniería Informática
+% Versión: 1.0
+% Fecha: 2024-03-07
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pucv_inf_2024}[2024/03/07 Paquete para informes PUCV\_INF]
+
+%\usepackage[utf8]{inputenc} % Codificación de entrada
+\usepackage[T1]{fontenc} % Codificación de fuente
+\usepackage[margin=2.5cm]{geometry} % Para configurar los márgenes
+\usepackage{fancyhdr} % Para los encabezados y pies de página personalizados
+\usepackage{titlesec} % Para personalizar los títulos de secciones
+\usepackage{lipsum} % Para texto de relleno. Puedes eliminarlo en tu documento final
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{times} % Times New Roman. Para Open Sans o Verdana, necesitarás paquetes adicionales
+\usepackage{xcolor}
+\definecolor{titlecolor}{HTML}{4472c4} % Define el color usando un valor hexadecimal
+\usepackage{amsmath}
+\usepackage{glossaries}
+
+\usepackage{nomencl}
+\makenomenclature
+
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage[style=apa, backend=biber]{biblatex}
+
+
+\usepackage{enumitem} % Para controlar el espaciado en listas
+\setlist{itemsep=0pt, topsep=0pt} % Ajusta 'itemsep' y 'topsep' según necesites
+
+\usepackage{caption}
+% Cambiar tamaño de la leyenda en figuras y tablas
+\captionsetup{font=footnotesize}
+\captionsetup[algorithm]{name=Algoritmo}
+
+
+% Cambiar el título de los índices
+\renewcommand{\nomname}{\uppercase{Lista de Símbolos}}
+\renewcommand{\contentsname}{\uppercase{Índice General}}
+\renewcommand{\listfigurename}{\uppercase{Lista de Figuras}}
+\renewcommand{\listtablename}{\uppercase{Lista de Tablas}}
+\renewcommand{\listalgorithmname}{\uppercase{Lista de Algoritmos}\vspace{17pt}}
+\renewcommand{\glossaryname}{Glosario}
+
+
+% Hacer que la numeración de los algoritmos dependa del capítulo
+\makeatletter
+\renewcommand{\thealgorithm}{\thechapter.\arabic{algorithm}}
+\@addtoreset{algorithm}{chapter}
+\makeatother
+
+% Configuración de encabezados y pies de página
+\pagestyle{fancy}
+\fancyhf{} % Limpia los encabezados y pies de página actuales
+%\rfoot{\thepage} % Número de página en el pie de página, alineado a la derecha
+\fancyfoot[R]{\thepage}
+
+\fancypagestyle{plain}{%
+    \fancyhf{} % Limpia los encabezados y pies de página
+    \fancyfoot[R]{\thepage} % Número de página a la derecha en páginas impares (incluyendo las primeras páginas de capítulo)
+}
+
+\renewcommand{\headrulewidth}{0pt} % Sin línea horizontal en el encabezado
+
+% Configuración de la numeración de páginas
+\pagenumbering{roman} % Numeración romana para páginas preliminares
+
+% Configuración de los títulos de secciones
+\titleformat{\chapter}[block]{\normalfont\bfseries\Large}{\thechapter.}{0.5em}{\MakeUppercase}
+\titlespacing*{\chapter}{0cm}{5pt}{0pt}
+
+\titleformat{\section}[block]{\normalfont\bfseries\large}{\thesection.}{0.5em}{}
+\titlespacing*{\section}{0cm}{5pt}{0pt}
+
+\titleformat{\subsection}[block]{\normalfont\bfseries\normalsize}{\thesubsection.}{0.5em}{}
+\titlespacing*{\subsection}{0cm}{5pt}{0pt}
+
+% Configuración de párrafos
+\setlength{\parindent}{1cm} % Sangría de 1 cm
+\renewcommand{\baselinestretch}{1} % Interlineado sencillo
+\setlength{\parskip}{10pt}

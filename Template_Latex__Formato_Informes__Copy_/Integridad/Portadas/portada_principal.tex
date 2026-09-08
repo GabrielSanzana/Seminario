@@ -1,0 +1,30 @@
+\title{Título del Informe\\[0.2cm] Segunda Línea del Título}
+\author{Nombre y Apellido 1\\[0.2cm] Nombre y Apellido 2\\[0.2cm]...}
+\date{Julio 2024}
+
+\begin{titlepage}
+  \addtocounter{page}{-1} 
+  \makeatletter
+  \thispagestyle{plain} % Usa el estilo 'plain' definido para la página de título
+    
+    \begin{picture}(0,0)
+         \put(-75,-80){\includegraphics[width=20cm]{Portadas/imagenes/encabezado.png}}
+    \end{picture}
+
+  \begin{flushright} % Alinea el contenido a la derecha
+  \vspace*{\fill} % Centra verticalmente el contenido
+    {\textcolor{titlecolor}{\LARGE\bfseries\MakeUppercase{
+    \\[3cm]
+    \@title}}}
+  \vspace*{\fill} % Centra verticalmente el contenido
+  
+    {\textcolor{titlecolor}{\Large\bfseries\textsc{
+    \@author
+    }}} \\[1cm]
+    {\textcolor{titlecolor}{\bfseries\textsc{
+    Nombre de la Asingatura\\[0.2cm] 
+    \@date
+    }}}
+
+  \end{flushright}
+\end{titlepage}
