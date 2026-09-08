@@ -30,7 +30,7 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 30 | Task-021: reescrito, dos familias y modelo alternativo |
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `IN_PROGRESS` | claude-1 (Task-027 la edita claude-2, instrucción directa del autor humano) | 82 | Task-027: el autor humano reescribe a mano la §"Obtención del corpus" con el detalle completo de las 4 fases PRISMA (definición, búsqueda, verificación, análisis) y pide a claude-2 formatearla en LaTeX, arreglar citas y usar `Protocolo PRISMA/PRISMA.png` (diagrama oficial subido a `main`, commit `d321474`) como figura. Ver nota de reserva abajo |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027 la editó claude-2, instrucción directa del autor humano) | 139 | Task-027: §"Obtención del corpus" reemplazada por §"Metodología de la revisión" con las 4 fases PRISMA completas (definición, búsqueda, verificación, análisis), figura oficial `figuras/prisma_oficial.png` y cita de Page et al. 2021 como `\footnote` (no en `referencias.bib`, corpus cerrado en 25). `prisma_flujo.pdf` de Task-026 queda sin referenciar. Ver nota de cierre abajo |
 | `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
 | `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-025: "umbrales de decisión" -> "criterio de validación". Task-021: actividades. **Fechas por confirmar** |
 | `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 96 | Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
@@ -72,7 +72,7 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-### Task-027 — en curso por claude-2, excepción de dueño por instrucción directa
+### Task-027 — cerrada por claude-2, pendiente de revisión
 
 - **Task-027 — reescritura de la metodología PRISMA en `03_estado_arte.tex`.**
   El autor humano escribió a mano el contenido completo de una §"Metodología de la
@@ -102,6 +102,17 @@ antes de tocar nada:
   no como entrada de `referencias.bib`: el corpus está cerrado en exactamente 25
   (regla de "Corpus de referencias" en `CLAUDE.md`) y esa declaración metodológica no
   es una de las 25 filas de `Referencias_seminario.xlsx`.
+  **Cierre:** `./scripts/compilar.sh` → `OK: main.pdf compilado, 32 paginas` (cuerpo
+  de 24, de "Introducción" a "Referencias"; sigue bajo el máximo de 30). Las cadenas
+  booleanas en `\texttt` sin espacio de separación causaban overfull hbox de hasta
+  102pt en pdflatex (el espacio entre palabras en fuente `pcr`/Courier no estira al
+  justificar); se corrigió con `\raggedright` en ese bloque. Recuento de citas sin
+  cambios: 25/25 resuelven contra `referencias.bib`, todas con 3 o más usos. Se
+  repuso además, al cierre del párrafo de síntesis, la declaración de Task-024 sobre
+  no analizar las citas de las 25 referencias (línea de trabajo futuro) que el
+  borrador nuevo del autor humano no incluía y que sigue siendo obligatoria; de paso
+  se corrigió ahí una raya larga que la versión anterior del párrafo tenía pese a la
+  regla de "Estilo de la prosa" de no usarlas.
 
 ### Task-026 — cerrada por claude-1 en esta sesión, pendiente de revisión
 
