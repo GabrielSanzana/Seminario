@@ -27,14 +27,14 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `main.tex` | `NEED_REVIEW` | claude-1 | 59 | Task-019: migrado al template PUCV, por orden directa del autor humano |
 | `pucv_inf_2024.sty` | `NEED_REVIEW` | claude-1 | — | Copia literal del template. No se modifica |
 | `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 | 33 | Portada del template con título, autores y asignatura del proyecto |
-| `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 31 | Task-019: resumen, abstract y palabras clave |
-| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 44 | Task-019: contexto, problema, qué se ha hecho, propuesta y contribución |
-| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 43 | Task-019: general más específicos en estudio, desarrollo y validación |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 96 | Task-019: PRISMA, seis familias con pro y contra, contribución |
-| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 72 | Task-019: absorbe `05_formalizacion.tex`, migrado sin reescribir la prosa |
-| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-019: sección nueva. **Fechas por confirmar con el autor humano** |
-| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1 | 91 | Task-019: la sección 6.2 viene de `04_arquitectura.tex` (autoría claude-2) |
-| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 16 | Task-019: conclusiones preliminares, sin resultados de código |
+| `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 31 | Task-020: reescrito, resumen y abstract con la pregunta de investigación |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 46 | Task-020: contexto reanclado en la pregunta del protocolo PRISMA |
+| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 46 | Task-020: menos enumeraciones, prosa desarrollada, citas integradas |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 | 81 | Task-020: obtención del corpus reducida a lo esencial; tres familias en prosa |
+| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 55 | Task-020: propiedades en prosa; contenido formal de claude-2 conservado |
+| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 | 56 | Task-020: actividades sin detalle de implementación. **Fechas por confirmar** |
+| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1 | 59 | Task-020: reescrita a nivel de alcance, sin detalle de código; §6.2 de claude-2 |
+| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 16 | Task-020: párrafos desarrollados, citas integradas |
 | `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | Task-019: reemplaza `99_bibliografia.tex`; 25 entradas biblatex APA |
 
 Archivos retirados del documento por Task-019, recuperables desde el historial de git:
@@ -70,8 +70,65 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-Sin tareas pendientes de contenido. Lo único abierto es la revisión de Task-019 por
+Sin tareas pendientes de contenido. Lo único abierto es la revisión de Task-020 por
 claude-2 y la confirmación de fechas del plan de trabajo por el autor humano.
+
+### Cerrada por claude-1 en esta sesión
+
+- **Task-020** — Correcciones de redacción y de alcance sobre el informe ya migrado.
+  El autor humano revisó el PDF resultante de Task-019 y levantó seis observaciones.
+  Se corrigieron todas:
+
+  1. *Párrafos demasiado breves y exceso de enumeraciones.* Se reescribió la prosa de
+     las siete secciones y del resumen con párrafos desarrollados. Las listas bajaron de
+     seis bloques a tres, y los tres que quedan están en `02_objetivos.tex`, donde
+     enumerar es la convención de la sección.
+  2. *Citas mal incorporadas.* Antes todo era `\cite` al final de la oración, que en
+     APA rinde siempre entre paréntesis. Ahora se usan las tres formas según
+     corresponda: `\textcite` para la mención con el autor integrado en la frase (21
+     usos), `\parencite` para la cita indirecta entre paréntesis (12 usos) y una cita
+     directa entre comillas con `\enquote`, tomada literal del resumen de
+     `mechinterp2025ts` en arXiv y atribuida a sus autores.
+  3. *El contexto del problema no debía ser el caso de estudio.* La sección 1.1 se
+     reescribió alrededor de la pregunta de investigación registrada al diseñar el
+     protocolo PRISMA, desarmándola por componentes (población, condición intervenida,
+     comparador y resultado esperado). El caso de los índices espectrales salió de ahí
+     y aparece ahora donde corresponde, en el marco teórico y en el alcance.
+  4. *La obtención del corpus entraba en demasiado detalle.* La sección 3.1 pasó de
+     cinco párrafos más tabla a dos párrafos más tabla: protocolo empleado, cadena de
+     búsqueda, fuentes, criterios de inclusión y resultado. Salieron el desglose PICO
+     (ahora está en la introducción, que es su lugar) y el detalle paso a paso del
+     cribado.
+  5. *El texto hablaba de código.* Esta entrega define alcance, así que salieron del
+     documento la ablación con renormalización, la fórmula del operador Top-K, los
+     operadores alternativos, la prueba binomial con sus correcciones por comparaciones
+     múltiples y el desglose de la arquitectura del ConvTransformer. El criterio de
+     validación quedó descrito por lo que establece cada paso y no por cómo se
+     implementa, y se agregó una sección de alcance explícito (§6.6) con lo que esta
+     etapa compromete y lo que deja fuera.
+  6. *Redacción con tells de IA.* Además de la reescritura, se pasó una auditoría de
+     patrones sobre el resultado y se corrigieron repeticiones de apertura ("conviene",
+     de 7 a 4 usos, y los que quedan son de uso corriente) y verbos inflados que
+     reemplazaban a "ser" ("constituye", de 5 a 1).
+
+  Nota sobre la §6.2, que es de claude-2: la descripción arquitectónica quedó reducida a
+  su argumento de delimitación (el ConvTransformer es instrumento y no contribución),
+  porque el detalle de implementación es justamente lo que el autor humano pidió sacar.
+  El argumento se conserva íntegro; lo que se retiró fue la enumeración técnica.
+
+  El corpus sigue cerrado en 25: recuento automático posterior a la reescritura da 25
+  claves citadas y 25 entradas en `referencias.bib`, sin colgantes ni sobrantes. Cero
+  rayas largas en la prosa. Cuerpo de 19 páginas.
+
+  Reserva: se editó sin el commit previo de `IN_PROGRESS` porque no había PR abierto de
+  claude-2 ni archivo suyo en curso al momento de empezar, y la instrucción del autor
+  humano llegó sobre el documento completo. Queda anotado por transparencia.
+
+  **`thesis-prose-audit` no está instalado en la máquina de claude-1**, aunque
+  `CLAUDE.md` lo declara obligatorio. La auditoría de prosa se hizo con la skill
+  `humanizer`, que cubre el mismo conjunto de patrones. Si esa skill vive solo en el
+  entorno de claude-2, conviene decirlo en `CLAUDE.md` o publicarla en el repositorio,
+  porque tal como está redactada la regla no se puede cumplir desde este lado. [claude-1]
 
 ### Cerrada por claude-1 en esta sesión
 

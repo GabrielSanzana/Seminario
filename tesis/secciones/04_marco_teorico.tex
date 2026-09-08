@@ -1,8 +1,9 @@
 %% ============================================================
 %%  Marco teorico
-%%  Contenido formal migrado desde 05_formalizacion.tex (autoria: claude-2).
-%%  Se traslado sin reescribir la prosa: solo cambio de archivo, ajuste de
-%%  citas al corpus vigente y eliminacion de rayas largas.
+%%  La definicion formal proviene de la antigua 05_formalizacion.tex
+%%  (autoria: claude-2). Se conserva su contenido matematico; la prosa que
+%%  lo rodea se reescribio por instruccion del autor humano (parrafos mas
+%%  largos, menos enumeraciones, citas integradas).
 %%  Reglas: ver ../../CLAUDE.md
 %% ============================================================
 
@@ -11,62 +12,44 @@
 
 \section{Definición formal del problema}
 
-La entrada del framework es una representación relacional y no un modelo. Sea $M_\theta: X \to Y$ un modelo profundo ya entrenado, del cual se extrae una matriz $A \in \mathbb{R}^{n\times n}$ donde cada elemento $A_{ij}$ representa la intensidad de interacción dirigida entre las componentes $i$ y $j$. Todo lo que el framework requiere de $M_\theta$ está contenido en esa matriz, que debe satisfacer tres propiedades:
+La entrada del framework es una representación relacional y no un modelo. Sea $M_\theta: X \to Y$ un modelo profundo ya entrenado, del cual se extrae una matriz $A \in \mathbb{R}^{n\times n}$ donde cada elemento $A_{ij}$ representa la intensidad de la interacción dirigida entre las componentes $i$ y $j$. Todo lo que el framework necesita de $M_\theta$ está contenido en esa matriz, siempre que cumpla tres condiciones. Los valores deben ser no negativos, $A_{ij} \geq 0$; las filas deben sumar aproximadamente uno, $\sum_j A_{ij} \approx 1$, lo que permite leer la matriz como una cadena de Markov dirigida; y la matriz debe ser asimétrica, de manera que en general $A_{ij} \neq A_{ji}$ y la dirección de la relación quede codificada. Esas tres condiciones forman la condición de admisibilidad, y una representación que no las satisfaga queda fuera del alcance del framework mientras no se le aplique una adaptación explícita. Nótese que la definición no menciona en ningún punto de dónde viene $A$, por lo que el índice $n$ puede recorrer índices espectrales, sensores industriales o variables de proceso sin que cambie nada de lo anterior.
 
-\begin{enumerate}
-\item No negatividad: $A_{ij} \geq 0$.
-\item Estocasticidad por filas: $\sum_j A_{ij} \approx 1$, lo que permite leer la matriz como una cadena de Markov dirigida.
-\item Asimetría: en general $A_{ij} \neq A_{ji}$, lo que codifica dirección.
-\end{enumerate}
-
-Estas tres propiedades constituyen la condición de admisibilidad. Una representación que no las satisfaga no es entrada válida para el framework sin una adaptación previa explícita. Puesto que la definición no menciona en ningún punto el origen de $A$, el índice $n$ puede corresponder a índices espectrales, sensores industriales o variables de proceso indistintamente.
-
-El problema puede entonces plantearse así: dada $A$, producir un objeto discreto $H$ de tamaño acotado, definido sobre variables con nombre, que preserve la información relacional relevante de $A$ y que admita ser sometido a prueba. Formalmente se busca
+Sobre esa entrada, el problema consiste en producir un objeto discreto $H$ de tamaño acotado, definido sobre variables con nombre, que conserve la información relacional relevante y que pueda someterse a prueba. Formalmente se busca
 
 \begin{equation}
 \min_{H} |H| \quad \text{sujeto a} \quad I(H, G) \geq \epsilon ,
 \end{equation}
 
-donde $G$ es el grafo dirigido obtenido a partir de $A$, $I(H,G)$ mide la información preservada entre ese grafo y la hipótesis reducida, y $\epsilon$ es el mínimo tolerado. El objetivo no es recuperar todos los circuitos internos del modelo, sino obtener una explicación estructural mínima capaz de conservar la información relevante.
+donde $G$ es el grafo dirigido derivado de $A$, la función $I(H,G)$ mide la información que la hipótesis conserva respecto de ese grafo y $\epsilon$ es el mínimo aceptable. La intención no es reconstruir todos los circuitos internos del modelo, sino quedarse con la explicación estructural más pequeña que siga diciendo algo.
 
-A esa exigencia de compacidad se suma una de fidelidad. Si $M(X)$ es la predicción original y $M_H(X)$ la que se obtiene cuando solo se conserva la información representada por $H$, entonces
+A la exigencia de compacidad se agrega la de fidelidad, que es lo que impide que la hipótesis se convierta en una descripción elegante y desconectada del modelo que la produjo. Si $M(X)$ es la predicción original y $M_H(X)$ la que se obtiene cuando solo se conserva la información representada por $H$, entonces
 
 \begin{equation}
 F(H,M) = 1 - \mathcal{L}\big(M(X), M_H(X)\big),
 \end{equation}
 
-y la hipótesis se considera fiel cuando $F(H,M) \geq \delta$. El problema completo, por lo tanto, no consiste en encontrar un $H$ cualquiera, sino uno que sea simultáneamente compacto, fiel al modelo y estable frente a las fuentes de variación que se detallan en el capítulo \ref{cap:propuesta}.
+y la hipótesis se considera fiel cuando $F(H,M) \geq \delta$. El problema completo, entonces, no consiste en encontrar un $H$ cualquiera sino uno que sea simultáneamente compacto, fiel al modelo y estable frente a las fuentes de variación que introduce el entrenamiento.
+
+El caso de estudio sobre el que se instrumenta este planteamiento trabaja con índices espectrales derivados de imágenes satelitales, cuyas bandas, resoluciones e índices derivados están documentados para la constelación Sentinel-2 y sus aplicaciones agrícolas \parencite{segarra2020sentinel}. Estas variables son fuertemente colineales entre sí, condición que vuelve poco practicable establecer la estructura relacional por inspección directa y que explica el interés por extraerla desde el modelo.
 
 \section{Técnicas necesarias}
 
-\subsection{Atención entre variables}
+\subsection{Atención entre variables y su agregación}
 
-El mecanismo de atención de un Transformer produce, para cada capa y cada cabeza, una matriz que indica cuánto pesa cada token al construir la representación de los demás. El eje sobre el que se aplica la atención determina qué significa esa matriz. Si los tokens son posiciones espaciales o instantes de tiempo, la matriz describe relaciones entre posiciones y su tamaño crece con la resolución del dato. Si cada token es una variable completa, la matriz tiene tamaño $n \times n$ sobre las variables del fenómeno y cada celda admite la lectura directa que el framework necesita. Invertir las dimensiones del Transformer en ese sentido está validado como decisión de diseño efectiva y no solo conveniente \cite{liu2024itransformer}.
+El mecanismo de atención produce, para cada capa y cada cabeza, una matriz que indica cuánto pesa cada token al construir la representación de los demás. Lo que esa matriz significa depende por completo del eje sobre el que se aplica la atención. Cuando los tokens son posiciones espaciales o instantes de tiempo, la matriz describe relaciones entre posiciones y su tamaño crece con la resolución del dato, de modo que no hay una lectura relacional entre variables que rescatar. Cuando cada token es una variable completa, en cambio, la matriz tiene tamaño $n \times n$ sobre las variables del fenómeno y cada celda admite la lectura directa que el framework necesita. Invertir las dimensiones del Transformer en ese sentido es una decisión de diseño validada por desempeño y no solo por conveniencia interpretativa \parencite{liu2024itransformer}.
 
-\subsection{Agregación entre capas: attention rollout}
-
-Un modelo con $L$ capas y $h$ cabezas produce $L \times h$ matrices, de modo que hace falta un procedimiento para obtener una sola matriz representativa. El attention rollout propaga la atención a través de las capas incorporando las conexiones residuales \cite{abnar2020quantifying}:
+Un modelo con $L$ capas y $h$ cabezas produce $L \times h$ matrices, así que hace falta un procedimiento para obtener una sola que represente al modelo completo. El attention rollout que propusieron \textcite{abnar2020quantifying} propaga la atención a través de las capas incorporando las conexiones residuales:
 
 \begin{equation}
 \tilde{A} = \prod_{\ell=1}^{L}\left( \gamma I + (1-\gamma) \bar{A}^{(\ell)} \right),
 \end{equation}
 
-donde $\bar{A}^{(\ell)}$ es el promedio de las $h$ cabezas de la capa $\ell$, $I$ es la identidad que simula la conexión residual y $\gamma$ es la fracción residual. El resultado se normaliza por filas para que siga siendo estocástico.
+donde $\bar{A}^{(\ell)}$ es el promedio de las $h$ cabezas de la capa $\ell$, la identidad $I$ simula la conexión residual y $\gamma$ es la fracción residual. El resultado se normaliza por filas para que siga cumpliendo la condición de admisibilidad. Los mismos autores advierten el límite del procedimiento: en un Transformer la información se mezcla progresivamente entre tokens al atravesar capas y conexiones residuales, con lo cual los pesos crudos dejan de corresponder de forma confiable a los tokens de entrada. El rollout atenúa esa mezcla sin eliminarla, y esa es la razón de fondo por la que el grafo que se obtiene después debe tratarse como hipótesis y no como lectura directa del mecanismo interno.
 
-El mismo trabajo que introduce el procedimiento advierte su límite: en un Transformer la información se mezcla progresivamente entre tokens al atravesar capas y conexiones residuales, por lo que los pesos crudos dejan de corresponder de forma confiable a los tokens de entrada \cite{abnar2020quantifying}. El rollout atenúa esa mezcla sin eliminarla. Por eso el grafo que se obtiene después debe tratarse como hipótesis sujeta a verificación y no como lectura directa del mecanismo interno.
+\subsection{Qué se sabe sobre medir una explicación}
 
-\subsection{Fidelidad de la atención}
+La segunda familia de técnicas necesarias tiene que ver con la evaluación, y su conclusión general es que casi ninguna medida de calidad puede adoptarse sin examinarla antes. Que un mecanismo interno sea legible no implica que gobierne la salida, según mostraron \textcite{rizzo2022faithfulness} al comparar atención y confianza como formas de saliencia sobre un mismo modelo, de manera que la fidelidad hay que medirla en cada caso.
 
-Que un mecanismo interno sea legible no implica que gobierne la salida. Al adaptar pruebas de fidelidad a un modelo de constancia de color temporal se observa que la atención no sostiene una relación causal con la predicción, mientras que otra forma de saliencia interna del mismo modelo sí la sostiene \cite{rizzo2022faithfulness}. Ese resultado obliga a medir la fidelidad en cada caso, que es justamente lo que hace el cuarto eslabón de la cadena de evidencia.
+La forma habitual de medirla consiste en perturbar una entrada y observar cuánto cae el desempeño, y ahí aparece un problema conocido. Una perturbación destructiva saca al dato de la distribución con la que el modelo fue entrenado, con lo cual lo que se termina midiendo es la fragilidad del modelo y no la relevancia de lo perturbado. \textcite{meng2023perturbation} abordan ese defecto generando perturbaciones que permanecen dentro de la distribución, y con ello identifican menos características críticas para explicar la misma decisión. El análisis de \textcite{simic2025perturbation} agrega que la métrica de fidelidad más extendida presenta fallas cuando se traslada a series temporales, y que ningún método de perturbación resulta óptimo para todas las arquitecturas y conjuntos evaluados. Ambos resultados obligan a justificar la medida elegida en lugar de tomarla prestada.
 
-\subsection{Perturbación y ablación}
-
-La forma habitual de medir fidelidad consiste en perturbar una entrada y observar cuánto cae el desempeño. La técnica arrastra un problema conocido: una perturbación destructiva saca al dato de la distribución con la que el modelo fue entrenado, con lo cual se termina midiendo la fragilidad del modelo y no la relevancia de lo perturbado. Generar perturbaciones que permanezcan dentro de la distribución evita ese efecto e identifica menos características críticas para explicar la misma decisión \cite{meng2023perturbation}. A esto se agrega que la métrica de fidelidad más extendida presenta fallas al trasladarse a series temporales, y que ningún método de perturbación resulta óptimo para todas las arquitecturas y conjuntos evaluados \cite{simic2025perturbation}.
-
-\subsection{Discretización y variabilidad de la explicación}
-
-Pasar de una matriz continua a un conjunto finito de relaciones exige una regla de corte, y esa regla es una fuente de variación por sí misma. El fenómeno de fondo es que dos configuraciones que coinciden en la predicción pueden diferir en la explicación, algo documentado al comparar la variabilidad de explicaciones humanas con la de explicaciones generadas por modelos; en ese mismo trabajo, aplicar esquemas de discretización aumenta la similitud con el juicio humano sin alterar las predicciones \cite{bogaert2026variability}. De ahí que el framework trate la regla de discretización como un parámetro cuyo efecto hay que medir, y no como un detalle de implementación.
-
-\subsection{Dominio del caso de estudio}
-
-El caso de estudio trabaja con índices espectrales derivados de imágenes satelitales. Las bandas, resoluciones e índices disponibles en la constelación Sentinel-2, junto con sus aplicaciones en seguimiento agrícola, constituyen la referencia técnica de las variables que forman los nodos del grafo \cite{segarra2020sentinel}. Estos índices son fuertemente colineales entre sí, lo que hace que la estructura relacional entre ellos sea difícil de establecer por inspección y motiva el interés por extraerla desde el modelo.
+Queda un tercer elemento, más sutil, que atañe al paso de una matriz continua a un conjunto finito de relaciones. Toda regla de corte es en sí misma una fuente de variación, y el fenómeno de fondo lo documentan \textcite{bogaert2026variability} al comparar la variabilidad de explicaciones humanas con la de explicaciones generadas por modelos: dos configuraciones que coinciden en la predicción pueden diferir en la explicación, y en su experimento la discretización aumenta la coincidencia con el juicio humano sin alterar las predicciones. Por eso el framework trata la regla de discretización como un parámetro cuyo efecto hay que medir y no como una decisión de implementación que se fija una vez y se olvida.
