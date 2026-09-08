@@ -886,3 +886,11 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
   detectar "qué párrafos son nuevos" corrompía el documento (lxml no garantiza
   identidad de objeto estable entre llamadas), moviendo ~50 párrafos de más sin ningún
   error visible. Detalle completo en `CLAUDE.md`, sección "Generar el DOCX".
+- **2026-09-08** — El autor humano vuelve a pedir `tesis/main.pdf` como entregable
+  versionado, revirtiendo el cambio de la entrada anterior (`.gitignore` y `CLAUDE.md`
+  actualizados: `main.pdf` sale del `.gitignore`, `Informe_avance.docx`/`*.docx` entran).
+  `scripts/build_docx.py` queda en el repo funcional pero en desuso. En el mismo mensaje
+  sube `Pauta/` (cuatro capturas de la rúbrica de calificación: Contenido 40%, Resumen
+  10%, Estructura 10%, Presentación 10%, Redacción y estilo 10%, Citas y referencias
+  10%, Contribución 10%) y pide considerarla en la configuración. Detalle completo en
+  `CLAUDE.md`, sección "Pauta de evaluación".

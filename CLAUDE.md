@@ -165,55 +165,55 @@ en bash se puede invocar por ruta completa, no hace falta PowerShell).
 
 **Ningún push sin compilar antes.** Un commit que rompe la compilación bloquea al otro agente.
 
-### Generar el DOCX (`scripts/build_docx.py`)
+### Generar el DOCX (`scripts/build_docx.py`) — en desuso desde el 2026-09-08
 
-Aplana las secciones y llama a `pandoc` con `--citeproc` y el estilo `scripts/ieee.csl`
-(ya está en el repo, no hace falta descargarlo) para producir `Informe_avance.docx` con
-el formato de la Escuela. Necesita `pandoc` y el paquete Python `python-docx`
-(`pip install python-docx`); revisa PATH y, si no lo encuentra ahí, la ruta típica del
-instalador de winget (`%LOCALAPPDATA%\Pandoc\pandoc.exe`) — instalar con
-`winget install JohnMacFarlane.Pandoc` si falta. Corre sin variables de entorno en la
-máquina de claude-2 (verificado 2026-09-08); si hace falta forzar una ruta,
-`PANDOC_BIN`, `IEEE_CSL` y `BUILD_DOCX_SCRATCH` la sobrescriben.
+El entregable volvió a ser `tesis/main.pdf` (ver "Reglas de aislamiento"). Este script
+sigue en el repo, funcional, por si se retoma el DOCX más adelante, pero su salida ya
+no se comitea. Aplana las secciones y llama a `pandoc` con `--citeproc` y el estilo
+`scripts/ieee.csl` (en el repo) para producir un DOCX con el formato de
+`Formato_Informes_Proyecto_Título-2024.pdf` (portada reconstruida a mano con
+`python-docx`, numeración romano/arábigo en tres secciones DOCX reales, saltos de
+página por capítulo).
 
-**El formato exacto que debe seguir el DOCX está en
-`Formato_Informes_Proyecto_Título-2024.pdf`** (raíz del repo, subido por el autor
-humano el 2026-09-08). Es la fuente de autoridad para cómo se ve el documento —
-`pucv_inf_2024.sty` cubre el PDF, este script cubre el DOCX, y ninguno de los dos se
-asume correcto solo porque compila: hay que verificar contra ese PDF si algo del
-formato cambia. Lo que `build_docx.py` ya implementa siguiendo ese documento (sección
-del PDF entre paréntesis):
+**Bug real encontrado y corregido el 2026-09-08, para no repetirlo si se retoma:**
+identificar "qué párrafos son nuevos" comparando `id()` de objetos `lxml` antes/después
+de insertarlos corrompe el documento — lxml puede devolver un envoltorio Python con
+`id()` distinto para el mismo nodo XML en cada llamada a `iterchildren()`, así que la
+comparación por identidad captura decenas de párrafos de más (todo el resto del
+documento, en la práctica) y termina moviendo contenido a un lugar equivocado sin
+lanzar ningún error. La forma segura es contar por posición (cuántos `<w:p>` había
+antes, tomar los que sobran después), no por identidad de objeto.
 
-- Márgenes 2,5 cm, papel carta, Times New Roman 12, sangría de 1 cm, interlineado
-  sencillo, control de líneas viudas/huérfanas (1.1–1.2).
-- Encabezados de capítulo en mayúscula negrita 14, cada uno en página nueva; secciones
-  y subsecciones en negrita 14/12 sin mayúscula (1.2).
-- Portada reconstruida a mano con `python-docx` (imagen institucional, título 18pt
-  negrita, autores, "Seminario de Título" + "Informe de avance" + fecha), **no** vía
-  pandoc: `Portadas/portada_principal.tex` usa `\begin{titlepage}`, `\makeatletter` y
-  macros (`\@title`, `\@author`) que el lector LaTeX de pandoc no resuelve de forma
-  confiable (2).
-- Numeración de página abajo a la derecha: la portada no lleva número; de Resumen a
-  Objetivos va en romano minúsculo empezando en "i"; de Introducción en adelante, en
-  arábigo empezando en 1 (1.3). Esto exige tres secciones DOCX reales (no solo
-  saltos de página) con `w:pgNumType` distinto cada una — python-docx no lo expone
-  como propiedad de alto nivel, `build_docx.py` lo arma con XML crudo
-  (`_insertar_salto_seccion_antes`, `_fijar_numeracion`).
+## Pauta de evaluación
 
-  **Bug real encontrado y corregido el 2026-09-08, para no repetirlo:** identificar
-  "qué párrafos son nuevos" comparando `id()` de objetos `lxml` antes/después de
-  insertarlos corrompe el documento — lxml puede devolver un envoltorio Python con
-  `id()` distinto para el mismo nodo XML en cada llamada a `iterchildren()`, así que la
-  comparación por identidad captura decenas de párrafos de más (todo el resto del
-  documento, en la práctica) y termina moviendo contenido a un lugar equivocado sin
-  lanzar ningún error. La forma segura es contar por posición (cuántos `<w:p>` había
-  antes, tomar los que sobran después), no por identidad de objeto.
+`Pauta/` (raíz del repo, cuatro capturas `informe 1.png`–`informe 4.png`, subidas por
+el autor humano el 2026-09-08) es la rúbrica de calificación del informe de avance.
+Fuente de autoridad para qué exige cada dimensión, no solo el formato — a diferencia de
+`Formato_Informes_Proyecto_Título-2024.pdf` (que rige la forma), esta rúbrica rige el
+contenido y el puntaje. Siete dimensiones, 100 puntos:
 
-No implementado todavía, pendiente si hace falta más precisión: la regla de 1.2 sobre
-trasladar una sección completa a la página siguiente cuando su primer párrafo no
-alcanza dos líneas (se aproxima con `widow_control`, que no es exactamente lo mismo).
-La extensión máxima de 30 páginas (Introducción a Conclusiones, sección 4 del formato)
-es responsabilidad de quien escribe la prosa, no de este script.
+- **Contenido 40 pts** — introducción clara y completa; objetivo general y específicos
+  adecuados y bien definidos; marco teórico completo y actualizado; metodología
+  adecuada y descrita con precisión; resultados y/o propuesta de buena calidad;
+  conclusiones coherentes y pertinentes.
+- **Resumen 10 pts** — visión general clara y completa del proyecto, destaca los puntos
+  clave, fácil de seguir y entender.
+- **Estructura 10 pts** — títulos y subtítulos alineados con el contenido de cada
+  sección, organización que facilita la comprensión.
+- **Presentación 10 pts** — índices, esquemas, gráficos, tablas y figuras pertinentes y
+  de buen nivel; cumple las normas de presentación establecidas.
+- **Redacción y estilo 10 pts** — escritura coherente, fluida y apropiada al contexto;
+  uso adecuado del vocabulario técnico; sin errores ortográficos ni gramaticales.
+- **Citas y referencias 10 pts** — lista de referencias completa, apropiada y
+  relevante, con formato consistente; todas citadas en el texto.
+- **Contribución 10 pts** — aporte a la Ingeniería Informática y sus aplicaciones;
+  metodologías y/o tecnologías aplicadas de forma adecuada.
+
+Al revisar un PR, además del protocolo de contradicciones, considerar si el cambio
+mueve alguna sección hacia el extremo bajo de su dimensión (p. ej. títulos
+desalineados con el contenido → Estructura; una cita no usada en el texto →
+Citas y referencias) y decirlo explícitamente en el comentario del PR, no solo aprobar
+o rechazar en silencio.
 
 ## Roles
 
@@ -297,17 +297,20 @@ DOI esperado.
 - Los archivos auxiliares de LaTeX (`.aux`, `.log`, `.toc`, `.out`, `.bbl`, `.blg`,
   `.bcf`, `.run.xml`, `.nlo`, `.nls`, `.glo`, `.gls`, `.ist`) están en `.gitignore`. No
   forzar su commit: cambian en cada compilación y colisionan siempre.
-- `tesis/main.pdf` no se versiona (vuelve a la regla general el 2026-09-08: entre el
-  8 y el 8 de septiembre se versionó, pero el autor humano pidió revertirlo). El
-  entregable que sí se versiona es **`tesis/Informe_avance.docx`**
-  (`./scripts/build_docx.py`, ver más arriba), para que se pueda ver el documento
-  actualizado en GitHub sin compilar localmente. Regenerar y comitear el DOCX junto
-  con el `.tex` que lo generó, en el mismo commit — nunca un commit de solo texto
-  seguido de un commit de solo DOCX, porque es un binario y cualquier commit
-  intermedio de otro agente sobre el mismo archivo genera conflicto sin nada que
-  conservar de ambos lados (a diferencia de `TASKS.md`, un binario no se puede
-  "conservar ambos lados"). Por eso: regenerar y comitear el DOCX solo al cerrar una
-  tarea (paso 7 del ciclo obligatorio), nunca en los commits de reserva o intermedios.
+- **`tesis/main.pdf` se versiona** (vuelta a la regla original el 2026-09-08: hubo un
+  período breve, el mismo día, en que el entregable versionado fue
+  `tesis/Informe_avance.docx` vía `scripts/build_docx.py`; el autor humano pidió
+  revertirlo. `scripts/build_docx.py` queda en el repo por si se retoma, pero su salida
+  ya no se comitea — está en `.gitignore`). Regenerar y comitear el PDF junto con el
+  `.tex` que lo generó, en el mismo commit — nunca un commit de solo texto seguido de
+  un commit de solo PDF, porque es un binario y cualquier commit intermedio de otro
+  agente sobre el mismo archivo genera conflicto sin nada que conservar de ambos lados
+  (a diferencia de `TASKS.md`, un binario no se puede "conservar ambos lados"). Por eso:
+  regenerar y comitear el PDF solo al cerrar una tarea (paso 7 del ciclo obligatorio),
+  nunca en los commits de reserva o intermedios. Antes de compilar, confirmar que
+  `tesis/main.pdf` no está abierto en otro programa (Windows bloquea el archivo y
+  `pdflatex` falla con "I can't write on file" sin más detalle — cerrar el visor y
+  reintentar, no es un error de LaTeX).
 
 ## Protocolo de contradicciones
 
