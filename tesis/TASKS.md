@@ -245,16 +245,23 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-- PR #12 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
-  Toca: `main.tex`, `pucv_inf_2024.sty`, `Portadas/`, `Resumen/`, las siete secciones,
-  `referencias.bib`, `scripts/compilar.sh`, `.gitignore` y `TASKS.md`
-  Task: Task-019 (migración al template PUCV y ajuste a la rúbrica)
-  Nota: es un PR grande y toca archivos de claude-2, por orden directa del autor humano.
-  El contenido técnico de claude-2 se migró sin reescribirlo; el detalle de qué revisar
-  está en el cuerpo del PR. Compila limpio con `pdflatex` + `biber`, cuerpo de 18
-  páginas, 25 citas y 25 entradas en el `.bib`.
+- PR #11 | rama: claude-2/review | autor: claude-2 | revisa: claude-1
+  Toca: CLAUDE.md, tesis/TASKS.md
+  Task: — (pone al día las reglas tras el reemplazo del notebook por `Framework.py`;
+  ahora también trae el ajuste de `CLAUDE.md` a la arquitectura PUCV de Task-019, ver
+  nota de cierre de Task-019)
 
-(PR #10 — agrega los 12 `\bibitem` de Task-017. Revisado y mergeado por claude-1:
+(PR #12 — Task-019, migración al template PUCV y ajuste a la rúbrica de la entrega,
+por orden directa del autor humano. Tocó archivos de claude-2 (`04_arquitectura.tex`,
+`05_formalizacion.tex`, `99_bibliografia.tex`) y `main.tex` con justificación explícita
+en el cuerpo del PR. Revisado a fondo por claude-2: instaló los paquetes LaTeX que
+faltaban en esta máquina (titlesec, lipsum, biblatex-apa, glossaries, nomencl, etc.),
+compiló limpio (18 páginas de cuerpo, 26 con portada/índices/referencias), recontó citas
+contra `referencias.bib` (25/25, cero colgantes, cero sin citar) y verificó por DOI/API
+de arXiv la nota de claude-1 sobre el título mal cargado de la fila 5 del excel
+(`rizzo2022faithfulness`): confirmado, el DOI real no dice "Causality", claude-1 ya usó
+el título correcto. Mergeado por claude-2.
+PR #10 — agrega los 12 `\bibitem` de Task-017. Revisado y mergeado por claude-1:
 compilado en worktree aparte (`OK: main.pdf compilado, 19 paginas`, cero referencias
 sin resolver, 34 `\cite`/34 `\bibitem` recontados 1:1), y verificada la metadata de 2
 de los 12 `\bibitem` contra Crossref/arXiv por DOI (autores, volumen, página y
@@ -479,3 +486,25 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
   compilación real y no solo sintaxis.
 - **2026-09-07** — Los dos agentes trabajan en el mismo repositorio con ramas separadas y
   pull requests, para que las contradicciones se detecten en la revisión cruzada.
+- **2026-09-07** — El autor humano reemplaza `Prototipo_Preliminar.ipynb` por
+  `Framework.py` directo en `main` (commits `d35e414`, `a8eef14`, `e398528`). Código
+  fuente puro, sin salidas de celda ejecutadas, y con varias fórmulas de índices
+  corregidas respecto al notebook (MARI, ARI, CHL\_REDEDGE, PSRI). Las cifras
+  experimentales ya citadas en la prosa (Jaccard, sensibilidad a K) se verificaron
+  contra el notebook cuando aún existía y quedan documentadas arriba en las notas de
+  cierre de Task-011/Task-016; siguen siendo válidas como lo que efectivamente se
+  ejecutó entonces. Una cifra nueva que se quiera citar desde `Framework.py` requiere
+  confirmar que se ejecutó (no solo que el código está ahí) antes de darla por buena.
+  Ver `CLAUDE.md`, sección "Fuentes primarias".
+- **2026-09-08** — El autor humano ordena migrar el documento al template
+  institucional PUCV (Task-019, PR #12), con cuatro condiciones para esta entrega:
+  corpus cerrado en las 25 referencias de `Referencias_seminario.xlsx`, estado del
+  arte que explique el protocolo PRISMA, sin cifras de ejecución del prototipo, sin
+  rayas largas en la prosa. `main.tex` cambia de clase (`article`→`report`) y de motor
+  bibliográfico (`thebibliography`→biblatex+biber); la estructura de `secciones/`
+  cambia de nombre y orden. El contenido técnico de claude-2
+  (`04_arquitectura.tex`→§6.2 de `06_propuesta.tex`, `05_formalizacion.tex`→
+  `04_marco_teorico.tex`, `99_bibliografia.tex`→`referencias.bib`) se migró sin
+  reescribir la prosa; claude-2 sigue siendo dueño de esas partes en los archivos
+  nuevos. `CLAUDE.md` se actualizó completo para reflejar la arquitectura nueva (ver
+  PR #11). Ver la nota de cierre de Task-019 arriba para el detalle completo.
