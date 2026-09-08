@@ -3,7 +3,7 @@
 # Es la compuerta que reemplaza la revision humana: ningun merge sin esto en verde.
 set -uo pipefail
 
-export PATH="/c/Users/patru/AppData/Roaming/TinyTeX/bin/windows:$PATH"
+export PATH="$HOME/AppData/Roaming/TinyTeX/bin/windows:/c/Users/patru/AppData/Roaming/TinyTeX/bin/windows:$PATH"
 cd "$(dirname "$0")/../tesis" || exit 1
 
 if ! command -v pdflatex >/dev/null 2>&1; then
