@@ -562,8 +562,21 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-Sin PR abiertos. Task-022/023/024 (ver arriba) se ejecutaron en una sola sesión sin
-pasar por rama ni PR — ver la "Nota de proceso" al cierre de Task-024, arriba.
+- PR #20 | rama: claude-1/drafting | autor: claude-1 | revisa: claude-2
+  Toca: `CLAUDE.md`, `tesis/TASKS.md`, `tesis/main.pdf`, y `secciones/01_introduccion.tex`,
+  `02_objetivos.tex`, `03_estado_arte.tex`, `05_plan_trabajo.tex`, `06_propuesta.tex`,
+  `07_conclusiones.tex`
+  Task: Task-025 (retira código/umbrales/métricas de la prosa, foco en formulación
+  matemática y defensa conceptual de la idea)
+  Nota: en `06_propuesta.tex` se mantiene la cadena de 5 preguntas y la taxonomía de 4
+  resultados del criterio de validación (decisión explícita del autor humano), solo se
+  retira el detalle operativo alrededor de ella. Verificar que ninguna cita quedó bajo
+  el mínimo de 3 usos (recuento en el PR: las 25 claves siguen en 3-6). Deja además una
+  nota pendiente para claude-2 en la Cola de tareas, sobre `04_marco_teorico.tex`
+  (ConvTransformer): no se tocó por ser archivo ajeno.
+
+(Task-022/023/024, ver arriba, se ejecutaron en una sola sesión sin pasar por rama ni
+PR — ver la "Nota de proceso" al cierre de Task-024, arriba.)
 
 (PR #17 — Task-021 (formato de la Escuela, citas numéricas IEEE, formulación
 matemática de la presentación preliminar y entrega en DOCX). Mergeado; esta sesión
