@@ -11,16 +11,16 @@
 
 \section{Estado a la fecha de este informe}
 
-El trabajo avanza en tres etapas, y a la fecha de este informe dos están cerradas. La primera consistió en delimitar el terreno mediante la revisión sistemática, que recorrió el protocolo desde la formulación de la pregunta hasta la extracción de datos y dejó como producto el corpus de veinticinco referencias sobre el que se apoya el capítulo \ref{cap:estado_arte}. La segunda produjo el diseño: las transformaciones están definidas, la condición que debe cumplir una representación para ser entrada válida quedó explícita, el criterio de validación está especificado pregunta por pregunta y la taxonomía que interpreta los resultados está formulada.
-
-Queda pendiente la etapa de validación, donde el diseño se pone a prueba y en la que se concentra el resto del calendario. Vale la pena señalar que ese reparto es deliberado: el trabajo optó por fijar su criterio de validación antes de mirar cualquier resultado, precisamente para que no termine acomodándose a lo que los datos entreguen.
+El trabajo avanza en tres etapas, y a la fecha de este informe dos están cerradas: la revisión sistemática, que recorrió el protocolo desde la formulación de la pregunta hasta la extracción de datos y dejó como producto el corpus de veinticinco referencias sobre el que se apoya el capítulo \ref{cap:estado_arte}, y el diseño, con las transformaciones definidas, la condición de entrada válida explícita, el criterio de validación especificado pregunta por pregunta y la taxonomía de resultados formulada. Queda pendiente la etapa de validación, donde el diseño se pone a prueba y se concentra el resto del calendario: el criterio se fijó antes de mirar cualquier resultado, para que no termine acomodándose a lo que los datos entreguen.
 
 \section{Actividades y calendario}
 
-La tabla \ref{tab:plan} detalla las actividades comprometidas. Las tres primeras filas corresponden a trabajo concluido y se incluyen para dejar constancia del punto de partida; el resto pertenece a la etapa de validación y aparece ordenado por dependencia, ya que cada pregunta del criterio solo tiene sentido sobre las relaciones que superaron la anterior. Ese encadenamiento hace que el orden de las filas sea también el orden obligado de ejecución, con poco margen para paralelizar.
+La tabla \ref{tab:plan} detalla las actividades comprometidas. Las tres primeras filas corresponden a trabajo concluido y se incluyen para dejar constancia del punto de partida; el resto pertenece a la etapa de validación y aparece ordenado por dependencia, ya que cada pregunta del criterio solo tiene sentido sobre las relaciones que superaron la anterior, lo que deja poco margen para paralelizar.
 
-{\small
-\begin{longtable}{P{0.46}P{0.24}P{0.26}}
+{\footnotesize
+\renewcommand{\arraystretch}{0.72}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{P{0.65}P{0.22}P{0.10}}
 \caption{Actividades del plan de trabajo, con periodo estimado y estado.}\label{tab:plan}\\
 \toprule
 \textbf{Actividad} & \textbf{Periodo} & \textbf{Estado}\\
@@ -51,6 +51,4 @@ Redacción del informe final & Marzo 2027 & Pendiente\\
 
 \section{Dependencias y riesgos}
 
-Tres dependencias condicionan ese calendario. La primera es de cómputo, porque evaluar la estabilidad exige entrenar varias decenas de modelos equivalentes y el costo por corrida determina cuánto puede avanzarse por semana. La segunda es la disponibilidad del segundo dominio, que necesita acceso al modelo y no solo a su matriz, ya que medir la dependencia del modelo respecto de una relación obliga a volver a predecir bajo condiciones alteradas. La tercera es la construcción del conjunto sintético, cuya estructura conocida será la única referencia externa con la que cuente el trabajo, dado que entre las variables del caso de estudio no existe una topología verificada de antemano.
-
-El riesgo principal es que la cadena se detenga temprano, es decir, que ninguna relación extraída supere la primera o la segunda pregunta y no quede material sobre el cual continuar. Ese desenlace sería incómodo, aunque no invalidaría el trabajo: la cadena está construida de manera que el punto donde una relación cae funcione como diagnóstico, y un resultado negativo sobre el caso de estudio seguiría diciendo algo sobre la relación entre atención y estructura del fenómeno. En ese escenario el conjunto sintético pasa a primer plano, porque permite verificar si el procedimiento detecta una estructura que se sabe que existe.
+Tres dependencias condicionan ese calendario: el cómputo, porque evaluar la estabilidad exige entrenar varias decenas de modelos equivalentes y el costo por corrida determina cuánto puede avanzarse por semana; la disponibilidad del segundo dominio, que exige acceso al modelo y no solo a su matriz, para poder repredecir bajo condiciones alteradas; y la construcción del conjunto sintético, única referencia externa con la que cuente el trabajo, dado que no existe una topología verificada de antemano entre las variables del caso de estudio. El riesgo principal es que la cadena se detenga temprano y ninguna relación supere la primera o segunda pregunta; aun así no invalidaría el trabajo, porque cada caída diagnostica la relación entre atención y estructura, y ahí sirve el conjunto sintético, para verificar si detecta una estructura conocida.
