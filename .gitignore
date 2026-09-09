@@ -40,3 +40,6 @@ tesis/*.docx
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# Archivos de bloqueo temporal de Word/Office (~$archivo.docx)
+~$*

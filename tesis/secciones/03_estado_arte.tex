@@ -13,12 +13,12 @@ Esta sección describe, en cuatro fases (definición de la investigación, búsq
 
 \subsection{Definición de la investigación}
 
-El área de estudio son los modelos de aprendizaje profundo basados en la arquitectura Transformer donde la atención se calcula entre tokens que representan variables con significado físico, con foco en la opacidad de sus mecanismos de decisión y en la inestabilidad estocástica de sus matrices de atención entre ejecuciones de entrenamiento. La revisión responde a la siguiente pregunta, formulada según el modelo PICO: ¿es posible desarrollar un framework metodológico que transforme las matrices de atención de modelos Transformer en grafos dirigidos compactos, capaces de generar hipótesis relacionales reproducibles y falsables, con mayor fidelidad al comportamiento del modelo que las técnicas tradicionales de explicabilidad post-hoc?
+El área de estudio son los modelos de aprendizaje profundo cuya representación interna produce una matriz de atención, específicamente aquellos donde esa atención se calcula entre tokens que representan variables con significado físico, con foco en la opacidad de sus mecanismos de decisión y en la inestabilidad estocástica de sus matrices de atención entre ejecuciones de entrenamiento. La revisión responde a la siguiente pregunta, formulada según el modelo PICO: ¿es posible desarrollar un framework metodológico que transforme las matrices de atención de modelos de aprendizaje profundo en grafos dirigidos compactos, capaces de generar hipótesis relacionales reproducibles y falsables, con mayor fidelidad al comportamiento del modelo que las técnicas tradicionales de explicabilidad post-hoc?
 
 El alcance queda delimitado por los cuatro componentes de la pregunta y por un marco temporal de publicaciones entre 2022 y 2026:
 
 \begin{itemize}[itemsep=1pt]
-\item \textbf{Población.} Modelos profundos basados en Transformer cuya atención opera entre tokens que representan variables con significado físico.
+\item \textbf{Población.} Modelos de aprendizaje profundo cuya representación interna produce una matriz de atención que opera entre tokens que representan variables con significado físico.
 \item \textbf{Intervención.} La condición de caja negra de estos modelos: opacidad del mecanismo de decisión e inestabilidad de la matriz de atención entre ejecuciones.
 \item \textbf{Comparador.} Métodos tradicionales de explicabilidad, es decir técnicas de atribución marginal por variable como SHAP y LIME, y la visualización de mapas continuos de atención.
 \item \textbf{Resultado.} La reconstrucción de una hipótesis relacional compacta, dirigida y falsable sobre las variables, estadísticamente reproducible y fiel al comportamiento del modelo.

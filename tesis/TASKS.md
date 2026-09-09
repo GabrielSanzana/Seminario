@@ -26,14 +26,14 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 |---|---|---|---|---|
 | `main.tex` | `NEED_REVIEW` | claude-1 | 75 | Task-021: hyperref (indice navegable), parskip 0 y titlespacing segun formato |
 | `pucv_inf_2024.sty` | `NEED_REVIEW` | claude-1 | 87 | Task-021: unica linea cambiada, biblatex apa -> ieee (citas numericas) |
-| `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 | 32 | Portada del template con titulo, autores y asignatura |
-| `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 30 | Task-021: reescrito, dos familias y modelo alternativo |
-| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
+| `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 32 | Task-029: nuevo título principal, "Framework para reconstrucción de estructuras relacionales desde representaciones latentes" |
+| `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 30 | Task-029: corrige la inconsistencia "siempre se entrena un modelo alternativo" -> framework agnóstico (aplica directo si el modelo desplegado ya cumple la condición, entrena alternativa si no) |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 47 | Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027/028 las editó claude-2, instrucción directa del autor humano) | 111 | Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
-| `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027/028/029 las editó claude-2, instrucción directa del autor humano) | 111 | Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
+| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 55 | Task-029: quita una raya larga en §4.1 (regla de estilo sin rayas). Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
 | `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-028 la editó claude-2, instrucción directa del autor humano) | 54 | Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
-| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 96 | Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
+| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 (Task-029 la editó claude-2, instrucción directa) | 90 | Task-029: §Planteamiento corrige la misma inconsistencia de agnosticismo del framework (ver nota de cierre abajo); quita 5 rayas largas en el archivo; elimina §"Alcance de esta etapa" completa por redundar con el capítulo de plan de trabajo — **ojo**: eso deja `teleconnections2026causal` en solo 2 usos, bajo el mínimo de 3, ver nota de cierre. Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
 | `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `figuras/framework_pipeline.tex` | `NEED_REVIEW` | claude-1 | 57 | Task-026: esquema de la composición, `standalone` + TikZ, se compila aparte |
 | `figuras/prisma_flujo.tex` | `NEED_REVIEW` | claude-1 | 65 | Task-026: flujo de cribado PRISMA, cifras de la bitácora |
@@ -71,6 +71,74 @@ antes de tocar nada:
    `LTchunksize`. Las tres tablas del documento dependen de ambos.
 
 ## Cola de tareas
+
+### Task-029 — cerrada por claude-2, pendiente de revisión
+
+- **Task-029 — ajustes de consistencia conceptual, título, PICO y formato.**
+  Instrucción directa del autor humano, 2026-09-08, siete puntos:
+  1. **Título de portada** (`Portadas/portada_principal.tex`): nuevo título
+     "Framework para reconstrucción de estructuras relacionales desde
+     representaciones latentes".
+  2. **Inconsistencia conceptual** en Resumen y el resto del documento: el texto
+     anterior afirmaba, sin condición, que el framework "no abre el modelo de
+     producción... entrena un modelo alternativo". Eso no es correcto: el
+     framework opera de forma agnóstica sobre cualquier modelo cuya atención se
+     calcule entre tokens que representan variables con nombre; si el modelo
+     desplegado ya cumple esa condición, el procedimiento se aplica directo
+     sobre él, y solo se entrena una arquitectura alternativa cuando no la
+     cumple o para efectos de un caso de estudio (como el de esta tesis).
+     Corregido en `Resumen/resumen.tex` (español e inglés),
+     `secciones/01_introduccion.tex` (§Propuesta y contribución) y
+     `secciones/06_propuesta.tex` (§Planteamiento). No se reescribió cada
+     mención posterior de "modelo alternativo" en el resto de `06_propuesta.tex`
+     (§Transformación matriz-grafo en adelante): esas secciones describen la
+     ejecución concreta del caso de estudio, donde sí se entrena una
+     arquitectura alternativa (el ConvTransformer), así que siguen siendo
+     correctas tal como están una vez que §Planteamiento deja explícito que ese
+     es solo uno de los dos caminos posibles.
+  3. El autor humano ya había corregido directamente en `main`
+     (commit `1900cd1`) la pregunta y la población del PICO en
+     `Protocolo PRISMA/Bítacora_revision_sistematica.docx`: "modelos Transformer"
+     -> "modelos de aprendizaje profundo" (población y pregunta). Se propaga
+     ese cambio a `secciones/01_introduccion.tex` (pregunta y población en
+     §Contexto del problema) y `secciones/03_estado_arte.tex` (misma pregunta
+     en §Metodología de la revisión, y el ítem Población de §Definición de la
+     investigación). Los términos de búsqueda booleana (§Búsqueda de
+     literatura) no se tocan: son los que efectivamente se ejecutaron y siguen
+     siendo vocabulario específico de Transformer, eso no cambió en la
+     bitácora.
+  4. **Espacios en blanco entre secciones** (2.2→3, 4.5→5, 6.6→7, ahora 6.5→7
+     tras el punto 6): revisado y **no es un defecto que se pueda corregir**.
+     Cada `\chapter` fuerza salto a página nueva (comportamiento de
+     `pucv_inf_2024.sty`/`main.tex`, que ningún agente edita); cuando la última
+     sección de un capítulo es corta, el resto de esa página queda en blanco
+     porque el capítulo siguiente empieza en página nueva de todas formas. No
+     hay forma de "rellenar" ese espacio sin agregar contenido (contradice el
+     punto 7) o sin tocar la clase/plantilla (fuera de alcance). Páginas
+     verificadas: 4 (fin de §2.2), 13 (fin de §4.5), 18 (fin de la antigua
+     §6.6, ahora fin de §6.5 tras el punto 6). Si esto molesta por norma de
+     presentación, hay que decidirlo con el autor humano contra el PDF de
+     formato oficial, no es algo que claude-2 pueda resolver solo.
+  5. **Rayas largas** quitadas en `secciones/04_marco_teorico.tex` §4.1 (1) y
+     `secciones/06_propuesta.tex` (5, no solo en §6.1: también en
+     §Transformación matriz-grafo y §Criterio de validación, mismo archivo).
+  6. **`secciones/06_propuesta.tex`, §"Alcance de esta etapa" (6.6) eliminada**
+     completa: su contenido (qué queda dentro/fuera de esta entrega,
+     transferencia a otros dominios) ya se cubre en el capítulo de plan de
+     trabajo. **Efecto colateral detectado:** esa sección era una de las tres
+     apariciones de `\textcite{teleconnections2026causal}`; al borrarla, esa
+     referencia queda en **2 usos**, bajo el mínimo de 3 que exige el
+     protocolo de contradicciones. No se resolvió unilateralmente (agregar un
+     tercer uso es agregar contenido, contradice el punto 7; retirarla del
+     corpus no se puede, está cerrado en 25). Pendiente de decisión del autor
+     humano: agregar un tercer uso genuino, o aceptar la excepción.
+  7. **20 páginas de cuerpo**, sin agregar información: verificado, el punto 6
+     además *reduce* el documento. Sigue en 20 páginas de cuerpo exactas.
+  **Cierre:** `./scripts/compilar.sh` → `OK: main.pdf compilado, 28 paginas`
+  (cuerpo de 20). Recuento de citas: 25/25 resuelven contra `referencias.bib`;
+  24/25 con 3 o más usos, `teleconnections2026causal` en 2 (ver punto 6). Sin
+  referencias colgantes al `\label` de la sección eliminada. Sin warnings
+  nuevos de `pdflatex`.
 
 ### Task-028 — cerrada por claude-2, pendiente de revisión
 
@@ -1075,3 +1143,14 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
   sobre archivos de claude-1. Detalle completo, incluida la lección sobre
   `\enlargethispage` pisando el pie de página, en la nota de cierre de Task-028
   arriba.
+- **2026-09-08** — El autor humano corrige directamente en `main` (commit `1900cd1`)
+  la pregunta y la población PICO de la bitácora: "modelos Transformer" pasa a
+  "modelos de aprendizaje profundo" en ambas. Pide además corregir la inconsistencia
+  conceptual de que el framework siempre entrena un modelo alternativo (correcto:
+  opera agnóstico sobre cualquier modelo cuya atención se calcule entre tokens de
+  variables nombradas, entrena alternativa solo si el desplegado no cumple esa
+  condición o para el caso de estudio), cambiar el título de portada, quitar rayas
+  largas en 4.1 y 6.1, y eliminar §6.6 de `06_propuesta.tex` por redundar con el plan
+  de trabajo (Task-029). La eliminación de 6.6 deja `teleconnections2026causal` en 2
+  usos, bajo el mínimo de 3 — pendiente de decisión del autor humano, ver nota de
+  cierre de Task-029 arriba.
