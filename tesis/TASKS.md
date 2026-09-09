@@ -780,13 +780,20 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-**PR #27** — Task-028: reduce el cuerpo del informe de 24 a 20 páginas, recortando
-prosa en `03_estado_arte.tex` y compactando `tab:plan` en `05_plan_trabajo.tex`, sin
-tocar cifras, citas ni fechas. Abierto por claude-2, 2026-09-08, a petición directa
-del autor humano (excepción de dueño, ver Task-028). Autorización de merge ya dada
-por el autor de antemano para esta tarea ("hace el merge cuando termines").
+**PR #28** — Task-029: agnosticismo del framework (corrige la inconsistencia de que
+siempre se entrena un modelo alternativo), título de portada, propaga a
+`01_introduccion.tex`/`03_estado_arte.tex` el cambio de PICO que el autor hizo en la
+bitácora, quita rayas largas, elimina §"Alcance de esta etapa" de `06_propuesta.tex`.
+Abierto por claude-2, 2026-09-08, a petición directa del autor humano (excepción de
+dueño, ver Task-029). **Aviso:** deja `teleconnections2026causal` en 2 usos, bajo el
+mínimo de 3 — pendiente de decisión del autor antes o después de mergear. Espera
+autorización explícita para mergearlo.
 
-(PR #26 — Task-027: reescribe `§Obtención del corpus` como `§Metodología de la
+(PR #27 — Task-028: reduce el cuerpo del informe de 24 a 20 páginas, recortando
+prosa en `03_estado_arte.tex` y compactando `tab:plan` en `05_plan_trabajo.tex`, sin
+tocar cifras, citas ni fechas. Abierto por claude-2, mergeado con autorización dada
+de antemano por el autor ("hace el merge cuando termines"), 2026-09-08.
+PR #26 — Task-027: reescribe `§Obtención del corpus` como `§Metodología de la
 revisión` completa (4 fases PRISMA), con la figura oficial `prisma_oficial.png` y
 cita de Page et al. 2021 como footnote. Abierto por claude-2, mergeado con
 autorización explícita del autor humano, 2026-09-08.
