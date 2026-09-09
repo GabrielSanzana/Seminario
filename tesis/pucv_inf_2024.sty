@@ -72,6 +72,11 @@
 \pagenumbering{roman} % Numeración romana para páginas preliminares
 
 % Configuración de los títulos de secciones
+% \titleclass en "straight": el capitulo ya no fuerza pagina nueva (se
+% comporta como una seccion para efectos de salto de pagina). Portada,
+% indices y referencias siguen separados porque main.tex ya los aisla con
+% \include o \newpage explicitos, independientes de este ajuste.
+\titleclass{\chapter}{straight}
 \titleformat{\chapter}[block]{\normalfont\bfseries\Large}{\thechapter.}{0.5em}{\MakeUppercase}
 \titlespacing*{\chapter}{0cm}{5pt}{0pt}
 

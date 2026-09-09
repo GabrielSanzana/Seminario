@@ -24,8 +24,8 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `main.tex` | `NEED_REVIEW` | claude-1 | 75 | Task-021: hyperref (indice navegable), parskip 0 y titlespacing segun formato |
-| `pucv_inf_2024.sty` | `NEED_REVIEW` | claude-1 | 87 | Task-021: unica linea cambiada, biblatex apa -> ieee (citas numericas) |
+| `main.tex` | `NEED_REVIEW` | autor humano (Task-029 la editó claude-2, autorización explícita) | 78 | Task-029: `\include` -> `\input` en los 7 capítulos del cuerpo, para que dejen de forzar página nueva entre ellos. Task-021: hyperref (indice navegable), parskip 0 y titlespacing segun formato |
+| `pucv_inf_2024.sty` | `NEED_REVIEW` | autor humano (Task-029 la editó claude-2, autorización explícita) | 91 | Task-029: `\titleclass{\chapter}{straight}` para que `\chapter` deje de forzar página nueva (ver TASKS.md, nota de cierre). Task-021: unica linea cambiada, biblatex apa -> ieee (citas numericas) |
 | `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 32 | Task-029: nuevo título principal, "Framework para reconstrucción de estructuras relacionales desde representaciones latentes" |
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 30 | Task-029: corrige la inconsistencia "siempre se entrena un modelo alternativo" -> framework agnóstico (aplica directo si el modelo desplegado ya cumple la condición, entrena alternativa si no) |
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 47 | Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
@@ -107,18 +107,30 @@ antes de tocar nada:
      literatura) no se tocan: son los que efectivamente se ejecutaron y siguen
      siendo vocabulario específico de Transformer, eso no cambió en la
      bitácora.
-  4. **Espacios en blanco entre secciones** (2.2→3, 4.5→5, 6.6→7, ahora 6.5→7
-     tras el punto 6): revisado y **no es un defecto que se pueda corregir**.
-     Cada `\chapter` fuerza salto a página nueva (comportamiento de
-     `pucv_inf_2024.sty`/`main.tex`, que ningún agente edita); cuando la última
-     sección de un capítulo es corta, el resto de esa página queda en blanco
-     porque el capítulo siguiente empieza en página nueva de todas formas. No
-     hay forma de "rellenar" ese espacio sin agregar contenido (contradice el
-     punto 7) o sin tocar la clase/plantilla (fuera de alcance). Páginas
-     verificadas: 4 (fin de §2.2), 13 (fin de §4.5), 18 (fin de la antigua
-     §6.6, ahora fin de §6.5 tras el punto 6). Si esto molesta por norma de
-     presentación, hay que decidirlo con el autor humano contra el PDF de
-     formato oficial, no es algo que claude-2 pueda resolver solo.
+  4. **Espacios en blanco entre secciones** (2.2→3, 4.5→5, 6.6→7): diagnosticado
+     como forzado por `\chapter` (salto de página automático del `report`) más
+     `\include` (que también fuerza salto antes/después de cada archivo). El
+     autor humano confirmó que quiere que se saque, siempre que portada,
+     índices y referencias sigan en página aparte. **Corregido**, con
+     autorización explícita para tocar `main.tex`/`pucv_inf_2024.sty`:
+     - `pucv_inf_2024.sty`: se agrega `\titleclass{\chapter}{straight}` antes
+       del `\titleformat{\chapter}` existente, para que `\chapter` deje de
+       comportarse como "top" (pagina nueva) y pase a comportarse como una
+       sección para efectos de salto de página. El formato visual del título
+       (mayúscula, negrita, tamaño) no cambia, solo el salto de página.
+     - `main.tex`: los 7 `\include{secciones/0N_*}` del cuerpo pasan a
+       `\input{secciones/0N_*}`, porque `\include` fuerza salto de página antes
+       y después del archivo independientemente de lo que haga `\chapter`.
+     - Portada, resumen, índices y referencias **no se tocan** y siguen
+       aislados: portada y resumen siguen en `\include` (no en la lista de
+       arriba), y los índices/referencias ya estaban separados con `\newpage`
+       explícito en `main.tex`, independiente del comportamiento de
+       `\chapter`.
+     **Resultado:** el cuerpo bajó de 20 a 17 páginas (documento completo de
+     28 a 25) solo por eliminar las 3 páginas casi vacías; verificado
+     visualmente que ningún título de capítulo queda huérfano al pie de una
+     página y que portada/resumen/índices/referencias siguen cada uno en su
+     propia página.
   5. **Rayas largas** quitadas en `secciones/04_marco_teorico.tex` §4.1 (1) y
      `secciones/06_propuesta.tex` (5, no solo en §6.1: también en
      §Transformación matriz-grafo y §Criterio de validación, mismo archivo).
@@ -132,10 +144,12 @@ antes de tocar nada:
      tercer uso es agregar contenido, contradice el punto 7; retirarla del
      corpus no se puede, está cerrado en 25). Pendiente de decisión del autor
      humano: agregar un tercer uso genuino, o aceptar la excepción.
-  7. **20 páginas de cuerpo**, sin agregar información: verificado, el punto 6
-     además *reduce* el documento. Sigue en 20 páginas de cuerpo exactas.
-  **Cierre:** `./scripts/compilar.sh` → `OK: main.pdf compilado, 28 paginas`
-  (cuerpo de 20). Recuento de citas: 25/25 resuelven contra `referencias.bib`;
+  7. **20 páginas de cuerpo**, sin agregar información: verificado, los puntos
+     4 y 6 además *reducen* el documento. Cuerpo final en 17 páginas, bajo el
+     objetivo de 20 (margen para el punto 6 si se decide agregar un tercer uso
+     de `teleconnections2026causal`).
+  **Cierre:** `./scripts/compilar.sh` → `OK: main.pdf compilado, 25 paginas`
+  (cuerpo de 17). Recuento de citas: 25/25 resuelven contra `referencias.bib`;
   24/25 con 3 o más usos, `teleconnections2026causal` en 2 (ver punto 6). Sin
   referencias colgantes al `\label` de la sección eliminada. Sin warnings
   nuevos de `pdflatex`.

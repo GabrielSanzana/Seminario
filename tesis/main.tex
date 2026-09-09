@@ -61,13 +61,18 @@
 \newpage
 \pagenumbering{arabic}
 
-\include{secciones/01_introduccion}
-\include{secciones/02_objetivos}
-\include{secciones/03_estado_arte}
-\include{secciones/04_marco_teorico}
-\include{secciones/05_plan_trabajo}
-\include{secciones/06_propuesta}
-\include{secciones/07_conclusiones}
+% \input en vez de \include: \include fuerza pagina nueva antes y despues de
+% cada archivo, lo que dejaba espacio en blanco cuando un capitulo terminaba
+% a media pagina. \input no rompe pagina, asi que un capitulo corto ya no dej
+% la pagina siguiente en blanco esperando el proximo \chapter (ver tambien el
+% \titleclass{\chapter}{straight} en pucv_inf_2024.sty).
+\input{secciones/01_introduccion}
+\input{secciones/02_objetivos}
+\input{secciones/03_estado_arte}
+\input{secciones/04_marco_teorico}
+\input{secciones/05_plan_trabajo}
+\input{secciones/06_propuesta}
+\input{secciones/07_conclusiones}
 
 \newpage\addcontentsline{toc}{chapter}{\texorpdfstring{Referencias\vspace{-0.5cm}}{Referencias}}
 \printbibliography[title=Referencias]
