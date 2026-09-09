@@ -24,16 +24,16 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `main.tex` | `NEED_REVIEW` | claude-1 | 75 | Task-021: hyperref (indice navegable), parskip 0 y titlespacing segun formato |
-| `pucv_inf_2024.sty` | `NEED_REVIEW` | claude-1 | 87 | Task-021: unica linea cambiada, biblatex apa -> ieee (citas numericas) |
-| `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 | 32 | Portada del template con titulo, autores y asignatura |
-| `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 | 30 | Task-021: reescrito, dos familias y modelo alternativo |
-| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 | 47 | Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
+| `main.tex` | `NEED_REVIEW` | autor humano (Task-029 la editó claude-2, autorización explícita) | 78 | Task-029: `\include` -> `\input` en los 7 capítulos del cuerpo, para que dejen de forzar página nueva entre ellos. Task-021: hyperref (indice navegable), parskip 0 y titlespacing segun formato |
+| `pucv_inf_2024.sty` | `NEED_REVIEW` | autor humano (Task-029 la editó claude-2, autorización explícita) | 91 | Task-029: `\titleclass{\chapter}{straight}` para que `\chapter` deje de forzar página nueva (ver TASKS.md, nota de cierre). Task-021: unica linea cambiada, biblatex apa -> ieee (citas numericas) |
+| `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 32 | Task-029: nuevo título principal, "Framework para reconstrucción de estructuras relacionales desde representaciones latentes" |
+| `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 30 | Task-029: corrige la inconsistencia "siempre se entrena un modelo alternativo" -> framework agnóstico (aplica directo si el modelo desplegado ya cumple la condición, entrena alternativa si no) |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 47 | Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027/028 las editó claude-2, instrucción directa del autor humano) | 111 | Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
-| `secciones/04_marco_teorico.tex` | `APPROVED` | claude-2 | 55 | Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027/028/029 las editó claude-2, instrucción directa del autor humano) | 111 | Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
+| `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 55 | Task-029: quita una raya larga en §4.1 (regla de estilo sin rayas). Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
 | `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-028 la editó claude-2, instrucción directa del autor humano) | 54 | Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
-| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 | 96 | Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
+| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 (Task-029 la editó claude-2, instrucción directa) | 90 | Task-029: §Planteamiento corrige la misma inconsistencia de agnosticismo del framework (ver nota de cierre abajo); quita 5 rayas largas en el archivo; elimina §"Alcance de esta etapa" completa por redundar con el capítulo de plan de trabajo — **ojo**: eso deja `teleconnections2026causal` en solo 2 usos, bajo el mínimo de 3, ver nota de cierre. Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
 | `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `figuras/framework_pipeline.tex` | `NEED_REVIEW` | claude-1 | 57 | Task-026: esquema de la composición, `standalone` + TikZ, se compila aparte |
 | `figuras/prisma_flujo.tex` | `NEED_REVIEW` | claude-1 | 65 | Task-026: flujo de cribado PRISMA, cifras de la bitácora |
@@ -71,6 +71,88 @@ antes de tocar nada:
    `LTchunksize`. Las tres tablas del documento dependen de ambos.
 
 ## Cola de tareas
+
+### Task-029 — cerrada por claude-2, pendiente de revisión
+
+- **Task-029 — ajustes de consistencia conceptual, título, PICO y formato.**
+  Instrucción directa del autor humano, 2026-09-08, siete puntos:
+  1. **Título de portada** (`Portadas/portada_principal.tex`): nuevo título
+     "Framework para reconstrucción de estructuras relacionales desde
+     representaciones latentes".
+  2. **Inconsistencia conceptual** en Resumen y el resto del documento: el texto
+     anterior afirmaba, sin condición, que el framework "no abre el modelo de
+     producción... entrena un modelo alternativo". Eso no es correcto: el
+     framework opera de forma agnóstica sobre cualquier modelo cuya atención se
+     calcule entre tokens que representan variables con nombre; si el modelo
+     desplegado ya cumple esa condición, el procedimiento se aplica directo
+     sobre él, y solo se entrena una arquitectura alternativa cuando no la
+     cumple o para efectos de un caso de estudio (como el de esta tesis).
+     Corregido en `Resumen/resumen.tex` (español e inglés),
+     `secciones/01_introduccion.tex` (§Propuesta y contribución) y
+     `secciones/06_propuesta.tex` (§Planteamiento). No se reescribió cada
+     mención posterior de "modelo alternativo" en el resto de `06_propuesta.tex`
+     (§Transformación matriz-grafo en adelante): esas secciones describen la
+     ejecución concreta del caso de estudio, donde sí se entrena una
+     arquitectura alternativa (el ConvTransformer), así que siguen siendo
+     correctas tal como están una vez que §Planteamiento deja explícito que ese
+     es solo uno de los dos caminos posibles.
+  3. El autor humano ya había corregido directamente en `main`
+     (commit `1900cd1`) la pregunta y la población del PICO en
+     `Protocolo PRISMA/Bítacora_revision_sistematica.docx`: "modelos Transformer"
+     -> "modelos de aprendizaje profundo" (población y pregunta). Se propaga
+     ese cambio a `secciones/01_introduccion.tex` (pregunta y población en
+     §Contexto del problema) y `secciones/03_estado_arte.tex` (misma pregunta
+     en §Metodología de la revisión, y el ítem Población de §Definición de la
+     investigación). Los términos de búsqueda booleana (§Búsqueda de
+     literatura) no se tocan: son los que efectivamente se ejecutaron y siguen
+     siendo vocabulario específico de Transformer, eso no cambió en la
+     bitácora.
+  4. **Espacios en blanco entre secciones** (2.2→3, 4.5→5, 6.6→7): diagnosticado
+     como forzado por `\chapter` (salto de página automático del `report`) más
+     `\include` (que también fuerza salto antes/después de cada archivo). El
+     autor humano confirmó que quiere que se saque, siempre que portada,
+     índices y referencias sigan en página aparte. **Corregido**, con
+     autorización explícita para tocar `main.tex`/`pucv_inf_2024.sty`:
+     - `pucv_inf_2024.sty`: se agrega `\titleclass{\chapter}{straight}` antes
+       del `\titleformat{\chapter}` existente, para que `\chapter` deje de
+       comportarse como "top" (pagina nueva) y pase a comportarse como una
+       sección para efectos de salto de página. El formato visual del título
+       (mayúscula, negrita, tamaño) no cambia, solo el salto de página.
+     - `main.tex`: los 7 `\include{secciones/0N_*}` del cuerpo pasan a
+       `\input{secciones/0N_*}`, porque `\include` fuerza salto de página antes
+       y después del archivo independientemente de lo que haga `\chapter`.
+     - Portada, resumen, índices y referencias **no se tocan** y siguen
+       aislados: portada y resumen siguen en `\include` (no en la lista de
+       arriba), y los índices/referencias ya estaban separados con `\newpage`
+       explícito en `main.tex`, independiente del comportamiento de
+       `\chapter`.
+     **Resultado:** el cuerpo bajó de 20 a 17 páginas (documento completo de
+     28 a 25) solo por eliminar las 3 páginas casi vacías; verificado
+     visualmente que ningún título de capítulo queda huérfano al pie de una
+     página y que portada/resumen/índices/referencias siguen cada uno en su
+     propia página.
+  5. **Rayas largas** quitadas en `secciones/04_marco_teorico.tex` §4.1 (1) y
+     `secciones/06_propuesta.tex` (5, no solo en §6.1: también en
+     §Transformación matriz-grafo y §Criterio de validación, mismo archivo).
+  6. **`secciones/06_propuesta.tex`, §"Alcance de esta etapa" (6.6) eliminada**
+     completa: su contenido (qué queda dentro/fuera de esta entrega,
+     transferencia a otros dominios) ya se cubre en el capítulo de plan de
+     trabajo. **Efecto colateral detectado:** esa sección era una de las tres
+     apariciones de `\textcite{teleconnections2026causal}`; al borrarla, esa
+     referencia queda en **2 usos**, bajo el mínimo de 3 que exige el
+     protocolo de contradicciones. No se resolvió unilateralmente (agregar un
+     tercer uso es agregar contenido, contradice el punto 7; retirarla del
+     corpus no se puede, está cerrado en 25). Pendiente de decisión del autor
+     humano: agregar un tercer uso genuino, o aceptar la excepción.
+  7. **20 páginas de cuerpo**, sin agregar información: verificado, los puntos
+     4 y 6 además *reducen* el documento. Cuerpo final en 17 páginas, bajo el
+     objetivo de 20 (margen para el punto 6 si se decide agregar un tercer uso
+     de `teleconnections2026causal`).
+  **Cierre:** `./scripts/compilar.sh` → `OK: main.pdf compilado, 25 paginas`
+  (cuerpo de 17). Recuento de citas: 25/25 resuelven contra `referencias.bib`;
+  24/25 con 3 o más usos, `teleconnections2026causal` en 2 (ver punto 6). Sin
+  referencias colgantes al `\label` de la sección eliminada. Sin warnings
+  nuevos de `pdflatex`.
 
 ### Task-028 — cerrada por claude-2, pendiente de revisión
 
@@ -712,13 +794,20 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-**PR #27** — Task-028: reduce el cuerpo del informe de 24 a 20 páginas, recortando
-prosa en `03_estado_arte.tex` y compactando `tab:plan` en `05_plan_trabajo.tex`, sin
-tocar cifras, citas ni fechas. Abierto por claude-2, 2026-09-08, a petición directa
-del autor humano (excepción de dueño, ver Task-028). Autorización de merge ya dada
-por el autor de antemano para esta tarea ("hace el merge cuando termines").
+**PR #28** — Task-029: agnosticismo del framework (corrige la inconsistencia de que
+siempre se entrena un modelo alternativo), título de portada, propaga a
+`01_introduccion.tex`/`03_estado_arte.tex` el cambio de PICO que el autor hizo en la
+bitácora, quita rayas largas, elimina §"Alcance de esta etapa" de `06_propuesta.tex`.
+Abierto por claude-2, 2026-09-08, a petición directa del autor humano (excepción de
+dueño, ver Task-029). **Aviso:** deja `teleconnections2026causal` en 2 usos, bajo el
+mínimo de 3 — pendiente de decisión del autor antes o después de mergear. Espera
+autorización explícita para mergearlo.
 
-(PR #26 — Task-027: reescribe `§Obtención del corpus` como `§Metodología de la
+(PR #27 — Task-028: reduce el cuerpo del informe de 24 a 20 páginas, recortando
+prosa en `03_estado_arte.tex` y compactando `tab:plan` en `05_plan_trabajo.tex`, sin
+tocar cifras, citas ni fechas. Abierto por claude-2, mergeado con autorización dada
+de antemano por el autor ("hace el merge cuando termines"), 2026-09-08.
+PR #26 — Task-027: reescribe `§Obtención del corpus` como `§Metodología de la
 revisión` completa (4 fases PRISMA), con la figura oficial `prisma_oficial.png` y
 cita de Page et al. 2021 como footnote. Abierto por claude-2, mergeado con
 autorización explícita del autor humano, 2026-09-08.
@@ -1075,3 +1164,14 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
   sobre archivos de claude-1. Detalle completo, incluida la lección sobre
   `\enlargethispage` pisando el pie de página, en la nota de cierre de Task-028
   arriba.
+- **2026-09-08** — El autor humano corrige directamente en `main` (commit `1900cd1`)
+  la pregunta y la población PICO de la bitácora: "modelos Transformer" pasa a
+  "modelos de aprendizaje profundo" en ambas. Pide además corregir la inconsistencia
+  conceptual de que el framework siempre entrena un modelo alternativo (correcto:
+  opera agnóstico sobre cualquier modelo cuya atención se calcule entre tokens de
+  variables nombradas, entrena alternativa solo si el desplegado no cumple esa
+  condición o para el caso de estudio), cambiar el título de portada, quitar rayas
+  largas en 4.1 y 6.1, y eliminar §6.6 de `06_propuesta.tex` por redundar con el plan
+  de trabajo (Task-029). La eliminación de 6.6 deja `teleconnections2026causal` en 2
+  usos, bajo el mínimo de 3 — pendiente de decisión del autor humano, ver nota de
+  cierre de Task-029 arriba.
