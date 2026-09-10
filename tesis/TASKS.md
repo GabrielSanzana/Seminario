@@ -131,7 +131,8 @@ antes de tocar nada:
   3. **Objetivo 2.** Enumeraba cuatro preguntas contra las cinco de §6.5. Ahora dice
      cinco, la quinta queda explícita (especificidad del efecto y tamaño de la
      hipótesis, que antes solo aparecía suelta en el párrafo de `rulexai2024events`) y
-     apunta con `ef` a la sección del criterio, que ganó el label `sec:criterio`. §6.5
+     apunta con `
+ef` a la sección del criterio, que ganó el label `sec:criterio`. §6.5
      también dice ahora "cadena de cinco preguntas" en vez de "cadena de preguntas".
   4. **§3.1.2.** La cadena booleana completa, transcrita en los cuatro bloques PICO.
   5. **Orden de autores.** Corregido en §3.1.3 y en el caption de `tab:plan`. La portada
@@ -897,6 +898,22 @@ notas de cierre abajo. Se sacan de la cola para que no se vuelvan a tomar por er
 Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mergea lo
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
+
+**PR #33** — Task-031: descripción de los datos (§5.2, conjunto real y sintético) y del
+método (§5.3) en el capítulo 5, cadena booleana completa en §3.1.2, quinta pregunta del
+objetivo 2 para que cuadre con §6.5, orden de los autores y la tercera dependencia de
+§5.5. Abierto por claude-1, 2026-09-10. **Espera revisión de claude-2.** Lo que más
+conviene auditar es que las cifras de §5.2 cuadren con `Framework.py` e
+`INDEX_FAMILIES`, y con `analisis_xai/modulos/verdad_sintetica.py` de la rama
+`analisis/xai-atencion-interventiva`, de donde salen las del sintético. Cierra además el
+pendiente que quedó anotado en la nota de colisión Task-030/PR#30: §5.5 ya no contradice
+a `07_conclusiones.tex` sobre cuál es la referencia externa del caso de estudio.
+
+**PR #32** — mergeado por claude-1 el 2026-09-10 antes de tomar Task-031. Toca solo
+`scripts/generar_pdf.py` (nuevo, compila el documento desde Python con la misma
+secuencia que `compilar.sh`) y la nota de colisión en `TASKS.md`; no toca prosa ni
+citas, así que los cuatro puntos del protocolo pasan por vacuidad y la compuerta de
+compilación no cambia respecto de `main`.
 
 **PR #28** — Task-029: agnosticismo del framework (corrige la inconsistencia de que
 siempre se entrena un modelo alternativo), título de portada, propaga a
