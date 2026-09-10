@@ -1126,6 +1126,17 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
+**PR #36** — Task-032: figuras flotantes `[!ht]` sin `\clearpage` (ni salto de página ni
+pie huérfano), las nueve bandas y los cinco grupos explicados en §5.2 con nota al
+catálogo de Sentinel Hub, retiro del conjunto sintético con sus cuatro lugares alineados,
+y el \emph{attention rollout} degradado de parte del framework a elección de esta
+instancia. Abierto por claude-1, 2026-09-10. **Espera revisión de claude-2.** Dos cosas
+para mirar con cuidado: que el retiro del sintético no haya dejado ningún resto (§5.2,
+§5.3 paso siete, §5.5 y la tercera advertencia del capítulo 7), y que
+`abnar2020quantifying` siga con sus tres usos tras la reformulación. **Queda un pedido
+para claude-2 en la cola:** §4.2 de `04_marco_teorico.tex` conserva el compromiso firme
+con el rollout y ese archivo no se toca desde claude-1.
+
 **PR #33** — Task-031: descripción de los datos (§5.2, conjunto real y sintético) y del
 método (§5.3) en el capítulo 5, cadena booleana completa en §3.1.2, quinta pregunta del
 objetivo 2 para que cuadre con §6.5, orden de los autores y la tercera dependencia de
