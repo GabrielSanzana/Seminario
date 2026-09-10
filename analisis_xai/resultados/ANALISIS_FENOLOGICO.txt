@@ -1,0 +1,40 @@
+==============================================================================
+ ANALISIS POR FASE FENOLOGICA
+
+ Verdad externa: CIREN viveros_2024_h19.shp
+ Cultivo Vid Vinifera en Pencahue, 41.05 ha, a 0.0 km del
+ centro del recorte (UTM19S 243117, 6073342).
+
+ Las conclusiones de la tesis declaran que para indices Sentinel-2 no
+ existe referencia externa. El catastro CIREN es una: dice que cultivo
+ hay en el pixel.
+==============================================================================
+
+  Cuanto cambia la ESTRUCTURA DE LOS DATOS entre fases
+  fase                     fechas   Spearman de |pc| contra la fase
+                                   dormancia  brotacion  crecimien  maduracio
+  dormancia (may-ago)           8         1.000      0.532      0.510      0.603
+  brotacion (sep-oct)          17         0.532      1.000      0.851      0.649
+  crecimiento (nov-dic)        40         0.510      0.851      1.000      0.790
+  maduracion (ene-mar)         76         0.603      0.649      0.790      1.000
+
+  Si estas correlaciones son altas, la dependencia entre indices
+  no cambia con la fenologia y agregar todas las fechas no pierde
+  nada. Si son bajas, el modelo entreno sobre regimenes distintos
+  mezclados y su matriz es un promedio de cosas incompatibles.
+
+  A que fase se parece lo que APRENDIO cada fuente
+  fuente                          global  dormancia  brotacion  crecimien  maduracio
+  atencion rollout                +0.132     -0.035     +0.296     +0.149     +0.058
+  atencion capa A1                -0.061     -0.056     -0.033     -0.105     -0.078
+  atencion capa A2                +0.104     +0.078     +0.017     +0.067     +0.105
+  atencion A2*A1 (sin residual)   +0.035     +0.146     -0.013     -0.027     +0.047
+  atencion A1+A2 (aditiva)        +0.053     +0.036     +0.047     +0.018     +0.039
+  atencion max sobre cabezas      +0.105     +0.120     -0.102     -0.004     +0.108
+  dependencia por ablacion        +0.097     +0.037     +0.051     +0.097     +0.160
+  dependencia por ablacion (cruda)  +0.095     +0.060     +0.058     +0.090     +0.150
+
+  Una fuente que se parezca mucho mas a una fase concreta
+  aprendio ese regimen y no el promedio, aunque se entreno con
+  todas las fechas.
+==============================================================================

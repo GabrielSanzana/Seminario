@@ -1,0 +1,30 @@
+==============================================================================
+ RE-INFERENCIA POR FASE FENOLOGICA
+
+ Cultivo Vid Vinifera (CIREN viveros_2024_h19.shp).
+ Los 50 modelos se entrenaron con todas las fechas mezcladas. Aqui se
+ los evalua restringiendo la entrada a cada fase, sin reentrenar.
+
+ Lee la DIAGONAL: si el valor mas alto de cada fila esta en su
+ propia fase, el modelo expone la estructura del regimen en que se lo
+ evalua y el promedio agregado era el problema, no el entrenamiento.
+==============================================================================
+
+  ABLACION   (filas: fase de evaluacion; columnas: |pc| de referencia)
+                           dormancia ( brotacion ( crecimiento maduracion  postcosecha
+  dormancia (may-ago)          +0.038*     +0.042      +0.101      +0.264      +0.273 
+  brotacion (sep-oct)          -0.030      -0.026*     -0.035      +0.139      +0.126 
+  crecimiento (nov-dic)        -0.124      -0.044      +0.003*     +0.093      +0.136 
+  maduracion (ene-mar)         -0.049      -0.034      +0.008      +0.087*     +0.053 
+  postcosecha (abr)            -0.006      +0.164      +0.096      +0.154      +0.181*
+    fases donde el maximo cae en su propia fase: 2/5
+
+  ATENCION   (filas: fase de evaluacion; columnas: |pc| de referencia)
+                           dormancia ( brotacion ( crecimiento maduracion  postcosecha
+  dormancia (may-ago)          +0.189*     +0.124      +0.078      +0.087      +0.097 
+  brotacion (sep-oct)          +0.120      +0.022*     +0.054      +0.126      +0.191 
+  crecimiento (nov-dic)        +0.147      +0.050      +0.093*     +0.152      +0.191 
+  maduracion (ene-mar)         +0.143      +0.125      +0.125      +0.132*     +0.150 
+  postcosecha (abr)            +0.151      +0.059      +0.091      +0.126      +0.157*
+    fases donde el maximo cae en su propia fase: 2/5
+==============================================================================

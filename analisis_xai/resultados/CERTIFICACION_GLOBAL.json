@@ -1,0 +1,4050 @@
+[
+  {
+    "etiqueta": "|pc| (VERDAD, control del script)",
+    "nota": "es el ground truth; si no sale perfecto el bug esta aqui",
+    "n_semillas": 0,
+    "T": 4.25,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.42438974386725,
+    "T_nulo_p05": 23.08088131313131,
+    "p_permutacion": 0.0001999600079984003,
+    "n_permutaciones": 5000,
+    "rho_condicional": 1.0,
+    "p_condicional": 0.0,
+    "rho_marginal": 0.18104581985179005,
+    "p_marginal": 0.1457321395790337,
+    "forma": "el ranking entero sigue la dependencia condicional",
+    "veredicto": "ENCUENTRA RELACIONES REALES",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 4,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 3,
+        "ok": true
+      }
+    ],
+    "n_controles_ok": 2,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 1,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 2,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 3,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 4,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 5,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 6,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 2.0,
+        "p_rank_sum": 2.1853146853146853e-05,
+        "en_top_K": 3,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 2.5,
+        "p_rank_sum": 1.3875013875013875e-06,
+        "en_top_K": 4,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 3.0,
+        "p_rank_sum": 1.1189527318559577e-07,
+        "en_top_K": 5,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 3.5,
+        "p_rank_sum": 1.100609244448483e-08,
+        "en_top_K": 6,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 4.0,
+        "p_rank_sum": 1.28404411852323e-09,
+        "en_top_K": 7,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 4.5,
+        "p_rank_sum": 1.741076770878956e-10,
+        "en_top_K": 8,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 5.0,
+        "p_rank_sum": 8.618769741670044e-07,
+        "en_top_K": 9,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 5.5,
+        "p_rank_sum": 2.888672098126924e-07,
+        "en_top_K": 10,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 6.0,
+        "p_rank_sum": 1.0172383574547588e-07,
+        "en_top_K": 11,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 6.5,
+        "p_rank_sum": 3.760920470992592e-08,
+        "en_top_K": 12,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": 0.007285823409333455,
+    "p_sustitutos": 0.9537007323154985,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 7.5,
+        "p": 0.0001999600079984003,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": NaN
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 43.0,
+        "p": 0.9180163967206558,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": NaN
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 37.77777777777778,
+        "p": 0.7620475904819036,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": NaN
+      }
+    },
+    "q_fdr": NaN
+  },
+  {
+    "etiqueta": "|r| marginal (SIN MODELO, liston)",
+    "nota": "dos lineas de numpy; el framework tiene que ganarle",
+    "n_semillas": 0,
+    "T": 25.200440115440113,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.5307712950938,
+    "T_nulo_p05": 26.143098304473305,
+    "p_permutacion": 0.027994401119776045,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.18104581985179005,
+    "p_condicional": 0.1457321395790337,
+    "rho_marginal": 1.0,
+    "p_marginal": 0.0,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "ENCUENTRA RELACIONES REALES pero falla 1/2 controles",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 5,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 50,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 1,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 9,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 50,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 5,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 27,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 45,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 20.0,
+        "p_rank_sum": 0.11527534965034966,
+        "en_top_K": 1,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 16.25,
+        "p_rank_sum": 0.032134532134532136,
+        "en_top_K": 1,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 18.4,
+        "p_rank_sum": 0.034106462533881894,
+        "en_top_K": 2,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 22.833333333333332,
+        "p_rank_sum": 0.08024360400748555,
+        "en_top_K": 2,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 28.285714285714285,
+        "p_rank_sum": 0.2308309599061847,
+        "en_top_K": 2,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 28.0,
+        "p_rank_sum": 0.19990519157962625,
+        "en_top_K": 2,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 28.77777777777778,
+        "p_rank_sum": 0.21629345489339163,
+        "en_top_K": 3,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 30.7,
+        "p_rank_sum": 0.31142901618692015,
+        "en_top_K": 3,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 29.09090909090909,
+        "p_rank_sum": 0.2044361791546177,
+        "en_top_K": 3,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 29.666666666666668,
+        "p_rank_sum": 0.22469134411150643,
+        "en_top_K": 3,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.020796529176450477,
+    "p_sustitutos": 0.868360320668941,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 41.0,
+        "p": 0.8618276344731054,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": NaN
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 24.428571428571427,
+        "p": 0.15976804639072187,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": NaN
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 44.0,
+        "p": 0.9266146770645871,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": NaN
+      }
+    },
+    "q_fdr": NaN
+  },
+  {
+    "etiqueta": "atencion rollout",
+    "nota": "pesos de atencion agregados",
+    "n_semillas": 50,
+    "T": 23.341266233766234,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.49571716883117,
+    "T_nulo_p05": 25.31548701298701,
+    "p_permutacion": 0.022795440911817635,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.13215739484396202,
+    "p_condicional": 0.29015301138882293,
+    "rho_marginal": 0.5693977664126919,
+    "p_marginal": 6.065092311144523e-07,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "ENCUENTRA RELACIONES REALES pero falla 1/2 controles",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 11,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 24,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 2,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 36,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 24,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 11,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 35,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 26,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 20.666666666666668,
+        "p_rank_sum": 0.12773164335664336,
+        "en_top_K": 1,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 18.25,
+        "p_rank_sum": 0.05285825285825285,
+        "en_top_K": 1,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 21.6,
+        "p_rank_sum": 0.07865353732289217,
+        "en_top_K": 1,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 22.333333333333332,
+        "p_rank_sum": 0.07047679757224971,
+        "en_top_K": 1,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 24.428571428571427,
+        "p_rank_sum": 0.09697083976896247,
+        "en_top_K": 1,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 22.875,
+        "p_rank_sum": 0.048732254623451994,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 25.333333333333332,
+        "p_rank_sum": 0.08628228582482828,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 23.6,
+        "p_rank_sum": 0.03907251996114656,
+        "en_top_K": 2,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 25.90909090909091,
+        "p_rank_sum": 0.07663390105423835,
+        "en_top_K": 3,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 28.416666666666668,
+        "p_rank_sum": 0.15725062194211037,
+        "en_top_K": 4,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.46740088138664,
+    "p_sustitutos": 7.59971264324672e-05,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": 24.6798556998557,
+    "frac_semillas_gana_liston": 0.54,
+    "p_signos_vs_liston": 0.3359055168826828,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 30.375,
+        "p": 0.3291341731653669,
+        "T_semilla_mediana": 31.0,
+        "frac_semillas_mejor_azar": 0.72,
+        "p_signos": 0.0013010857283610733,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 17.857142857142858,
+        "p": 0.028394321135772844,
+        "T_semilla_mediana": 19.428571428571427,
+        "frac_semillas_mejor_azar": 0.96,
+        "p_signos": 1.1333156635373598e-12,
+        "q_fdr": 0.11357728454309138
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 26.666666666666668,
+        "p": 0.17976404719056188,
+        "T_semilla_mediana": 26.444444444444443,
+        "frac_semillas_mejor_azar": 0.92,
+        "p_signos": 2.2308910274659866e-10,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.13897220555888823
+  },
+  {
+    "etiqueta": "atencion capa A1",
+    "nota": "pesos de una sola capa, sin rollout",
+    "n_semillas": 50,
+    "T": 45.60439033189033,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.58818552308802,
+    "T_nulo_p05": 26.335230699855703,
+    "p_permutacion": 0.9976004799040192,
+    "n_permutaciones": 5000,
+    "rho_condicional": -0.06147583759524059,
+    "p_condicional": 0.6238835472536554,
+    "rho_marginal": 0.19828827888529385,
+    "p_marginal": 0.11048549508702181,
+    "forma": "el ranking entero no sigue a ninguna de las dos",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 17,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 63,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 54,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 57,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 63,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 17,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 30,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 65,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 58.0,
+        "p_rank_sum": 0.9921765734265735,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 47.75,
+        "p_rank_sum": 0.9372530247530249,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 44.2,
+        "p_rank_sum": 0.9014457764457764,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 47.666666666666664,
+        "p_rank_sum": 0.9724686559694492,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 47.57142857142857,
+        "p_rank_sum": 0.9813610929290464,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 42.125,
+        "p_rank_sum": 0.9122888156578071,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 44.111111111111114,
+        "p_rank_sum": 0.9635747318648681,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 41.9,
+        "p_rank_sum": 0.9346285775975818,
+        "en_top_K": 1,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 42.63636363636363,
+        "p_rank_sum": 0.9588759523228534,
+        "en_top_K": 1,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 40.083333333333336,
+        "p_rank_sum": 0.9068659440672783,
+        "en_top_K": 2,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.41299751280457536,
+    "p_sustitutos": 0.0005682706741038033,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": 42.72573412698412,
+    "frac_semillas_gana_liston": 0.0,
+    "p_signos_vs_liston": 1.0,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 37.875,
+        "p": 0.7440511897620475,
+        "T_semilla_mediana": 36.9375,
+        "frac_semillas_mejor_azar": 0.14,
+        "p_signos": 0.9999999837812972,
+        "q_fdr": 0.8753543408965265
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 22.285714285714285,
+        "p": 0.09678064387122576,
+        "T_semilla_mediana": 25.428571428571427,
+        "frac_semillas_mejor_azar": 0.94,
+        "p_signos": 1.8541612689659814e-11,
+        "q_fdr": 0.19356128774245152
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 26.88888888888889,
+        "p": 0.1811637672465507,
+        "T_semilla_mediana": 28.0,
+        "frac_semillas_mejor_azar": 0.88,
+        "p_signos": 1.6218702825199216e-08,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "atencion capa A2",
+    "nota": "pesos de una sola capa, sin rollout",
+    "n_semillas": 50,
+    "T": 39.829199134199136,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.47688213852814,
+    "T_nulo_p05": 24.940218975468976,
+    "p_permutacion": 0.908618276344731,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.1040183696900115,
+    "p_condicional": 0.40588256812546647,
+    "rho_marginal": 0.2593674981734684,
+    "p_marginal": 0.035466995910870554,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 21,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 66,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 50,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 56,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 66,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 21,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 30,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 1,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 57.333333333333336,
+        "p_rank_sum": 0.9899912587412587,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 48.25,
+        "p_rank_sum": 0.9439810189810189,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 44.6,
+        "p_rank_sum": 0.9097798482879127,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 37.333333333333336,
+        "p_rank_sum": 0.6956386641738308,
+        "en_top_K": 1,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 39.857142857142854,
+        "p_rank_sum": 0.8217862481545718,
+        "en_top_K": 1,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 35.75,
+        "p_rank_sum": 0.6393633147240779,
+        "en_top_K": 2,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 36.333333333333336,
+        "p_rank_sum": 0.686449628094232,
+        "en_top_K": 2,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 34.1,
+        "p_rank_sum": 0.5462706310746687,
+        "en_top_K": 2,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 32.81818181818182,
+        "p_rank_sum": 0.45206699272671824,
+        "en_top_K": 2,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 31.916666666666668,
+        "p_rank_sum": 0.37920653388907866,
+        "en_top_K": 2,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.17454084038735307,
+    "p_sustitutos": 0.1610141057608773,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": 40.200766594516594,
+    "frac_semillas_gana_liston": 0.0,
+    "p_signos_vs_liston": 1.0,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 29.5,
+        "p": 0.28234353129374123,
+        "T_semilla_mediana": 31.6875,
+        "frac_semillas_mejor_azar": 0.62,
+        "p_signos": 0.05946022627971814,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 26.714285714285715,
+        "p": 0.20575884823035392,
+        "T_semilla_mediana": 27.57142857142857,
+        "frac_semillas_mejor_azar": 0.72,
+        "p_signos": 0.0013010857283610733,
+        "q_fdr": 0.3165520742005445
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 28.555555555555557,
+        "p": 0.2523495300939812,
+        "T_semilla_mediana": 31.27777777777778,
+        "frac_semillas_mejor_azar": 0.66,
+        "p_signos": 0.016419568782134242,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "atencion A2*A1 (sin residual)",
+    "nota": "composicion de las dos capas, sin el termino identidad",
+    "n_semillas": 50,
+    "T": 39.12351731601731,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.48121677849928,
+    "T_nulo_p05": 25.9856424963925,
+    "p_permutacion": 0.8984203159368126,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.035215530737918804,
+    "p_condicional": 0.7789304388345929,
+    "rho_marginal": 0.2383258532512264,
+    "p_marginal": 0.053974438460814525,
+    "forma": "el ranking entero no sigue a ninguna de las dos",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 16,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 46,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 50,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 28,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 46,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 16,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 34,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 66,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 41.333333333333336,
+        "p_rank_sum": 0.7602272727272728,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 35.0,
+        "p_rank_sum": 0.5668983793983794,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 34.8,
+        "p_rank_sum": 0.5652964866674544,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 40.0,
+        "p_rank_sum": 0.8061815233946381,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 41.857142857142854,
+        "p_rank_sum": 0.8877459984562708,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 37.625,
+        "p_rank_sum": 0.7412523367078396,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 40.333333333333336,
+        "p_rank_sum": 0.876664637959263,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 40.4,
+        "p_rank_sum": 0.8930517836345913,
+        "en_top_K": 1,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 41.63636363636363,
+        "p_rank_sum": 0.9392519502060411,
+        "en_top_K": 1,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 38.25,
+        "p_rank_sum": 0.8304503543861064,
+        "en_top_K": 2,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": 0.041091136858772734,
+    "p_sustitutos": 0.7432246451635866,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": 37.017417027417025,
+    "frac_semillas_gana_liston": 0.0,
+    "p_signos_vs_liston": 1.0,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 38.875,
+        "p": 0.7938412317536493,
+        "T_semilla_mediana": 37.875,
+        "frac_semillas_mejor_azar": 0.08,
+        "p_signos": 0.9999999999814584,
+        "q_fdr": 0.8820458130596103
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 23.0,
+        "p": 0.11597680463907219,
+        "T_semilla_mediana": 26.0,
+        "frac_semillas_mejor_azar": 0.94,
+        "p_signos": 1.8541612689659814e-11,
+        "q_fdr": 0.21086691752558578
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 33.111111111111114,
+        "p": 0.4887022595480904,
+        "T_semilla_mediana": 34.333333333333336,
+        "frac_semillas_mejor_azar": 0.46,
+        "p_signos": 0.7600561691508361,
+        "q_fdr": 0.5598880223955208
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "atencion A1+A2 (aditiva)",
+    "nota": "parte aditiva del rollout, sin identidad",
+    "n_semillas": 50,
+    "T": 39.04550505050506,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.46156138095238,
+    "T_nulo_p05": 25.538210317460315,
+    "p_permutacion": 0.8830233953209358,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.05279198413526772,
+    "p_condicional": 0.673767238715037,
+    "rho_marginal": 0.303329506314581,
+    "p_marginal": 0.01329343201696869,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 17,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 65,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 45,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 56,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 65,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 17,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 23,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 10,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 55.333333333333336,
+        "p_rank_sum": 0.981097027972028,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 45.75,
+        "p_rank_sum": 0.9044816294816295,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 41.2,
+        "p_rank_sum": 0.822280877724426,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 36.0,
+        "p_rank_sum": 0.6320307578900916,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 38.0,
+        "p_rank_sum": 0.7433743683016554,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 34.0,
+        "p_rank_sum": 0.5345504974698568,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 36.77777777777778,
+        "p_rank_sum": 0.7124484597742448,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 34.5,
+        "p_rank_sum": 0.5744753024832249,
+        "en_top_K": 2,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 34.72727272727273,
+        "p_rank_sum": 0.5951765460198962,
+        "en_top_K": 2,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 34.166666666666664,
+        "p_rank_sum": 0.5561889848370943,
+        "en_top_K": 2,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.3117753618892936,
+    "p_sustitutos": 0.010823591403008282,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": 40.1076461038961,
+    "frac_semillas_gana_liston": 0.0,
+    "p_signos_vs_liston": 1.0,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 31.875,
+        "p": 0.41271745650869823,
+        "T_semilla_mediana": 32.625,
+        "frac_semillas_mejor_azar": 0.62,
+        "p_signos": 0.05946022627971814,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 20.857142857142858,
+        "p": 0.0651869626074785,
+        "T_semilla_mediana": 25.07142857142857,
+        "frac_semillas_mejor_azar": 0.8,
+        "p_signos": 1.1930665838377763e-05,
+        "q_fdr": 0.1821857850652092
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 25.555555555555557,
+        "p": 0.14197160567886422,
+        "T_semilla_mediana": 28.166666666666664,
+        "frac_semillas_mejor_azar": 0.82,
+        "p_signos": 2.8070500466270687e-06,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "atencion max sobre cabezas",
+    "nota": "la cabeza mas fuerte de cada arista, sin promediar",
+    "n_semillas": 50,
+    "T": 40.48321067821068,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.491470511544016,
+    "T_nulo_p05": 26.21680916305916,
+    "p_permutacion": 0.9512097580483904,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.10531259784991127,
+    "p_condicional": 0.40003408386798806,
+    "rho_marginal": 0.08176599519883103,
+    "p_marginal": 0.5139675511204794,
+    "forma": "el ranking entero no sigue a ninguna de las dos",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 37,
+        "ok": false
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 66,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 0,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 58,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 47,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 66,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 37,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 12,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 3,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 57.0,
+        "p_rank_sum": 0.9887674825174825,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 52.0,
+        "p_rank_sum": 0.9788600288600289,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 44.0,
+        "p_rank_sum": 0.8970881269268366,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 37.166666666666664,
+        "p_rank_sum": 0.6879432923853864,
+        "en_top_K": 1,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 40.42857142857143,
+        "p_rank_sum": 0.8426322729799726,
+        "en_top_K": 1,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 38.75,
+        "p_rank_sum": 0.7945851076037328,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 36.111111111111114,
+        "p_rank_sum": 0.6730826957245362,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 35.8,
+        "p_rank_sum": 0.6628554221109522,
+        "en_top_K": 1,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 32.90909090909091,
+        "p_rank_sum": 0.45888824789089644,
+        "en_top_K": 2,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 30.666666666666668,
+        "p_rank_sum": 0.2887832852760956,
+        "en_top_K": 4,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": 0.15969666541963573,
+    "p_sustitutos": 0.20025289940476637,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": 41.26382395382395,
+    "frac_semillas_gana_liston": 0.0,
+    "p_signos_vs_liston": 1.0,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 27.75,
+        "p": 0.20075984803039393,
+        "T_semilla_mediana": 29.1875,
+        "frac_semillas_mejor_azar": 0.88,
+        "p_signos": 1.6218702825199216e-08,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 37.714285714285715,
+        "p": 0.6892621475704859,
+        "T_semilla_mediana": 37.42857142857143,
+        "frac_semillas_mejor_azar": 0.28,
+        "p_signos": 0.9995318885445741,
+        "q_fdr": 0.8615776844631073
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 39.55555555555556,
+        "p": 0.7994401119776045,
+        "T_semilla_mediana": 39.77777777777777,
+        "frac_semillas_mejor_azar": 0.24,
+        "p_signos": 0.9999548925494643,
+        "q_fdr": 0.8415159073448468
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "dependencia por ablacion",
+    "nota": "interviene la entrada, no lee pesos",
+    "n_semillas": 50,
+    "T": 21.046273448773448,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.44844099062049,
+    "T_nulo_p05": 22.864406836219338,
+    "p_permutacion": 0.025994801039792043,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.09738214893590431,
+    "p_condicional": 0.43664459097913794,
+    "rho_marginal": 0.1176901190637093,
+    "p_marginal": 0.346639835477754,
+    "forma": "el ranking entero no sigue a ninguna de las dos",
+    "veredicto": "ENCUENTRA RELACIONES REALES pero falla 2/2 controles",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 25,
+        "ok": false
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 41,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 0,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 17,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 4,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 41,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 25,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 10,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 6,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 20.666666666666668,
+        "p_rank_sum": 0.12083725971576909,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 21.75,
+        "p_rank_sum": 0.10551762389896835,
+        "en_top_K": 1,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 19.4,
+        "p_rank_sum": 0.0447742680185041,
+        "en_top_K": 1,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 17.166666666666668,
+        "p_rank_sum": 0.014753517674752154,
+        "en_top_K": 2,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 21.285714285714285,
+        "p_rank_sum": 0.03822623942797486,
+        "en_top_K": 2,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 20.125,
+        "p_rank_sum": 0.018119628477923172,
+        "en_top_K": 2,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 21.77777777777778,
+        "p_rank_sum": 0.02478512390487105,
+        "en_top_K": 2,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 22.7,
+        "p_rank_sum": 0.027165159947571065,
+        "en_top_K": 3,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 23.09090909090909,
+        "p_rank_sum": 0.024812274130121728,
+        "en_top_K": 3,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 22.5,
+        "p_rank_sum": 0.01433016863738745,
+        "en_top_K": 4,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.11650214376101765,
+    "p_sustitutos": 0.35156322044481225,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.12121212121212122,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": 23.579944985569988,
+    "frac_semillas_gana_liston": 0.88,
+    "p_signos_vs_liston": 1.6218702825199216e-08,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 24.625,
+        "p": 0.08418316336732654,
+        "T_semilla_mediana": 27.3125,
+        "frac_semillas_mejor_azar": 0.98,
+        "p_signos": 4.529709940470639e-14,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 38.857142857142854,
+        "p": 0.7938412317536493,
+        "T_semilla_mediana": 38.64285714285714,
+        "frac_semillas_mejor_azar": 0.16,
+        "p_signos": 0.9999998950661286,
+        "q_fdr": 0.9292878266451974
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 27.77777777777778,
+        "p": 0.16456708658268346,
+        "T_semilla_mediana": 29.77777777777778,
+        "frac_semillas_mejor_azar": 0.92,
+        "p_signos": 2.2308910274659866e-10,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.13897220555888823
+  },
+  {
+    "etiqueta": "dependencia por ablacion (cruda)",
+    "nota": "la misma sin normalizar por fila",
+    "n_semillas": 50,
+    "T": 23.99064574314574,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.46232612842713,
+    "T_nulo_p05": 23.2121718975469,
+    "p_permutacion": 0.0665866826634673,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.09512576975263545,
+    "p_condicional": 0.44739508119085397,
+    "rho_marginal": 0.17198622273249142,
+    "p_marginal": 0.1673281658773342,
+    "forma": "el ranking entero no sigue a ninguna de las dos",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 11,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 59,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 20,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 8,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 59,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 11,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 6,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 15,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 29.0,
+        "p_rank_sum": 0.35262237762237764,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 24.5,
+        "p_rank_sum": 0.17702713952713955,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 20.8,
+        "p_rank_sum": 0.06491380483315969,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 19.833333333333332,
+        "p_rank_sum": 0.03417081332205605,
+        "en_top_K": 1,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 23.714285714285715,
+        "p_rank_sum": 0.07999757418385128,
+        "en_top_K": 1,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 22.375,
+        "p_rank_sum": 0.04102551027077553,
+        "en_top_K": 2,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 23.444444444444443,
+        "p_rank_sum": 0.04631782468314076,
+        "en_top_K": 2,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 24.8,
+        "p_rank_sum": 0.06093806426437883,
+        "en_top_K": 2,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 25.272727272727273,
+        "p_rank_sum": 0.060748049793958904,
+        "en_top_K": 3,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 26.166666666666668,
+        "p_rank_sum": 0.07287601186998051,
+        "en_top_K": 3,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.17372980024048415,
+    "p_sustitutos": 0.16299935520194153,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": 23.871143578643576,
+    "frac_semillas_gana_liston": 0.74,
+    "p_signos_vs_liston": 0.0004681114554259125,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 30.625,
+        "p": 0.3301339732053589,
+        "T_semilla_mediana": 29.0625,
+        "frac_semillas_mejor_azar": 0.9,
+        "p_signos": 2.104926011270436e-09,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 34.142857142857146,
+        "p": 0.5484903019396121,
+        "T_semilla_mediana": 35.857142857142854,
+        "frac_semillas_mejor_azar": 0.3,
+        "p_signos": 0.9986989142716389,
+        "q_fdr": 0.7313204025861495
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 26.77777777777778,
+        "p": 0.13517296540691862,
+        "T_semilla_mediana": 27.11111111111111,
+        "frac_semillas_mejor_azar": 1.0,
+        "p_signos": 8.881784197001252e-16,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.2663467306538692
+  },
+  {
+    "etiqueta": "Rashomon (percentil de fila)",
+    "nota": "importancia agregada sobre el conjunto Rashomon",
+    "n_semillas": 28,
+    "T": 42.411713564213564,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.477952026334776,
+    "T_nulo_p05": 25.93370634920635,
+    "p_permutacion": 0.9764047190561888,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.033067512903561885,
+    "p_condicional": 0.7921028220080376,
+    "rho_marginal": 0.2822429131667656,
+    "p_marginal": 0.021673679557418026,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 14,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 66,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 56,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 62,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 66,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 14,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 11,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 36,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 61.5,
+        "p_rank_sum": 0.9953577199162914,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 49.625,
+        "p_rank_sum": 0.9596726193998486,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 41.9,
+        "p_rank_sum": 0.848485092114735,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 40.916666666666664,
+        "p_rank_sum": 0.8422594193792659,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 42.07142857142857,
+        "p_rank_sum": 0.8961602031989662,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 37.625,
+        "p_rank_sum": 0.7447992575264439,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 39.388888888888886,
+        "p_rank_sum": 0.8412753910616015,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 36.95,
+        "p_rank_sum": 0.7343331309359997,
+        "en_top_K": 1,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 37.68181818181818,
+        "p_rank_sum": 0.7881796615278716,
+        "en_top_K": 2,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 36.458333333333336,
+        "p_rank_sum": 0.7252611905690881,
+        "en_top_K": 2,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.3233783402707755,
+    "p_sustitutos": 0.008084631758170495,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 0.18181818181818182,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 32.5,
+        "p": 0.44831033793241354,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 21.285714285714285,
+        "p": 0.07358528294341132,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.1821857850652092
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 27.833333333333332,
+        "p": 0.21695660867826436,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "P1 probabilistico (frecuencia)",
+    "nota": "en cuantas semillas sobrevive la arista",
+    "n_semillas": 50,
+    "T": 29.434897186147186,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.65637413636363,
+    "T_nulo_p05": 25.894468253968252,
+    "p_permutacion": 0.1845630873825235,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.15774030766324,
+    "p_condicional": 0.20589293813134998,
+    "rho_marginal": 0.5787043520351367,
+    "p_marginal": 3.5881870628908885e-07,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 21,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 41,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 9,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 49,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 41,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 21,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 21,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 38,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 33.0,
+        "p_rank_sum": 0.487600327204656,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 30.125,
+        "p_rank_sum": 0.36212225541919507,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 28.4,
+        "p_rank_sum": 0.27034361083867675,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 30.0,
+        "p_rank_sum": 0.3221315592579977,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 30.785714285714285,
+        "p_rank_sum": 0.3486221351900963,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 28.0625,
+        "p_rank_sum": 0.19679619205961735,
+        "en_top_K": 0,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 29.166666666666668,
+        "p_rank_sum": 0.2337828463085344,
+        "en_top_K": 2,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 27.15,
+        "p_rank_sum": 0.1276120633588515,
+        "en_top_K": 3,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 27.90909090909091,
+        "p_rank_sum": 0.1446015658786476,
+        "en_top_K": 3,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 29.75,
+        "p_rank_sum": 0.22750431211862115,
+        "en_top_K": 3,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.5318480219144213,
+    "p_sustitutos": 4.318060389508467e-06,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 0.7575757575757576,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 30.25,
+        "p": 0.3167366526694661,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 15.642857142857142,
+        "p": 0.010397920415916816,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.10397920415916817
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 24.833333333333332,
+        "p": 0.10617876424715057,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.52732310680721
+  },
+  {
+    "etiqueta": "P1 probabilistico (-p_value)",
+    "nota": "significacion contra el modelo nulo",
+    "n_semillas": 50,
+    "T": 30.47442640692641,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.57232899458874,
+    "T_nulo_p05": 25.295928481240985,
+    "p_permutacion": 0.2601479704059188,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.11718529915723931,
+    "p_condicional": 0.34872672512446934,
+    "rho_marginal": 0.566092889123204,
+    "p_marginal": 7.279762485943907e-07,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 23,
+        "ok": false
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 38,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 0,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 14,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 49,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 38,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 23,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 28,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 39,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 33.833333333333336,
+        "p_rank_sum": 0.5184173960086905,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 31.125,
+        "p_rank_sum": 0.40443034480189255,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 30.5,
+        "p_rank_sum": 0.36263549743121004,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 31.916666666666668,
+        "p_rank_sum": 0.42043837998764616,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 32.357142857142854,
+        "p_rank_sum": 0.4379352269079359,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 28.5,
+        "p_rank_sum": 0.2188277851626254,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 29.833333333333332,
+        "p_rank_sum": 0.27181035231123774,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 27.8,
+        "p_rank_sum": 0.15611103446757202,
+        "en_top_K": 2,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 28.545454545454547,
+        "p_rank_sum": 0.17638217620314206,
+        "en_top_K": 2,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 30.333333333333332,
+        "p_rank_sum": 0.26646882237851666,
+        "en_top_K": 2,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.560678584778678,
+    "p_sustitutos": 9.77583563315354e-07,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 0.3181818181818182,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 30.1875,
+        "p": 0.3067386522695461,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 14.928571428571429,
+        "p": 0.010197960407918417,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.10397920415916817
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 25.61111111111111,
+        "p": 0.1357728454309138,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.650369926014797
+  },
+  {
+    "etiqueta": "P2 interventivo (auc_degradation)",
+    "nota": "area de la curva de degradacion al debilitar la arista",
+    "n_semillas": 50,
+    "T": 44.00007575757576,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.489298964646466,
+    "T_nulo_p05": 25.80740133477633,
+    "p_permutacion": 0.9880023995200959,
+    "n_permutaciones": 5000,
+    "rho_condicional": -0.12293080054274086,
+    "p_condicional": 0.32543572342877153,
+    "rho_marginal": 0.07901054169710887,
+    "p_marginal": 0.5282972398195346,
+    "forma": "el ranking entero no sigue a ninguna de las dos",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 61,
+        "ok": false
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 51,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 0,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 65,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 32,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 51,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 61,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 49,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 11,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 49.333333333333336,
+        "p_rank_sum": 0.9264860139860139,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 52.25,
+        "p_rank_sum": 0.9803710178710179,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 51.6,
+        "p_rank_sum": 0.9879656633688891,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 44.833333333333336,
+        "p_rank_sum": 0.9355352584133652,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 47.0,
+        "p_rank_sum": 0.976863556342007,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 42.875,
+        "p_rank_sum": 0.9299241345645365,
+        "en_top_K": 0,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 41.0,
+        "p_rank_sum": 0.8980616952910243,
+        "en_top_K": 0,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 40.2,
+        "p_rank_sum": 0.8863137412939355,
+        "en_top_K": 0,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 36.90909090909091,
+        "p_rank_sum": 0.7433865610871783,
+        "en_top_K": 2,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 34.0,
+        "p_rank_sum": 0.5430273438581177,
+        "en_top_K": 3,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": 0.11744386600654148,
+    "p_sustitutos": 0.3476568564594543,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 30.75,
+        "p": 0.3687262547490502,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 49.285714285714285,
+        "p": 0.9746050789842031,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.974605078984203
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 48.333333333333336,
+        "p": 0.9840031993601279,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.9840031993601279
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "P2 interventivo (max_degradation)",
+    "nota": "peor degradacion alcanzada",
+    "n_semillas": 50,
+    "T": 23.251046176046177,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.49180343362193,
+    "T_nulo_p05": 24.76441847041847,
+    "p_permutacion": 0.027794441111777646,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.13766830184740633,
+    "p_condicional": 0.27032613744123524,
+    "rho_marginal": 0.6461747208015867,
+    "p_marginal": 4.6400777472714294e-09,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "ENCUENTRA RELACIONES REALES pero falla 1/2 controles",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 14,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 26,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 3,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 37,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 26,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 14,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 38,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 2,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 22.0,
+        "p_rank_sum": 0.15528846153846157,
+        "en_top_K": 1,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 20.0,
+        "p_rank_sum": 0.07792762792762793,
+        "en_top_K": 1,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 23.6,
+        "p_rank_sum": 0.12163855409823152,
+        "en_top_K": 1,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 20.0,
+        "p_rank_sum": 0.0360093700588148,
+        "en_top_K": 2,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 23.285714285714285,
+        "p_rank_sum": 0.07090438591463182,
+        "en_top_K": 2,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 22.0,
+        "p_rank_sum": 0.03589432894593826,
+        "en_top_K": 2,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 24.77777777777778,
+        "p_rank_sum": 0.07249819534688162,
+        "en_top_K": 2,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 23.9,
+        "p_rank_sum": 0.04382739806682913,
+        "en_top_K": 2,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 25.363636363636363,
+        "p_rank_sum": 0.06284534266584281,
+        "en_top_K": 2,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 27.583333333333332,
+        "p_rank_sum": 0.12058378014840582,
+        "en_top_K": 2,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.4070343083539187,
+    "p_sustitutos": 0.0006945523603975053,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 29.625,
+        "p": 0.2917416516696661,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 19.285714285714285,
+        "p": 0.04239152169566087,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.14130507231886957
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 29.11111111111111,
+        "p": 0.28014397120575885,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.13897220555888823
+  },
+  {
+    "etiqueta": "P2 interventivo (jaccard_drop)",
+    "nota": "cuanto cambia el grafo al intervenir",
+    "n_semillas": 50,
+    "T": 31.324873737373736,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.51161983080809,
+    "T_nulo_p05": 26.570462752525252,
+    "p_permutacion": 0.3149370125974805,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.07069095598863624,
+    "p_condicional": 0.5727340195050222,
+    "rho_marginal": 0.5409259495694324,
+    "p_marginal": 2.7452595052600427e-06,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 37,
+        "ok": false
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 37,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 0,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 12,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 37,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 37,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 37,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 37,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 37,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 28.833333333333332,
+        "p_rank_sum": 0.328940714931386,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 30.875,
+        "p_rank_sum": 0.38729973090462,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 32.1,
+        "p_rank_sum": 0.43335275328350603,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 32.916666666666664,
+        "p_rank_sum": 0.47157789681609663,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 33.5,
+        "p_rank_sum": 0.5044262930314308,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 30.875,
+        "p_rank_sum": 0.33389632557355575,
+        "en_top_K": 0,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 31.555555555555557,
+        "p_rank_sum": 0.3675003797507631,
+        "en_top_K": 0,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 29.65,
+        "p_rank_sum": 0.2344842275673078,
+        "en_top_K": 0,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 30.318181818181817,
+        "p_rank_sum": 0.263518256692309,
+        "en_top_K": 0,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 32.625,
+        "p_rank_sum": 0.42969282227933303,
+        "en_top_K": 0,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.5818466096923978,
+    "p_sustitutos": 2.9943344013991715e-07,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 1.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 33.5,
+        "p": 0.5646870625874825,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.7058588282343531
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 16.0,
+        "p": 0.01779644071185763,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.10997800439912017
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 28.444444444444443,
+        "p": 0.2611477704459108,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.6998600279944012
+  },
+  {
+    "etiqueta": "P3 topologico (brecha)",
+    "nota": "brecha topologica de la arista",
+    "n_semillas": 50,
+    "T": 48.854909812409815,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.458239904040404,
+    "T_nulo_p05": 25.090800865800865,
+    "p_permutacion": 0.9962007598480304,
+    "n_permutaciones": 5000,
+    "rho_condicional": -0.27331383192244796,
+    "p_condicional": 0.02638818642280128,
+    "rho_marginal": -0.708255877241582,
+    "p_marginal": 2.9000766912507695e-11,
+    "forma": "el ranking entero sigue la dependencia condicional",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 61,
+        "ok": false
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 61,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 0,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 61,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 32,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 61,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 61,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 40,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 61,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 51.333333333333336,
+        "p_rank_sum": 0.9521588061175343,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 53.75,
+        "p_rank_sum": 0.9859272618660823,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 51.0,
+        "p_rank_sum": 0.9837172038670634,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 52.666666666666664,
+        "p_rank_sum": 0.9950908256555862,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 46.285714285714285,
+        "p_rank_sum": 0.9698462718663751,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 48.125,
+        "p_rank_sum": 0.9896615016530688,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 46.44444444444444,
+        "p_rank_sum": 0.9857809573851424,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 47.3,
+        "p_rank_sum": 0.9934788114036601,
+        "en_top_K": 1,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 46.72727272727273,
+        "p_rank_sum": 0.9940961323280463,
+        "en_top_K": 1,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 44.916666666666664,
+        "p_rank_sum": 0.9890248295855707,
+        "en_top_K": 1,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": 0.2657526471583297,
+    "p_sustitutos": 0.031030772161595825,
+    "sesgo": "pierde los pares que tienen sustitutos (enmascaramiento por redundancia)",
+    "frac_empates": 0.16666666666666666,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 43.0,
+        "p": 0.9296140771845631,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.9296140771845632
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 42.714285714285715,
+        "p": 0.8822235552889423,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.9292878266451974
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 30.555555555555557,
+        "p": 0.33053389322135573,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "P3 topologico (peso)",
+    "nota": "peso de la arista en el grafo de consenso",
+    "n_semillas": 50,
+    "T": 22.209823232323235,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.51879391486292,
+    "T_nulo_p05": 25.450800324675324,
+    "p_permutacion": 0.014797040591881624,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.14000626239432212,
+    "p_condicional": 0.2621954787918986,
+    "rho_marginal": 0.7855756184114394,
+    "p_marginal": 5.6970398754470924e-15,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "ENCUENTRA RELACIONES REALES pero falla 1/2 controles",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 4,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 30,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 2,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 23,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 30,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 4,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 41,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 9,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 18.333333333333332,
+        "p_rank_sum": 0.08771853146853148,
+        "en_top_K": 1,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 14.75,
+        "p_rank_sum": 0.021139971139971143,
+        "en_top_K": 2,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 20.0,
+        "p_rank_sum": 0.05299527980979595,
+        "en_top_K": 2,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 18.166666666666668,
+        "p_rank_sum": 0.01951386794062627,
+        "en_top_K": 2,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 23.0,
+        "p_rank_sum": 0.06527810649307211,
+        "en_top_K": 2,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 22.375,
+        "p_rank_sum": 0.04102551027077553,
+        "en_top_K": 2,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 25.11111111111111,
+        "p_rank_sum": 0.0805502891611341,
+        "en_top_K": 3,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 25.4,
+        "p_rank_sum": 0.07498408299910966,
+        "en_top_K": 3,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 26.545454545454547,
+        "p_rank_sum": 0.09549724653280556,
+        "en_top_K": 3,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 28.416666666666668,
+        "p_rank_sum": 0.15725062194211037,
+        "en_top_K": 3,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.23325463455417939,
+    "p_sustitutos": 0.05944964978959435,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.0,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 34.25,
+        "p": 0.5290941811637673,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.7054589082183563
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 17.0,
+        "p": 0.021995600879824034,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.10997800439912017
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 33.55555555555556,
+        "p": 0.4983003399320136,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.5598880223955208
+      }
+    },
+    "q_fdr": 0.13897220555888823
+  },
+  {
+    "etiqueta": "P4 triangulacion (te_brecha)",
+    "nota": "brecha del criterio de estabilidad topologica",
+    "n_semillas": 0,
+    "T": 48.854909812409815,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.512889083694084,
+    "T_nulo_p05": 25.134118506493504,
+    "p_permutacion": 0.9954009198160368,
+    "n_permutaciones": 5000,
+    "rho_condicional": -0.27331383192244796,
+    "p_condicional": 0.02638818642280128,
+    "rho_marginal": -0.708255877241582,
+    "p_marginal": 2.9000766912507695e-11,
+    "forma": "el ranking entero sigue la dependencia condicional",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 61,
+        "ok": false
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 61,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 0,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 61,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 32,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 61,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 61,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 40,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 61,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 51.333333333333336,
+        "p_rank_sum": 0.9521588061175343,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 53.75,
+        "p_rank_sum": 0.9859272618660823,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 51.0,
+        "p_rank_sum": 0.9837172038670634,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 52.666666666666664,
+        "p_rank_sum": 0.9950908256555862,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 46.285714285714285,
+        "p_rank_sum": 0.9698462718663751,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 48.125,
+        "p_rank_sum": 0.9896615016530688,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 46.44444444444444,
+        "p_rank_sum": 0.9857809573851424,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 47.3,
+        "p_rank_sum": 0.9934788114036601,
+        "en_top_K": 1,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 46.72727272727273,
+        "p_rank_sum": 0.9940961323280463,
+        "en_top_K": 1,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 44.916666666666664,
+        "p_rank_sum": 0.9890248295855707,
+        "en_top_K": 1,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": 0.2657526471583297,
+    "p_sustitutos": 0.031030772161595825,
+    "sesgo": "pierde los pares que tienen sustitutos (enmascaramiento por redundancia)",
+    "frac_empates": 0.16666666666666666,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 43.0,
+        "p": 0.9290141971605679,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.9296140771845632
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 42.714285714285715,
+        "p": 0.8828234353129374,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.9292878266451974
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 30.555555555555557,
+        "p": 0.3313337332533493,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "CONSENSO todas (13)",
+    "nota": "rango medio de atencion rollout, atencion capa A1, atencion capa A2, atencion A2*A1 (sin residual), atencion A1+A2 (aditiva), atencion max sobre cabezas, dependencia por ablacion, dependencia por ablacion (cruda), Rashomon (percentil de fila), P2 interventivo (auc_degradation), P2 interventivo (max_degradation), P3 topologico (brecha), P3 topologico (peso)",
+    "n_semillas": 13,
+    "T": 35.40017135642135,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.47452145707071,
+    "T_nulo_p05": 25.148296807359305,
+    "p_permutacion": 0.641871625674865,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.1040677225829417,
+    "p_condicional": 0.4056586372612997,
+    "rho_marginal": 0.4131185882033768,
+    "p_marginal": 0.0005659382927646622,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 9,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 64,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 45,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 43,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 64,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 9,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 18,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 10,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 50.833333333333336,
+        "p_rank_sum": 0.9469818011616491,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 40.375,
+        "p_rank_sum": 0.7741303268116813,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 35.9,
+        "p_rank_sum": 0.6190291301801881,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 31.583333333333332,
+        "p_rank_sum": 0.40308390044174525,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 35.357142857142854,
+        "p_rank_sum": 0.6107037161321692,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 31.4375,
+        "p_rank_sum": 0.3766186858135635,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 33.72222222222222,
+        "p_rank_sum": 0.5186302379688712,
+        "en_top_K": 2,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 31.85,
+        "p_rank_sum": 0.3873772856414357,
+        "en_top_K": 3,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 32.31818181818182,
+        "p_rank_sum": 0.4148491427107611,
+        "en_top_K": 3,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 30.625,
+        "p_rank_sum": 0.2859360227517912,
+        "en_top_K": 4,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.2876983905649514,
+    "p_sustitutos": 0.01916149154801422,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 0.21212121212121213,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 29.1875,
+        "p": 0.27834433113377327,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 25.0,
+        "p": 0.15836832633473305,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.26394721055788845
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 29.444444444444443,
+        "p": 0.2991401719656069,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  },
+  {
+    "etiqueta": "CONSENSO intervencion (4)",
+    "nota": "rango medio de dependencia por ablacion, dependencia por ablacion (cruda), P2 interventivo (auc_degradation), P2 interventivo (max_degradation)",
+    "n_semillas": 4,
+    "T": 26.208423520923525,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.426922759740265,
+    "T_nulo_p05": 23.29516901154401,
+    "p_permutacion": 0.122375524895021,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.07169925737868643,
+    "p_condicional": 0.5672574507287289,
+    "rho_marginal": 0.3997745139865198,
+    "p_marginal": 0.0008823800555987749,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 27,
+        "ok": false
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 46,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 0,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 25,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 13,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 46,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 27,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 24,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 1,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 28.166666666666668,
+        "p_rank_sum": 0.31659076748479,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 27.875,
+        "p_rank_sum": 0.27714266070988974,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 27.1,
+        "p_rank_sum": 0.22258261776103155,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 22.75,
+        "p_rank_sum": 0.07667008839642561,
+        "en_top_K": 1,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 27.714285714285715,
+        "p_rank_sum": 0.2023745516951847,
+        "en_top_K": 1,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 24.625,
+        "p_rank_sum": 0.08296344977406345,
+        "en_top_K": 2,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 25.88888888888889,
+        "p_rank_sum": 0.1018887335763673,
+        "en_top_K": 2,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 26.4,
+        "p_rank_sum": 0.10363954295913413,
+        "en_top_K": 2,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 25.772727272727273,
+        "p_rank_sum": 0.07294389462674132,
+        "en_top_K": 2,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 25.791666666666668,
+        "p_rank_sum": 0.06302697181591586,
+        "en_top_K": 2,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.22396620911825804,
+    "p_sustitutos": 0.07063986033483945,
+    "sesgo": "sin sesgo detectable por numero de sustitutos",
+    "frac_empates": 0.3181818181818182,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 28.125,
+        "p": 0.21375724855028994,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 33.5,
+        "p": 0.5250949810037993,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.7313204025861495
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 33.5,
+        "p": 0.5038992201559688,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.5598880223955208
+      }
+    },
+    "q_fdr": 0.40791841631673664
+  },
+  {
+    "etiqueta": "CONSENSO pesos de atencion (6)",
+    "nota": "rango medio de atencion rollout, atencion capa A1, atencion capa A2, atencion A2*A1 (sin residual), atencion A1+A2 (aditiva), atencion max sobre cabezas",
+    "n_semillas": 6,
+    "T": 39.256417748917755,
+    "T_azar": 33.5,
+    "T_nulo_media": 33.5085083939394,
+    "T_nulo_p05": 26.00344074675325,
+    "p_permutacion": 0.9044191161767646,
+    "n_permutaciones": 5000,
+    "rho_condicional": 0.09791436223710955,
+    "p_condicional": 0.4341302167843176,
+    "rho_marginal": 0.3850184793980328,
+    "p_marginal": 0.0014120920631396933,
+    "forma": "el ranking entero sigue la correlacion marginal",
+    "veredicto": "NO SE DISTINGUE DEL AZAR",
+    "controles": [
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto_verdad": 4,
+        "puesto_framework": 13,
+        "ok": true
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto_verdad": 3,
+        "puesto_framework": 63,
+        "ok": false
+      }
+    ],
+    "n_controles_ok": 1,
+    "n_controles": 2,
+    "umbral_control": 22,
+    "top_pares_reales": [
+      {
+        "par": "EVI2-SAVI",
+        "pc": 0.8254326184108188,
+        "puesto": 46,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDMI-NDII",
+        "pc": 0.8166445119320757,
+        "puesto": 51,
+        "n_sustitutos": 0
+      },
+      {
+        "par": "MARI-ARI",
+        "pc": 0.7746021544100478,
+        "puesto": 63,
+        "n_sustitutos": 1
+      },
+      {
+        "par": "NDVI-KNDVI",
+        "pc": 0.7207751430314301,
+        "puesto": 13,
+        "n_sustitutos": 3
+      },
+      {
+        "par": "NDVI-PSRI",
+        "pc": 0.6424007354232789,
+        "puesto": 25,
+        "n_sustitutos": 4
+      },
+      {
+        "par": "NDWI-PSRI",
+        "pc": 0.6326653533961628,
+        "puesto": 26,
+        "n_sustitutos": 0
+      }
+    ],
+    "enriquecimiento": [
+      {
+        "K": 3,
+        "puesto_medio": 53.5,
+        "p_rank_sum": 0.9687444908307419,
+        "en_top_K": 0,
+        "esperado": 0.13636363636363635
+      },
+      {
+        "K": 4,
+        "puesto_medio": 43.375,
+        "p_rank_sum": 0.8588310928079306,
+        "en_top_K": 0,
+        "esperado": 0.24242424242424243
+      },
+      {
+        "K": 5,
+        "puesto_medio": 39.7,
+        "p_rank_sum": 0.777395997214167,
+        "en_top_K": 0,
+        "esperado": 0.3787878787878788
+      },
+      {
+        "K": 6,
+        "puesto_medio": 37.416666666666664,
+        "p_rank_sum": 0.703808772813989,
+        "en_top_K": 0,
+        "esperado": 0.5454545454545454
+      },
+      {
+        "K": 7,
+        "puesto_medio": 40.42857142857143,
+        "p_rank_sum": 0.846263031330428,
+        "en_top_K": 0,
+        "esperado": 0.7424242424242424
+      },
+      {
+        "K": 8,
+        "puesto_medio": 35.5,
+        "p_rank_sum": 0.6271122178075932,
+        "en_top_K": 1,
+        "esperado": 0.9696969696969697
+      },
+      {
+        "K": 9,
+        "puesto_medio": 37.5,
+        "p_rank_sum": 0.752409039045419,
+        "en_top_K": 1,
+        "esperado": 1.2272727272727273
+      },
+      {
+        "K": 10,
+        "puesto_medio": 35.5,
+        "p_rank_sum": 0.6430649161976806,
+        "en_top_K": 1,
+        "esperado": 1.5151515151515151
+      },
+      {
+        "K": 11,
+        "puesto_medio": 35.72727272727273,
+        "p_rank_sum": 0.6664747526484268,
+        "en_top_K": 1,
+        "esperado": 1.8333333333333333
+      },
+      {
+        "K": 12,
+        "puesto_medio": 33.916666666666664,
+        "p_rank_sum": 0.5364324077335597,
+        "en_top_K": 1,
+        "esperado": 2.1818181818181817
+      }
+    ],
+    "rho_sustitutos": -0.2533355884319937,
+    "p_sustitutos": 0.04013115950113234,
+    "sesgo": "favorece los pares del racimo colineal grande (firma del atajo)",
+    "frac_empates": 0.36363636363636365,
+    "T_liston": 25.200440115440113,
+    "T_semilla_mediana": NaN,
+    "frac_semillas_gana_liston": NaN,
+    "p_signos_vs_liston": NaN,
+    "sub": {
+      "solo condicional": {
+        "n": 8,
+        "T": 32.3125,
+        "p": 0.4373125374925015,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.6404433399034479
+      },
+      "no lineal": {
+        "n": 7,
+        "T": 21.785714285714285,
+        "p": 0.08198360327934413,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.1821857850652092
+      },
+      "no lin blindado": {
+        "n": 9,
+        "T": 29.444444444444443,
+        "p": 0.2943411317736453,
+        "T_semilla_mediana": NaN,
+        "frac_semillas_mejor_azar": NaN,
+        "p_signos": NaN,
+        "q_fdr": 0.44177831100446574
+      }
+    },
+    "q_fdr": 0.9976004799040192
+  }
+]

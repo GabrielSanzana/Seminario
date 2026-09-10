@@ -1,0 +1,1682 @@
+[
+  {
+    "etiqueta": "atencion rollout",
+    "n_semillas": 50,
+    "reciprocidad": 0.3,
+    "n_aristas_variables": 79,
+    "nmi_media": 0.09391050189249385,
+    "nmi_umbral_nulo": 0.1368251239305121,
+    "n_sustitutivas": 183,
+    "n_complementarias": 315,
+    "frac_sust_mismo_origen": 0.1092896174863388,
+    "frac_sust_misma_familia": 0.2185792349726776,
+    "top_sustitutivas": [
+      {
+        "e1": "MARI->NDWI",
+        "e2": "EVI2->SAVI",
+        "nmi": 0.383408149219198,
+        "phi": -0.57888373874097,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->SAVI",
+        "e2": "CHL_REDEDGE->NDWI",
+        "nmi": 0.383408149219198,
+        "phi": -0.57888373874097,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->NDWI",
+        "e2": "EVI2->EVI",
+        "nmi": 0.3247769256794957,
+        "phi": -0.5345224838248488,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->NDWI",
+        "e2": "EVI2->EVI",
+        "nmi": 0.3247769256794957,
+        "phi": -0.5345224838248488,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->EVI",
+        "e2": "EVI2->NDWI",
+        "nmi": 0.3247769256794956,
+        "phi": -0.5345224838248488,
+        "misma_familia": false,
+        "mismo_origen": true
+      },
+      {
+        "e1": "EVI2->EVI",
+        "e2": "SAVI->NDWI",
+        "nmi": 0.3247769256794956,
+        "phi": -0.5345224838248488,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->EVI",
+        "e2": "KNDVI->NDWI",
+        "nmi": 0.3247769256794956,
+        "phi": -0.5345224838248488,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->NDWI",
+        "e2": "EVI2->SAVI",
+        "nmi": 0.31652677299745835,
+        "phi": -0.5819143739626462,
+        "misma_familia": false,
+        "mismo_origen": false
+      }
+    ],
+    "top_complementarias": [
+      {
+        "e1": "NDVI->NDWI",
+        "e2": "KNDVI->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999997,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->NDWI",
+        "e2": "EVI2->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999996,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->NDWI",
+        "e2": "SAVI->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999996,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->NDWI",
+        "e2": "SAVI->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999996,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->PSRI",
+        "e2": "ARI->NDWI",
+        "nmi": 1.0,
+        "phi": 1.0,
+        "misma_familia": false,
+        "mismo_origen": false
+      }
+    ],
+    "ov_overlap_medio": 0.6253514739228992,
+    "ov_por_nodo": {
+      "NDVI": 0.6780952380952326,
+      "MARI": 0.6576870748299278,
+      "ARI": 0.6266666666666637,
+      "EVI": 0.6767346938775469,
+      "EVI2": 0.6778231292516963,
+      "NDWI": 0.4389115646258497,
+      "NDMI": 0.677823129251699,
+      "CHL_REDEDGE": 0.565714285714285,
+      "NDII": 0.718095238095235,
+      "SAVI": 0.6682993197278867,
+      "PSRI": 0.43183673469387646,
+      "KNDVI": 0.6865306122448914
+    },
+    "ov_mas_estables": [
+      "NDII",
+      "KNDVI",
+      "NDVI",
+      "NDMI"
+    ],
+    "ov_menos_estables": [
+      "ARI",
+      "CHL_REDEDGE",
+      "NDWI",
+      "PSRI"
+    ],
+    "pers_n_significativas": 30,
+    "pers_aristas": [
+      {
+        "arista": "EVI2->SAVI",
+        "phi": 0.84,
+        "q": 4.966616489457302e-25
+      },
+      {
+        "arista": "EVI->SAVI",
+        "phi": 0.8,
+        "q": 1.5418849986261052e-22
+      },
+      {
+        "arista": "NDVI->SAVI",
+        "phi": 0.74,
+        "q": 4.934699159126642e-19
+      },
+      {
+        "arista": "NDII->SAVI",
+        "phi": 0.74,
+        "q": 4.934699159126642e-19
+      },
+      {
+        "arista": "EVI2->EVI",
+        "phi": 0.72,
+        "q": 5.952354156312722e-18
+      },
+      {
+        "arista": "NDMI->SAVI",
+        "phi": 0.7,
+        "q": 5.0959636248147475e-17
+      },
+      {
+        "arista": "SAVI->EVI",
+        "phi": 0.7,
+        "q": 5.0959636248147475e-17
+      },
+      {
+        "arista": "SAVI->EVI2",
+        "phi": 0.7,
+        "q": 5.0959636248147475e-17
+      },
+      {
+        "arista": "KNDVI->SAVI",
+        "phi": 0.66,
+        "q": 5.818410592517693e-15
+      },
+      {
+        "arista": "MARI->NDVI",
+        "phi": 0.66,
+        "q": 5.818410592517693e-15
+      },
+      {
+        "arista": "EVI->EVI2",
+        "phi": 0.64,
+        "q": 5.081245609113076e-14
+      },
+      {
+        "arista": "NDII->EVI",
+        "phi": 0.64,
+        "q": 5.081245609113076e-14
+      }
+    ]
+  },
+  {
+    "etiqueta": "atencion capa A1",
+    "n_semillas": 50,
+    "reciprocidad": 0.2,
+    "n_aristas_variables": 90,
+    "nmi_media": 0.10152117406849424,
+    "nmi_umbral_nulo": 0.2561895657238203,
+    "n_sustitutivas": 116,
+    "n_complementarias": 394,
+    "frac_sust_mismo_origen": 0.08620689655172414,
+    "frac_sust_misma_familia": 0.0603448275862069,
+    "top_sustitutivas": [
+      {
+        "e1": "PSRI->NDWI",
+        "e2": "KNDVI->CHL_REDEDGE",
+        "nmi": 0.7234707389586204,
+        "phi": -0.8567628336893989,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->CHL_REDEDGE",
+        "e2": "ARI->NDWI",
+        "nmi": 0.6651164454663935,
+        "phi": -0.8261595987094034,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->CHL_REDEDGE",
+        "e2": "NDMI->NDWI",
+        "nmi": 0.6651164454663935,
+        "phi": -0.8261595987094034,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->CHL_REDEDGE",
+        "e2": "NDII->NDWI",
+        "nmi": 0.6651164454663935,
+        "phi": -0.8261595987094034,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->CHL_REDEDGE",
+        "e2": "SAVI->NDWI",
+        "nmi": 0.6651164454663935,
+        "phi": -0.8261595987094034,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->CHL_REDEDGE",
+        "e2": "KNDVI->NDWI",
+        "nmi": 0.6651164454663935,
+        "phi": -0.8261595987094034,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->PSRI",
+        "e2": "KNDVI->CHL_REDEDGE",
+        "nmi": 0.6645904681969201,
+        "phi": -0.8079466429027211,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->PSRI",
+        "e2": "KNDVI->CHL_REDEDGE",
+        "nmi": 0.6645904681969201,
+        "phi": -0.8079466429027211,
+        "misma_familia": false,
+        "mismo_origen": false
+      }
+    ],
+    "top_complementarias": [
+      {
+        "e1": "NDVI->NDWI",
+        "e2": "CHL_REDEDGE->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999997,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->NDWI",
+        "e2": "NDMI->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999994,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->NDWI",
+        "e2": "NDII->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999994,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->NDWI",
+        "e2": "SAVI->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999994,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->NDWI",
+        "e2": "KNDVI->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999994,
+        "misma_familia": true,
+        "mismo_origen": false
+      }
+    ],
+    "ov_overlap_medio": 0.618253968253966,
+    "ov_por_nodo": {
+      "NDVI": 0.6427210884353706,
+      "MARI": 0.6057142857142845,
+      "ARI": 0.6024489795918361,
+      "EVI": 0.5570068027210886,
+      "EVI2": 0.5948299319727864,
+      "NDWI": 0.699047619047615,
+      "NDMI": 0.6794557823129201,
+      "CHL_REDEDGE": 0.5600000000000005,
+      "NDII": 0.6538775510204041,
+      "SAVI": 0.5812244897959168,
+      "PSRI": 0.6658503401360503,
+      "KNDVI": 0.576870748299319
+    },
+    "ov_mas_estables": [
+      "NDWI",
+      "NDMI",
+      "PSRI",
+      "NDII"
+    ],
+    "ov_menos_estables": [
+      "SAVI",
+      "KNDVI",
+      "CHL_REDEDGE",
+      "EVI"
+    ],
+    "pers_n_significativas": 20,
+    "pers_aristas": [
+      {
+        "arista": "KNDVI->CHL_REDEDGE",
+        "phi": 0.94,
+        "q": 3.0351068837910937e-33
+      },
+      {
+        "arista": "CHL_REDEDGE->KNDVI",
+        "phi": 0.92,
+        "q": 1.0145114429343565e-31
+      },
+      {
+        "arista": "EVI2->CHL_REDEDGE",
+        "phi": 0.9,
+        "q": 3.540881564902484e-30
+      },
+      {
+        "arista": "SAVI->CHL_REDEDGE",
+        "phi": 0.88,
+        "q": 1.1336542423870804e-28
+      },
+      {
+        "arista": "EVI->CHL_REDEDGE",
+        "phi": 0.86,
+        "q": 2.318138140997447e-27
+      },
+      {
+        "arista": "NDVI->CHL_REDEDGE",
+        "phi": 0.86,
+        "q": 2.318138140997447e-27
+      },
+      {
+        "arista": "MARI->KNDVI",
+        "phi": 0.86,
+        "q": 2.318138140997447e-27
+      },
+      {
+        "arista": "ARI->KNDVI",
+        "phi": 0.78,
+        "q": 7.100868271668507e-22
+      },
+      {
+        "arista": "NDII->KNDVI",
+        "phi": 0.78,
+        "q": 7.100868271668507e-22
+      },
+      {
+        "arista": "NDII->CHL_REDEDGE",
+        "phi": 0.76,
+        "q": 1.1840839663580102e-20
+      },
+      {
+        "arista": "NDMI->KNDVI",
+        "phi": 0.74,
+        "q": 1.7944360578642335e-19
+      },
+      {
+        "arista": "NDWI->KNDVI",
+        "phi": 0.7,
+        "q": 3.135977615270614e-17
+      }
+    ]
+  },
+  {
+    "etiqueta": "atencion capa A2",
+    "n_semillas": 50,
+    "reciprocidad": 0.3,
+    "n_aristas_variables": 62,
+    "nmi_media": 0.14251606820625806,
+    "nmi_umbral_nulo": 0.14923955940424802,
+    "n_sustitutivas": 324,
+    "n_complementarias": 298,
+    "frac_sust_mismo_origen": 0.10802469135802469,
+    "frac_sust_misma_familia": 0.0,
+    "top_sustitutivas": [
+      {
+        "e1": "EVI->NDWI",
+        "e2": "NDII->KNDVI",
+        "nmi": 0.6770007457013122,
+        "phi": -0.880704845927979,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "MARI->KNDVI",
+        "e2": "KNDVI->PSRI",
+        "nmi": 0.6456464972724847,
+        "phi": -0.8217814036133181,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->CHL_REDEDGE",
+        "e2": "SAVI->PSRI",
+        "nmi": 0.6314418293871763,
+        "phi": -0.8191780219091255,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "MARI->KNDVI",
+        "e2": "CHL_REDEDGE->PSRI",
+        "nmi": 0.5902405052914311,
+        "phi": -0.8207677342949548,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->KNDVI",
+        "e2": "CHL_REDEDGE->PSRI",
+        "nmi": 0.5719541873874422,
+        "phi": -0.8068977697577978,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "CHL_REDEDGE->PSRI",
+        "e2": "CHL_REDEDGE->KNDVI",
+        "nmi": 0.5719541873874422,
+        "phi": -0.8068977697577978,
+        "misma_familia": false,
+        "mismo_origen": true
+      },
+      {
+        "e1": "NDVI->CHL_REDEDGE",
+        "e2": "EVI->PSRI",
+        "nmi": 0.5709921438914223,
+        "phi": -0.7741827783921407,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->KNDVI",
+        "e2": "KNDVI->PSRI",
+        "nmi": 0.5497951458843379,
+        "phi": -0.7895178878845713,
+        "misma_familia": false,
+        "mismo_origen": false
+      }
+    ],
+    "top_complementarias": [
+      {
+        "e1": "NDVI->NDII",
+        "e2": "KNDVI->NDII",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->NDVI",
+        "e2": "SAVI->NDVI",
+        "nmi": 1.0,
+        "phi": 1.0,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->EVI",
+        "e2": "NDII->EVI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->NDWI",
+        "e2": "SAVI->NDWI",
+        "nmi": 0.8779718550919103,
+        "phi": 0.9606453592105878,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->NDWI",
+        "e2": "NDII->NDWI",
+        "nmi": 0.8779718550919103,
+        "phi": 0.9606453592105878,
+        "misma_familia": true,
+        "mismo_origen": false
+      }
+    ],
+    "ov_overlap_medio": 0.6263492063492052,
+    "ov_por_nodo": {
+      "NDVI": 0.6753741496598604,
+      "MARI": 0.6865306122448959,
+      "ARI": 0.7499319727891097,
+      "EVI": 0.6258503401360547,
+      "EVI2": 0.5961904761904782,
+      "NDWI": 0.5774149659863926,
+      "NDMI": 0.5561904761904763,
+      "CHL_REDEDGE": 0.6361904761904756,
+      "NDII": 0.5485714285714286,
+      "SAVI": 0.5953741496598665,
+      "PSRI": 0.6582312925170035,
+      "KNDVI": 0.6103401360544213
+    },
+    "ov_mas_estables": [
+      "ARI",
+      "MARI",
+      "NDVI",
+      "PSRI"
+    ],
+    "ov_menos_estables": [
+      "SAVI",
+      "NDWI",
+      "NDMI",
+      "NDII"
+    ],
+    "pers_n_significativas": 31,
+    "pers_aristas": [
+      {
+        "arista": "ARI->KNDVI",
+        "phi": 0.82,
+        "q": 6.6007449525940894e-24
+      },
+      {
+        "arista": "CHL_REDEDGE->KNDVI",
+        "phi": 0.82,
+        "q": 6.6007449525940894e-24
+      },
+      {
+        "arista": "MARI->KNDVI",
+        "phi": 0.78,
+        "q": 2.130260481500552e-21
+      },
+      {
+        "arista": "KNDVI->CHL_REDEDGE",
+        "phi": 0.72,
+        "q": 7.440442695390903e-18
+      },
+      {
+        "arista": "NDVI->CHL_REDEDGE",
+        "phi": 0.68,
+        "q": 1.0184504801893346e-15
+      },
+      {
+        "arista": "NDWI->PSRI",
+        "phi": 0.66,
+        "q": 9.697350987529488e-15
+      },
+      {
+        "arista": "EVI2->CHL_REDEDGE",
+        "phi": 0.58,
+        "q": 6.091448267720677e-11
+      },
+      {
+        "arista": "EVI->CHL_REDEDGE",
+        "phi": 0.56,
+        "q": 3.5802731640341245e-10
+      },
+      {
+        "arista": "SAVI->CHL_REDEDGE",
+        "phi": 0.56,
+        "q": 3.5802731640341245e-10
+      },
+      {
+        "arista": "ARI->NDVI",
+        "phi": 0.54,
+        "q": 2.046320066769809e-09
+      },
+      {
+        "arista": "NDVI->NDWI",
+        "phi": 0.54,
+        "q": 2.046320066769809e-09
+      },
+      {
+        "arista": "NDMI->KNDVI",
+        "phi": 0.52,
+        "q": 1.1189684472158075e-08
+      }
+    ]
+  },
+  {
+    "etiqueta": "atencion A2*A1 (sin residual)",
+    "n_semillas": 50,
+    "reciprocidad": 0.0,
+    "n_aristas_variables": 110,
+    "nmi_media": 0.09620476841185682,
+    "nmi_umbral_nulo": 0.18421237223532128,
+    "n_sustitutivas": 111,
+    "n_complementarias": 689,
+    "frac_sust_mismo_origen": 0.06306306306306306,
+    "frac_sust_misma_familia": 0.06306306306306306,
+    "top_sustitutivas": [
+      {
+        "e1": "MARI->NDWI",
+        "e2": "NDWI->KNDVI",
+        "nmi": 0.38599683745549745,
+        "phi": -0.5897678246195883,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->NDWI",
+        "e2": "NDWI->KNDVI",
+        "nmi": 0.38599683745549745,
+        "phi": -0.5897678246195883,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "MARI->PSRI",
+        "e2": "PSRI->CHL_REDEDGE",
+        "nmi": 0.34361588841247187,
+        "phi": -0.5392403377381665,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->PSRI",
+        "e2": "PSRI->CHL_REDEDGE",
+        "nmi": 0.34361588841247187,
+        "phi": -0.5392403377381665,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "MARI->PSRI",
+        "e2": "NDWI->CHL_REDEDGE",
+        "nmi": 0.3109550404131061,
+        "phi": -0.5052911526399115,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "MARI->PSRI",
+        "e2": "NDWI->KNDVI",
+        "nmi": 0.3109550404131061,
+        "phi": -0.5052911526399115,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->PSRI",
+        "e2": "NDWI->CHL_REDEDGE",
+        "nmi": 0.3109550404131061,
+        "phi": -0.5052911526399115,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "ARI->PSRI",
+        "e2": "NDWI->KNDVI",
+        "nmi": 0.3109550404131061,
+        "phi": -0.5052911526399115,
+        "misma_familia": false,
+        "mismo_origen": false
+      }
+    ],
+    "top_complementarias": [
+      {
+        "e1": "MARI->CHL_REDEDGE",
+        "e2": "ARI->CHL_REDEDGE",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999998,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->KNDVI",
+        "e2": "EVI2->KNDVI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999998,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->MARI",
+        "e2": "CHL_REDEDGE->MARI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999994,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->MARI",
+        "e2": "NDII->MARI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999994,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "CHL_REDEDGE->MARI",
+        "e2": "NDII->MARI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999994,
+        "misma_familia": true,
+        "mismo_origen": false
+      }
+    ],
+    "ov_overlap_medio": 0.5500453514739221,
+    "ov_por_nodo": {
+      "NDVI": 0.5885714285714275,
+      "MARI": 0.5325170068027212,
+      "ARI": 0.48353741496598723,
+      "EVI": 0.5923809523809518,
+      "EVI2": 0.5978231292517,
+      "NDWI": 0.5956462585033986,
+      "NDMI": 0.558639455782312,
+      "CHL_REDEDGE": 0.4315646258503391,
+      "NDII": 0.5793197278911559,
+      "SAVI": 0.6057142857142841,
+      "PSRI": 0.5676190476190462,
+      "KNDVI": 0.4672108843537408
+    },
+    "ov_mas_estables": [
+      "SAVI",
+      "EVI2",
+      "NDWI",
+      "EVI"
+    ],
+    "ov_menos_estables": [
+      "MARI",
+      "ARI",
+      "KNDVI",
+      "CHL_REDEDGE"
+    ],
+    "pers_n_significativas": 20,
+    "pers_aristas": [
+      {
+        "arista": "ARI->CHL_REDEDGE",
+        "phi": 0.84,
+        "q": 2.483308244728651e-25
+      },
+      {
+        "arista": "MARI->CHL_REDEDGE",
+        "phi": 0.84,
+        "q": 2.483308244728651e-25
+      },
+      {
+        "arista": "PSRI->CHL_REDEDGE",
+        "phi": 0.82,
+        "q": 4.4004966350627265e-24
+      },
+      {
+        "arista": "NDWI->KNDVI",
+        "phi": 0.8,
+        "q": 6.16753999450442e-23
+      },
+      {
+        "arista": "NDWI->CHL_REDEDGE",
+        "phi": 0.8,
+        "q": 6.16753999450442e-23
+      },
+      {
+        "arista": "EVI->KNDVI",
+        "phi": 0.76,
+        "q": 1.691548523368586e-20
+      },
+      {
+        "arista": "EVI2->KNDVI",
+        "phi": 0.76,
+        "q": 1.691548523368586e-20
+      },
+      {
+        "arista": "NDMI->CHL_REDEDGE",
+        "phi": 0.74,
+        "q": 1.9738796636506568e-19
+      },
+      {
+        "arista": "SAVI->KNDVI",
+        "phi": 0.74,
+        "q": 1.9738796636506568e-19
+      },
+      {
+        "arista": "NDII->CHL_REDEDGE",
+        "phi": 0.74,
+        "q": 1.9738796636506568e-19
+      },
+      {
+        "arista": "NDVI->KNDVI",
+        "phi": 0.72,
+        "q": 2.705615525596692e-18
+      },
+      {
+        "arista": "EVI2->CHL_REDEDGE",
+        "phi": 0.7,
+        "q": 3.3973090832098315e-17
+      }
+    ]
+  },
+  {
+    "etiqueta": "atencion A1+A2 (aditiva)",
+    "n_semillas": 50,
+    "reciprocidad": 0.3,
+    "n_aristas_variables": 61,
+    "nmi_media": 0.15084428768070007,
+    "nmi_umbral_nulo": 0.1496386213009925,
+    "n_sustitutivas": 293,
+    "n_complementarias": 299,
+    "frac_sust_mismo_origen": 0.10921501706484642,
+    "frac_sust_misma_familia": 0.0,
+    "top_sustitutivas": [
+      {
+        "e1": "CHL_REDEDGE->PSRI",
+        "e2": "CHL_REDEDGE->KNDVI",
+        "nmi": 1.0000000000000002,
+        "phi": -0.9999999999999997,
+        "misma_familia": false,
+        "mismo_origen": true
+      },
+      {
+        "e1": "MARI->KNDVI",
+        "e2": "CHL_REDEDGE->PSRI",
+        "nmi": 0.8029274242032223,
+        "phi": -0.915238951128249,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "CHL_REDEDGE->PSRI",
+        "e2": "KNDVI->CHL_REDEDGE",
+        "nmi": 0.8029274242032223,
+        "phi": -0.915238951128249,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->PSRI",
+        "e2": "CHL_REDEDGE->KNDVI",
+        "nmi": 0.8029274242032222,
+        "phi": -0.915238951128249,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->PSRI",
+        "e2": "CHL_REDEDGE->KNDVI",
+        "nmi": 0.8029274242032222,
+        "phi": -0.915238951128249,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->PSRI",
+        "e2": "CHL_REDEDGE->KNDVI",
+        "nmi": 0.8029274242032222,
+        "phi": -0.915238951128249,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->PSRI",
+        "e2": "CHL_REDEDGE->KNDVI",
+        "nmi": 0.7847088986036665,
+        "phi": -0.9026709338484398,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "CHL_REDEDGE->KNDVI",
+        "e2": "KNDVI->PSRI",
+        "nmi": 0.7847088986036665,
+        "phi": -0.9026709338484398,
+        "misma_familia": false,
+        "mismo_origen": false
+      }
+    ],
+    "top_complementarias": [
+      {
+        "e1": "NDVI->PSRI",
+        "e2": "KNDVI->PSRI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999997,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->CHL_REDEDGE",
+        "e2": "EVI2->CHL_REDEDGE",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999998,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->PSRI",
+        "e2": "EVI2->PSRI",
+        "nmi": 1.0000000000000002,
+        "phi": 1.0,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->NDVI",
+        "e2": "EVI2->NDVI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->NDVI",
+        "e2": "SAVI->NDVI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      }
+    ],
+    "ov_overlap_medio": 0.6687755102040781,
+    "ov_por_nodo": {
+      "NDVI": 0.6593197278911523,
+      "MARI": 0.7507482993197219,
+      "ARI": 0.7975510204081557,
+      "EVI": 0.6198639455782288,
+      "EVI2": 0.625306122448977,
+      "NDWI": 0.6582312925170031,
+      "NDMI": 0.6696598639455755,
+      "CHL_REDEDGE": 0.6223129251700653,
+      "NDII": 0.6590476190476191,
+      "SAVI": 0.628843537414963,
+      "PSRI": 0.7431292517006722,
+      "KNDVI": 0.5912925170068026
+    },
+    "ov_mas_estables": [
+      "ARI",
+      "MARI",
+      "PSRI",
+      "NDMI"
+    ],
+    "ov_menos_estables": [
+      "EVI2",
+      "CHL_REDEDGE",
+      "EVI",
+      "KNDVI"
+    ],
+    "pers_n_significativas": 29,
+    "pers_aristas": [
+      {
+        "arista": "ARI->KNDVI",
+        "phi": 0.9,
+        "q": 1.0622644694707452e-29
+      },
+      {
+        "arista": "CHL_REDEDGE->KNDVI",
+        "phi": 0.88,
+        "q": 2.267308484774161e-28
+      },
+      {
+        "arista": "KNDVI->CHL_REDEDGE",
+        "phi": 0.86,
+        "q": 4.056741746745532e-27
+      },
+      {
+        "arista": "MARI->KNDVI",
+        "phi": 0.86,
+        "q": 4.056741746745532e-27
+      },
+      {
+        "arista": "EVI2->CHL_REDEDGE",
+        "phi": 0.82,
+        "q": 1.885927129312597e-24
+      },
+      {
+        "arista": "NDVI->CHL_REDEDGE",
+        "phi": 0.82,
+        "q": 1.885927129312597e-24
+      },
+      {
+        "arista": "EVI->CHL_REDEDGE",
+        "phi": 0.82,
+        "q": 1.885927129312597e-24
+      },
+      {
+        "arista": "SAVI->CHL_REDEDGE",
+        "phi": 0.8,
+        "q": 3.854712496565263e-23
+      },
+      {
+        "arista": "NDMI->KNDVI",
+        "phi": 0.68,
+        "q": 5.658058223274081e-16
+      },
+      {
+        "arista": "NDMI->CHL_REDEDGE",
+        "phi": 0.66,
+        "q": 4.848675493764744e-15
+      },
+      {
+        "arista": "NDII->CHL_REDEDGE",
+        "phi": 0.66,
+        "q": 4.848675493764744e-15
+      },
+      {
+        "arista": "NDII->KNDVI",
+        "phi": 0.66,
+        "q": 4.848675493764744e-15
+      }
+    ]
+  },
+  {
+    "etiqueta": "atencion max sobre cabezas",
+    "n_semillas": 50,
+    "reciprocidad": 0.1,
+    "n_aristas_variables": 51,
+    "nmi_media": 0.20242500981648967,
+    "nmi_umbral_nulo": 0.21399448214570232,
+    "n_sustitutivas": 260,
+    "n_complementarias": 242,
+    "frac_sust_mismo_origen": 0.09615384615384616,
+    "frac_sust_misma_familia": 0.0,
+    "top_sustitutivas": [
+      {
+        "e1": "NDVI->NDWI",
+        "e2": "MARI->CHL_REDEDGE",
+        "nmi": 0.8029274242032223,
+        "phi": -0.9152389511282493,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->NDWI",
+        "e2": "ARI->CHL_REDEDGE",
+        "nmi": 0.8029274242032223,
+        "phi": -0.9152389511282493,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->NDWI",
+        "e2": "SAVI->CHL_REDEDGE",
+        "nmi": 0.7631594083437823,
+        "phi": -0.9011271137791661,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->NDWI",
+        "e2": "SAVI->CHL_REDEDGE",
+        "nmi": 0.7631594083437823,
+        "phi": -0.9011271137791662,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "CHL_REDEDGE->NDWI",
+        "e2": "SAVI->CHL_REDEDGE",
+        "nmi": 0.7631594083437823,
+        "phi": -0.9011271137791662,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "KNDVI->NDWI",
+        "e2": "KNDVI->CHL_REDEDGE",
+        "nmi": 0.6721756993547944,
+        "phi": -0.8435273922869735,
+        "misma_familia": false,
+        "mismo_origen": true
+      },
+      {
+        "e1": "NDII->PSRI",
+        "e2": "NDII->KNDVI",
+        "nmi": 0.6385934738508999,
+        "phi": -0.8553773704957132,
+        "misma_familia": false,
+        "mismo_origen": true
+      },
+      {
+        "e1": "EVI->NDWI",
+        "e2": "KNDVI->CHL_REDEDGE",
+        "nmi": 0.6183886838731147,
+        "phi": -0.8412813518778786,
+        "misma_familia": false,
+        "mismo_origen": false
+      }
+    ],
+    "top_complementarias": [
+      {
+        "e1": "MARI->CHL_REDEDGE",
+        "e2": "ARI->CHL_REDEDGE",
+        "nmi": 1.0000000000000002,
+        "phi": 1.0,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->NDWI",
+        "e2": "CHL_REDEDGE->NDWI",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->NDVI",
+        "e2": "NDII->NDVI",
+        "nmi": 1.0,
+        "phi": 1.0,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->NDII",
+        "e2": "NDII->NDMI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->PSRI",
+        "e2": "NDII->PSRI",
+        "nmi": 0.8662538119835821,
+        "phi": 0.9543135154205279,
+        "misma_familia": true,
+        "mismo_origen": false
+      }
+    ],
+    "ov_overlap_medio": 0.7563945578231287,
+    "ov_por_nodo": {
+      "NDVI": 0.8136054421768731,
+      "MARI": 0.678095238095235,
+      "ARI": 0.7088435374149619,
+      "EVI": 0.8321088435374198,
+      "EVI2": 0.8321088435374198,
+      "NDWI": 0.7039455782312858,
+      "NDMI": 0.6764625850340116,
+      "CHL_REDEDGE": 0.7774149659863917,
+      "NDII": 0.6914285714285692,
+      "SAVI": 0.832925170068032,
+      "PSRI": 0.7099319727891085,
+      "KNDVI": 0.8198639455782353
+    },
+    "ov_mas_estables": [
+      "SAVI",
+      "EVI",
+      "EVI2",
+      "KNDVI"
+    ],
+    "ov_menos_estables": [
+      "NDWI",
+      "NDII",
+      "MARI",
+      "NDMI"
+    ],
+    "pers_n_significativas": 26,
+    "pers_aristas": [
+      {
+        "arista": "NDVI->NDWI",
+        "phi": 0.86,
+        "q": 1.622696698698213e-26
+      },
+      {
+        "arista": "NDMI->NDWI",
+        "phi": 0.82,
+        "q": 4.4004966350627265e-24
+      },
+      {
+        "arista": "SAVI->NDWI",
+        "phi": 0.82,
+        "q": 4.4004966350627265e-24
+      },
+      {
+        "arista": "NDII->NDWI",
+        "phi": 0.8,
+        "q": 6.16753999450442e-23
+      },
+      {
+        "arista": "KNDVI->NDWI",
+        "phi": 0.8,
+        "q": 6.16753999450442e-23
+      },
+      {
+        "arista": "CHL_REDEDGE->NDWI",
+        "phi": 0.76,
+        "q": 1.4801049579475128e-20
+      },
+      {
+        "arista": "EVI2->NDWI",
+        "phi": 0.76,
+        "q": 1.4801049579475128e-20
+      },
+      {
+        "arista": "EVI->NDWI",
+        "phi": 0.76,
+        "q": 1.4801049579475128e-20
+      },
+      {
+        "arista": "NDWI->PSRI",
+        "phi": 0.74,
+        "q": 2.1931996262785075e-19
+      },
+      {
+        "arista": "NDVI->PSRI",
+        "phi": 0.72,
+        "q": 2.976177078156361e-18
+      },
+      {
+        "arista": "ARI->KNDVI",
+        "phi": 0.7,
+        "q": 3.3973090832098315e-17
+      },
+      {
+        "arista": "NDII->PSRI",
+        "phi": 0.7,
+        "q": 3.3973090832098315e-17
+      }
+    ]
+  },
+  {
+    "etiqueta": "dependencia por ablacion",
+    "n_semillas": 50,
+    "reciprocidad": 0.5,
+    "n_aristas_variables": 54,
+    "nmi_media": 0.04956935377859265,
+    "nmi_umbral_nulo": 0.1689734663308406,
+    "n_sustitutivas": 34,
+    "n_complementarias": 48,
+    "frac_sust_mismo_origen": 0.14705882352941177,
+    "frac_sust_misma_familia": 0.029411764705882353,
+    "top_sustitutivas": [
+      {
+        "e1": "NDWI->ARI",
+        "e2": "NDMI->EVI",
+        "nmi": 1.0,
+        "phi": -1.0,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDWI->ARI",
+        "e2": "NDII->EVI",
+        "nmi": 1.0,
+        "phi": -1.0,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDII->NDWI",
+        "e2": "NDII->NDMI",
+        "nmi": 0.43072883153559927,
+        "phi": -0.6123724356957945,
+        "misma_familia": false,
+        "mismo_origen": true
+      },
+      {
+        "e1": "ARI->CHL_REDEDGE",
+        "e2": "PSRI->CHL_REDEDGE",
+        "nmi": 0.4012083894243379,
+        "phi": -0.5654448612875199,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->EVI",
+        "e2": "NDWI->ARI",
+        "nmi": 0.4012083894243379,
+        "phi": -0.5654448612875199,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDWI->ARI",
+        "e2": "SAVI->EVI",
+        "nmi": 0.4012083894243379,
+        "phi": -0.56544486128752,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "SAVI->NDMI",
+        "e2": "PSRI->NDVI",
+        "nmi": 0.4012083894243379,
+        "phi": -0.5654448612875199,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "SAVI->NDMI",
+        "e2": "PSRI->KNDVI",
+        "nmi": 0.4012083894243379,
+        "phi": -0.5654448612875198,
+        "misma_familia": false,
+        "mismo_origen": false
+      }
+    ],
+    "top_complementarias": [
+      {
+        "e1": "EVI2->CHL_REDEDGE",
+        "e2": "SAVI->CHL_REDEDGE",
+        "nmi": 1.0000000000000002,
+        "phi": 0.9999999999999996,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->EVI",
+        "e2": "NDII->EVI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->NDWI",
+        "e2": "NDII->NDWI",
+        "nmi": 0.5798894014604662,
+        "phi": 0.763762615825973,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->NDMI",
+        "e2": "SAVI->NDMI",
+        "nmi": 0.5479676242251033,
+        "phi": 0.6998542122237651,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->PSRI",
+        "e2": "KNDVI->PSRI",
+        "nmi": 0.5121806224599564,
+        "phi": 0.7179859859140654,
+        "misma_familia": true,
+        "mismo_origen": false
+      }
+    ],
+    "ov_overlap_medio": 0.7414739229024917,
+    "ov_por_nodo": {
+      "NDVI": 0.8862585034013578,
+      "MARI": 0.7387755102040753,
+      "ARI": 0.6070748299319716,
+      "EVI": 0.558911564625851,
+      "EVI2": 0.6117006802721069,
+      "NDWI": 0.9866666666666656,
+      "NDMI": 0.6353741496598587,
+      "CHL_REDEDGE": 0.7523809523809472,
+      "NDII": 0.6946938775510156,
+      "SAVI": 0.5692517006802711,
+      "PSRI": 0.9866666666666675,
+      "KNDVI": 0.8699319727891114
+    },
+    "ov_mas_estables": [
+      "PSRI",
+      "NDWI",
+      "NDVI",
+      "KNDVI"
+    ],
+    "ov_menos_estables": [
+      "EVI2",
+      "ARI",
+      "SAVI",
+      "EVI"
+    ],
+    "pers_n_significativas": 21,
+    "pers_aristas": [
+      {
+        "arista": "NDVI->CHL_REDEDGE",
+        "phi": 1.0,
+        "q": 4.20830190141272e-40
+      },
+      {
+        "arista": "KNDVI->CHL_REDEDGE",
+        "phi": 1.0,
+        "q": 4.20830190141272e-40
+      },
+      {
+        "arista": "NDWI->ARI",
+        "phi": 0.98,
+        "q": 5.982802536508417e-38
+      },
+      {
+        "arista": "MARI->NDWI",
+        "phi": 0.98,
+        "q": 5.982802536508417e-38
+      },
+      {
+        "arista": "NDII->NDMI",
+        "phi": 0.96,
+        "q": 5.5578263896790865e-36
+      },
+      {
+        "arista": "NDMI->NDII",
+        "phi": 0.96,
+        "q": 5.5578263896790865e-36
+      },
+      {
+        "arista": "PSRI->NDVI",
+        "phi": 0.94,
+        "q": 3.3723409819901044e-34
+      },
+      {
+        "arista": "PSRI->KNDVI",
+        "phi": 0.94,
+        "q": 3.3723409819901044e-34
+      },
+      {
+        "arista": "PSRI->CHL_REDEDGE",
+        "phi": 0.94,
+        "q": 3.3723409819901044e-34
+      },
+      {
+        "arista": "NDWI->PSRI",
+        "phi": 0.92,
+        "q": 1.8445662598806482e-32
+      },
+      {
+        "arista": "CHL_REDEDGE->PSRI",
+        "phi": 0.92,
+        "q": 1.8445662598806482e-32
+      },
+      {
+        "arista": "NDWI->MARI",
+        "phi": 0.82,
+        "q": 1.1001241587656816e-24
+      }
+    ]
+  },
+  {
+    "etiqueta": "dependencia por ablacion (cruda)",
+    "n_semillas": 50,
+    "reciprocidad": 0.3,
+    "n_aristas_variables": 63,
+    "nmi_media": 0.04761330131366514,
+    "nmi_umbral_nulo": 0.25864375501969444,
+    "n_sustitutivas": 8,
+    "n_complementarias": 37,
+    "frac_sust_mismo_origen": 0.125,
+    "frac_sust_misma_familia": 0.0,
+    "top_sustitutivas": [
+      {
+        "e1": "NDMI->CHL_REDEDGE",
+        "e2": "KNDVI->NDVI",
+        "nmi": 0.468132749980658,
+        "phi": -0.6806815483793538,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI->CHL_REDEDGE",
+        "e2": "KNDVI->PSRI",
+        "nmi": 0.38422115845140914,
+        "phi": -0.6169526972391243,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->PSRI",
+        "e2": "EVI->CHL_REDEDGE",
+        "nmi": 0.3690567882895389,
+        "phi": -0.6806593270844964,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "MARI->NDWI",
+        "e2": "EVI->CHL_REDEDGE",
+        "nmi": 0.36517761678497085,
+        "phi": -0.6794871794871792,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->PSRI",
+        "e2": "EVI2->CHL_REDEDGE",
+        "nmi": 0.34625098499958495,
+        "phi": -0.580288457473997,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "CHL_REDEDGE->NDII",
+        "e2": "PSRI->KNDVI",
+        "nmi": 0.3209090872879592,
+        "phi": -0.4844521416518046,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDVI->PSRI",
+        "e2": "SAVI->CHL_REDEDGE",
+        "nmi": 0.29404147932591035,
+        "phi": -0.5808640532349616,
+        "misma_familia": false,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDII->NDMI",
+        "e2": "NDII->KNDVI",
+        "nmi": 0.28351422629728795,
+        "phi": -0.5882357548280668,
+        "misma_familia": false,
+        "mismo_origen": true
+      }
+    ],
+    "top_complementarias": [
+      {
+        "e1": "EVI2->EVI",
+        "e2": "NDMI->EVI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->EVI",
+        "e2": "SAVI->EVI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "EVI2->KNDVI",
+        "e2": "SAVI->KNDVI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999996,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->EVI",
+        "e2": "SAVI->EVI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      },
+      {
+        "e1": "NDMI->NDWI",
+        "e2": "NDII->NDWI",
+        "nmi": 1.0,
+        "phi": 0.9999999999999999,
+        "misma_familia": true,
+        "mismo_origen": false
+      }
+    ],
+    "ov_overlap_medio": 0.5840362811791361,
+    "ov_por_nodo": {
+      "NDVI": 0.7161904761904696,
+      "MARI": 0.47265306122448913,
+      "ARI": 0.4209523809523798,
+      "EVI": 0.478639455782314,
+      "EVI2": 0.47727891156462704,
+      "NDWI": 0.7725170068027196,
+      "NDMI": 0.6255782312925132,
+      "CHL_REDEDGE": 0.5327891156462573,
+      "NDII": 0.5970068027210855,
+      "SAVI": 0.4955102040816322,
+      "PSRI": 0.6892517006802693,
+      "KNDVI": 0.7300680272108779
+    },
+    "ov_mas_estables": [
+      "NDWI",
+      "KNDVI",
+      "NDVI",
+      "PSRI"
+    ],
+    "ov_menos_estables": [
+      "EVI",
+      "EVI2",
+      "MARI",
+      "ARI"
+    ],
+    "pers_n_significativas": 27,
+    "pers_aristas": [
+      {
+        "arista": "NDVI->CHL_REDEDGE",
+        "phi": 1.0,
+        "q": 4.20830190141272e-40
+      },
+      {
+        "arista": "KNDVI->CHL_REDEDGE",
+        "phi": 1.0,
+        "q": 4.20830190141272e-40
+      },
+      {
+        "arista": "PSRI->CHL_REDEDGE",
+        "phi": 0.96,
+        "q": 1.1115652779358173e-35
+      },
+      {
+        "arista": "PSRI->NDVI",
+        "phi": 0.94,
+        "q": 7.587767209477734e-34
+      },
+      {
+        "arista": "PSRI->KNDVI",
+        "phi": 0.92,
+        "q": 4.0580457717374257e-32
+      },
+      {
+        "arista": "ARI->KNDVI",
+        "phi": 0.88,
+        "q": 7.557694949247203e-29
+      },
+      {
+        "arista": "ARI->NDWI",
+        "phi": 0.82,
+        "q": 1.885927129312597e-24
+      },
+      {
+        "arista": "NDII->CHL_REDEDGE",
+        "phi": 0.78,
+        "q": 7.98847680562707e-22
+      },
+      {
+        "arista": "NDMI->CHL_REDEDGE",
+        "phi": 0.74,
+        "q": 2.1931996262785075e-19
+      },
+      {
+        "arista": "NDII->NDMI",
+        "phi": 0.72,
+        "q": 2.976177078156361e-18
+      },
+      {
+        "arista": "PSRI->NDMI",
+        "phi": 0.68,
+        "q": 4.2435436674555605e-16
+      },
+      {
+        "arista": "PSRI->NDII",
+        "phi": 0.68,
+        "q": 4.2435436674555605e-16
+      }
+    ]
+  }
+]

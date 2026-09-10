@@ -1,0 +1,39 @@
+==============================================================================
+ ES UNARIO TAMBIEN EL ACOPLAMIENTO NMI = 1?
+
+ A_sur = mu + r_i + c_j no contiene ninguna relacion de par. Si aun
+ asi produce los mismos acoplamientos perfectos, el hallazgo de
+ 'bloque indivisible' en G1 era un efecto de la normalizacion por
+ fila y no una propiedad aprendida.
+
+ La columna que lo delata es 'mismo destino': dos aristas i->j y k->j
+ comparten c_j, asi que entran y salen del Top-P a la vez sin que
+ exista relacion alguna entre ellas.
+==============================================================================
+
+  fuente                      NMI media  pares NMI=1  mismo dest  n compl.  n sust.
+  atencion rollout  real          0.094           50          37       315      183
+                       sust       0.128           76          76       475      118
+
+  atencion capa A1  real          0.102           40          40       311       58
+                       sust       0.134          171         159       609      147
+
+  atencion capa A2  real          0.143            3           3       298      324
+                       sust       0.269           30          30       387      506
+
+  atencion A2*A1 (sin  real       0.096          110          86       699      202
+                       sust       0.109          214         205       678       33
+
+  atencion A1+A2 (adi  real       0.151            9           7       325      334
+                       sust       0.250           17          17       356      405
+
+  atencion max sobre   real       0.202            4           3       338      391
+                       sust       0.321           38          35       431      453
+
+  dependencia por abl  real       0.050            4           2        35       26
+                       sust       0.148           90          90       343      318
+
+  dependencia por abl  real       0.048            8           6        69       29
+                       sust       0.082            3           0       201      123
+
+==============================================================================

@@ -1,0 +1,161 @@
+==============================================================================
+ INVARIANT CAUSAL PREDICTION SOBRE LAS FASES FENOLOGICAS
+
+ Entornos: las fases del ciclo de Vid Vinifera, que el
+ catastro CIREN viveros_2024_h19.shp situa en el pixel.
+ La particion la impone la planta, no el analista.
+
+ Adyacencia por entorno: beta[i,j] = -Omega[i,j]/Omega[j,j], o sea el
+ coeficiente de i al regresar j sobre los otros once, estimado en cada
+ FECHA. La replica es la escena y no el pixel.
+
+ H0 por arista: el coeficiente es el mismo en las cinco fases.
+ No rechazarla es NECESARIO para que la arista sea estructural, no
+ suficiente: hay que leerla junto a |beta|.
+==============================================================================
+
+  Entornos con datos suficientes: 5
+    dormancia (may-ago)          8 fechas
+    brotacion (sep-oct)         17 fechas
+    crecimiento (nov-dic)       40 fechas
+    maduracion (ene-mar)        76 fechas
+    postcosecha (abr)            7 fechas
+
+  EL NULO
+    muestras del nulo agrupado: 19404    fechas usadas: 148
+    inflacion sobre la chi-cuadrado asintotica: 2.27
+    Un factor mayor que 1 confirma que las fechas vecinas no son
+    independientes y que el p asintotico habria sido
+    anticonservador por ese factor.
+
+    Calibracion verificada sobre datos sinteticos, no sobre
+    estos: con doce canales de ruido y la misma particion, la
+    fraccion de p por debajo de 0.05 sale 0.045 y ninguna arista
+    sobrevive a Benjamini-Hochberg. Sobre los datos reales esa
+    fraccion es 0.485, y eso NO es descalibracion: es que la mitad
+    de las aristas de verdad cambia con la fase.
+
+  EL CONTROL POSITIVO FALLA, Y EL MOTIVO IMPORTA
+    NDVI->KNDVI               beta   +1.818   p  0.0464   q  0.0958   RECHAZADA
+    KNDVI->NDVI               beta   +0.313   p  0.0364   q  0.0815   RECHAZADA
+    MARI->ARI                 beta   +0.875   p  0.0031   q  0.0222   RECHAZADA
+    ARI->MARI                 beta   +0.858   p  0.0556   q  0.1111   invariante
+
+    KNDVI = tanh(NDVI^2) y MARI = ARI*B7 son identidades exactas,
+    asi que se esperaba que salieran invariantes. Salen
+    rechazadas, y no por un fallo del test: ninguna de las dos es
+    LINEAL con pendiente constante. La pendiente local de
+    tanh(NDVI^2) depende del nivel de NDVI, y la de MARI depende
+    de B7; ambos niveles se mueven con la fenologia, asi que el
+    coeficiente lineal cambia aunque la identidad no.
+
+    Consecuencia para la lectura: este ICP prueba invariancia del
+    COEFICIENTE LINEAL, no del mecanismo. Una relacion no lineal
+    perfectamente estable puede aparecer como de regimen si el
+    punto de operacion se desplaza. Es la limitacion principal de
+    este modulo y hay que declararla.
+
+    Lo que si valida el control es que el test DETECTA cambio de
+    regimen real donde se sabe que lo hay: EVI2->KNDVI y
+    SAVI->KNDVI se disparan en brotacion, cuando NDVI es bajo y
+    la tanh esta en su tramo empinado, y caen a un tercio en
+    maduracion, cuando satura.
+
+==============================================================================
+  ARISTAS ESTRUCTURALES: invariantes en las cinco fases
+  Ordenadas por |beta| entre las que no rechazan invariancia a
+  q > 0.1. El p alto significa que ninguna fase
+  mueve el coeficiente.
+
+  arista                        beta        p        q  var fase
+  SAVI->ARI                   -7.324   0.2904   0.4014     0.181
+  EVI2->ARI                   +4.045   0.1739   0.2589     0.209
+  EVI2->PSRI                  +3.966   0.0781   0.1431     0.284
+  SAVI->NDWI                  -3.030   0.8920   0.9124     0.025
+  NDVI->ARI                   +2.506   0.0815   0.1474     0.291
+  NDVI->PSRI                  -2.086   0.1772   0.2599     0.242
+  EVI2->NDWI                  +1.745   0.8985   0.9124     0.033
+  EVI->NDII                   +1.501   0.2556   0.3627     0.396
+  NDWI->CHL_REDEDGE           -1.264   0.7422   0.8165     0.064
+  SAVI->PSRI                  -1.203   0.7203   0.8126     0.042
+  EVI2->EVI                   +1.035   0.7146   0.8126     0.056
+  ARI->MARI                   +0.858   0.0556   0.1111     0.475
+  NDWI->ARI                   -0.841   0.8123   0.8717     0.064
+  NDWI->PSRI                  -0.789   0.0682   0.1304     0.240
+  EVI->MARI                   -0.680   0.8615   0.9026     0.057
+
+  ARTEFACTOS DE REGIMEN: el coeficiente cambia con la fase
+  Ordenadas por q. Existen en los datos, pero existen porque la
+  vid estaba en cierto estado, no como propiedad del cultivo.
+
+  arista                        beta        p        q  var fase
+  EVI2->NDVI                  -1.201   0.0006   0.0125     0.801
+  EVI2->KNDVI                 +2.931   0.0005   0.0125     0.651
+  SAVI->NDVI                  +1.974   0.0005   0.0125     0.880
+  SAVI->KNDVI                 -3.838   0.0004   0.0125     0.846
+  PSRI->NDMI                  -0.589   0.0005   0.0125     1.314
+  PSRI->NDII                  +0.596   0.0003   0.0125     1.234
+  NDII->NDMI                  +0.820   0.0008   0.0146     0.628
+  MARI->ARI                   +0.875   0.0031   0.0222     0.903
+  EVI->EVI2                   +0.276   0.0022   0.0222     0.915
+  EVI2->MARI                  -2.258   0.0029   0.0222     0.396
+  NDWI->NDMI                  -0.133   0.0015   0.0222     0.679
+  NDWI->NDII                  +0.330   0.0019   0.0222     0.870
+  NDWI->SAVI                  -0.055   0.0028   0.0222     0.532
+  NDMI->NDWI                  -0.027   0.0019   0.0222     1.922
+  CHL_REDEDGE->SAVI           -0.025   0.0029   0.0222     0.492
+
+  Reparto: 68 invariantes, 64 de regimen, de 132 aristas dirigidas.
+
+  Como se mueve el coeficiente de las cinco aristas mas
+  estacionales, fase por fase
+  arista                    dormancia  brotacion  crecimien  maduracio  postcosec
+  EVI2->NDVI                   -2.340     -2.489     -1.585     -0.933     -0.644
+  EVI2->KNDVI                  +3.857     +5.815     +3.965     +1.129     +1.176
+  SAVI->NDVI                   +3.098     +3.215     +2.369     +1.777     +1.476
+  SAVI->KNDVI                  -4.637     -7.154     -5.683     -1.763     -1.766
+  PSRI->NDMI                   -0.212     -0.668     -0.675     -0.537     -0.623
+
+==============================================================================
+  DONDE SE CONCENTRAN LAS ARISTAS DE REGIMEN
+
+  Bloques por magnitud biofisica: verdor (NDVI EVI EVI2 SAVI
+  KNDVI), agua (NDWI NDMI NDII), pigmento (MARI ARI CHL_REDEDGE
+  PSRI). Binomial contra la tasa global de 48.5%.
+
+  celda                         n  regimen    frac        p
+  agua -> agua                  6        6    100%    0.013
+  verdor -> verdor             20       12     60%    0.210
+  verdor -> agua               15        8     53%    0.452
+  verdor -> pigmento           20       10     50%    0.534
+  pigmento -> verdor           20       10     50%    0.534
+  pigmento -> agua             12        5     42%    0.776
+  agua -> verdor               15        6     40%    0.820
+  agua -> pigmento             12        4     33%    0.911
+  pigmento -> pigmento         12        3     25%    0.975
+
+==============================================================================
+  ORDENAN LAS FUENTES LAS INVARIANTES POR ENCIMA?
+
+  auc = probabilidad de que una arista invariante reciba mas peso
+  que una de regimen. 0.5 es indiferencia.
+
+  fuente                    version         rho beta  rho inv     auc        p
+  atencion rollout          cruda             -0.333   -0.516   0.457   0.3933
+  atencion rollout          parte de par      -0.236   -0.241   0.552   0.3003
+  atencion capa A1          cruda             -0.058   -0.295   0.307   0.0001
+  atencion capa A1          parte de par      +0.227   -0.158   0.323   0.0005
+  atencion capa A2          cruda             +0.072   +0.106   0.399   0.0459
+  atencion capa A2          parte de par      +0.275   +0.317   0.460   0.4322
+  atencion A2*A1 (sin resid cruda             +0.058   -0.230   0.288   0.0000
+  atencion A2*A1 (sin resid parte de par      +0.273   +0.212   0.431   0.1741
+  atencion A1+A2 (aditiva)  cruda             -0.030   -0.115   0.345   0.0021
+  atencion A1+A2 (aditiva)  parte de par      +0.296   +0.288   0.424   0.1335
+  atencion max sobre cabeza cruda             +0.133   +0.207   0.481   0.7072
+  atencion max sobre cabeza parte de par      +0.230   +0.227   0.559   0.2410
+  dependencia por ablacion  cruda             +0.135   -0.035   0.500   0.9945
+  dependencia por ablacion  parte de par      +0.015   +0.056   0.445   0.2755
+  dependencia por ablacion  cruda             -0.009   -0.153   0.428   0.1548
+  dependencia por ablacion  parte de par      +0.004   -0.073   0.468   0.5313
+
+==============================================================================

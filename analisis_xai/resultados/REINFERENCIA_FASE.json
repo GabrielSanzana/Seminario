@@ -1,0 +1,106 @@
+{
+  "cultivo": {
+    "fuente": "CIREN viveros_2024_h19.shp",
+    "especie": "Vid Vinifera",
+    "comuna": "Pencahue",
+    "region": "Maule",
+    "superficie_ha": 41.05,
+    "distancia_km": 0.0,
+    "utm19s": [
+      243117,
+      6073342
+    ]
+  },
+  "resultados": {
+    "dormancia (may-ago)": {
+      "ablacion": {
+        "dormancia (may-ago)": 0.037767821525386755,
+        "brotacion (sep-oct)": 0.042156998349034365,
+        "crecimiento (nov-dic)": 0.10080476104977328,
+        "maduracion (ene-mar)": 0.2641657422575336,
+        "postcosecha (abr)": 0.27344571611324564,
+        "n_semillas": 10
+      },
+      "atencion": {
+        "dormancia (may-ago)": 0.18939567894791778,
+        "brotacion (sep-oct)": 0.12372403715687298,
+        "crecimiento (nov-dic)": 0.07834255296941865,
+        "maduracion (ene-mar)": 0.08748564867967855,
+        "postcosecha (abr)": 0.09675399227638035,
+        "n_semillas": 10
+      }
+    },
+    "brotacion (sep-oct)": {
+      "ablacion": {
+        "dormancia (may-ago)": -0.030499133692532213,
+        "brotacion (sep-oct)": -0.025530760099908897,
+        "crecimiento (nov-dic)": -0.035258752092188164,
+        "maduracion (ene-mar)": 0.13896833195837574,
+        "postcosecha (abr)": 0.12556624856987084,
+        "n_semillas": 10
+      },
+      "atencion": {
+        "dormancia (may-ago)": 0.11988310197265424,
+        "brotacion (sep-oct)": 0.021814006888633757,
+        "crecimiento (nov-dic)": 0.053626970044880505,
+        "maduracion (ene-mar)": 0.12639599206763388,
+        "postcosecha (abr)": 0.19119089865358524,
+        "n_semillas": 10
+      }
+    },
+    "crecimiento (nov-dic)": {
+      "ablacion": {
+        "dormancia (may-ago)": -0.1240464973730882,
+        "brotacion (sep-oct)": -0.04433068591884079,
+        "crecimiento (nov-dic)": 0.0031142254605880616,
+        "maduracion (ene-mar)": 0.09282063939913812,
+        "postcosecha (abr)": 0.13591817563895411,
+        "n_semillas": 10
+      },
+      "atencion": {
+        "dormancia (may-ago)": 0.1468948961486275,
+        "brotacion (sep-oct)": 0.0495355390877779,
+        "crecimiento (nov-dic)": 0.09333055004696798,
+        "maduracion (ene-mar)": 0.15219705667466865,
+        "postcosecha (abr)": 0.19073165640329826,
+        "n_semillas": 10
+      }
+    },
+    "maduracion (ene-mar)": {
+      "ablacion": {
+        "dormancia (may-ago)": -0.04855265600634944,
+        "brotacion (sep-oct)": -0.03367125648998232,
+        "crecimiento (nov-dic)": 0.008046824176687273,
+        "maduracion (ene-mar)": 0.08721921373848308,
+        "postcosecha (abr)": 0.05310903956613599,
+        "n_semillas": 10
+      },
+      "atencion": {
+        "dormancia (may-ago)": 0.14271996660056363,
+        "brotacion (sep-oct)": 0.1253105103851373,
+        "crecimiento (nov-dic)": 0.12451727377100513,
+        "maduracion (ene-mar)": 0.13219914413944267,
+        "postcosecha (abr)": 0.15002609330967542,
+        "n_semillas": 10
+      }
+    },
+    "postcosecha (abr)": {
+      "ablacion": {
+        "dormancia (may-ago)": -0.005724674706809221,
+        "brotacion (sep-oct)": 0.1643441286268662,
+        "crecimiento (nov-dic)": 0.09577338998545064,
+        "maduracion (ene-mar)": 0.15381407004207842,
+        "postcosecha (abr)": 0.18110029327964355,
+        "n_semillas": 10
+      },
+      "atencion": {
+        "dormancia (may-ago)": 0.15081932992380756,
+        "brotacion (sep-oct)": 0.05926312493476674,
+        "crecimiento (nov-dic)": 0.09090909090909093,
+        "maduracion (ene-mar)": 0.12585325122638558,
+        "postcosecha (abr)": 0.15666423129109697,
+        "n_semillas": 10
+      }
+    }
+  }
+}
