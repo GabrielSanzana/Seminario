@@ -36,9 +36,40 @@ DOS CONTROLES QUE EL DISENO INGENUO NO TIENE
    fases con dos o tres fechas. Es la misma decision que en reinferir_por_fase.py
    y por el mismo motivo.
 
+EL PRIMER CONTROL ESTABA MAL APLICADO AL MSE
+--------------------------------------------
+Igualar el numero de fechas hacia falta para el SUELO DE RUIDO, que se estima
+de la cola negativa de Datt y por tanto se encoge cuando hay mas fechas. Pero
+se aplico tambien al MSE base, donde no hacia ninguna falta -una media es una
+media con 8 fechas o con 90, solo cambia su varianza- y ahi hizo dano: la
+submuestra se elegia con np.linspace, un solo conjunto fijo, y el resultado
+colgaba de esa eleccion.
+
+Cuanto colgaba, medido: la razon dormancia/maduracion del brazo base da 2.67
+tomando 8 fechas y 1.87 tomando 9. La diferencia es una sola escena de
+maduracion, con MSE 0.4111 frente a una mediana de 0.10, que entra en el
+muestreo de 9 y no en el de 8. Y la submuestra fija cae en el percentil 1 a 4
+de los sorteos posibles en los cuatro brazos, o sea que ademas sesgaba a la
+baja de forma sistematica: linspace siempre incluye la primera y la ultima
+fecha de la fase, que son las de transicion y las de mayor error.
+
+ARREGLO
+-------
+  MSE base: todas las fechas de la fase, sin submuestrear, con intervalo de
+  confianza por bootstrap sobre fechas. No necesitaba igualarse.
+
+  Suelo de ruido y Datt: se sigue igualando el numero de fechas, porque ahi el
+  sesgo por tamano de muestra es real, pero promediando muchos sorteos al azar
+  en vez de uno fijo.
+
+Las dos cosas se calculan del tensor de errores por fecha que guarda
+errores_por_fecha.py, asi que ya no hacen falta ni GPU ni una pasada por
+modelo. test_errores.py comprueba que ese tensor reproduce exactamente lo que
+daba la pasada por GPU, y control_fases.py somete el resultado a los placebos.
+
 USO
-    srun --partition=student --qos=student --gres=gpu:1 --mem=16G \\
-         .venv/bin/python -u datt_por_fase.py --semillas 15
+    .venv/bin/python datt_por_fase.py --sufijo _ctrl
+    srun ... .venv/bin/python -u datt_por_fase.py --gpu --semillas 15
 """
 from __future__ import annotations
 
@@ -90,6 +121,70 @@ def frames_de_fase(stack, meses, ms, scaler, n_max, n_fechas_comun=None):
     return sel, n_fechas
 
 
+def desde_tensor(ruta: str, min_fechas: int, umbral: float, sorteos: int,
+                 semilla: int = 20260910):
+    """La tabla por fase a partir del tensor de errores por fecha.
+
+    Reemplaza la pasada por GPU y arregla el estimador: el MSE usa todas las
+    fechas de la fase y el suelo de ruido promedia muchos sorteos con el numero
+    de fechas igualado, en vez de un unico np.linspace.
+    """
+    rng = np.random.default_rng(semilla)
+    d = np.load(ruta, allow_pickle=True)
+    E = d["E"].astype(np.float64)              # (semilla, fecha, canal, corte)
+    meses_t = d["meses"]
+    Dd = E[:, :, :, 1:] - E[:, :, :, :1]       # Datt por fecha
+    mse_fecha = E[:, :, :, 0].mean(axis=(0, 2))
+    Dm = Dd.mean(axis=0)                       # (fecha, canal, canal)
+
+    disp = {}
+    for nombre, ms in FASES:
+        idx = np.where(np.isin(meses_t, ms))[0]
+        if len(idx) < min_fechas:
+            print("  fuera por pocas fechas: %s (%d)" % (nombre, len(idx)))
+            continue
+        disp[nombre] = idx
+    n_comun = min(len(i) for i in disp.values())
+
+    def suelo_de(D):
+        off = ~np.eye(D.shape[0], dtype=bool)
+        neg = D[off & (D < 0)]
+        return float(np.abs(neg).mean()) if neg.size else float("nan")
+
+    por_fase = {}
+    for nombre, idx in disp.items():
+        # MSE: todas las fechas, con intervalo. No hay motivo para igualar.
+        bs = np.array([mse_fecha[rng.choice(idx, len(idx), True)].mean()
+                       for _ in range(1000)])
+        # Datt y suelo: numero de fechas igualado, promediando sorteos.
+        Ds, suelos = [], []
+        for _ in range(sorteos):
+            sel = rng.choice(idx, n_comun, replace=(len(idx) == n_comun))
+            D = Dm[sel].mean(axis=0)
+            np.fill_diagonal(D, 0.0)
+            Ds.append(D)
+            suelos.append(suelo_de(D))
+        D = np.mean(Ds, axis=0)
+        ruido = float(np.median(suelos))
+        por_fase[nombre] = dict(
+            D=D, ruido=ruido,
+            ruido_ic=(float(np.percentile(suelos, 2.5)),
+                      float(np.percentile(suelos, 97.5))),
+            mse_base=float(mse_fecha[idx].mean()),
+            mse_ic=(float(np.percentile(bs, 2.5)),
+                    float(np.percentile(bs, 97.5))),
+            n_fechas=int(len(idx)), n_fechas_suelo=int(n_comun),
+            n_parches=int(len(idx) * int(d["n_por_fecha"])),
+            M=int(E.shape[0]),
+            n_sobre=int((D > umbral * ruido).sum()))
+        print("  %-24s n=%2d  MSE %.4f [%.4f, %.4f]  ruido %.3e  sobre %gx: %d"
+              % (nombre, len(idx), por_fase[nombre]["mse_base"],
+                 bs.min() * 0 + por_fase[nombre]["mse_ic"][0],
+                 por_fase[nombre]["mse_ic"][1], ruido, umbral,
+                 por_fase[nombre]["n_sobre"]))
+    return por_fase, n_comun, int(E.shape[0])
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--semillas", type=int, default=15)
@@ -100,7 +195,21 @@ def main() -> int:
                     help="carpeta con model_seed_*.pth y val_losses.json")
     ap.add_argument("--sufijo", default="")
     ap.add_argument("--salida", default="resultados")
+    ap.add_argument("--sorteos", type=int, default=200,
+                    help="submuestras al azar para el suelo de ruido")
+    ap.add_argument("--gpu", action="store_true",
+                    help="forzar la pasada por modelo en vez de leer el "
+                         "tensor de errores por fecha")
     a = ap.parse_args()
+
+    tensor = os.path.join(a.salida,
+                          "ERRORES_POR_FECHA" + a.sufijo + ".npz")
+    if os.path.exists(tensor) and not a.gpu:
+        print("  leyendo " + tensor + " (sin GPU)")
+        por_fase, n_comun, n_semillas = desde_tensor(
+            tensor, a.min_fechas, a.umbral, a.sorteos)
+        n_fechas_comun = n_comun
+        return informe(a, por_fase, n_fechas_comun, n_comun)
 
     H.CustomTransformerEncoderLayer.forward = AB._forward_con_corte
     H.ConvTransformer._recortar_atencion = AB._recortar_sin_renormalizar
@@ -191,6 +300,11 @@ def main() -> int:
         print("    ruido %.3e   aristas sobre %gx: %d"
               % (ruido, a.umbral, por_fase[nombre]["n_sobre"]))
 
+    return informe(a, por_fase, n_fechas_comun, n_comun)
+
+
+def informe(a, por_fase, n_fechas_comun, n_comun) -> int:
+    """La tabla y los archivos de salida, comunes a los dos caminos."""
     # Aristas de referencia: las 19 del grafo global.
     with open(os.path.join(a.salida, "ABLACION_ATENCION_base.json"),
               encoding="utf-8") as f:
@@ -231,22 +345,28 @@ def main() -> int:
          " sin tocar el modelo, asi que si las dos coinciden es validacion",
          " cruzada entre una medida del dato y una del modelo.",
          "",
-         " Igualados entre fases el numero de FECHAS (" + str(n_fechas_comun)
-         + ") y de parches (" + str(n_comun) + "),",
-         " y el suelo de ruido recalculado dentro de cada fase. Igualar solo",
-         " parches no basta: los de una misma escena estan correlacionados, asi",
-         " que 128 parches de 9 fechas valen menos que 128 de 90.",
+         " El MSE usa TODAS las fechas de cada fase: es una media y no",
+         " necesita igualarse. El suelo de ruido si, porque se estima de la",
+         " cola negativa de Datt y esa cola se encoge con mas fechas; se",
+         " iguala a " + str(n_fechas_comun) + " fechas promediando sorteos al "
+         "azar, no una",
+         " submuestra fija. Igualar solo parches no basta: los de una misma",
+         " escena estan correlacionados, asi que 128 parches de 9 fechas valen",
+         " menos que 128 de 90.",
          "=" * W, ""]
-    L.append("  " + "fase".ljust(24) + "fechas".rjust(7) + "parches".rjust(9)
-             + "MSE base".rjust(11) + "ruido".rjust(12)
-             + "aristas sobre 3x".rjust(18))
+    con_ic = all("mse_ic" in por_fase[n] for n in nombres)
+    L.append("  " + "fase".ljust(24) + "fechas".rjust(7)
+             + "MSE base".rjust(10)
+             + ("IC95 del MSE".rjust(20) if con_ic else "")
+             + "ruido".rjust(11) + "sobre 3x".rjust(10))
     for n in nombres:
         d = por_fase[n]
         L.append("  " + n[:23].ljust(24) + str(d["n_fechas"]).rjust(7)
-                 + str(d["n_parches"]).rjust(9)
-                 + ("%.4f" % d["mse_base"]).rjust(11)
-                 + ("%.2e" % d["ruido"]).rjust(12)
-                 + str(d["n_sobre"]).rjust(18))
+                 + ("%.4f" % d["mse_base"]).rjust(10)
+                 + (("[%.4f, %.4f]" % tuple(d["mse_ic"])).rjust(20)
+                    if con_ic else "")
+                 + ("%.2e" % d["ruido"]).rjust(11)
+                 + str(d["n_sobre"]).rjust(10))
     L.append("")
     L.append("  LAS 19 ARISTAS DEL GRAFO GLOBAL, FASE POR FASE")
     L.append("  (numeros en multiplos del ruido de esa fase; * = sobre 3x)")
@@ -290,8 +410,12 @@ def main() -> int:
               encoding="utf-8") as f:
         json.dump(dict(aristas=filas, n_parches_comun=int(n_comun),
                        fases={n: dict(ruido=por_fase[n]["ruido"],
+                                      ruido_ic=por_fase[n].get("ruido_ic"),
                                       mse_base=por_fase[n]["mse_base"],
+                                      mse_ic=por_fase[n].get("mse_ic"),
                                       n_fechas=por_fase[n]["n_fechas"],
+                                      n_fechas_suelo=por_fase[n].get(
+                                          "n_fechas_suelo"),
                                       n_parches=por_fase[n]["n_parches"],
                                       M=por_fase[n]["M"],
                                       D=por_fase[n]["D"].tolist())

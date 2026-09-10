@@ -1,0 +1,1994 @@
+{
+  "_base": {
+    "tabla": [
+      {
+        "fase": "dormancia (may-ago)",
+        "n_fechas": 9,
+        "mse": 0.2778667460566525,
+        "ic_fechas": [
+          0.22323360013355859,
+          0.3249653052153457
+        ],
+        "ic_semillas": [
+          0.2611136015864552,
+          0.29813578793439827
+        ],
+        "sd_semillas": 0.037922193190346384
+      },
+      {
+        "fase": "brotacion (sep-oct)",
+        "n_fechas": 22,
+        "mse": 0.13933962709176345,
+        "ic_fechas": [
+          0.10322093593817432,
+          0.1774023972994722
+        ],
+        "ic_semillas": [
+          0.13540160248999722,
+          0.14373726551141117
+        ],
+        "sd_semillas": 0.008555931757711407
+      },
+      {
+        "fase": "crecimiento (nov-dic)",
+        "n_fechas": 57,
+        "mse": 0.10598346252361092,
+        "ic_fechas": [
+          0.09083285495644748,
+          0.12189177781712449
+        ],
+        "ic_semillas": [
+          0.1030823003035175,
+          0.10900959172051448
+        ],
+        "sd_semillas": 0.006027037888733349
+      },
+      {
+        "fase": "maduracion (ene-mar)",
+        "n_fechas": 90,
+        "mse": 0.1076705017063859,
+        "ic_fechas": [
+          0.09689566076552371,
+          0.11957011752833763
+        ],
+        "ic_semillas": [
+          0.1036316507568606,
+          0.11190621771211276
+        ],
+        "sd_semillas": 0.008624843446127822
+      },
+      {
+        "fase": "postcosecha (abr)",
+        "n_fechas": 8,
+        "mse": 0.17470930004492402,
+        "ic_fechas": [
+          0.13075839447387907,
+          0.2264555505172918
+        ],
+        "ic_semillas": [
+          0.16772700523731246,
+          0.18251174994201086
+        ],
+        "sd_semillas": 0.014990746150586586
+      }
+    ],
+    "razon": {
+      "razon": 2.580713767029585,
+      "ic": [
+        2.0442324316348746,
+        3.1580271231503962
+      ],
+      "p_mayor_que_uno": 0.0
+    },
+    "razon_n_igualado": {
+      "n": 9,
+      "mediana": 2.6327850986913033,
+      "ic": [
+        1.8634142109979501,
+        3.5480084532881646
+      ],
+      "submuestra_publicada": 1.8680519283159784,
+      "percentil_publicada": 2.6
+    },
+    "placebo_etiquetas": {
+      "observado": 2.580713767029585,
+      "nulo_mediana": 0.9911256898922285,
+      "nulo_ic": [
+        0.6436769586538198,
+        1.4767705608800243
+      ],
+      "p": 0.0005
+    },
+    "placebo_calendario": {
+      "observado": 2.580713767029585,
+      "rotadas": [
+        2.0171335056367274,
+        1.279764230126309,
+        0.8175102573418838,
+        0.42299301679838347,
+        0.3594053803585599,
+        0.41001099321694484,
+        0.6365552366543273,
+        0.8771060965990329,
+        1.1508622338741084,
+        1.4047619006133072,
+        2.0526200842277404
+      ],
+      "rotadas_max": 2.0526200842277404,
+      "p": 0.08333333333333333
+    },
+    "dificultad": {
+      "razon_cruda": 2.580713767029585,
+      "razon_normalizada": 2.4669723847428573,
+      "ic_normalizada": [
+        0.9375082828398663,
+        7.618490534616205
+      ],
+      "p_normalizada": 0.063,
+      "brecha_cerrada": 0.07195571055249682,
+      "dificultad_a": 0.6904794357855011,
+      "dificultad_b": 0.9700965110203943,
+      "razon_dificultad": 0.7117636523186972
+    },
+    "suelo_igualado": {
+      "n": 9,
+      "alta": 0.009410910031930717,
+      "baja": 0.0010138254783769304,
+      "ic_alta": [
+        0.006456466953005242,
+        0.013706053009817403
+      ],
+      "ic_baja": [
+        0.0005677313832566142,
+        0.00422270868299892
+      ],
+      "p": 0.0
+    },
+    "regresion": {
+      "beta_exposicion": -0.3782345926266222,
+      "beta_ndvi": 0.43623180144816887,
+      "beta_dificultad": -0.08858283606929722,
+      "r2": 0.28043765108319574,
+      "corr_regresores": 0.2905677781111878,
+      "rho_expo": -0.2028798549507224,
+      "rho_ndvi": 0.3715929488225503,
+      "rho_dificultad": 0.025893169346679783,
+      "intra_fase": [
+        [
+          "dormancia (may-ago)",
+          9,
+          0.33333333333333337,
+          0.38071318167686347
+        ],
+        [
+          "brotacion (sep-oct)",
+          22,
+          0.6194240542066629,
+          0.002110576672057837
+        ],
+        [
+          "crecimiento (nov-dic)",
+          57,
+          0.4314882032667877,
+          0.0008047463373500734
+        ],
+        [
+          "maduracion (ene-mar)",
+          90,
+          0.23284356093344855,
+          0.027207994778274222
+        ],
+        [
+          "postcosecha (abr)",
+          8,
+          0.30952380952380953,
+          0.4556448907375822
+        ]
+      ]
+    },
+    "icp": {
+      "por_fase_ruido": {
+        "dormancia (may-ago)": 0.008496219708221743,
+        "brotacion (sep-oct)": 0.0012939727084876344,
+        "crecimiento (nov-dic)": 0.001168617813434816,
+        "maduracion (ene-mar)": 0.0009909449296968955,
+        "postcosecha (abr)": 0.005753138376399874
+      },
+      "discreto": {
+        "obs": 21.0,
+        "p": 0.4145629911883782,
+        "p_minimo": 0.00011907597046915932,
+        "n_repartos": 50388
+      },
+      "continuo": {
+        "obs": 34.08053827493934,
+        "p": 0.6668452806223704,
+        "p_minimo": 1.9845995078193222e-05,
+        "n_repartos": 50388
+      },
+      "n_invariantes": 7,
+      "n_regimen": 12
+    },
+    "aristas": [
+      {
+        "arista": "NDVI <- CHL_REDEDGE",
+        "i": 0,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 2.7587329725219125,
+          "brotacion (sep-oct)": 17.61986999712891,
+          "crecimiento (nov-dic)": 12.42604238116795,
+          "maduracion (ene-mar)": 16.59776515745814,
+          "postcosecha (abr)": 1.9962564871328663
+        },
+        "n_sobre": 3,
+        "mediana": 12.42604238116795
+      },
+      {
+        "arista": "KNDVI <- CHL_REDEDGE",
+        "i": 11,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.5430702953766738,
+          "brotacion (sep-oct)": 14.290852671917897,
+          "crecimiento (nov-dic)": 12.631779399107153,
+          "maduracion (ene-mar)": 14.556373223883734,
+          "postcosecha (abr)": 2.0917829067934886
+        },
+        "n_sobre": 3,
+        "mediana": 12.631779399107153
+      },
+      {
+        "arista": "ARI <- KNDVI",
+        "i": 2,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 4.211145360951071,
+          "brotacion (sep-oct)": 8.832187778753408,
+          "crecimiento (nov-dic)": 19.734262539671168,
+          "maduracion (ene-mar)": 21.92225270114777,
+          "postcosecha (abr)": 4.510506286059742
+        },
+        "n_sobre": 5,
+        "mediana": 8.832187778753408
+      },
+      {
+        "arista": "ARI <- NDWI",
+        "i": 2,
+        "j": 5,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 5.5467482963872525,
+          "brotacion (sep-oct)": 11.257692780045158,
+          "crecimiento (nov-dic)": 7.196819447514841,
+          "maduracion (ene-mar)": 9.747586432721455,
+          "postcosecha (abr)": 8.908231370984106
+        },
+        "n_sobre": 5,
+        "mediana": 8.908231370984106
+      },
+      {
+        "arista": "PSRI <- CHL_REDEDGE",
+        "i": 10,
+        "j": 7,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": -2.20843811627174,
+          "brotacion (sep-oct)": 2.831778103578331,
+          "crecimiento (nov-dic)": 4.075229703388291,
+          "maduracion (ene-mar)": 3.662520587420969,
+          "postcosecha (abr)": 0.6894386644141008
+        },
+        "n_sobre": 2,
+        "mediana": 2.831778103578331
+      },
+      {
+        "arista": "EVI <- CHL_REDEDGE",
+        "i": 3,
+        "j": 7,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 3.748571764904521,
+          "brotacion (sep-oct)": 12.328868967018108,
+          "crecimiento (nov-dic)": 9.741026903307395,
+          "maduracion (ene-mar)": 9.179053717163027,
+          "postcosecha (abr)": 0.4275260336923601
+        },
+        "n_sobre": 4,
+        "mediana": 9.179053717163027
+      },
+      {
+        "arista": "ARI <- NDVI",
+        "i": 2,
+        "j": 0,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 3.369163026672579,
+          "brotacion (sep-oct)": 1.7137610039488957,
+          "crecimiento (nov-dic)": 9.221721533869813,
+          "maduracion (ene-mar)": 11.33304124350125,
+          "postcosecha (abr)": 5.383269590177518
+        },
+        "n_sobre": 4,
+        "mediana": 5.383269590177518
+      },
+      {
+        "arista": "PSRI <- KNDVI",
+        "i": 10,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": -0.8404766928287849,
+          "brotacion (sep-oct)": 3.0291740778260663,
+          "crecimiento (nov-dic)": 2.713075648401749,
+          "maduracion (ene-mar)": 2.869830081956374,
+          "postcosecha (abr)": 0.8065989351254478
+        },
+        "n_sobre": 1,
+        "mediana": 2.713075648401749
+      },
+      {
+        "arista": "PSRI <- NDVI",
+        "i": 10,
+        "j": 0,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": -0.5890835228475916,
+          "brotacion (sep-oct)": 6.908717209767887,
+          "crecimiento (nov-dic)": 3.037571236704523,
+          "maduracion (ene-mar)": 3.528609360582355,
+          "postcosecha (abr)": 0.04053546736727153
+        },
+        "n_sobre": 3,
+        "mediana": 3.037571236704523
+      },
+      {
+        "arista": "MARI <- NDWI",
+        "i": 1,
+        "j": 5,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 1.4429387339048396,
+          "brotacion (sep-oct)": 5.9260148387860525,
+          "crecimiento (nov-dic)": 2.8722725948947354,
+          "maduracion (ene-mar)": 4.0507096757039855,
+          "postcosecha (abr)": 1.9536515789383002
+        },
+        "n_sobre": 2,
+        "mediana": 2.8722725948947354
+      },
+      {
+        "arista": "SAVI <- CHL_REDEDGE",
+        "i": 9,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 4.005225248102194,
+          "brotacion (sep-oct)": 12.185074064536588,
+          "crecimiento (nov-dic)": 7.599005116981325,
+          "maduracion (ene-mar)": 8.121844521029974,
+          "postcosecha (abr)": 0.6457961921000424
+        },
+        "n_sobre": 4,
+        "mediana": 7.599005116981325
+      },
+      {
+        "arista": "EVI2 <- NDII",
+        "i": 4,
+        "j": 8,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.7361048425862885,
+          "brotacion (sep-oct)": 5.304008078484853,
+          "crecimiento (nov-dic)": 3.9106420583732975,
+          "maduracion (ene-mar)": 3.281354665178944,
+          "postcosecha (abr)": 0.07786573290167409
+        },
+        "n_sobre": 3,
+        "mediana": 3.281354665178944
+      },
+      {
+        "arista": "MARI <- KNDVI",
+        "i": 1,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.09647442020062377,
+          "brotacion (sep-oct)": 7.352631830999068,
+          "crecimiento (nov-dic)": 2.825820610425171,
+          "maduracion (ene-mar)": 6.964441278796637,
+          "postcosecha (abr)": 4.34050993916629
+        },
+        "n_sobre": 3,
+        "mediana": 4.34050993916629
+      },
+      {
+        "arista": "EVI2 <- CHL_REDEDGE",
+        "i": 4,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 3.68842907738165,
+          "brotacion (sep-oct)": 10.73178875466889,
+          "crecimiento (nov-dic)": 7.944501302680534,
+          "maduracion (ene-mar)": 8.049723163120968,
+          "postcosecha (abr)": 0.5010915275658591
+        },
+        "n_sobre": 4,
+        "mediana": 7.944501302680534
+      },
+      {
+        "arista": "EVI <- NDII",
+        "i": 3,
+        "j": 8,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 0.44708245216736464,
+          "brotacion (sep-oct)": 5.791506095638847,
+          "crecimiento (nov-dic)": 4.54975528684005,
+          "maduracion (ene-mar)": 4.277168853050128,
+          "postcosecha (abr)": 0.06332488283998561
+        },
+        "n_sobre": 3,
+        "mediana": 4.277168853050128
+      },
+      {
+        "arista": "SAVI <- NDII",
+        "i": 9,
+        "j": 8,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.7403591299779548,
+          "brotacion (sep-oct)": 4.313856884705824,
+          "crecimiento (nov-dic)": 3.312583820465121,
+          "maduracion (ene-mar)": 2.7199391253987555,
+          "postcosecha (abr)": 0.1344260492876422
+        },
+        "n_sobre": 2,
+        "mediana": 2.7199391253987555
+      },
+      {
+        "arista": "EVI2 <- NDMI",
+        "i": 4,
+        "j": 6,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.41067660275819673,
+          "brotacion (sep-oct)": 4.591529698763228,
+          "crecimiento (nov-dic)": 1.7291768078581509,
+          "maduracion (ene-mar)": 0.9019438382747033,
+          "postcosecha (abr)": -0.02750818109053072
+        },
+        "n_sobre": 1,
+        "mediana": 0.9019438382747033
+      },
+      {
+        "arista": "EVI <- NDMI",
+        "i": 3,
+        "j": 6,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.18884551469565294,
+          "brotacion (sep-oct)": 4.946567847131276,
+          "crecimiento (nov-dic)": 2.0526377171972645,
+          "maduracion (ene-mar)": 1.7226543024357754,
+          "postcosecha (abr)": 0.0388240744671716
+        },
+        "n_sobre": 1,
+        "mediana": 1.7226543024357754
+      },
+      {
+        "arista": "SAVI <- NDMI",
+        "i": 9,
+        "j": 6,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 0.3750046778800449,
+          "brotacion (sep-oct)": 3.479307535950256,
+          "crecimiento (nov-dic)": 1.267336414562322,
+          "maduracion (ene-mar)": 0.6287640450915025,
+          "postcosecha (abr)": 0.03247935662923214
+        },
+        "n_sobre": 1,
+        "mediana": 0.6287640450915025
+      }
+    ]
+  },
+  "_bal": {
+    "tabla": [
+      {
+        "fase": "dormancia (may-ago)",
+        "n_fechas": 9,
+        "mse": 0.7043278205679891,
+        "ic_fechas": [
+          0.5273742030210287,
+          0.902548931002341
+        ],
+        "ic_semillas": [
+          0.6949590604640774,
+          0.7130956434522883
+        ],
+        "sd_semillas": 0.017973797985461483
+      },
+      {
+        "fase": "brotacion (sep-oct)",
+        "n_fechas": 22,
+        "mse": 0.3089870356126792,
+        "ic_fechas": [
+          0.2300399196936721,
+          0.39851864688808675
+        ],
+        "ic_semillas": [
+          0.30525447981937726,
+          0.31266518341088106
+        ],
+        "sd_semillas": 0.007705281873020526
+      },
+      {
+        "fase": "crecimiento (nov-dic)",
+        "n_fechas": 57,
+        "mse": 0.2563063346085522,
+        "ic_fechas": [
+          0.2268275780959525,
+          0.2862062793084535
+        ],
+        "ic_semillas": [
+          0.25334112974351225,
+          0.2593161259913003
+        ],
+        "sd_semillas": 0.006111586027593836
+      },
+      {
+        "fase": "maduracion (ene-mar)",
+        "n_fechas": 90,
+        "mse": 0.3101526746137735,
+        "ic_fechas": [
+          0.28866374709986636,
+          0.332316878533031
+        ],
+        "ic_semillas": [
+          0.3063404232758834,
+          0.3135210208999004
+        ],
+        "sd_semillas": 0.007191966792277156
+      },
+      {
+        "fase": "postcosecha (abr)",
+        "n_fechas": 8,
+        "mse": 0.44740637282116547,
+        "ic_fechas": [
+          0.3670767002759709,
+          0.5142166508879099
+        ],
+        "ic_semillas": [
+          0.4431617324043893,
+          0.45094909786401943
+        ],
+        "sd_semillas": 0.008234568185115605
+      }
+    ],
+    "razon": {
+      "razon": 2.270906808864613,
+      "ic": [
+        1.6851453460180295,
+        2.9047871791002073
+      ],
+      "p_mayor_que_uno": 0.0
+    },
+    "razon_n_igualado": {
+      "n": 9,
+      "mediana": 2.283152449363731,
+      "ic": [
+        1.8638509270266088,
+        2.8702898232355127
+      ],
+      "submuestra_publicada": 1.807243574457368,
+      "percentil_publicada": 1.25
+    },
+    "placebo_etiquetas": {
+      "observado": 2.270906808864613,
+      "nulo_mediana": 0.9811519426783557,
+      "nulo_ic": [
+        0.6895879883412347,
+        1.4054839179266783
+      ],
+      "p": 0.0005
+    },
+    "placebo_calendario": {
+      "observado": 2.270906808864613,
+      "rotadas": [
+        1.8350556609027004,
+        1.143925583415535,
+        0.7540477867544321,
+        0.4026279480977991,
+        0.34919054099251323,
+        0.43625149036447486,
+        0.7605822400357588,
+        1.129923985121654,
+        1.3527600980916605,
+        1.4330300013684962,
+        1.850116295736698
+      ],
+      "rotadas_max": 1.850116295736698,
+      "p": 0.08333333333333333
+    },
+    "dificultad": {
+      "razon_cruda": 2.270906808864613,
+      "razon_normalizada": 2.3849132141769576,
+      "ic_normalizada": [
+        1.0611753384165745,
+        5.953656317643859
+      ],
+      "p_normalizada": 0.0515,
+      "brecha_cerrada": -0.08970477183468237,
+      "dificultad_a": 0.6904794357855011,
+      "dificultad_b": 0.9700965110203943,
+      "razon_dificultad": 0.7117636523186972
+    },
+    "suelo_igualado": {
+      "n": 9,
+      "alta": 0.020427876635743237,
+      "baja": 0.0031577780874974936,
+      "ic_alta": [
+        0.013205034652165588,
+        0.03158574880888524
+      ],
+      "ic_baja": [
+        0.002102707282004375,
+        0.006394718382199706
+      ],
+      "p": 0.0
+    },
+    "regresion": {
+      "beta_exposicion": -0.349988582129491,
+      "beta_ndvi": 0.32601930876340707,
+      "beta_dificultad": 0.3392879534237859,
+      "r2": 0.3803687699434435,
+      "corr_regresores": 0.2905677781111878,
+      "rho_expo": -0.030394287713414663,
+      "rho_ndvi": 0.4959816121106444,
+      "rho_dificultad": 0.44995221200154784,
+      "intra_fase": [
+        [
+          "dormancia (may-ago)",
+          9,
+          0.5666666666666667,
+          0.1116329876114912
+        ],
+        [
+          "brotacion (sep-oct)",
+          22,
+          0.6849237718802937,
+          0.00043664957319991185
+        ],
+        [
+          "crecimiento (nov-dic)",
+          57,
+          0.5486777288047706,
+          9.921168447188923e-06
+        ],
+        [
+          "maduracion (ene-mar)",
+          90,
+          0.1370951146232045,
+          0.1975679418446388
+        ],
+        [
+          "postcosecha (abr)",
+          8,
+          0.1666666666666667,
+          0.693238811728395
+        ]
+      ]
+    },
+    "icp": {
+      "por_fase_ruido": {
+        "dormancia (may-ago)": 0.019121093520657027,
+        "brotacion (sep-oct)": 0.0028498246676179687,
+        "crecimiento (nov-dic)": 0.0022495539732940053,
+        "maduracion (ene-mar)": 0.0030291334256258235,
+        "postcosecha (abr)": 0.01162346652111946
+      },
+      "discreto": {
+        "obs": 12.0,
+        "p": 0.8576843692942764,
+        "p_minimo": 0.0050011907597046915,
+        "n_repartos": 50388
+      },
+      "continuo": {
+        "obs": 15.395899231150688,
+        "p": 0.9149797570850202,
+        "p_minimo": 1.9845995078193222e-05,
+        "n_repartos": 50388
+      },
+      "n_invariantes": 7,
+      "n_regimen": 12
+    },
+    "aristas": [
+      {
+        "arista": "NDVI <- CHL_REDEDGE",
+        "i": 0,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 2.5089141115636826,
+          "brotacion (sep-oct)": 9.81035582391017,
+          "crecimiento (nov-dic)": 6.574610055325978,
+          "maduracion (ene-mar)": 4.9248093751886595,
+          "postcosecha (abr)": 1.1006539141266891
+        },
+        "n_sobre": 3,
+        "mediana": 4.9248093751886595
+      },
+      {
+        "arista": "KNDVI <- CHL_REDEDGE",
+        "i": 11,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 1.8472911698526664,
+          "brotacion (sep-oct)": 7.473184610574663,
+          "crecimiento (nov-dic)": 8.2010278167991,
+          "maduracion (ene-mar)": 6.426210633458377,
+          "postcosecha (abr)": 1.3881564100306734
+        },
+        "n_sobre": 3,
+        "mediana": 6.426210633458377
+      },
+      {
+        "arista": "ARI <- KNDVI",
+        "i": 2,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 4.574554651779597,
+          "brotacion (sep-oct)": 5.451569366536188,
+          "crecimiento (nov-dic)": 3.617268306491715,
+          "maduracion (ene-mar)": 0.594733928746831,
+          "postcosecha (abr)": 0.7757983379810778
+        },
+        "n_sobre": 3,
+        "mediana": 3.617268306491715
+      },
+      {
+        "arista": "ARI <- NDWI",
+        "i": 2,
+        "j": 5,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": -0.09843255426885612,
+          "brotacion (sep-oct)": 0.9124281852787277,
+          "crecimiento (nov-dic)": 0.04161201986793232,
+          "maduracion (ene-mar)": 0.06630958408822006,
+          "postcosecha (abr)": 0.6211534062332951
+        },
+        "n_sobre": 0,
+        "mediana": 0.06630958408822006
+      },
+      {
+        "arista": "PSRI <- CHL_REDEDGE",
+        "i": 10,
+        "j": 7,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": -0.2151806893644947,
+          "brotacion (sep-oct)": 1.5387500525344637,
+          "crecimiento (nov-dic)": 1.3104673883922149,
+          "maduracion (ene-mar)": 1.9791061723790735,
+          "postcosecha (abr)": 0.1516222677582858
+        },
+        "n_sobre": 0,
+        "mediana": 1.3104673883922149
+      },
+      {
+        "arista": "EVI <- CHL_REDEDGE",
+        "i": 3,
+        "j": 7,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 3.3066416621708656,
+          "brotacion (sep-oct)": 11.72633977580488,
+          "crecimiento (nov-dic)": 6.895131788946078,
+          "maduracion (ene-mar)": 4.178909578920742,
+          "postcosecha (abr)": 0.928844778477893
+        },
+        "n_sobre": 4,
+        "mediana": 4.178909578920742
+      },
+      {
+        "arista": "ARI <- NDVI",
+        "i": 2,
+        "j": 0,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 4.104667853947356,
+          "brotacion (sep-oct)": 4.853700485953179,
+          "crecimiento (nov-dic)": 1.9782572683963355,
+          "maduracion (ene-mar)": 0.14967018992563666,
+          "postcosecha (abr)": 0.5913196533649495
+        },
+        "n_sobre": 2,
+        "mediana": 1.9782572683963355
+      },
+      {
+        "arista": "PSRI <- KNDVI",
+        "i": 10,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.2733320373546888,
+          "brotacion (sep-oct)": 1.3716326678431916,
+          "crecimiento (nov-dic)": 0.5659359977958658,
+          "maduracion (ene-mar)": 1.1032916806267283,
+          "postcosecha (abr)": -0.15257290565194123
+        },
+        "n_sobre": 0,
+        "mediana": 0.5659359977958658
+      },
+      {
+        "arista": "PSRI <- NDVI",
+        "i": 10,
+        "j": 0,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 1.0302953396650938,
+          "brotacion (sep-oct)": 1.9809153993235742,
+          "crecimiento (nov-dic)": 0.8016599177789971,
+          "maduracion (ene-mar)": 1.1430043072297802,
+          "postcosecha (abr)": -0.5503453696365006
+        },
+        "n_sobre": 0,
+        "mediana": 1.0302953396650938
+      },
+      {
+        "arista": "MARI <- NDWI",
+        "i": 1,
+        "j": 5,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": -0.23686742180959533,
+          "brotacion (sep-oct)": 0.1513435153521886,
+          "crecimiento (nov-dic)": -0.1605156797354805,
+          "maduracion (ene-mar)": 0.3229651691668567,
+          "postcosecha (abr)": 0.15325382365324386
+        },
+        "n_sobre": 0,
+        "mediana": 0.1513435153521886
+      },
+      {
+        "arista": "SAVI <- CHL_REDEDGE",
+        "i": 9,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 4.215006893475873,
+          "brotacion (sep-oct)": 13.159210298949366,
+          "crecimiento (nov-dic)": 5.565528550279751,
+          "maduracion (ene-mar)": 2.945816896523775,
+          "postcosecha (abr)": 1.0076669049011178
+        },
+        "n_sobre": 3,
+        "mediana": 4.215006893475873
+      },
+      {
+        "arista": "EVI2 <- NDII",
+        "i": 4,
+        "j": 8,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.5407635520536256,
+          "brotacion (sep-oct)": 5.2201467465102125,
+          "crecimiento (nov-dic)": 6.671967347428099,
+          "maduracion (ene-mar)": 3.39465658137967,
+          "postcosecha (abr)": 1.4128140130687925
+        },
+        "n_sobre": 3,
+        "mediana": 3.39465658137967
+      },
+      {
+        "arista": "MARI <- KNDVI",
+        "i": 1,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 1.2441912035311762,
+          "brotacion (sep-oct)": 2.7824418925261933,
+          "crecimiento (nov-dic)": 2.6660786401535708,
+          "maduracion (ene-mar)": 0.5199724754338603,
+          "postcosecha (abr)": 1.1706543721667195
+        },
+        "n_sobre": 0,
+        "mediana": 1.2441912035311762
+      },
+      {
+        "arista": "EVI2 <- CHL_REDEDGE",
+        "i": 4,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 3.85539369665405,
+          "brotacion (sep-oct)": 11.62391028344835,
+          "crecimiento (nov-dic)": 5.873093073757714,
+          "maduracion (ene-mar)": 3.2259494838473954,
+          "postcosecha (abr)": 0.9720347672672981
+        },
+        "n_sobre": 4,
+        "mediana": 3.85539369665405
+      },
+      {
+        "arista": "EVI <- NDII",
+        "i": 3,
+        "j": 8,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 0.5996716974292382,
+          "brotacion (sep-oct)": 5.81497527836765,
+          "crecimiento (nov-dic)": 8.123329086228795,
+          "maduracion (ene-mar)": 4.593159445238831,
+          "postcosecha (abr)": 1.4561107595277931
+        },
+        "n_sobre": 3,
+        "mediana": 4.593159445238831
+      },
+      {
+        "arista": "SAVI <- NDII",
+        "i": 9,
+        "j": 8,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.5579089936380536,
+          "brotacion (sep-oct)": 4.902899522083377,
+          "crecimiento (nov-dic)": 6.468489344626762,
+          "maduracion (ene-mar)": 3.4664718968120627,
+          "postcosecha (abr)": 1.4215700542765313
+        },
+        "n_sobre": 3,
+        "mediana": 3.4664718968120627
+      },
+      {
+        "arista": "EVI2 <- NDMI",
+        "i": 4,
+        "j": 6,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 1.1559399527078233,
+          "brotacion (sep-oct)": 5.6867577321587,
+          "crecimiento (nov-dic)": 5.797261829852757,
+          "maduracion (ene-mar)": 3.4410262644573235,
+          "postcosecha (abr)": 1.565872664514907
+        },
+        "n_sobre": 3,
+        "mediana": 3.4410262644573235
+      },
+      {
+        "arista": "EVI <- NDMI",
+        "i": 3,
+        "j": 6,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 1.221252291245697,
+          "brotacion (sep-oct)": 6.107921753171144,
+          "crecimiento (nov-dic)": 6.870635942200223,
+          "maduracion (ene-mar)": 4.5184067874196785,
+          "postcosecha (abr)": 1.6615476102903908
+        },
+        "n_sobre": 3,
+        "mediana": 4.5184067874196785
+      },
+      {
+        "arista": "SAVI <- NDMI",
+        "i": 9,
+        "j": 6,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 1.1998765505088467,
+          "brotacion (sep-oct)": 5.32524390096183,
+          "crecimiento (nov-dic)": 5.287244623448601,
+          "maduracion (ene-mar)": 3.1174524507621566,
+          "postcosecha (abr)": 1.5467929120109538
+        },
+        "n_sobre": 3,
+        "mediana": 3.1174524507621566
+      }
+    ]
+  },
+  "_ctrl": {
+    "tabla": [
+      {
+        "fase": "dormancia (may-ago)",
+        "n_fechas": 9,
+        "mse": 0.7624453648211964,
+        "ic_fechas": [
+          0.5534049109111965,
+          0.9821851618217741
+        ],
+        "ic_semillas": [
+          0.7507141578927015,
+          0.7752261511623331
+        ],
+        "sd_semillas": 0.02575223245886485
+      },
+      {
+        "fase": "brotacion (sep-oct)",
+        "n_fechas": 22,
+        "mse": 0.45742106883777206,
+        "ic_fechas": [
+          0.3362795511925254,
+          0.5951763894032882
+        ],
+        "ic_semillas": [
+          0.4418861190557263,
+          0.4762485885204785
+        ],
+        "sd_semillas": 0.03533642161215442
+      },
+      {
+        "fase": "crecimiento (nov-dic)",
+        "n_fechas": 57,
+        "mse": 0.4113490590705858,
+        "ic_fechas": [
+          0.3759211587467817,
+          0.4497393607638674
+        ],
+        "ic_semillas": [
+          0.39759685030797054,
+          0.42618425382019814
+        ],
+        "sd_semillas": 0.028936175987352687
+      },
+      {
+        "fase": "maduracion (ene-mar)",
+        "n_fechas": 90,
+        "mse": 0.49616762064075387,
+        "ic_fechas": [
+          0.46628831831663614,
+          0.5275972775435306
+        ],
+        "ic_semillas": [
+          0.4802370541004327,
+          0.5143411261254094
+        ],
+        "sd_semillas": 0.035174252511483706
+      },
+      {
+        "fase": "postcosecha (abr)",
+        "n_fechas": 8,
+        "mse": 0.58121706424281,
+        "ic_fechas": [
+          0.4963215352178345,
+          0.6707440937675223
+        ],
+        "ic_semillas": [
+          0.567367467311366,
+          0.5956652348801595
+        ],
+        "sd_semillas": 0.02970823300659323
+      }
+    ],
+    "razon": {
+      "razon": 1.536668926191858,
+      "ic": [
+        1.131165408633299,
+        2.00328176222588
+      ],
+      "p_mayor_que_uno": 0.005
+    },
+    "razon_n_igualado": {
+      "n": 9,
+      "mediana": 1.545034461121493,
+      "ic": [
+        1.2817458110757278,
+        1.8640479487950978
+      ],
+      "submuestra_publicada": 1.3117736182959834,
+      "percentil_publicada": 4.25
+    },
+    "placebo_etiquetas": {
+      "observado": 1.536668926191858,
+      "nulo_mediana": 0.9921312968072951,
+      "nulo_ic": [
+        0.7616806828553945,
+        1.3156578860670571
+      ],
+      "p": 0.0005
+    },
+    "placebo_calendario": {
+      "observado": 1.536668926191858,
+      "rotadas": [
+        1.393780752930821,
+        1.054424358524736,
+        0.8229408841644504,
+        0.569709108386334,
+        0.5301565661552845,
+        0.6255989373705765,
+        0.9187686771304594,
+        1.184344158741674,
+        1.2614255428561474,
+        1.2149919868517067,
+        1.3605992650637797
+      ],
+      "rotadas_max": 1.393780752930821,
+      "p": 0.08333333333333333
+    },
+    "dificultad": {
+      "razon_cruda": 1.536668926191858,
+      "razon_normalizada": 1.8890677811719923,
+      "ic_normalizada": [
+        0.8965319522261026,
+        3.9960259359273427
+      ],
+      "p_normalizada": 0.0485,
+      "brecha_cerrada": -0.6566410645026844,
+      "dificultad_a": 0.6904794357855011,
+      "dificultad_b": 0.9700965110203943,
+      "razon_dificultad": 0.7117636523186972
+    },
+    "suelo_igualado": {
+      "n": 9,
+      "alta": 0.01736646885660539,
+      "baja": 0.007990861918967761,
+      "ic_alta": [
+        0.008705794109073442,
+        0.03302916994051901
+      ],
+      "ic_baja": [
+        0.005399208187505051,
+        0.011166840756532946
+      ],
+      "p": 0.0
+    },
+    "regresion": {
+      "beta_exposicion": -0.2929505835611677,
+      "beta_ndvi": 0.2388445775981222,
+      "beta_dificultad": 0.673162447804786,
+      "r2": 0.6548347556975231,
+      "corr_regresores": 0.2905677781111878,
+      "rho_expo": 0.11205273397104985,
+      "rho_ndvi": 0.5530344213456166,
+      "rho_dificultad": 0.7594300873238254,
+      "intra_fase": [
+        [
+          "dormancia (may-ago)",
+          9,
+          0.6666666666666667,
+          0.049867230568885125
+        ],
+        [
+          "brotacion (sep-oct)",
+          22,
+          0.7413890457368719,
+          7.87750589529019e-05
+        ],
+        [
+          "crecimiento (nov-dic)",
+          57,
+          0.6615245009074411,
+          2.1176952897256515e-08
+        ],
+        [
+          "maduracion (ene-mar)",
+          90,
+          0.059768695723751895,
+          0.57575894180773
+        ],
+        [
+          "postcosecha (abr)",
+          8,
+          0.7619047619047621,
+          0.028004939153071805
+        ]
+      ]
+    },
+    "icp": {
+      "por_fase_ruido": {
+        "dormancia (may-ago)": 0.015913923439525426,
+        "brotacion (sep-oct)": 0.00485021416032247,
+        "crecimiento (nov-dic)": 0.007256873840477035,
+        "maduracion (ene-mar)": 0.007332980890194075,
+        "postcosecha (abr)": 0.014065499782441109
+      },
+      "discreto": {
+        "obs": 12.0,
+        "p": 0.747737556561086,
+        "p_minimo": 0.0016670635865682305,
+        "n_repartos": 50388
+      },
+      "continuo": {
+        "obs": 9.111609713356508,
+        "p": 0.8503413511153449,
+        "p_minimo": 1.9845995078193222e-05,
+        "n_repartos": 50388
+      },
+      "n_invariantes": 7,
+      "n_regimen": 12
+    },
+    "aristas": [
+      {
+        "arista": "NDVI <- CHL_REDEDGE",
+        "i": 0,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 3.0912609867935674,
+          "brotacion (sep-oct)": 4.8901100310212415,
+          "crecimiento (nov-dic)": 1.852462273217939,
+          "maduracion (ene-mar)": 2.5252631725961945,
+          "postcosecha (abr)": 0.8374109470942038
+        },
+        "n_sobre": 2,
+        "mediana": 2.5252631725961945
+      },
+      {
+        "arista": "KNDVI <- CHL_REDEDGE",
+        "i": 11,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 3.467371461065936,
+          "brotacion (sep-oct)": 5.640204077748288,
+          "crecimiento (nov-dic)": 2.9932082659310706,
+          "maduracion (ene-mar)": 3.933238121282499,
+          "postcosecha (abr)": 1.5308223234553155
+        },
+        "n_sobre": 3,
+        "mediana": 3.467371461065936
+      },
+      {
+        "arista": "ARI <- KNDVI",
+        "i": 2,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 5.870966151130338,
+          "brotacion (sep-oct)": 3.9929792846734826,
+          "crecimiento (nov-dic)": -0.7424533130418692,
+          "maduracion (ene-mar)": -2.1089317412981616,
+          "postcosecha (abr)": -2.613006330939487
+        },
+        "n_sobre": 2,
+        "mediana": -0.7424533130418692
+      },
+      {
+        "arista": "ARI <- NDWI",
+        "i": 2,
+        "j": 5,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": -0.9782874160279171,
+          "brotacion (sep-oct)": 0.5597618099688859,
+          "crecimiento (nov-dic)": -0.19282240651881055,
+          "maduracion (ene-mar)": -0.5131847104808147,
+          "postcosecha (abr)": -0.7049204413751358
+        },
+        "n_sobre": 0,
+        "mediana": -0.5131847104808147
+      },
+      {
+        "arista": "PSRI <- CHL_REDEDGE",
+        "i": 10,
+        "j": 7,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": -1.0706891538482475,
+          "brotacion (sep-oct)": 0.5761845013209264,
+          "crecimiento (nov-dic)": 0.27978023735425633,
+          "maduracion (ene-mar)": 0.6696554029289123,
+          "postcosecha (abr)": 0.29909623641355315
+        },
+        "n_sobre": 0,
+        "mediana": 0.29909623641355315
+      },
+      {
+        "arista": "EVI <- CHL_REDEDGE",
+        "i": 3,
+        "j": 7,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 3.196485005961952,
+          "brotacion (sep-oct)": 7.208615105134964,
+          "crecimiento (nov-dic)": 3.455929417262611,
+          "maduracion (ene-mar)": 3.907368509558151,
+          "postcosecha (abr)": 0.8439278502324512
+        },
+        "n_sobre": 4,
+        "mediana": 3.455929417262611
+      },
+      {
+        "arista": "ARI <- NDVI",
+        "i": 2,
+        "j": 0,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 5.666027259623158,
+          "brotacion (sep-oct)": 4.229888544121588,
+          "crecimiento (nov-dic)": -1.2423270736730232,
+          "maduracion (ene-mar)": -2.116763076752329,
+          "postcosecha (abr)": -1.9968471110986128
+        },
+        "n_sobre": 2,
+        "mediana": -1.2423270736730232
+      },
+      {
+        "arista": "PSRI <- KNDVI",
+        "i": 10,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": -0.2699447474579686,
+          "brotacion (sep-oct)": 0.32480132780214604,
+          "crecimiento (nov-dic)": 0.24814166040846408,
+          "maduracion (ene-mar)": 0.5360485029015678,
+          "postcosecha (abr)": 0.12706085960098373
+        },
+        "n_sobre": 0,
+        "mediana": 0.24814166040846408
+      },
+      {
+        "arista": "PSRI <- NDVI",
+        "i": 10,
+        "j": 0,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.6434148148743322,
+          "brotacion (sep-oct)": 0.8789880313944574,
+          "crecimiento (nov-dic)": 0.5986816372895523,
+          "maduracion (ene-mar)": 0.829549314008283,
+          "postcosecha (abr)": 0.07512912990980897
+        },
+        "n_sobre": 0,
+        "mediana": 0.6434148148743322
+      },
+      {
+        "arista": "MARI <- NDWI",
+        "i": 1,
+        "j": 5,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": -0.6442382671896018,
+          "brotacion (sep-oct)": -0.2791500262235699,
+          "crecimiento (nov-dic)": -0.13901519863589645,
+          "maduracion (ene-mar)": 0.08808740108801068,
+          "postcosecha (abr)": -0.0390772995464799
+        },
+        "n_sobre": 0,
+        "mediana": -0.13901519863589645
+      },
+      {
+        "arista": "SAVI <- CHL_REDEDGE",
+        "i": 9,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 4.142295684350196,
+          "brotacion (sep-oct)": 7.614241710702639,
+          "crecimiento (nov-dic)": 2.9227683874630017,
+          "maduracion (ene-mar)": 3.380576894084971,
+          "postcosecha (abr)": 0.9476273037874337
+        },
+        "n_sobre": 3,
+        "mediana": 3.380576894084971
+      },
+      {
+        "arista": "EVI2 <- NDII",
+        "i": 4,
+        "j": 8,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.7959944914526388,
+          "brotacion (sep-oct)": 4.175760159588572,
+          "crecimiento (nov-dic)": 3.7995669812389754,
+          "maduracion (ene-mar)": 3.4135022075770665,
+          "postcosecha (abr)": 1.0367017316918035
+        },
+        "n_sobre": 3,
+        "mediana": 3.4135022075770665
+      },
+      {
+        "arista": "MARI <- KNDVI",
+        "i": 1,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 2.0134131180612185,
+          "brotacion (sep-oct)": 2.438258775421505,
+          "crecimiento (nov-dic)": 0.38622843569633414,
+          "maduracion (ene-mar)": 0.08431269232644262,
+          "postcosecha (abr)": 0.38494760594263655
+        },
+        "n_sobre": 0,
+        "mediana": 0.38622843569633414
+      },
+      {
+        "arista": "EVI2 <- CHL_REDEDGE",
+        "i": 4,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 3.665215143704341,
+          "brotacion (sep-oct)": 6.5343328172420065,
+          "crecimiento (nov-dic)": 2.7109556488873063,
+          "maduracion (ene-mar)": 3.087014940876396,
+          "postcosecha (abr)": 0.8569671919373659
+        },
+        "n_sobre": 3,
+        "mediana": 3.087014940876396
+      },
+      {
+        "arista": "EVI <- NDII",
+        "i": 3,
+        "j": 8,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 0.8959950506924043,
+          "brotacion (sep-oct)": 4.874853321503474,
+          "crecimiento (nov-dic)": 4.565268400903912,
+          "maduracion (ene-mar)": 4.166595977323613,
+          "postcosecha (abr)": 1.0880642039275963
+        },
+        "n_sobre": 3,
+        "mediana": 4.166595977323613
+      },
+      {
+        "arista": "SAVI <- NDII",
+        "i": 9,
+        "j": 8,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.6063488277993163,
+          "brotacion (sep-oct)": 4.449281198359356,
+          "crecimiento (nov-dic)": 3.884159443801744,
+          "maduracion (ene-mar)": 3.5359410092442625,
+          "postcosecha (abr)": 1.0801775162089018
+        },
+        "n_sobre": 3,
+        "mediana": 3.5359410092442625
+      },
+      {
+        "arista": "EVI2 <- NDMI",
+        "i": 4,
+        "j": 6,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 1.3441171361932858,
+          "brotacion (sep-oct)": 4.282893893412913,
+          "crecimiento (nov-dic)": 3.440714683974778,
+          "maduracion (ene-mar)": 3.0630664987525735,
+          "postcosecha (abr)": 0.8495321934120601
+        },
+        "n_sobre": 3,
+        "mediana": 3.0630664987525735
+      },
+      {
+        "arista": "EVI <- NDMI",
+        "i": 3,
+        "j": 6,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 1.4543315310127611,
+          "brotacion (sep-oct)": 4.767844410232795,
+          "crecimiento (nov-dic)": 4.099527257125492,
+          "maduracion (ene-mar)": 3.6945825334329605,
+          "postcosecha (abr)": 0.8394016619570547
+        },
+        "n_sobre": 3,
+        "mediana": 3.6945825334329605
+      },
+      {
+        "arista": "SAVI <- NDMI",
+        "i": 9,
+        "j": 6,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 1.1821292681707274,
+          "brotacion (sep-oct)": 4.528684443968528,
+          "crecimiento (nov-dic)": 3.4466420052373,
+          "maduracion (ene-mar)": 3.0845150651464657,
+          "postcosecha (abr)": 0.8461930940939458
+        },
+        "n_sobre": 3,
+        "mediana": 3.0845150651464657
+      }
+    ]
+  },
+  "_bal2": {
+    "tabla": [
+      {
+        "fase": "dormancia (may-ago)",
+        "n_fechas": 9,
+        "mse": 0.7334223625215667,
+        "ic_fechas": [
+          0.5466672911503018,
+          0.9165833926771156
+        ],
+        "ic_semillas": [
+          0.7259468532650284,
+          0.7409211420309213
+        ],
+        "sd_semillas": 0.015195030400281619
+      },
+      {
+        "fase": "brotacion (sep-oct)",
+        "n_fechas": 22,
+        "mse": 0.37366054870018905,
+        "ic_fechas": [
+          0.27666497045897437,
+          0.4788270357476002
+        ],
+        "ic_semillas": [
+          0.367226721496801,
+          0.3790531013677874
+        ],
+        "sd_semillas": 0.012328339027836406
+      },
+      {
+        "fase": "crecimiento (nov-dic)",
+        "n_fechas": 57,
+        "mse": 0.3334437166157289,
+        "ic_fechas": [
+          0.30189589856423027,
+          0.3685125228671491
+        ],
+        "ic_semillas": [
+          0.32818515261869374,
+          0.3381760593645862
+        ],
+        "sd_semillas": 0.010049529438713985
+      },
+      {
+        "fase": "maduracion (ene-mar)",
+        "n_fechas": 90,
+        "mse": 0.38869454678423987,
+        "ic_fechas": [
+          0.3641354834852786,
+          0.41369910101129753
+        ],
+        "ic_semillas": [
+          0.3826407235800002,
+          0.3947313103948456
+        ],
+        "sd_semillas": 0.012169584633150415
+      },
+      {
+        "fase": "postcosecha (abr)",
+        "n_fechas": 8,
+        "mse": 0.4876686315259172,
+        "ic_fechas": [
+          0.40111054350363295,
+          0.5610970485970999
+        ],
+        "ic_semillas": [
+          0.47989649657806804,
+          0.49614333840371627
+        ],
+        "sd_semillas": 0.01694240570589507
+      }
+    ],
+    "razon": {
+      "razon": 1.886886164442851,
+      "ic": [
+        1.415350087439014,
+        2.4337413942979413
+      ],
+      "p_mayor_que_uno": 0.0
+    },
+    "razon_n_igualado": {
+      "n": 9,
+      "mediana": 1.8915638076848742,
+      "ic": [
+        1.5703086049253436,
+        2.304339422813562
+      ],
+      "submuestra_publicada": 1.5475848657454818,
+      "percentil_publicada": 1.6
+    },
+    "placebo_etiquetas": {
+      "observado": 1.886886164442851,
+      "nulo_mediana": 0.9939973680933445,
+      "nulo_ic": [
+        0.7212375593838842,
+        1.3415323870777263
+      ],
+      "p": 0.0005
+    },
+    "placebo_calendario": {
+      "observado": 1.886886164442851,
+      "rotadas": [
+        1.6489263272328052,
+        1.1394338832140305,
+        0.8174639475416582,
+        0.4883682516755083,
+        0.4399437323347796,
+        0.5295929595113545,
+        0.8435806134765707,
+        1.1436102377933275,
+        1.2446033102574274,
+        1.228475745898803,
+        1.5184674176152408
+      ],
+      "rotadas_max": 1.6489263272328052,
+      "p": 0.08333333333333333
+    },
+    "dificultad": {
+      "razon_cruda": 1.886886164442851,
+      "razon_normalizada": 2.190540692369735,
+      "ic_normalizada": [
+        0.9571956546123337,
+        4.80764336875553
+      ],
+      "p_normalizada": 0.0415,
+      "brecha_cerrada": -0.34238275451916883,
+      "dificultad_a": 0.6904794357855011,
+      "dificultad_b": 0.9700965110203943,
+      "razon_dificultad": 0.7117636523186972
+    },
+    "suelo_igualado": {
+      "n": 9,
+      "alta": 0.01891925456114357,
+      "baja": 0.0044932999440864705,
+      "ic_alta": [
+        0.012214790821401197,
+        0.029188609183204175
+      ],
+      "ic_baja": [
+        0.002877107238282438,
+        0.008252464186841016
+      ],
+      "p": 0.0
+    },
+    "regresion": {
+      "beta_exposicion": -0.32455856175378045,
+      "beta_ndvi": 0.2729431075650453,
+      "beta_dificultad": 0.5139751368200757,
+      "r2": 0.492593426234049,
+      "corr_regresores": 0.2905677781111878,
+      "rho_expo": 0.031157168210730807,
+      "rho_ndvi": 0.5245574365118957,
+      "rho_dificultad": 0.5795588584962399,
+      "intra_fase": [
+        [
+          "dormancia (may-ago)",
+          9,
+          0.65,
+          0.058073058017148654
+        ],
+        [
+          "brotacion (sep-oct)",
+          22,
+          0.7210615471485038,
+          0.0001528714095424258
+        ],
+        [
+          "crecimiento (nov-dic)",
+          57,
+          0.6468758102151932,
+          5.433914668039333e-08
+        ],
+        [
+          "maduracion (ene-mar)",
+          90,
+          0.09480182738609705,
+          0.3741098775290725
+        ],
+        [
+          "postcosecha (abr)",
+          8,
+          0.4047619047619048,
+          0.3198886412288163
+        ]
+      ]
+    },
+    "icp": {
+      "por_fase_ruido": {
+        "dormancia (may-ago)": 0.016986718235468424,
+        "brotacion (sep-oct)": 0.002822300194156777,
+        "crecimiento (nov-dic)": 0.004385377448439744,
+        "maduracion (ene-mar)": 0.004240628163571711,
+        "postcosecha (abr)": 0.00899282821143667
+      },
+      "discreto": {
+        "obs": 12.0,
+        "p": 0.8722711756767484,
+        "p_minimo": 0.0013892196554735254,
+        "n_repartos": 50388
+      },
+      "continuo": {
+        "obs": 16.927542971386735,
+        "p": 0.8221401921092324,
+        "p_minimo": 1.9845995078193222e-05,
+        "n_repartos": 50388
+      },
+      "n_invariantes": 7,
+      "n_regimen": 12
+    },
+    "aristas": [
+      {
+        "arista": "NDVI <- CHL_REDEDGE",
+        "i": 0,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 2.5749673616342585,
+          "brotacion (sep-oct)": 12.1586446851969,
+          "crecimiento (nov-dic)": 4.426270237405699,
+          "maduracion (ene-mar)": 5.314441272613018,
+          "postcosecha (abr)": 1.6323284821278876
+        },
+        "n_sobre": 3,
+        "mediana": 4.426270237405699
+      },
+      {
+        "arista": "KNDVI <- CHL_REDEDGE",
+        "i": 11,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 2.2476157839172033,
+          "brotacion (sep-oct)": 9.715529315080875,
+          "crecimiento (nov-dic)": 5.447297974625597,
+          "maduracion (ene-mar)": 6.449182416619288,
+          "postcosecha (abr)": 2.0746386780665524
+        },
+        "n_sobre": 3,
+        "mediana": 5.447297974625597
+      },
+      {
+        "arista": "ARI <- KNDVI",
+        "i": 2,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 5.446499511560261,
+          "brotacion (sep-oct)": 5.016254213879155,
+          "crecimiento (nov-dic)": 1.5181707533648874,
+          "maduracion (ene-mar)": 0.07509980127316415,
+          "postcosecha (abr)": 0.843794164037411
+        },
+        "n_sobre": 2,
+        "mediana": 1.5181707533648874
+      },
+      {
+        "arista": "ARI <- NDWI",
+        "i": 2,
+        "j": 5,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 0.36704458454599,
+          "brotacion (sep-oct)": 1.6482885076354312,
+          "crecimiento (nov-dic)": 0.37231249308855396,
+          "maduracion (ene-mar)": 0.7677151127194523,
+          "postcosecha (abr)": 2.001287126952987
+        },
+        "n_sobre": 0,
+        "mediana": 0.7677151127194523
+      },
+      {
+        "arista": "PSRI <- CHL_REDEDGE",
+        "i": 10,
+        "j": 7,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": -0.3676772386763542,
+          "brotacion (sep-oct)": 2.0800343757220867,
+          "crecimiento (nov-dic)": 0.3046723753542227,
+          "maduracion (ene-mar)": 1.1931080164545647,
+          "postcosecha (abr)": 0.25841937265563353
+        },
+        "n_sobre": 0,
+        "mediana": 0.3046723753542227
+      },
+      {
+        "arista": "EVI <- CHL_REDEDGE",
+        "i": 3,
+        "j": 7,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 3.11186542763179,
+          "brotacion (sep-oct)": 13.947220736330559,
+          "crecimiento (nov-dic)": 5.05782671940085,
+          "maduracion (ene-mar)": 5.300718300782586,
+          "postcosecha (abr)": 1.0094358666800438
+        },
+        "n_sobre": 4,
+        "mediana": 5.05782671940085
+      },
+      {
+        "arista": "ARI <- NDVI",
+        "i": 2,
+        "j": 0,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 4.917980789084836,
+          "brotacion (sep-oct)": 4.2915710871490855,
+          "crecimiento (nov-dic)": 0.3369730652780176,
+          "maduracion (ene-mar)": -0.4703208189150659,
+          "postcosecha (abr)": 1.0360391645970473
+        },
+        "n_sobre": 2,
+        "mediana": 1.0360391645970473
+      },
+      {
+        "arista": "PSRI <- KNDVI",
+        "i": 10,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": -0.005077867813910255,
+          "brotacion (sep-oct)": 1.4381879394293364,
+          "crecimiento (nov-dic)": -0.04276356480459235,
+          "maduracion (ene-mar)": 0.6624506002249136,
+          "postcosecha (abr)": -0.08649063407446482
+        },
+        "n_sobre": 0,
+        "mediana": -0.005077867813910255
+      },
+      {
+        "arista": "PSRI <- NDVI",
+        "i": 10,
+        "j": 0,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.9791285599696995,
+          "brotacion (sep-oct)": 2.442295606234583,
+          "crecimiento (nov-dic)": 0.30021134371690616,
+          "maduracion (ene-mar)": 1.022793472656638,
+          "postcosecha (abr)": -0.4141584544780323
+        },
+        "n_sobre": 0,
+        "mediana": 0.9791285599696995
+      },
+      {
+        "arista": "MARI <- NDWI",
+        "i": 1,
+        "j": 5,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": -0.22584247527065388,
+          "brotacion (sep-oct)": 0.2712093499484241,
+          "crecimiento (nov-dic)": -0.01675066997205092,
+          "maduracion (ene-mar)": 0.6469067694296937,
+          "postcosecha (abr)": 0.642754775209616
+        },
+        "n_sobre": 0,
+        "mediana": 0.2712093499484241
+      },
+      {
+        "arista": "SAVI <- CHL_REDEDGE",
+        "i": 9,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 4.3006797238605055,
+          "brotacion (sep-oct)": 15.76657851742818,
+          "crecimiento (nov-dic)": 4.24394431491847,
+          "maduracion (ene-mar)": 4.056237939089085,
+          "postcosecha (abr)": 1.218516659284767
+        },
+        "n_sobre": 4,
+        "mediana": 4.24394431491847
+      },
+      {
+        "arista": "EVI2 <- NDII",
+        "i": 4,
+        "j": 8,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": -0.030305786249713494,
+          "brotacion (sep-oct)": 5.599962152053106,
+          "crecimiento (nov-dic)": 4.915449512970781,
+          "maduracion (ene-mar)": 3.8838207739165944,
+          "postcosecha (abr)": 0.9627456638915274
+        },
+        "n_sobre": 3,
+        "mediana": 3.8838207739165944
+      },
+      {
+        "arista": "MARI <- KNDVI",
+        "i": 1,
+        "j": 11,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 1.4530462230901995,
+          "brotacion (sep-oct)": 3.92688183976691,
+          "crecimiento (nov-dic)": 1.4183736260532183,
+          "maduracion (ene-mar)": 0.6370067555504878,
+          "postcosecha (abr)": 1.6205057515454342
+        },
+        "n_sobre": 1,
+        "mediana": 1.4530462230901995
+      },
+      {
+        "arista": "EVI2 <- CHL_REDEDGE",
+        "i": 4,
+        "j": 7,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 3.831918199700023,
+          "brotacion (sep-oct)": 13.884034115998476,
+          "crecimiento (nov-dic)": 4.236781466040318,
+          "maduracion (ene-mar)": 4.077900777924319,
+          "postcosecha (abr)": 1.009137785291252
+        },
+        "n_sobre": 4,
+        "mediana": 4.077900777924319
+      },
+      {
+        "arista": "EVI <- NDII",
+        "i": 3,
+        "j": 8,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 0.12543535492521954,
+          "brotacion (sep-oct)": 6.2970111534952595,
+          "crecimiento (nov-dic)": 6.15676568534255,
+          "maduracion (ene-mar)": 5.323540979189066,
+          "postcosecha (abr)": 1.0348203960039626
+        },
+        "n_sobre": 3,
+        "mediana": 5.323540979189066
+      },
+      {
+        "arista": "SAVI <- NDII",
+        "i": 9,
+        "j": 8,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.0031421620371411365,
+          "brotacion (sep-oct)": 5.419723613845051,
+          "crecimiento (nov-dic)": 4.956177725757006,
+          "maduracion (ene-mar)": 4.000541739914841,
+          "postcosecha (abr)": 1.0807968991278156
+        },
+        "n_sobre": 3,
+        "mediana": 4.000541739914841
+      },
+      {
+        "arista": "EVI2 <- NDMI",
+        "i": 4,
+        "j": 6,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 0.9694790282208423,
+          "brotacion (sep-oct)": 6.595458116267058,
+          "crecimiento (nov-dic)": 4.851586387848154,
+          "maduracion (ene-mar)": 4.3892020205217355,
+          "postcosecha (abr)": 1.1901096700142573
+        },
+        "n_sobre": 3,
+        "mediana": 4.3892020205217355
+      },
+      {
+        "arista": "EVI <- NDMI",
+        "i": 3,
+        "j": 6,
+        "invariante": false,
+        "veces": {
+          "dormancia (may-ago)": 1.0605253064452034,
+          "brotacion (sep-oct)": 6.848483898652302,
+          "crecimiento (nov-dic)": 5.8033062605686965,
+          "maduracion (ene-mar)": 5.7398478096457755,
+          "postcosecha (abr)": 1.3218129831470544
+        },
+        "n_sobre": 3,
+        "mediana": 5.7398478096457755
+      },
+      {
+        "arista": "SAVI <- NDMI",
+        "i": 9,
+        "j": 6,
+        "invariante": true,
+        "veces": {
+          "dormancia (may-ago)": 1.0059244176616604,
+          "brotacion (sep-oct)": 6.401423782581793,
+          "crecimiento (nov-dic)": 4.651536857664507,
+          "maduracion (ene-mar)": 4.1665392701776724,
+          "postcosecha (abr)": 1.280482362989084
+        },
+        "n_sobre": 3,
+        "mediana": 4.1665392701776724
+      }
+    ]
+  }
+}

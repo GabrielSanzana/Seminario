@@ -153,16 +153,49 @@ BALANCEAR = False           # sobremuestrear el TRAIN
 ESTRATIFICADO = False       # particion train/val por fase en vez de cronologica
 BALANCEAR_VAL = False       # sobremuestrear el VAL, para que el criterio de
                             # early stopping pese igual las cinco fases
-REPORTE = {}
+MIN_FECHAS_VAL = 3          # bajo esto una fase no puede ceder val sin que la
+                            # misma escena quede en los dos lados
+REPORTE_TRAIN: dict = {}
+REPORTE_VAL: dict = {}
+OMITIDAS_DEL_VAL: list = []
+SPLIT: dict = {}            # composicion por fase de cada bloque, para el JSON
 
 
-def _indices_balanceados(meses_tr: np.ndarray) -> np.ndarray:
-    """Indices de frames de train repetidos para igualar el peso de cada fase."""
+def _cobertura_fases(meses: np.ndarray) -> list:
+    """Grupos (nombre, indices) de FASES, exigiendo que cubran todos los meses.
+
+    Sin esta comprobacion un mes que no aparezca en FASES desaparece del
+    entrenamiento sin ningun aviso: _indices_balanceados concatena solo los
+    grupos que encuentra, asi que un frame no cubierto no es un error visible
+    sino un frame que deja de existir. FASES hoy si es una particion de los
+    doce meses, pero eso es una propiedad que hay que verificar, no suponer.
+    """
     grupos = []
+    cubiertos = np.zeros(len(meses), dtype=bool)
     for nombre, ms in FASES:
-        idx = np.where(np.isin(meses_tr, ms))[0]
+        idx = np.where(np.isin(meses, ms))[0]
+        cubiertos[idx] = True
         if len(idx):
             grupos.append((nombre, idx))
+    if len(meses) and not cubiertos.all():
+        raise ValueError(
+            "FASES no cubre los meses "
+            + str(sorted({int(m) for m in meses[~cubiertos]}))
+            + "; esos frames se caerian del entrenamiento sin aviso")
+    if not grupos:
+        raise ValueError("ninguna fase tiene frames")
+    return grupos
+
+
+def _indices_balanceados(meses: np.ndarray, reporte: dict = None) -> np.ndarray:
+    """Indices repetidos para igualar el peso de cada fase.
+
+    Devuelve indices RELATIVOS al vector meses que recibe, asi que sirve igual
+    para el bloque de train y para el de val; el diccionario de reporte va
+    aparte para cada uno, porque los factores no son los mismos y antes el del
+    val pisaba al del train en el archivo de salida.
+    """
+    grupos = _cobertura_fases(meses)
     objetivo = max(len(i) for _n, i in grupos)
     salida, rep = [], {}
     for nombre, idx in grupos:
@@ -171,11 +204,18 @@ def _indices_balanceados(meses_tr: np.ndarray) -> np.ndarray:
         salida.append(ext)
         rep[nombre] = dict(originales=int(len(idx)), tras_balanceo=int(len(ext)),
                            factor=round(objetivo / len(idx), 2))
-    REPORTE.update(rep)
-    return np.concatenate(salida)
+    fuera = np.concatenate(salida)
+    # Sobremuestrear nunca puede perder un frame: repetir es anadir copias, y
+    # si alguno desaparece es que el recorte [:objetivo] se comio un grupo.
+    if set(fuera.tolist()) != set(range(len(meses))):
+        raise ValueError("el sobremuestreo perdio frames del bloque original")
+    if reporte is not None:
+        reporte.clear()
+        reporte.update(rep)
+    return fuera
 
 
-def _split_estratificado(meses_all, frac_val=0.2):
+def _split_estratificado(meses_all, frac_val=0.2, min_fechas=None):
     """Particion train/val tomando el ultimo frac_val de CADA fase.
 
     La particion original es cronologica: el ultimo 20% de fechas va a val. Con
@@ -189,16 +229,39 @@ def _split_estratificado(meses_all, frac_val=0.2):
     Se toma el ultimo tramo DENTRO de cada fase y no una muestra al azar: las
     fechas vecinas se parecen mucho, y con muestreo aleatorio una fecha de train
     y su vecina de val serian casi la misma escena.
+
+    Una fase con menos de min_fechas va entera a train. La version anterior
+    hacia va.append(idx[-1:]) cuando el corte se comia la fase completa, y esa
+    linea metia LA MISMA fecha en train y en val: fuga directa al criterio de
+    parada. Con los datos de este caso ninguna fase cae en ese camino -la mas
+    corta tiene 7 fechas- pero el codigo no puede depender de eso.
     """
-    tr, va = [], []
-    for _nombre, ms in FASES:
-        idx = np.where(np.isin(meses_all, ms))[0]
-        if not len(idx):
+    min_fechas = MIN_FECHAS_VAL if min_fechas is None else min_fechas
+    grupos = _cobertura_fases(np.asarray(meses_all))
+    tr, va, omitidas = [], [], []
+    for nombre, idx in grupos:
+        if len(idx) < min_fechas:
+            tr.append(idx)
+            omitidas.append((nombre, int(len(idx))))
             continue
-        corte = max(1, int(round((1 - frac_val) * len(idx))))
+        corte = int(round((1 - frac_val) * len(idx)))
+        corte = min(max(corte, 1), len(idx) - 1)   # ningun lado vacio
         tr.append(idx[:corte])
-        va.append(idx[corte:] if corte < len(idx) else idx[-1:])
-    return np.sort(np.concatenate(tr)), np.sort(np.concatenate(va))
+        va.append(idx[corte:])
+    i_tr = np.sort(np.concatenate(tr))
+    i_va = (np.sort(np.concatenate(va)) if va
+            else np.empty(0, dtype=i_tr.dtype))
+    if np.intersect1d(i_tr, i_va).size:
+        raise ValueError("fuga: hay fechas en train y en val a la vez")
+    if len(i_tr) + len(i_va) != len(meses_all):
+        raise ValueError("la particion no cubre todas las fechas")
+    OMITIDAS_DEL_VAL[:] = omitidas
+    return i_tr, i_va
+
+
+def _composicion(meses: np.ndarray) -> dict:
+    """Cuantas fechas de cada fase hay en un bloque. Va al JSON de salida."""
+    return {nombre: int(np.isin(meses, ms).sum()) for nombre, ms in FASES}
 
 
 def _pid_balanceado(stack, seq_length=1, dates_millis=None, **kw):
@@ -208,6 +271,18 @@ def _pid_balanceado(stack, seq_length=1, dates_millis=None, **kw):
     if MESES is None or not (BALANCEAR or ESTRATIFICADO or BALANCEAR_VAL):
         return out
 
+    # Todo lo que sigue supone que el frame k de X corresponde a la fecha k de
+    # MESES: mismo orden cronologico y una fecha por frame. Con SEQ_LENGTH > 1
+    # process_indices_data devuelve ventanas y esa correspondencia se rompe,
+    # asi que cada frame quedaria etiquetado con el mes de otra fecha y todo el
+    # balanceo seria falso sin dar ningun error. Se comprueba, no se supone.
+    if len(Xtr) + len(Xva) != len(MESES):
+        raise ValueError(
+            "desalineacion entre frames y fechas: %d + %d frames contra %d "
+            "meses. Con SEQ_LENGTH=%s la correspondencia uno a uno no vale y "
+            "el balanceo por fase etiquetaria mal cada frame."
+            % (len(Xtr), len(Xva), len(MESES), seq_length))
+
     if ESTRATIFICADO:
         # Se recompone el orden original -el cronologico- y se reparte por
         # fase. El scaler sigue siendo el que ajusto la particion cronologica;
@@ -215,7 +290,7 @@ def _pid_balanceado(stack, seq_length=1, dates_millis=None, **kw):
         # pero conviene declararlo.
         X = np.concatenate([Xtr, Xva], axis=0)
         Y = (np.concatenate([Ytr, Yva], axis=0) if Ytr is not None else None)
-        i_tr, i_va = _split_estratificado(MESES[:len(X)])
+        i_tr, i_va = _split_estratificado(MESES)
         Xtr, Xva = X[i_tr], X[i_va]
         Ytr = Y[i_tr] if Y is not None else None
         Yva = Y[i_va] if Y is not None else None
@@ -224,16 +299,22 @@ def _pid_balanceado(stack, seq_length=1, dates_millis=None, **kw):
         meses_tr = MESES[:len(Xtr)]
         meses_va = MESES[len(Xtr):len(Xtr) + len(Xva)]
 
+    SPLIT["train"] = _composicion(meses_tr)
+    SPLIT["val"] = _composicion(meses_va)
+    SPLIT["omitidas_del_val"] = list(OMITIDAS_DEL_VAL)
+
     if BALANCEAR:
-        idx = _indices_balanceados(meses_tr)
+        idx = _indices_balanceados(meses_tr, REPORTE_TRAIN)
         Xtr = Xtr[idx]
         Ytr = Ytr[idx] if Ytr is not None else Ytr
+        SPLIT["train_balanceado"] = _composicion(meses_tr[idx])
     if BALANCEAR_VAL:
         # Sin esto el criterio de parada pesa las fases como vengan en el
         # bloque de validacion, y ese reparto es justo el confound.
-        idx = _indices_balanceados(meses_va)
+        idx = _indices_balanceados(meses_va, REPORTE_VAL)
         Xva = Xva[idx]
         Yva = Yva[idx] if Yva is not None else Yva
+        SPLIT["val_balanceado"] = _composicion(meses_va[idx])
     return (Xtr, Ytr), (Xva, Yva), img, scaler
 
 
@@ -299,13 +380,35 @@ def main() -> int:
                 vl.update(json.load(f))
     with open(os.path.join(a.destino, "val_losses.json"), "w") as f:
         json.dump(vl, f, indent=2)
+    # El brazo entero queda descrito aqui: que split, que se sobremuestreo, y
+    # con cuantas fechas de cada fase quedo cada bloque. Sin esto, comparar dos
+    # carpetas de checkpoints obliga a acordarse de con que banderas se corrio
+    # cada una, que es justo como se colo el sesgo del split cronologico.
     with open(os.path.join(a.destino, "balanceo.json"), "w",
               encoding="utf-8") as f:
-        json.dump(REPORTE, f, indent=2, ensure_ascii=False)
-    print("\n  balanceo aplicado:")
-    for k, v in REPORTE.items():
-        print("    %-24s %3d -> %3d  (x%.2f)"
-              % (k, v["originales"], v["tras_balanceo"], v["factor"]))
+        json.dump(dict(split=("estratificado" if ESTRATIFICADO
+                              else "cronologico"),
+                       train_balanceado=not a.sin_train,
+                       val_balanceado=BALANCEAR_VAL,
+                       semillas=sorted(int(k) for k in vl),
+                       composicion=SPLIT,
+                       factores_train=REPORTE_TRAIN,
+                       factores_val=REPORTE_VAL),
+                  f, indent=2, ensure_ascii=False)
+    for etiqueta, rep in (("train", REPORTE_TRAIN), ("val", REPORTE_VAL)):
+        if not rep:
+            continue
+        print("\n  balanceo aplicado al " + etiqueta + ":")
+        for k, v in rep.items():
+            print("    %-24s %3d -> %3d  (x%.2f)"
+                  % (k, v["originales"], v["tras_balanceo"], v["factor"]))
+    print("\n  composicion del split:")
+    for bloque in ("train", "val"):
+        if bloque in SPLIT:
+            print("    %-6s %s" % (bloque, SPLIT[bloque]))
+    if SPLIT.get("omitidas_del_val"):
+        print("    fases sin val por tener pocas fechas: "
+              + str(SPLIT["omitidas_del_val"]))
     print("  val_losses.json con " + str(len(vl)) + " semillas")
     return 0
 

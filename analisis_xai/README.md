@@ -652,22 +652,123 @@ sobremuestreo también del val para que el criterio de parada pese igual las
 cinco. Más un brazo de control con el mismo split y el mismo criterio pero sin
 sobremuestrear el entrenamiento, de modo que la única diferencia sea ésa.
 
+### 9.1 El estimador colgaba de qué fechas se eligieran
+
+Las cuatro cifras que había en este lugar salían de `datt_por_fase.py`, que
+igualaba el número de fechas entre fases tomando una submuestra fija con
+`np.linspace`. Ese detalle resultó no ser un detalle.
+
+Igualar hacía falta para el **suelo de ruido**, que se estima de la cola
+negativa de $D_{att}$ y se encoge cuando hay más fechas. Para el **MSE** no
+hacía ninguna falta: una media es una media con 8 fechas o con 90, sólo cambia
+su varianza. Y ahí la submuestra fija hizo daño.
+
 ```
-brazo                    dormancia  postcosecha  suelo dormancia
-cronologico  base           2.67        1.60          7.02
-cronologico  bal            2.87        1.71          6.75
-estratificado ctrl          2.06        1.48          3.48
-estratificado bal           2.46        1.54          4.93
+maduracion, brazo base
+  8 fechas (linspace)   MSE 0.1094    razon dormancia/maduracion  2.67
+  9 fechas (linspace)   MSE 0.1487    razon                       1.87
+  90 fechas (todas)     MSE 0.1077    razon                       2.58
 ```
 
-La comparación limpia es el par estratificado: dormancia pasa de 2.06 a 2.46 y
-su suelo de 3.48 a 4.93. Balancear la exposición sigue sin cerrar la brecha.
+Una sola escena de maduración con MSE 0.4111, contra una mediana de 0.10, entra
+en el muestreo de 9 y no en el de 8. La cifra publicada se movía un 30% por un
+día. Sorteando la submuestra 2000 veces, la elección fija cae en el **percentil
+1 a 4 en los cuatro brazos**: sesgaba a la baja de forma sistemática, porque
+`linspace` siempre incluye la primera y la última fecha de la fase, que son las
+de transición y las de mayor error.
 
-Pero el arreglo **redujo el efecto**: dormancia es 2.1 veces peor que
-maduración, no 2.7, y su suelo de ruido 3.5 veces mayor, no 7. Parte de lo que
-se había reportado era la partición cronológica. El resto se mantiene.
+Arreglado: el MSE usa todas las fechas y lleva intervalo por bootstrap; el
+suelo sigue igualando fechas pero promediando 200 sorteos al azar. Las dos
+cantidades se calculan del tensor de error por fecha de `errores_por_fecha.py`,
+y `test_errores.py` comprueba que ese tensor reproduce la pasada por GPU al
+0.00%.
 
-**Dos hallazgos del brazo base que este control tumba.**
+### 9.2 Las cifras, ya con intervalo
+
+```
+brazo                  razon MSE dormancia/maduracion   IC95        razon del suelo
+cronologico  base                 2.58              [2.04, 3.16]        9.13
+cronologico  bal                  2.27              [1.69, 2.90]        6.12
+estratificado ctrl                1.54              [1.13, 2.00]        2.24
+estratificado bal                 1.89              [1.42, 2.43]        3.96
+```
+
+La comparación limpia es el par estratificado, que sólo difiere en el
+sobremuestreo del train: dormancia pasa de 1.54 a 1.89 y su suelo de 2.24 a
+3.96. Balancear la exposición sigue sin cerrar la brecha; la ensancha un poco.
+
+El efecto es **bastante menor de lo reportado en cualquier versión anterior**.
+En el brazo limpio dormancia es 1.5 veces peor que maduración, no 2.1 ni 2.7, y
+su suelo de ruido 2.2 veces mayor, no 3.5 ni 7. El límite inferior del
+intervalo sigue por encima de 1 en los cuatro brazos, así que el efecto existe;
+su tamaño era el inflado.
+
+### 9.3 Cuatro controles que el efecto podía no sobrevivir
+
+`control_fases.py` somete la razón a cuatro pruebas que hasta aquí no se habían
+corrido. Ninguna de las cuatro lo tumba, y una lo refuerza.
+
+```
+                            base      bal     ctrl     bal2
+placebo de etiquetas      0.0005   0.0005   0.0005   0.0005
+calendario rotado         0.0833   0.0833   0.0833   0.0833
+suelo con n igualado      0.0000   0.0000   0.0000   0.0000
+razon ya normalizada        2.47     2.38     1.89     2.19
+```
+
+**Placebo de etiquetas.** Se reparten las fechas al azar en grupos de los
+mismos tamaños, 2000 veces. La razón nula tiene mediana 0.99 e IC95 de 0.65 a
+1.48; la observada queda fuera en los cuatro brazos. El salto no es el tamaño
+del grupo.
+
+**Calendario rotado.** Se gira el ciclo fenológico de 1 a 11 meses, con lo que
+los grupos conservan tamaño, recurrencia anual y contigüidad y sólo dejan de
+coincidir con el ciclo de la vid. El calendario real da la razón más alta de
+las doce en los cuatro brazos (base: 2.58 contra un máximo rotado de 2.05). El
+p de 0.0833 es el mínimo alcanzable con doce rotaciones, o sea la evidencia
+máxima que este control puede dar.
+
+**Suelo de ruido con el mismo número de fechas.** El control decisivo del
+suelo: se estima el de maduración con las mismas 9 fechas que tiene dormancia,
+2000 veces. Nunca alcanza el de dormancia, en ningún brazo. La diferencia de
+suelos no es un artefacto de tamaño de muestra, que era la explicación más
+económica y la que quedaba viva.
+
+**Dificultad de la escena.** Un MSE alto podía significar "el modelo falla ahí"
+o "esa escena es más heterogénea y cualquiera fallaría" — plausible en un viñedo
+invernal con suelo desnudo y sombras largas. La referencia es el predictor
+trivial que devuelve la media espacial del canal tapado, cuyo error es la
+varianza espacial. Resultado: las escenas de dormancia son **menos** heterogéneas
+que las de maduración (0.690 contra 0.970), así que normalizar no baja la razón
+sino que la sube. Descartado.
+
+### 9.4 Qué predice el error de una fecha
+
+Con 186 fechas en vez de una tabla de cinco filas, las explicaciones que
+compiten se pueden meter en el mismo modelo. Coeficientes estandarizados, brazo
+base:
+
+```
+exposicion (log fechas de train de su fase)   -0.378
+NDVI de la fecha                              +0.436
+dificultad (log varianza espacial)            -0.089     R2 0.280
+```
+
+La correlación entre exposición y NDVI es +0.291, baja, así que los dos
+coeficientes son separables aquí.
+
+El resultado incómodo está dentro de cada fase, donde la exposición es
+constante por construcción: la correlación entre error y NDVI es **positiva en
+las cinco fases** (+0.23 a +0.62, significativa en tres). Más verde, más error.
+Entre fases el signo se invierte, porque dormancia tiene poco NDVI y mucho
+error. Los dos niveles dicen cosas opuestas, y la lectura "sin hoja los índices
+degeneran y el modelo se pierde" no sobrevive a la versión intra-fase.
+
+Lo que queda, dicho sin adornos: el error depende de la fase de forma
+sistemática y robusta, y **no se sabe por qué**. Exposición, biología y
+dificultad de la escena quedan las tres descartadas o insuficientes.
+
+### 9.5 Dos hallazgos del brazo base que este control tumba
 
 La arista `ARI <- KNDVI` daba $D_{att}$ = −6.0 veces el ruido en brotación, o
 sea que cortarla mejoraba la reconstrucción, y se propuso como ruta mal
@@ -676,17 +777,37 @@ aparece con la partición cronológica original, así que no es un defecto del
 modelo. Se retira.
 
 La prueba contra el ICP no encuentra apoyo en **ninguno de los cuatro brazos**,
-y en tres de ellos las invariantes aguantan menos fases que las de régimen
-(p entre 0.4134 y 0.9176). El desacople entre la medida del dato y la del
-modelo es robusto.
+y en tres de ellos las invariantes aguantan menos fases que las de régimen. Con
+19 aristas y 7 invariantes hay $\binom{19}{7} = 50388$ repartos posibles, así
+que el p se enumera exacto en vez de aproximarse:
+
+```
+brazo   p exacto   p minimo alcanzable
+base     0.4146          0.0001
+bal      0.8577          0.0050
+ctrl     0.7477          0.0017
+bal2     0.8723          0.0014
+```
+
+La segunda columna es la que faltaba. Sin ella, un p alto no distingue "no hay
+señal" de "el test no podía detectarla". Aquí el test **podía** llegar a 0.0001
+y llegó a 0.41: es ausencia de señal, no falta de potencia. El desacople entre
+la medida del dato y la del modelo es un resultado, no un empate.
 
 **Lo que queda en pie de esta sección.** La dependencia interna del modelo
-varía con la fase de forma sistemática y robusta al balanceo, con la estructura
-concentrada en la estación de crecimiento. Eso no equivale a que el modelo
-capture la biología: `reinferir_por_fase.py` ya había medido que evaluado en una
-fase el modelo no expone la estructura de esa fase (2 aciertos de 5, azar 1 de
-5). Lo compatible es más chico: la calidad de reconstrucción depende de la fase,
-la estructura relacional no identifica la fase.
+varía con la fase de forma sistemática, con la estructura concentrada en la
+estación de crecimiento. El efecto sobrevive a cuatro controles —placebo de
+etiquetas, calendario rotado, suelo con `n` igualado, dificultad de escena— en
+los cuatro brazos de entrenamiento, y su tamaño es de 1.5 a 2.6 veces según el
+brazo, con el límite inferior del IC95 siempre por encima de 1.
+
+Eso no equivale a que el modelo capture la biología: `reinferir_por_fase.py` ya
+había medido que evaluado en una fase el modelo no expone la estructura de esa
+fase (2 aciertos de 5, azar 1 de 5), y la correlación intra-fase entre error y
+NDVI sale positiva, al revés de lo que pediría la lectura biológica. Lo
+compatible es más chico: la calidad de reconstrucción depende de la fase, la
+estructura relacional no identifica la fase, y la causa de la dependencia queda
+sin identificar tras descartar exposición, biología y dificultad de escena.
 
 ---
 
@@ -751,12 +872,25 @@ el mecanismo de detección es reutilizable.
 | Nulo del ICP por arista sin agrupar | Control sintético con efecto enorme daba q = 0.995 | Resolución mínima 1/n; se agrupó entre aristas |
 | Control de distancia a la inicialización | Todos los bloques en 1.42 = raíz de 2 | Comparaba dos sorteos independientes; no distingue nada |
 | "Igualé el tamaño de muestra" | Se midió el MSE base por fase | Sólo se había igualado la evaluación, no el entrenamiento |
-| El control de exposición usaba un val cronológico | 31 de 38 fechas de val eran crecimiento y maduración | El criterio de parada penalizaba justo lo que el control quería medir; el efecto real es 2.1x y no 2.7x |
+| El control de exposición usaba un val cronológico | 31 de 38 fechas de val eran crecimiento y maduración | El criterio de parada penalizaba justo lo que el control quería medir |
+| El arreglo del split podía meter la misma fecha en train y en val | Se escribió el test antes de confiar en la función | Sólo se dispara con fases de 1 o 2 fechas; no llegó a afectar a ninguna cifra |
+| El MSE por fase colgaba de una submuestra fija de fechas | Cambiar 8 fechas por 9 movía la razón de 2.67 a 1.87 | Una escena con MSE 0.41 entre 90; la elección fija caía en el percentil 1 a 4 |
+| Igualar fechas se aplicaba también donde no hacía falta | Una media no necesita igualarse, sólo su varianza cambia | El efecto real es 1.5x en el brazo limpio, no 2.1x ni 2.7x |
+| Se reportaban razones entre fases sin ningún intervalo | Cinco puntos sin incertidumbre admiten casi cualquier relato | Con IC95 el efecto sigue vivo pero es la mitad de grande |
+| Nunca se había probado un placebo de fases | Se corrieron dos, etiquetas al azar y calendario rotado | Los pasa los dos; era el control que faltaba para llamarlo resultado |
 
 El patrón que los une: **cuando un estadístico da el mismo valor en fuentes que
 deberían diferir, o un p pegado a un extremo, casi siempre es la métrica y no el
 dato.** Y el remedio que más veces funcionó fue construir un control sintético
 con respuesta conocida antes de correr sobre datos reales.
+
+Los seis últimos añaden un patrón propio: **un número sin intervalo, sin
+placebo y sin test de su propio estimador no es un resultado todavía.** Cuatro
+de las seis filas no se detectaron mirando salidas raras sino escribiendo el
+test que la función debía pasar. Las pruebas están en `pruebas/`:
+`test_particion.py` con 22 casos sobre el reparto por fase y el sobremuestreo,
+y `test_errores.py` con 8 que comprueban que el camino de cálculo nuevo
+reproduce el viejo hasta 1e-9.
 
 ---
 
@@ -784,14 +918,33 @@ con respuesta conocida antes de correr sobre datos reales.
 | `atencion_por_grupos.py` | Partición intra/inter grupo, estabilidad por mitades, resolución de grupo |
 | `signo_por_fase.py` | El signo intra-familia contra `\|pc\|` estimado dentro de cada fase |
 | `grafo_datt.py` | Figura del grafo de las 19 aristas |
-| `datt_por_fase.py` | $D_{att}$ restringido a cada fase, con fechas y parches igualados y MSE base |
-| `entrenar_balanceado.py` | Reentrenamiento con sobremuestreo por fase, control del confound de exposición |
+| `datt_por_fase.py` | $D_{att}$ por fase: MSE con todas las fechas e intervalo, suelo de ruido igualando fechas por sorteo |
+| `entrenar_balanceado.py` | Reentrenamiento con sobremuestreo por fase, partición estratificada, control del confound de exposición |
+| `errores_por_fecha.py` | Tensor `E[semilla, fecha, canal, corte]` en una pasada por GPU; de él salen todas las agrupaciones sin volver a evaluar |
+| `control_fases.py` | Los cuatro controles del efecto por fase: bootstrap, placebo de etiquetas, calendario rotado, suelo con `n` igualado, dificultad de escena, regresión por fecha, ICP con permutación exacta |
 
 ### Pruebas (`pruebas/`)
 
 `test_aridad.py` valida la descomposición con controles sintéticos:
 recomposición exacta, ortogonalidad, matriz unaria pura, matriz de par pura, e
 ICC con señal contra ruido.
+
+`test_particion.py`, 22 casos sobre el reparto por fase y el sobremuestreo. Los
+que importan: que `FASES` sea una partición de los doce meses (un mes fuera
+haría desaparecer sus frames del entrenamiento sin ningún aviso), que train y
+val nunca compartan una fecha, que cada fase llegue al val, que el
+sobremuestreo no pierda ni invente índices, y que una desalineación entre
+frames y fechas —la que produciría `SEQ_LENGTH > 1`— levante error en vez de
+etiquetar mal cada frame. Corre sin GPU y sin datos, sobre un calendario
+sintético **ordenado en el tiempo**: con las fechas barajadas los tests pasan
+sin probar nada, porque el sesgo que se está midiendo nace del orden.
+
+`test_errores.py`, 8 casos que atan el camino de cálculo nuevo al viejo:
+`errores_por_frame` promediado da `error_por_canal` hasta 4e-9 con y sin arista
+cortada, el parche `k` viene de la fecha `k // 16`, y el MSE por fase reproduce
+el `DATT_POR_FASE.json` publicado con **0.00%** de desviación. Sin este último
+los controles de `control_fases.py` estarían midiendo otra cosa que las cifras
+del texto.
 
 ### Resultados (`resultados/`)
 

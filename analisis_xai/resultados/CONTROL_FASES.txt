@@ -1,0 +1,322 @@
+==================================================================================
+ EL EFECTO POR FASE, CONTRA CUATRO CONTROLES
+
+ La afirmacion en prueba: el modelo reconstruye peor en dormancia y
+ postcosecha, y el suelo de ruido de Datt sube ahi, por algo que no
+ es el numero de fechas de entrenamiento.
+==================================================================================
+
+==================================================================================
+ BRAZO BASE   (15 semillas, 186 fechas)
+==================================================================================
+
+  MSE POR FASE, CON INTERVALOS AL 95%
+  fase                       n      MSE       IC sobre fechas     IC sobre semillas
+  dormancia (may-ago)        9   0.2779      [0.2232, 0.3250]      [0.2611, 0.2981]
+  brotacion (sep-oct)       22   0.1393      [0.1032, 0.1774]      [0.1354, 0.1437]
+  crecimiento (nov-dic)     57   0.1060      [0.0908, 0.1219]      [0.1031, 0.1090]
+  maduracion (ene-mar)      90   0.1077      [0.0969, 0.1196]      [0.1036, 0.1119]
+  postcosecha (abr)          8   0.1747      [0.1308, 0.2265]      [0.1677, 0.1825]
+
+  El intervalo sobre fechas es el que manda: con 7 u 8
+  escenas puede ser tan ancho que la fase no diga nada.
+
+  RAZON dormancia / maduracion:  2.58   IC95 [2.04, 3.16]
+    fraccion del bootstrap que no supera 1: 0.0000
+
+  LA MISMA RAZON IGUALANDO FECHAS (n = 9 cada una), sorteada 2000 veces
+    mediana 2.63   IC95 [1.86, 3.55]
+    la submuestra fija que publica datt_por_fase da 1.87, percentil 3
+    Un percentil cerca de 50 dice que aquella eleccion no sesgaba;
+    cerca de 0 o de 100, que el numero publicado dependia de ella.
+
+  PLACEBO DE ETIQUETAS (grupos al azar del mismo tamano)
+    observado 2.58   nulo mediana 0.99  IC95 [0.64, 1.48]
+    p = 0.0005
+    Contesta: un grupo cualquiera de ese tamano da el mismo
+    salto? Si el p es alto, el salto es del tamano del grupo.
+
+  PLACEBO DE CALENDARIO ROTADO (11 giros del ciclo)
+    observado 2.58   maximo de las rotadas 2.05   p = 0.0833
+    rotadas: 2.02 1.28 0.82 0.42 0.36 0.41 0.64 0.88 1.15 1.40 2.05
+    El p minimo alcanzable con doce rotaciones es 0.0833.
+    Contesta: es la fenologia de la vid, o cualquier tramo
+    del ano con esa misma forma?
+
+  SUELO DE RUIDO CON EL MISMO NUMERO DE FECHAS (n = 9)
+    dormancia              mediana 9.411e-03  IC95 [6.456e-03, 1.371e-02]  (bootstrap, usa todas sus fechas)
+    maduracion             mediana 1.014e-03  IC95 [5.677e-04, 4.223e-03]
+    razon de medianas 9.28   p = 0.0000
+    p = con cuanta frecuencia maduracion, estimada con las mismas
+    9 fechas, alcanza el suelo de dormancia.
+
+  DIFICULTAD DE LA ESCENA (contra el predictor trivial)
+    varianza espacial media: dormancia 0.690, maduracion 0.970  (razon 0.71)
+    razon de MSE cruda        2.58
+    razon ya normalizada      2.47   IC95 [0.94, 7.62]  p = 0.0630
+    la normalizacion cierra el 7% de la brecha
+    Si la razon normalizada baja a 1, lo que se medía era
+    la heterogeneidad del invierno y no el modelo.
+
+  QUE PREDICE EL ERROR DE UNA FECHA, 186 FECHAS
+    coeficientes estandarizados en un modelo con los tres:
+      exposicion (log fechas de train de su fase) -0.378
+      NDVI de la fecha                            +0.436
+      dificultad (log varianza espacial)          -0.089
+    R2 0.280
+    rho de Spearman por separado: exposicion -0.203, NDVI +0.372, dificultad +0.026
+    correlacion entre exposicion y NDVI: +0.291
+    Intra-fase (exposicion constante por construccion), rho MSE vs NDVI:
+      dormancia (may-ago)      n= 9  rho +0.333  p 0.3807
+      brotacion (sep-oct)      n=22  rho +0.619  p 0.0021
+      crecimiento (nov-dic)    n=57  rho +0.431  p 0.0008
+      maduracion (ene-mar)     n=90  rho +0.233  p 0.0272
+      postcosecha (abr)        n= 8  rho +0.310  p 0.4556
+
+  PERSISTENCIA DE Datt CONTRA LAS ETIQUETAS DEL ICP
+    7 invariantes y 12 de regimen, 50388 repartos posibles
+    conteo de fases sobre 3x: p exacto 0.4146  (minimo alcanzable 0.0001)
+    mediana de Datt/ruido:    p exacto 0.6668  (minimo alcanzable 0.0000)
+    El minimo alcanzable dice si el test podia detectar algo.
+    Si es pequeno y el p sale alto, no hay senal; si el minimo
+    ya es grande, el test no tenia con que.
+
+==================================================================================
+ BRAZO BAL   (15 semillas, 186 fechas)
+==================================================================================
+
+  MSE POR FASE, CON INTERVALOS AL 95%
+  fase                       n      MSE       IC sobre fechas     IC sobre semillas
+  dormancia (may-ago)        9   0.7043      [0.5274, 0.9025]      [0.6950, 0.7131]
+  brotacion (sep-oct)       22   0.3090      [0.2300, 0.3985]      [0.3053, 0.3127]
+  crecimiento (nov-dic)     57   0.2563      [0.2268, 0.2862]      [0.2533, 0.2593]
+  maduracion (ene-mar)      90   0.3102      [0.2887, 0.3323]      [0.3063, 0.3135]
+  postcosecha (abr)          8   0.4474      [0.3671, 0.5142]      [0.4432, 0.4509]
+
+  El intervalo sobre fechas es el que manda: con 7 u 8
+  escenas puede ser tan ancho que la fase no diga nada.
+
+  RAZON dormancia / maduracion:  2.27   IC95 [1.69, 2.90]
+    fraccion del bootstrap que no supera 1: 0.0000
+
+  LA MISMA RAZON IGUALANDO FECHAS (n = 9 cada una), sorteada 2000 veces
+    mediana 2.28   IC95 [1.86, 2.87]
+    la submuestra fija que publica datt_por_fase da 1.81, percentil 1
+    Un percentil cerca de 50 dice que aquella eleccion no sesgaba;
+    cerca de 0 o de 100, que el numero publicado dependia de ella.
+
+  PLACEBO DE ETIQUETAS (grupos al azar del mismo tamano)
+    observado 2.27   nulo mediana 0.98  IC95 [0.69, 1.41]
+    p = 0.0005
+    Contesta: un grupo cualquiera de ese tamano da el mismo
+    salto? Si el p es alto, el salto es del tamano del grupo.
+
+  PLACEBO DE CALENDARIO ROTADO (11 giros del ciclo)
+    observado 2.27   maximo de las rotadas 1.85   p = 0.0833
+    rotadas: 1.84 1.14 0.75 0.40 0.35 0.44 0.76 1.13 1.35 1.43 1.85
+    El p minimo alcanzable con doce rotaciones es 0.0833.
+    Contesta: es la fenologia de la vid, o cualquier tramo
+    del ano con esa misma forma?
+
+  SUELO DE RUIDO CON EL MISMO NUMERO DE FECHAS (n = 9)
+    dormancia              mediana 2.043e-02  IC95 [1.321e-02, 3.159e-02]  (bootstrap, usa todas sus fechas)
+    maduracion             mediana 3.158e-03  IC95 [2.103e-03, 6.395e-03]
+    razon de medianas 6.47   p = 0.0000
+    p = con cuanta frecuencia maduracion, estimada con las mismas
+    9 fechas, alcanza el suelo de dormancia.
+
+  DIFICULTAD DE LA ESCENA (contra el predictor trivial)
+    varianza espacial media: dormancia 0.690, maduracion 0.970  (razon 0.71)
+    razon de MSE cruda        2.27
+    razon ya normalizada      2.38   IC95 [1.06, 5.95]  p = 0.0515
+    la normalizacion cierra el -9% de la brecha
+    Si la razon normalizada baja a 1, lo que se medía era
+    la heterogeneidad del invierno y no el modelo.
+
+  QUE PREDICE EL ERROR DE UNA FECHA, 186 FECHAS
+    coeficientes estandarizados en un modelo con los tres:
+      exposicion (log fechas de train de su fase) -0.350
+      NDVI de la fecha                            +0.326
+      dificultad (log varianza espacial)          +0.339
+    R2 0.380
+    rho de Spearman por separado: exposicion -0.030, NDVI +0.496, dificultad +0.450
+    correlacion entre exposicion y NDVI: +0.291
+    Intra-fase (exposicion constante por construccion), rho MSE vs NDVI:
+      dormancia (may-ago)      n= 9  rho +0.567  p 0.1116
+      brotacion (sep-oct)      n=22  rho +0.685  p 0.0004
+      crecimiento (nov-dic)    n=57  rho +0.549  p 0.0000
+      maduracion (ene-mar)     n=90  rho +0.137  p 0.1976
+      postcosecha (abr)        n= 8  rho +0.167  p 0.6932
+
+  PERSISTENCIA DE Datt CONTRA LAS ETIQUETAS DEL ICP
+    7 invariantes y 12 de regimen, 50388 repartos posibles
+    conteo de fases sobre 3x: p exacto 0.8577  (minimo alcanzable 0.0050)
+    mediana de Datt/ruido:    p exacto 0.9150  (minimo alcanzable 0.0000)
+    El minimo alcanzable dice si el test podia detectar algo.
+    Si es pequeno y el p sale alto, no hay senal; si el minimo
+    ya es grande, el test no tenia con que.
+
+==================================================================================
+ BRAZO CTRL   (15 semillas, 186 fechas)
+==================================================================================
+
+  MSE POR FASE, CON INTERVALOS AL 95%
+  fase                       n      MSE       IC sobre fechas     IC sobre semillas
+  dormancia (may-ago)        9   0.7624      [0.5534, 0.9822]      [0.7507, 0.7752]
+  brotacion (sep-oct)       22   0.4574      [0.3363, 0.5952]      [0.4419, 0.4762]
+  crecimiento (nov-dic)     57   0.4113      [0.3759, 0.4497]      [0.3976, 0.4262]
+  maduracion (ene-mar)      90   0.4962      [0.4663, 0.5276]      [0.4802, 0.5143]
+  postcosecha (abr)          8   0.5812      [0.4963, 0.6707]      [0.5674, 0.5957]
+
+  El intervalo sobre fechas es el que manda: con 7 u 8
+  escenas puede ser tan ancho que la fase no diga nada.
+
+  RAZON dormancia / maduracion:  1.54   IC95 [1.13, 2.00]
+    fraccion del bootstrap que no supera 1: 0.0050
+
+  LA MISMA RAZON IGUALANDO FECHAS (n = 9 cada una), sorteada 2000 veces
+    mediana 1.55   IC95 [1.28, 1.86]
+    la submuestra fija que publica datt_por_fase da 1.31, percentil 4
+    Un percentil cerca de 50 dice que aquella eleccion no sesgaba;
+    cerca de 0 o de 100, que el numero publicado dependia de ella.
+
+  PLACEBO DE ETIQUETAS (grupos al azar del mismo tamano)
+    observado 1.54   nulo mediana 0.99  IC95 [0.76, 1.32]
+    p = 0.0005
+    Contesta: un grupo cualquiera de ese tamano da el mismo
+    salto? Si el p es alto, el salto es del tamano del grupo.
+
+  PLACEBO DE CALENDARIO ROTADO (11 giros del ciclo)
+    observado 1.54   maximo de las rotadas 1.39   p = 0.0833
+    rotadas: 1.39 1.05 0.82 0.57 0.53 0.63 0.92 1.18 1.26 1.21 1.36
+    El p minimo alcanzable con doce rotaciones es 0.0833.
+    Contesta: es la fenologia de la vid, o cualquier tramo
+    del ano con esa misma forma?
+
+  SUELO DE RUIDO CON EL MISMO NUMERO DE FECHAS (n = 9)
+    dormancia              mediana 1.737e-02  IC95 [8.706e-03, 3.303e-02]  (bootstrap, usa todas sus fechas)
+    maduracion             mediana 7.991e-03  IC95 [5.399e-03, 1.117e-02]
+    razon de medianas 2.17   p = 0.0000
+    p = con cuanta frecuencia maduracion, estimada con las mismas
+    9 fechas, alcanza el suelo de dormancia.
+
+  DIFICULTAD DE LA ESCENA (contra el predictor trivial)
+    varianza espacial media: dormancia 0.690, maduracion 0.970  (razon 0.71)
+    razon de MSE cruda        1.54
+    razon ya normalizada      1.89   IC95 [0.90, 4.00]  p = 0.0485
+    la normalizacion cierra el -66% de la brecha
+    Si la razon normalizada baja a 1, lo que se medía era
+    la heterogeneidad del invierno y no el modelo.
+
+  QUE PREDICE EL ERROR DE UNA FECHA, 186 FECHAS
+    coeficientes estandarizados en un modelo con los tres:
+      exposicion (log fechas de train de su fase) -0.293
+      NDVI de la fecha                            +0.239
+      dificultad (log varianza espacial)          +0.673
+    R2 0.655
+    rho de Spearman por separado: exposicion +0.112, NDVI +0.553, dificultad +0.759
+    correlacion entre exposicion y NDVI: +0.291
+    Intra-fase (exposicion constante por construccion), rho MSE vs NDVI:
+      dormancia (may-ago)      n= 9  rho +0.667  p 0.0499
+      brotacion (sep-oct)      n=22  rho +0.741  p 0.0001
+      crecimiento (nov-dic)    n=57  rho +0.662  p 0.0000
+      maduracion (ene-mar)     n=90  rho +0.060  p 0.5758
+      postcosecha (abr)        n= 8  rho +0.762  p 0.0280
+
+  PERSISTENCIA DE Datt CONTRA LAS ETIQUETAS DEL ICP
+    7 invariantes y 12 de regimen, 50388 repartos posibles
+    conteo de fases sobre 3x: p exacto 0.7477  (minimo alcanzable 0.0017)
+    mediana de Datt/ruido:    p exacto 0.8503  (minimo alcanzable 0.0000)
+    El minimo alcanzable dice si el test podia detectar algo.
+    Si es pequeno y el p sale alto, no hay senal; si el minimo
+    ya es grande, el test no tenia con que.
+
+==================================================================================
+ BRAZO BAL2   (15 semillas, 186 fechas)
+==================================================================================
+
+  MSE POR FASE, CON INTERVALOS AL 95%
+  fase                       n      MSE       IC sobre fechas     IC sobre semillas
+  dormancia (may-ago)        9   0.7334      [0.5467, 0.9166]      [0.7259, 0.7409]
+  brotacion (sep-oct)       22   0.3737      [0.2767, 0.4788]      [0.3672, 0.3791]
+  crecimiento (nov-dic)     57   0.3334      [0.3019, 0.3685]      [0.3282, 0.3382]
+  maduracion (ene-mar)      90   0.3887      [0.3641, 0.4137]      [0.3826, 0.3947]
+  postcosecha (abr)          8   0.4877      [0.4011, 0.5611]      [0.4799, 0.4961]
+
+  El intervalo sobre fechas es el que manda: con 7 u 8
+  escenas puede ser tan ancho que la fase no diga nada.
+
+  RAZON dormancia / maduracion:  1.89   IC95 [1.42, 2.43]
+    fraccion del bootstrap que no supera 1: 0.0000
+
+  LA MISMA RAZON IGUALANDO FECHAS (n = 9 cada una), sorteada 2000 veces
+    mediana 1.89   IC95 [1.57, 2.30]
+    la submuestra fija que publica datt_por_fase da 1.55, percentil 2
+    Un percentil cerca de 50 dice que aquella eleccion no sesgaba;
+    cerca de 0 o de 100, que el numero publicado dependia de ella.
+
+  PLACEBO DE ETIQUETAS (grupos al azar del mismo tamano)
+    observado 1.89   nulo mediana 0.99  IC95 [0.72, 1.34]
+    p = 0.0005
+    Contesta: un grupo cualquiera de ese tamano da el mismo
+    salto? Si el p es alto, el salto es del tamano del grupo.
+
+  PLACEBO DE CALENDARIO ROTADO (11 giros del ciclo)
+    observado 1.89   maximo de las rotadas 1.65   p = 0.0833
+    rotadas: 1.65 1.14 0.82 0.49 0.44 0.53 0.84 1.14 1.24 1.23 1.52
+    El p minimo alcanzable con doce rotaciones es 0.0833.
+    Contesta: es la fenologia de la vid, o cualquier tramo
+    del ano con esa misma forma?
+
+  SUELO DE RUIDO CON EL MISMO NUMERO DE FECHAS (n = 9)
+    dormancia              mediana 1.892e-02  IC95 [1.221e-02, 2.919e-02]  (bootstrap, usa todas sus fechas)
+    maduracion             mediana 4.493e-03  IC95 [2.877e-03, 8.252e-03]
+    razon de medianas 4.21   p = 0.0000
+    p = con cuanta frecuencia maduracion, estimada con las mismas
+    9 fechas, alcanza el suelo de dormancia.
+
+  DIFICULTAD DE LA ESCENA (contra el predictor trivial)
+    varianza espacial media: dormancia 0.690, maduracion 0.970  (razon 0.71)
+    razon de MSE cruda        1.89
+    razon ya normalizada      2.19   IC95 [0.96, 4.81]  p = 0.0415
+    la normalizacion cierra el -34% de la brecha
+    Si la razon normalizada baja a 1, lo que se medía era
+    la heterogeneidad del invierno y no el modelo.
+
+  QUE PREDICE EL ERROR DE UNA FECHA, 186 FECHAS
+    coeficientes estandarizados en un modelo con los tres:
+      exposicion (log fechas de train de su fase) -0.325
+      NDVI de la fecha                            +0.273
+      dificultad (log varianza espacial)          +0.514
+    R2 0.493
+    rho de Spearman por separado: exposicion +0.031, NDVI +0.525, dificultad +0.580
+    correlacion entre exposicion y NDVI: +0.291
+    Intra-fase (exposicion constante por construccion), rho MSE vs NDVI:
+      dormancia (may-ago)      n= 9  rho +0.650  p 0.0581
+      brotacion (sep-oct)      n=22  rho +0.721  p 0.0002
+      crecimiento (nov-dic)    n=57  rho +0.647  p 0.0000
+      maduracion (ene-mar)     n=90  rho +0.095  p 0.3741
+      postcosecha (abr)        n= 8  rho +0.405  p 0.3199
+
+  PERSISTENCIA DE Datt CONTRA LAS ETIQUETAS DEL ICP
+    7 invariantes y 12 de regimen, 50388 repartos posibles
+    conteo de fases sobre 3x: p exacto 0.8723  (minimo alcanzable 0.0014)
+    mediana de Datt/ruido:    p exacto 0.8221  (minimo alcanzable 0.0000)
+    El minimo alcanzable dice si el test podia detectar algo.
+    Si es pequeno y el p sale alto, no hay senal; si el minimo
+    ya es grande, el test no tenia con que.
+
+==================================================================================
+ LOS BRAZOS, UNO AL LADO DEL OTRO
+==================================================================================
+
+  brazo     razon            IC95  normaliz  placebo p  rotado p  suelo p   ICP p
+  base       2.58    [2.04, 3.16]      2.47     0.0005    0.0833   0.0000  0.6668
+  bal        2.27    [1.69, 2.90]      2.38     0.0005    0.0833   0.0000  0.9150
+  ctrl       1.54    [1.13, 2.00]      1.89     0.0005    0.0833   0.0000  0.8503
+  bal2       1.89    [1.42, 2.43]      2.19     0.0005    0.0833   0.0000  0.8221
+
+  Un resultado que sobrevive a los cinco controles en los
+  cuatro brazos es un resultado. Uno que solo aparece en un
+  brazo es una propiedad de ese entrenamiento.
+==================================================================================
