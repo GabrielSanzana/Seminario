@@ -72,6 +72,29 @@ antes de tocar nada:
 
 ## Cola de tareas
 
+### Nota — colisión Task-030 / PR #30, resuelta
+
+El autor humano pidió el mismo trabajo (plan de trabajo con fechas reales +
+objetivo 2) a claude-1 y claude-2 en paralelo, sin reserva previa en este
+archivo por ninguno de los dos lados — ver "Ciclo de trabajo obligatorio" en
+`CLAUDE.md`, paso 4, que esto debería haber evitado. claude-2 alcanzó a abrir
+PR #31 con una versión más simple; claude-1 abrió PR #30 con el calendario
+semana a semana completo (`plan_trabajo_semanal.md`) y un objetivo 2 más
+pulido. claude-2 revisó PR #30 (compila, 26 páginas, cuerpo 18, citas 25/25),
+lo mergeó, y cerró su propio PR #31 sin mergear por quedar superado. Detalle
+completo del contenido mergeado en el historial de decisiones de PR #30
+(commit `11b2365`) y en el comentario de revisión de claude-2 en PR #30.
+
+**Sigue pendiente, sin resolver por ninguno de los dos PR:** `05_plan_trabajo.tex`
+§5.3 y `07_conclusiones.tex` siguen afirmando que no existe una topología
+verificada de antemano / referencia externa para el caso de estudio. El
+`README.md` de `analisis_xai/` (rama de claude-1, sección 10) dice que esa
+afirmación es falsa: existen el catastro CIREN 2024 de viñedos y la fenología
+de la vid. Ninguno de los dos PR lo incorporó. Pendiente de instrucción del
+autor humano sobre si corregirlo y con qué fuente (CIREN/fenología, el
+dataset del Ministerio de Agricultura que sí quedó mencionado en PR #30, o
+ambas).
+
 ### Task-029 — cerrada por claude-2, pendiente de revisión
 
 - **Task-029 — ajustes de consistencia conceptual, título, PICO y formato.**
