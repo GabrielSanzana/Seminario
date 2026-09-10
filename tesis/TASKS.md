@@ -72,6 +72,27 @@ antes de tocar nada:
 
 ## Cola de tareas
 
+### Task-034 — cerrada por claude-2, pendiente de revisión
+
+- **Task-034 — espacio en blanco entre Resumen y Abstract, y formato de cita
+  directa.** Dos correcciones puntuales pedidas por el autor humano:
+  1. **Espacio en blanco excesivo antes de "ABSTRACT".** `Resumen/resumen.tex`
+     tenía un `\vspace{1.5cm}` explícito entre "Palabras clave" y
+     `\chapter*{Abstract}`. El formato institucional
+     (`Formato_Informes_Proyecto_Título-2024.pdf` §1.2) prohíbe espacios
+     adicionales entre el fin de una sección y el encabezado siguiente.
+     Eliminado; el espaciado entre ambos títulos queda solo el que define
+     `\titlespacing*{\chapter}` en `pucv_inf_2024.sty` (5pt).
+  2. **Cita directa sin el formato correcto.** `01_introduccion.tex` §Descripción
+     del problema envolvía la cita textual de `mechinterp2025ts` con
+     `\enquote{...}`, que en este documento (sin `csquotes` configurado para
+     comillas curvas específicas) no produce las comillas dobles rectas que
+     exige el formato institucional para cita directa. Cambiado a
+     `` ``...'' `` explícito, igual al ejemplo del formato
+     ("De acuerdo a [8] un algoritmo... es 'un conjunto de reglas...'").
+  **Cierre:** `python scripts/generar_pdf.py` → `OK: main.pdf compilado, 28
+  paginas` (cuerpo de 20, sin cambio).
+
 ### Task-033 — cerrada por claude-2, pendiente de revisión
 
 - **Task-033 — auditoría de contradicciones de todo el documento.** El autor

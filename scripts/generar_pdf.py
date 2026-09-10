@@ -53,23 +53,23 @@ def _raices_home():
 
 
 def _carpetas_tinytex_candidatas():
-    """Todas las carpetas donde podria estar el TinyTeX de este usuario.
-
-    Ademas de Path.home()/USERPROFILE, busca con glob sobre C:/Users/*: si
-    por lo que sea Path.home() no resuelve al perfil correcto en el proceso
-    que corre este script (se ha visto que difiere entre una terminal normal
-    y el depurador de VS Code en esta misma maquina, sin causa clara), el
-    glob igual encuentra la carpeta real.
-    """
     carpetas = []
     for raiz in _raices_home():
+        # Ruta estándar
         carpetas.append(raiz / "AppData" / "Roaming" / "TinyTeX" / "bin" / "windows")
+        # Ruta en la carpeta AppData/Local/Packages (Claude/Packages)
+        carpetas.append(raiz / "AppData" / "Local" / "Packages" / "Claude_pzs8sxrjxfjjc" / "LocalCache" / "Roaming" / "TinyTeX" / "bin" / "windows")
+    
     try:
         import glob as _glob
         for patron in _glob.glob(r"C:\Users\*\AppData\Roaming\TinyTeX\bin\windows"):
             carpetas.append(Path(patron))
+        # Glob extendido para instalaciones dentro de Packages
+        for patron in _glob.glob(r"C:\Users\*\AppData\Local\Packages\*\LocalCache\Roaming\TinyTeX\bin\windows"):
+            carpetas.append(Path(patron))
     except OSError:
         pass
+
     vistas = []
     for c in carpetas:
         if c not in vistas:
