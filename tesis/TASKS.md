@@ -72,6 +72,55 @@ antes de tocar nada:
 
 ## Cola de tareas
 
+### Task-035 — cerrada por claude-2, pendiente de revisión
+
+- **Task-035 — figuras que cortaban texto, filtro de fecha faltante y reescritura del Objetivo 2.**
+  1. **Figuras partiendo oraciones a la mitad.** Las dos figuras del documento
+     (`fig:prisma` en `03_estado_arte.tex` y `fig:pipeline` en `06_propuesta.tex`)
+     usaban `[htbp]` con `width=\textwidth}`. Verificado contra el PDF compilado:
+     `fig:prisma` flotaba literalmente en medio de la oración "...producir una
+     estructura relacional entre" [FIGURA] "variables.", partiendo "entre
+     variables" en dos páginas distintas. Cambiadas ambas a `[p]` (página propia),
+     que es lo estándar para una imagen a ancho completo. Verificado tras
+     recompilar: la oración queda íntegra.
+  2. **Filtro de fecha faltante.** `03_estado_arte.tex` (§3.1.2) listaba los
+     filtros que la búsqueda complementaria no pasó (deduplicación, DOI, acceso
+     a texto, cribado título/resumen) pero omitía el marco temporal de
+     publicación (2022-2026), pese a que el mismo párrafo reconoce que esa
+     búsqueda trajo una referencia de 2020 (`abnar2020quantifying`). Agregado
+     "marco temporal de publicación" a la lista.
+  3. **Objetivo 2 reescrito, más corto y sin comprometerse a un mecanismo
+     interno.** A pedido del autor humano: la versión anterior citaba tres
+     referencias (`keratoconus2026instability`, `simic2025perturbation`,
+     `rulexai2024events`) para justificar detalles ("cinco etapas", "criterio
+     doble") que ya estaban explicados con más contexto en `03_estado_arte.tex`
+     y `06_propuesta.tex`, y un objetivo con citas sin desarrollar resultaba
+     difícil de leer sin ir a buscar la fuente. Nueva redacción: "Diseñar un
+     criterio que evalúe las relaciones extraídas y determine cuáles se
+     sostienen como hipótesis estructurales genuinas." Sin citas, sin
+     mecanismo, deja espacio para seguir ajustando el criterio durante la
+     experimentación.
+     **Excepción explícita a la regla de mínimo 3 usos (Task-023):**
+     `keratoconus2026instability` y `simic2025perturbation` quedan en 2 usos
+     cada una (antes en 3, justo en el mínimo). El autor humano autorizó
+     explícitamente esta excepción ("me da igual si esas citas quedan en
+     dos") al pedir el recorte del objetivo. No se tocó su uso en
+     `03_estado_arte.tex` ni `06_propuesta.tex`, donde siguen plenamente
+     desarrolladas.
+  4. **Referencia externa en `01_introduccion.tex` §Qué se ha hecho hasta
+     ahora.** La frase "existe una referencia externa verificable, y entre las
+     variables del caso de estudio esa referencia no existe" era imprecisa:
+     sí existe una referencia (el catastro del Ministerio de Agricultura,
+     verificado contra el shapefile real `viveros_2024_h19.shp`: 3185 puntos,
+     58 de ellos con vid o uva, no 72 ni polígonos como decía
+     `05_plan_trabajo.tex` antes de esta corrección), solo que da sitio y
+     especie, no una topología entre índices espectrales. Reescrito para
+     nombrar esa referencia y precisar qué le falta, en vez de negar que
+     exista.
+  **Cierre:** `python scripts/generar_pdf.py` → `OK: main.pdf compilado, 28
+  paginas` (cuerpo de 20, sin cambio). Verificado con extracción de texto del
+  PDF que la oración de `fig:prisma` ya no queda partida.
+
 ### Task-034 — cerrada por claude-2, pendiente de revisión
 
 - **Task-034 — espacio en blanco entre Resumen y Abstract, y formato de cita
