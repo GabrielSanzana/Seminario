@@ -12,7 +12,7 @@
 
 \section{Estado a la fecha de este informe}
 
-El trabajo avanza en tres etapas, y a la fecha de este informe dos están cerradas: la revisión sistemática, que recorrió el protocolo desde la formulación de la pregunta hasta la extracción de datos y dejó como producto el corpus de veinticinco referencias sobre el que se apoya el capítulo \ref{cap:estado_arte}, y el diseño, con las transformaciones definidas, la condición de entrada válida explícita, el criterio de validación especificado paradigma por paradigma y la taxonomía de resultados formulada. La tercera, la etapa de validación, ya está en curso, según se detalla en el resto de este capítulo: el criterio se fijó antes de mirar cualquier resultado, para que no termine acomodándose a lo que los datos entreguen.
+El trabajo avanza en tres etapas, y a la fecha de este informe dos están cerradas: la revisión sistemática, que recorrió el protocolo desde la formulación de la pregunta hasta la extracción de datos y dejó como producto el corpus de veinticinco referencias sobre el que se apoya el capítulo \ref{cap:estado_arte}, y el diseño, con las transformaciones definidas, la condición de entrada válida explícita, el criterio de validación formulado en términos de independencia condicional y la taxonomía de resultados definida. La tercera, la etapa de validación, ya está en curso, según se detalla en el resto de este capítulo: el criterio se fijó antes de mirar cualquier resultado, para que no termine acomodándose a lo que los datos entreguen.
 
 \section{Datos}
 
@@ -63,7 +63,7 @@ La segunda entrena el modelo del que se obtiene la matriz de interacción, y lo 
 
 La tercera aplica las dos transformaciones formalizadas en el capítulo \ref{cap:propuesta}. La discretización convierte cada matriz en un grafo dirigido y ponderado, y la unidad de análisis deja de ser el grafo de una corrida para pasar a ser la frecuencia con que cada relación reaparece entre corridas; sobre esa estructura de consenso opera después la compresión que reduce el grafo a una hipótesis enunciable fuera del modelo.
 
-La cuarta somete cada relación de esa hipótesis al criterio de validación de la sección \ref{sec:criterio}, que la evalúa por separado desde cinco paradigmas distintos y la clasifica según qué combinación de ellos apruebe. El contraste final se hace contra la partición en grupos de bandas compartidas de la sección anterior, que es la única referencia analítica disponible: una hipótesis que se limitara a reproducir esa partición estaría redescubriendo la aritmética de las fórmulas y no diría nada del cultivo, mientras que una relación entre grupos distintos sí es una afirmación sobre el fenómeno.
+La cuarta somete cada relación de esa hipótesis al criterio de validación de la sección \ref{sec:criterio}, que prueba si la dependencia entre los dos índices sobrevive al condicionar sobre los demás y la clasifica según ese resultado y según su reproducibilidad entre corridas. El contraste final se hace contra la partición en grupos de bandas compartidas de la sección anterior, que es la única referencia analítica disponible: una hipótesis que se limitara a reproducir esa partición estaría redescubriendo la aritmética de las fórmulas y no diría nada del cultivo, mientras que una relación entre grupos distintos sí es una afirmación sobre el fenómeno.
 
 \section{Actividades y calendario}
 
@@ -82,7 +82,7 @@ La tabla \ref{tab:plan} detalla el plan semana a semana del equipo, desde el ini
 \textbf{Semana} & \textbf{Plan para la semana} & \textbf{Opcional}\\
 \midrule
 \endhead
-13--19 ago 2026 & Revisión del estado del arte; estructuración del framework como método generalizable sobre cinco paradigmas; pruebas de robustez entre semillas & \\
+13--19 ago 2026 & Revisión del estado del arte; estructuración del framework como método generalizable; pruebas de robustez entre semillas & \\
 20--26 ago 2026 & Incorporación del conjunto de datos del Ministerio de Agricultura como referencia de contraste; primeras pruebas del framework propio & \\
 27 ago--2 sept 2026 & Puesta en marcha del servidor de cómputo; se constata que el volumen de artículos por filtrar, cuarenta y cinco, exige un cribado sistemático & \\
 3--9 sept 2026 & Aplicación del protocolo PRISMA; actualización de la carta Gantt; redacción del informe de avance & \\

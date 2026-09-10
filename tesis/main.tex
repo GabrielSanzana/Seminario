@@ -81,17 +81,23 @@
 \newpage
 \pagenumbering{arabic}
 
-% \input en vez de \include: \include fuerza pagina nueva antes y despues de
-% cada archivo, lo que dejaba espacio en blanco cuando un capitulo terminaba
-% a media pagina. \input no rompe pagina, asi que un capitulo corto ya no dej
-% la pagina siguiente en blanco esperando el proximo \chapter (ver tambien el
-% \titleclass{\chapter}{straight} en pucv_inf_2024.sty).
+% Cada capitulo empieza en hoja propia (instruccion del autor humano, Task-035).
+% Se usa \input mas un \clearpage explicito y no \include, porque \include
+% fuerza ademas una pagina nueva DESPUES de cada archivo, y ese segundo salto
+% no hace falta. Ver tambien \titleclass{\chapter}{straight} en el .sty.
+\clearpage
 \input{secciones/01_introduccion}
+\clearpage
 \input{secciones/02_objetivos}
+\clearpage
 \input{secciones/03_estado_arte}
+\clearpage
 \input{secciones/04_marco_teorico}
+\clearpage
 \input{secciones/05_plan_trabajo}
+\clearpage
 \input{secciones/06_propuesta}
+\clearpage
 \input{secciones/07_conclusiones}
 
 \newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Referencias\vspace{-0.5cm}}{Referencias}}
