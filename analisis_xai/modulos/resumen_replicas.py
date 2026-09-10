@@ -37,8 +37,11 @@ from scipy import stats
 
 METODOS = ["correlacion", "correlacion parcial", "PC (Fisher z)",
            "informacion mutua", "distancia de corr.", "LOCO con arboles",
-           "LOCO con vecindario", "Datt identidad largo",
-           "Datt familia largo"]
+           "LOCO con vecindario", "LOCO con retardos",
+           "Datt identidad largo", "Datt familia largo",
+           "Datt atencion neutro", "Datt entrada neutro",
+           "Datt atencion tokens", "Datt entrada tokens",
+           "Datt atencion p26", "Datt entrada p26"]
 
 
 def main() -> int:
@@ -60,7 +63,7 @@ def main() -> int:
          "=" * W]
 
     todo = {}
-    for reg in ("lineal", "no_lineal", "espacial"):
+    for reg in ("lineal", "no_lineal", "espacial", "temporal"):
         filas = {}
         for m in METODOS:
             aucs, mors, pks, ac, tot, n_rep = [], [], [], 0, 0, 0

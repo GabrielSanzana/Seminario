@@ -69,6 +69,16 @@
       "n_orientadas": 76,
       "p_orientacion": 0.0019181178758073132,
       "n_replicas": 4
+    },
+    "LOCO con retardos": {
+      "auc_esqueleto": 0.981942889137738,
+      "sd_auc": 0.010095222553191164,
+      "auc_moral": 0.9311012042025592,
+      "precision_en_k": 0.881578947368421,
+      "orientacion": 0.6710526315789473,
+      "n_orientadas": 76,
+      "p_orientacion": 0.0019181178758073132,
+      "n_replicas": 4
     }
   },
   "no_lineal": {
@@ -142,6 +152,16 @@
       "p_orientacion": 0.0003822908695775238,
       "n_replicas": 4
     },
+    "LOCO con retardos": {
+      "auc_esqueleto": 0.8872480403135499,
+      "sd_auc": 0.0801934855018106,
+      "auc_moral": 0.842151323225159,
+      "precision_en_k": 0.7368421052631579,
+      "orientacion": 0.75,
+      "n_orientadas": 76,
+      "p_orientacion": 7.418449668186183e-06,
+      "n_replicas": 4
+    },
     "Datt identidad largo": {
       "auc_esqueleto": 0.6133818589025757,
       "sd_auc": 0.11415331628820653,
@@ -157,6 +177,26 @@
       "sd_auc": 0.13939096462876024,
       "auc_moral": 0.5870600952749563,
       "precision_en_k": 0.4342105263157895,
+      "orientacion": 0.618421052631579,
+      "n_orientadas": 76,
+      "p_orientacion": 0.025226205123608833,
+      "n_replicas": 4
+    },
+    "Datt atencion neutro": {
+      "auc_esqueleto": 0.6822508398656215,
+      "sd_auc": 0.1214620653468693,
+      "auc_moral": 0.6633378393934658,
+      "precision_en_k": 0.5197368421052632,
+      "orientacion": 0.6447368421052632,
+      "n_orientadas": 76,
+      "p_orientacion": 0.007720131010453185,
+      "n_replicas": 4
+    },
+    "Datt entrada neutro": {
+      "auc_esqueleto": 0.6728723404255319,
+      "sd_auc": 0.10762047672284913,
+      "auc_moral": 0.6502108397380871,
+      "precision_en_k": 0.506578947368421,
       "orientacion": 0.618421052631579,
       "n_orientadas": 76,
       "p_orientacion": 0.025226205123608833,
@@ -234,6 +274,16 @@
       "p_orientacion": 0.0008809360014703125,
       "n_replicas": 4
     },
+    "LOCO con retardos": {
+      "auc_esqueleto": 0.897956326987682,
+      "sd_auc": 0.05247473911070201,
+      "auc_moral": 0.7371521584319557,
+      "precision_en_k": 0.763157894736842,
+      "orientacion": 0.5921052631578947,
+      "n_orientadas": 76,
+      "p_orientacion": 0.06769255264971544,
+      "n_replicas": 4
+    },
     "Datt identidad largo": {
       "auc_esqueleto": 0.6175111982082867,
       "sd_auc": 0.06345886369514786,
@@ -252,6 +302,168 @@
       "orientacion": 0.5526315789473685,
       "n_orientadas": 76,
       "p_orientacion": 0.21109555249615783,
+      "n_replicas": 4
+    },
+    "Datt atencion neutro": {
+      "auc_esqueleto": 0.6336086226203806,
+      "sd_auc": 0.10411758979449998,
+      "auc_moral": 0.5927981384272646,
+      "precision_en_k": 0.4868421052631579,
+      "orientacion": 0.40789473684210525,
+      "n_orientadas": 76,
+      "p_orientacion": 0.957676953664582,
+      "n_replicas": 4
+    },
+    "Datt entrada neutro": {
+      "auc_esqueleto": 0.617931131019037,
+      "sd_auc": 0.0885548002147119,
+      "auc_moral": 0.6049477654754922,
+      "precision_en_k": 0.4407894736842105,
+      "orientacion": 0.39473684210526316,
+      "n_orientadas": 76,
+      "p_orientacion": 0.9747737948763912,
+      "n_replicas": 4
+    },
+    "Datt atencion p26": {
+      "auc_esqueleto": 0.40586506159014557,
+      "sd_auc": 0.069540323089874,
+      "auc_moral": 0.46129295653504027,
+      "precision_en_k": 0.24342105263157893,
+      "orientacion": 0.47368421052631576,
+      "n_orientadas": 76,
+      "p_orientacion": 0.7167132788006575,
+      "n_replicas": 4
+    },
+    "Datt entrada p26": {
+      "auc_esqueleto": 0.4167133258678612,
+      "sd_auc": 0.06731608192028254,
+      "auc_moral": 0.4712394630963772,
+      "precision_en_k": 0.24342105263157893,
+      "orientacion": 0.42105263157894735,
+      "n_orientadas": 76,
+      "p_orientacion": 0.9323074473502846,
+      "n_replicas": 4
+    }
+  },
+  "temporal": {
+    "correlacion": {
+      "auc_esqueleto": 0.4722844344904815,
+      "sd_auc": 0.12653934072545908,
+      "auc_moral": 0.5553969945780903,
+      "precision_en_k": 0.2894736842105263,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "correlacion parcial": {
+      "auc_esqueleto": 0.4784434490481523,
+      "sd_auc": 0.09398659617296315,
+      "auc_moral": 0.5304026118305055,
+      "precision_en_k": 0.3289473684210526,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "PC (Fisher z)": {
+      "auc_esqueleto": 0.4423292273236282,
+      "sd_auc": 0.04303182616485134,
+      "auc_moral": 0.5408715569561158,
+      "precision_en_k": 0.28289473684210525,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "informacion mutua": {
+      "auc_esqueleto": 0.46276595744680854,
+      "sd_auc": 0.11125698428633633,
+      "auc_moral": 0.5424013296730328,
+      "precision_en_k": 0.2894736842105263,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "distancia de corr.": {
+      "auc_esqueleto": 0.48180291153415455,
+      "sd_auc": 0.09858399126699888,
+      "auc_moral": 0.509726785007956,
+      "precision_en_k": 0.3026315789473684,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "LOCO con arboles": {
+      "auc_esqueleto": 0.4611562150055991,
+      "sd_auc": 0.12795481807334377,
+      "auc_moral": 0.486146412163742,
+      "precision_en_k": 0.22368421052631576,
+      "orientacion": 0.5263157894736842,
+      "n_orientadas": 76,
+      "p_orientacion": 0.3655044411113028,
+      "n_replicas": 4
+    },
+    "LOCO con vecindario": {
+      "auc_esqueleto": 0.4671052631578947,
+      "sd_auc": 0.0719934993837298,
+      "auc_moral": 0.4440003186850514,
+      "precision_en_k": 0.26973684210526316,
+      "orientacion": 0.5,
+      "n_orientadas": 76,
+      "p_orientacion": 0.5456115373622537,
+      "n_replicas": 4
+    },
+    "LOCO con retardos": {
+      "auc_esqueleto": 0.7301931690929452,
+      "sd_auc": 0.03498310754687995,
+      "auc_moral": 0.6691297298834065,
+      "precision_en_k": 0.5723684210526316,
+      "orientacion": 1.0,
+      "n_orientadas": 76,
+      "p_orientacion": 1.3234889800848443e-23,
+      "n_replicas": 4
+    },
+    "Datt atencion neutro": {
+      "auc_esqueleto": 0.4284014557670773,
+      "sd_auc": 0.01627336218320776,
+      "auc_moral": 0.5589041316039902,
+      "precision_en_k": 0.23026315789473684,
+      "orientacion": 0.618421052631579,
+      "n_orientadas": 76,
+      "p_orientacion": 0.025226205123608833,
+      "n_replicas": 4
+    },
+    "Datt entrada neutro": {
+      "auc_esqueleto": 0.4362402015677492,
+      "sd_auc": 0.0339114824338583,
+      "auc_moral": 0.5570595003248635,
+      "precision_en_k": 0.256578947368421,
+      "orientacion": 0.631578947368421,
+      "n_orientadas": 76,
+      "p_orientacion": 0.014313327754368948,
+      "n_replicas": 4
+    },
+    "Datt atencion tokens": {
+      "auc_esqueleto": 0.7061170212765957,
+      "sd_auc": 0.013573978820576739,
+      "auc_moral": 0.6872437861664172,
+      "precision_en_k": 0.5460526315789473,
+      "orientacion": 0.9736842105263158,
+      "n_orientadas": 76,
+      "p_orientacion": 3.873852244708339e-20,
+      "n_replicas": 4
+    },
+    "Datt entrada tokens": {
+      "auc_esqueleto": 0.7222144456886898,
+      "sd_auc": 0.040855799438642995,
+      "auc_moral": 0.6040197017556334,
+      "precision_en_k": 0.5789473684210527,
+      "orientacion": 0.9605263157894737,
+      "n_orientadas": 76,
+      "p_orientacion": 9.69151275446729e-19,
       "n_replicas": 4
     }
   }

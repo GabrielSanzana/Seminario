@@ -834,17 +834,25 @@ Lo que la evidencia sostiene, con los números que la respaldan:
 | Suelo de ruido y multiplicidad | sí, teoría | sí, cola negativa y BH |
 | Coincide con `\|pc\|` | por definición | parcialmente, `rho` hasta 0.63 intra-familia |
 | Validado contra verdad externa | no lo intenta | no, `auc` 0.29 a 0.56 |
-| Recupera estructura conocida (sintética) | sí, `auc` 0.98 lineal | no, `auc` 0.61 (sección 13) |
-| Orienta contra verdad conocida | hasta la clase de Markov | no, 0.51 a 0.62 con azar 0.5 |
+| Recupera estructura conocida (sintética) | sí, `auc` 0.98 lineal | no, `auc` 0.68 (sección 13) |
+| Orienta contra verdad conocida | hasta la clase de Markov | sí, 0.645 no lineal y 0.974 temporal |
+| Funciona con mecanismos retardados | no, `auc` 0.478 | sí, `auc` 0.722, empata con LOCO con retardos |
 
 ### Lo que queda pendiente
 
-La equivalencia epistémica está establecida; la superioridad en validez está
-**refutada**. La sección 13 corrió el experimento que faltaba —verdad conocida
-por construcción, no lineal y espacial— y $D_{att}$ queda último en los tres
-regímenes, con la afirmación de direccionalidad sin sostén. El uso que
-sobrevive es auditar un modelo desplegado, no descubrir estructura en el
-mundo. Para eso último la recomendación es LOCO con árboles potenciados.
+La equivalencia epistémica está establecida; la superioridad general en
+validez está **refutada**, pero hay una excepción medida. La sección 13 corrió
+el experimento que faltaba —verdad conocida por construcción— sobre cuatro
+regímenes. $D_{att}$ pierde en el lineal, el no lineal y el espacial, donde la
+recomendación es LOCO con árboles potenciados. **Empata en el temporal**, que
+es el único donde ningún método clásico estándar pasa del azar, y ahí su
+orientación llega a 0.974 sobre 76 aristas verdaderas.
+
+La afirmación defendible no es "recupera mejor" sino "recupera donde lo
+clásico no llega, sin que se le diga dónde mirar". Con una condición previa:
+la configuración del caso de estudio (`SEQ_LENGTH = 1`, tarea enmascarada sin
+ventanas temporales) impide captar tiempo, así que hay que reentrenar con los
+retardos como tokens antes de sostener nada temporal sobre el viñedo.
 
 El experimento que quedaba pendiente y ya no lo está era una
 verdad conocida por construcción y a la vez no lineal y espacial: simulación de
@@ -886,6 +894,11 @@ el mecanismo de detección es reutilizable.
 | Igualar fechas se aplicaba también donde no hacía falta | Una media no necesita igualarse, sólo su varianza cambia | El efecto real es 1.5x en el brazo limpio, no 2.1x ni 2.7x |
 | Se reportaban razones entre fases sin ningún intervalo | Cinco puntos sin incertidumbre admiten casi cualquier relato | Con IC95 el efecto sigue vivo pero es la mitad de grande |
 | Nunca se había probado un placebo de fases | Se corrieron dos, etiquetas al azar y calendario rotado | Los pasa los dos; era el control que faltaba para llamarlo resultado |
+| El enmascarado por familia dejaba 24% de las aristas fuera del alcance del modelo | Se contaron: 23 de 95 son intra-familia y esa familia va siempre oculta | Techo sobre la puntuación, no "ruido de configuración" como se había escrito |
+| Se comparó cortar una arista de atención contra quitar una variable | Son preguntas distintas: residual y convolución enrutan alrededor de la arista | La orientación pasa de 0.526 a 0.645 al medirla como corresponde |
+| Se concluyó que la direccionalidad no existe con el experimento mal montado | Al arreglar los dos anteriores sale 0.645 y 0.974 con p bajo | Se retira la retirada: la afirmación central del framework se sostiene |
+| El modelo del caso de estudio no puede ver tiempo | `SEQ_LENGTH = 1` y la tarea enmascarada descarta ventanas por diseño | Toda afirmación temporal del documento queda sin respaldo hasta reentrenar |
+| El test del parche 26×26 no separaba lo que decía separar | Cuadruplicar el parche divide por cuatro las muestras; el `val` sube a 0.944 | Test contaminado: sirve si sale bien, no si sale mal |
 
 El patrón que los une: **cuando un estadístico da el mismo valor en fuentes que
 deberían diferir, o un p pegado a un extremo, casi siempre es la métrica y no el
@@ -933,6 +946,7 @@ reproduce el viejo hasta 1e-9.
 | `entrenar_sintetico.py` | Entrena el ConvTransformer sobre cada régimen y calcula $D_{att}$ |
 | `benchmark_recuperacion.py` | Siete estimadores de estructura puntuados contra la misma verdad |
 | `resumen_replicas.py` | Agrega las réplicas; la orientación se suma, no se promedia |
+| `entrenar_temporal_tokens.py` | Los retardos como tokens (12 índices × 3 instantes = 36) para darle tiempo al transformer sin tocar `forward_enmascarado` |
 | `control_fases.py` | Los cuatro controles del efecto por fase: bootstrap, placebo de etiquetas, calendario rotado, suelo con `n` igualado, dificultad de escena, regresión por fecha, ICP con permutación exacta |
 
 ### Pruebas (`pruebas/`)
@@ -1094,12 +1108,12 @@ auditor, y es el resultado positivo del experimento.
 
 1. Que $D_{att}$ recupere estructura mejor que un método clásico. Queda último
    en los tres regímenes, con AUC de 0.60 a 0.62 contra 0.88 a 0.98.
-2. **Que la asimetría de $D_{att}$ indique dirección causal.** De cuatro
-   mediciones con potencia (dos máscaras × dos regímenes), una sola supera el
-   azar —0.618 con p = 0.0252— y con dos máscaras probadas queda en el límite
-   de la multiplicidad. LOCO llega a 0.763 con p < 0.0001 sobre los mismos
-   datos. Era la única afirmación que $D_{att}$ hacía y los demás no podían
-   hacer.
+2. ~~Que la asimetría de $D_{att}$ indique dirección causal.~~
+   **Esta conclusión se retira en 13.13.** Venía de comparar el corte de una
+   arista de atención contra la ablación de una variable, que no son la misma
+   pregunta, y de un enmascarado que dejaba un cuarto del grafo fuera del
+   alcance del modelo. Corregidos los dos, la orientación es 0.645 con
+   p = 0.0077 en el régimen no lineal y 0.974 en el temporal.
 3. Que la arquitectura espacial aporte. Árboles con rasgos de vecindario la
    superan, 0.952 contra 0.618.
 
@@ -1144,6 +1158,181 @@ Lo que no está establecido es el límite superior: la relación monótona entre
 ajuste del modelo y AUC de $D_{att}$ deja abierto que un modelo mucho mejor
 entrenado lo acerque a LOCO. Es contrastable y barato, y es lo siguiente que
 haría falta correr.
+
+### 13.10 Tres handicaps de configuración, y qué pasa al quitarlos
+
+La primera versión de este experimento concluyó que $D_{att}$ pierde en todos
+los regímenes y que su direccionalidad no se sostiene. Al revisar el código
+aparecieron tres defectos, dos de diseño del experimento y uno de la
+configuración de la tesis. Ninguno se veía en las cifras de salida.
+
+**Primero: el enmascarado por familia hacía inaprendible un cuarto del grafo.**
+`MASCARA_MODO="familia_balanceada"` oculta *siempre* la familia entera del
+índice que se reconstruye. Sobre el viñedo eso es deliberado y correcto: mata
+el atajo colineal entre índices que comparten bandas. Sobre datos sintéticos
+las familias son una partición arbitraria de los doce canales, y una arista
+verdadera entre dos canales de la misma familia queda fuera del alcance del
+modelo por construcción, porque nunca ve uno con el otro disponible.
+
+```
+datos_sinteticos    4 de 19 aristas dentro de familia
+datos_rep11         4 de 19
+datos_rep12         4 de 19
+datos_rep13         6 de 19
+datos_rep14         5 de 19
+TOTAL              23 de 95 = 24% inaprendibles
+```
+
+La versión anterior de este README llamó a eso "ruido de configuración, ni
+favorece ni perjudica". Es falso: es un techo sobre la puntuación. Corregido
+con `MASCARA_K = 1` —ocultar sólo el canal objetivo—, el modelo aprende
+$E[X_i \mid \text{los otros once}]$, cuya estructura de dependencia es
+exactamente el manto de Markov que se quiere recuperar. El `val` baja de 0.801
+a 0.690 y el AUC sube de 0.613 a 0.682.
+
+**Segundo: se comparaba cortar una arista contra quitar una variable.**
+$D_{att}$ corta una arista de la matriz de atención; LOCO con árboles quita la
+variable entera. No son la misma pregunta, y presentarlas como tal fue un
+error de diseño. Con conexiones residuales y una rama convolucional, cortar
+una arista de atención deja abiertos otros caminos por los que la misma
+información vuelve a entrar.
+
+El competidor justo del LOCO con árboles no es $D_{att}$ sino la ablación de
+**entrada** hecha con el mismo transformer, que el pipeline ya tenía en
+`matriz_dependencia_ablacion`:
+
+$$D[i,j] = \text{MSE}(\text{reconstruir } i \mid i,j \text{ ocultos}) - \text{MSE}(\text{reconstruir } i \mid i)$$
+
+**Tercero, y es el que más importa: el modelo nunca tuvo acceso al tiempo.**
+En `process_indices_data`:
+
+```
+if TAREA == "enmascarado":
+    # No hay ventanas temporales: cada frame es independiente
+```
+
+y `forward_enmascarado` codifica cada token con `reshape(B*N, 1, H, W)`: una
+imagen, un instante. `ConvEncoder` sí admite `in_channels = seq_length`, o sea
+que la arquitectura soporta ventanas, pero el camino de la tarea enmascarada
+no las usa. La tesis corre con `SEQ_LENGTH = 1`.
+
+Consecuencia inmediata: **toda afirmación del documento sobre relaciones
+temporales estaba sin respaldo**, no porque el transformer no pueda captarlas
+sino porque no se le estaban dando.
+
+### 13.11 Un cuarto régimen: el tiempo
+
+Se añadió el régimen `temporal`, donde $X_i(t)$ depende de $X_p(t-1)$ y
+$X_p(t-2)$ y no de $X_p(t)$. En el mismo instante la dependencia es débil, así
+que cualquier método que trate cada fecha como una observación independiente
+está ciego por construcción.
+
+Para que la comparación siga siendo simétrica, LOCO recibe los mismos
+retardos, igual que en el régimen espacial recibió la media 5×5. Y al
+transformer se le dan como tokens adicionales: 12 índices × 3 instantes = 36
+tokens, con la atención viviendo en una matriz 36×36 donde una arista puede
+cruzar instantes. Para puntuar contra el DAG de 12 nodos se suman las columnas
+de los tres instantes de cada variable, que es lo que hace LOCO con retardos
+al ablacionar todos los retardos de $j$ a la vez.
+
+No se reescribió `forward_enmascarado`: es la ruta optimizada del pipeline y
+romperla afectaría a todo lo demás.
+
+```
+REGIMEN TEMPORAL, 4 DAG        auc esq     sd  auc moral  prec@k  orientacion   n       p
+LOCO con retardos                0.730  0.035     0.669    0.57     1.000      76  0.0000
+Datt entrada tokens              0.722  0.041     0.604    0.58     0.961      76  0.0000
+Datt atencion tokens             0.706  0.014     0.687    0.55     0.974      76  0.0000
+Datt entrada neutro (12 tokens)  0.436  0.034     0.557    0.26     0.632      76  0.0143
+LOCO con arboles                 0.461  0.128     0.486    0.22     0.526      76  0.3655
+LOCO con vecindario              0.467  0.072     0.444    0.27     0.500      76  0.5456
+correlacion parcial              0.478  0.094     0.530    0.33   simetrico
+PC (Fisher z)                    0.442  0.043     0.541    0.28   simetrico
+informacion mutua                0.463  0.111     0.542    0.29   simetrico
+```
+
+Dándole el pasado, el transformer pasa de 0.436 a **0.722** y su orientación de
+0.632 a **0.974**: 74 de 76 aristas verdaderas bien orientadas. Empata con LOCO
+con retardos dentro de la desviación entre réplicas, y contra el grafo
+moralizado lo supera, 0.687 frente a 0.669.
+
+Ningún método clásico estándar funciona en este régimen. El único que compite
+es LOCO con retardos, que ya es una construcción *ad hoc* con el pasado
+inyectado a mano: alguien tuvo que decidir que los retardos relevantes eran 1 y
+2. El transformer llega al mismo sitio sin que se le diga qué mirar.
+
+Y aquí la ablación de atención funciona tan bien como la de entrada, 0.706 y
+0.974 frente a 0.722 y 0.961. Tiene una explicación: con la información
+temporal repartida en tokens separados, cortar la arista de atención sí aísla
+la variable, porque ya no hay una ruta residual que traiga lo mismo desde otro
+instante.
+
+### 13.12 Lo espacial sigue sin explicarse, y el test que hice no vale
+
+```
+REGIMEN ESPACIAL          auc esq  orientacion       p
+LOCO con vecindario         0.952     0.684      0.0009
+correlacion parcial         0.901   simetrico
+Datt atencion neutro        0.634     0.408      0.9577
+Datt atencion p26           0.406     0.474      0.7167
+```
+
+La hipótesis era que un laplaciano no sobrevive a dos convoluciones de stride 2
+sobre un parche de 13×13, que llegan a la atención con 4×4 posiciones. Se probó
+con `TOKEN_PARCHE = 26` y salió peor.
+
+**Ese test no concluye nada**, y conviene decirlo antes que apoyarse en él:
+cuadruplicar el área del parche divide por cuatro las muestras de
+entrenamiento, de 2368 a 592, y el `val` sube a 0.944. No distingue "el campo
+receptivo no era el problema" de "se quedó sin datos". Separarlo pediría
+parches grandes con solape, o más fechas.
+
+Lo que sí queda establecido es que en el régimen espacial el transformer
+pierde y su orientación cae por debajo del azar (0.408, 0.395), mientras unos
+árboles con la media 5×5 alcanzan 0.952. Sin explicación por ahora.
+
+### 13.13 El cuadro final
+
+```
+regimen      mejor clasico              mejor transformer        veredicto
+lineal       0.983 correlacion parcial   -                       clasico, como debe
+no lineal    0.912 LOCO con arboles      0.682 Datt neutro       clasico
+espacial     0.952 LOCO con vecindario   0.634 Datt neutro       clasico
+temporal     0.730 LOCO con retardos     0.722 Datt tokens       empate
+```
+
+Y la orientación, que es la afirmación propia del framework:
+
+```
+regimen      Datt          p         LOCO mejor
+no lineal    0.645     0.0077          0.763
+espacial     0.408     0.9577          0.684
+temporal     0.974     0.0000          1.000
+```
+
+**Lo que se sostiene.** La direccionalidad de $D_{att}$ es real: 0.645 en el
+régimen no lineal y 0.974 en el temporal, las dos con $p$ pequeño sobre 76
+aristas verdaderas. La sección 13.6 de la versión anterior la daba por
+refutada, y esa conclusión se retira: venía de una comparación mal montada
+—arista contra variable— y de un enmascarado que tapaba un cuarto del grafo.
+
+**Lo que sigue sin sostenerse.** Que $D_{att}$ recupere el esqueleto mejor que
+un método clásico. Pierde en tres de cuatro regímenes y sólo empata en el
+cuarto.
+
+**Lo que el experimento sí concede al transformer**, y es lo que la tesis puede
+defender: en el régimen temporal ningún método clásico estándar pasa del azar.
+Correlación parcial 0.478, PC 0.442, información mutua 0.463. El único
+competidor es una construcción a la que hubo que decirle a mano qué retardos
+mirar. Ésa es una ventaja de aplicabilidad real, medida contra verdad conocida,
+y es la que hay que escribir: no "recupera mejor", sino **"recupera donde lo
+clásico no llega, sin que se le diga dónde mirar"**.
+
+**Lo que hay que corregir en el documento antes que nada.** `SEQ_LENGTH = 1`
+y la tarea enmascarada sin ventanas temporales. Con esa configuración el
+modelo del caso de estudio no puede captar ninguna relación temporal, así que
+cualquier frase del documento que lo afirme está sin respaldo hasta reentrenar
+con los retardos como tokens.
 
 ---
 

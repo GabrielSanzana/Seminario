@@ -166,6 +166,26 @@ def generar(rng, A, regimen, n_fechas=N_FECHAS, lado=LADO):
                 c = rng.uniform(0.5, 1.5) * rng.choice([-1.0, 1.0])
                 z += c * X[..., p]
                 cs.append(float(c))
+        elif regimen == "temporal":
+            # El mecanismo pasa por el PASADO del padre: X_i(t) depende de
+            # X_p(t-1) y X_p(t-2), no de X_p(t). En el mismo instante la
+            # dependencia es debil, asi que cualquier metodo que trate cada
+            # fecha como una observacion independiente esta ciego por
+            # construccion, y un modelo que solo ve un frame a la vez tambien.
+            # Es el regimen que pone a prueba la mitad temporal de la
+            # afirmacion "el transformer capta relaciones en tiempo y
+            # espacio", que hasta aqui nunca se habia contrastado: la tesis
+            # corre con SEQ_LENGTH = 1.
+            for k, p in enumerate(padres):
+                c = rng.uniform(0.6, 1.4) * rng.choice([-1.0, 1.0])
+                cs.append(float(c))
+                retardo = 1 + (k % 2)
+                prev = np.roll(X[..., p], retardo, axis=0)
+                prev[:retardo] = X[:retardo, ..., p]
+                if k % 2 == 0:
+                    z += c * prev
+                else:
+                    z += c * np.tanh(1.5 * prev)
         elif regimen == "espacial":
             # El mecanismo pasa por el VECINDARIO del padre, no por su valor
             # en el pixel. Es el unico regimen donde el contexto espacial
@@ -208,6 +228,10 @@ def main() -> int:
     ap.add_argument("--semilla", type=int, default=7)
     ap.add_argument("--aristas", type=int, default=19)
     ap.add_argument("--fechas", type=int, default=N_FECHAS)
+    # Sin --solo se reescriben los cuatro stacks, lo que pisaria datos que
+    # otro trabajo pueda estar leyendo en ese momento.
+    ap.add_argument("--solo", nargs="*", default=None,
+                    help="regenerar solo estos regimenes")
     a = ap.parse_args()
 
     os.makedirs(a.salida, exist_ok=True)
@@ -222,8 +246,11 @@ def main() -> int:
     # corridas del generador dieran datos distintos con la misma bandera
     # --semilla. Reproducible no es lo mismo que determinista dentro de una
     # corrida, y aqui hacia falta lo primero.
-    SEMILLAS = {"lineal": 101, "no_lineal": 202, "espacial": 303}
-    for regimen in ("lineal", "no_lineal", "espacial"):
+    SEMILLAS = {"lineal": 101, "no_lineal": 202, "espacial": 303,
+                "temporal": 404}
+    for regimen in ("lineal", "no_lineal", "espacial", "temporal"):
+        if a.solo and regimen not in a.solo:
+            continue
         r2 = np.random.default_rng(a.semilla + SEMILLAS[regimen])
         X, coef = generar(r2, A, regimen, a.fechas)
         ruta = os.path.join(a.salida, "stack_" + regimen + ".npy")

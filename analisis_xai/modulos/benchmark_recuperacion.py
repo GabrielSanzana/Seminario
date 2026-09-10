@@ -207,6 +207,58 @@ def s_loco_espacial(Z, V):
     return out
 
 
+def rasgos_retardados(X, n_sub=20000, semilla=0, retardos=(1, 2)):
+    """Cada canal con su valor y el de las fechas anteriores.
+
+    En el regimen temporal el mecanismo pasa por el pasado del padre. Un
+    metodo que trate cada fecha como una fila independiente esta ciego, asi
+    que compararlo contra un modelo con ventana temporal no diria nada sobre
+    el metodo. Con estos rasgos, LOCO ve el mismo pasado.
+    """
+    rng = np.random.default_rng(semilla)
+    p = X.shape[-1]
+    bloques = [X]
+    for r in retardos:
+        prev = np.roll(X, r, axis=0)
+        prev[:r] = X[:r]
+        bloques.append(prev)
+    Z = X.reshape(-1, p).astype(np.float64)
+    L = [b.reshape(-1, p).astype(np.float64) for b in bloques[1:]]
+    sel = rng.choice(len(Z), min(n_sub, len(Z)), replace=False)
+    z = Z[sel]
+    z = (z - z.mean(0)) / (z.std(0) + 1e-12)
+    ls = [(m[sel] - m[sel].mean(0)) / (m[sel].std(0) + 1e-12) for m in L]
+    return z, ls
+
+
+def s_loco_retardado(Z, retardadas):
+    """LOCO donde ablacionar el canal j le quita su presente y su pasado."""
+    from sklearn.ensemble import HistGradientBoostingRegressor as GB
+    n_tr = int(0.7 * len(Z))
+    p = Z.shape[1]
+    F = np.column_stack([Z] + list(retardadas))
+    n_bloques = 1 + len(retardadas)
+    out = np.zeros((p, p))
+    for i in range(p):
+        cols = [b * p + k for b in range(n_bloques) for k in range(p)
+                if not (b == 0 and k == i)]
+        base = GB(max_iter=120, random_state=0).fit(F[:n_tr][:, cols],
+                                                    Z[:n_tr, i])
+        e0 = float(np.mean((base.predict(F[n_tr:][:, cols])
+                            - Z[n_tr:, i]) ** 2))
+        for j in range(p):
+            if j == i:
+                continue
+            quitar = {b * p + j for b in range(n_bloques)}
+            resto = [c for c in cols if c not in quitar]
+            m = GB(max_iter=120, random_state=0).fit(F[:n_tr][:, resto],
+                                                     Z[:n_tr, i])
+            ej = float(np.mean((m.predict(F[n_tr:][:, resto])
+                                - Z[n_tr:, i]) ** 2))
+            out[i, j] = ej - e0
+    return out
+
+
 def s_loco(Z, n_sub=20000, semilla=0):
     """LOCO no lineal con arboles potenciados.
 
@@ -308,7 +360,7 @@ def main() -> int:
          "=" * W]
 
     todo = {}
-    for regimen in ("lineal", "no_lineal", "espacial"):
+    for regimen in ("lineal", "no_lineal", "espacial", "temporal"):
         ruta = os.path.join(a.datos, "stack_" + regimen + ".npy")
         if not os.path.exists(ruta):
             continue
@@ -329,6 +381,8 @@ def main() -> int:
         met["LOCO con arboles"] = s_loco(Z)
         Zs, Vs = rasgos_espaciales(X)
         met["LOCO con vecindario"] = s_loco_espacial(Zs, Vs)
+        Zr, Ls = rasgos_retardados(X)
+        met["LOCO con retardos"] = s_loco_retardado(Zr, Ls)
 
         # Se cargan todas las variantes de Datt que haya para este regimen.
         # El sufijo _largo es el mismo experimento con mas epocas: la primera
@@ -337,7 +391,7 @@ def main() -> int:
         # un Datt bajo no distingue "el estimador no sirve" de "el modelo no
         # habia aprendido nada que auditar".
         hubo = False
-        for etiq in ("", "_largo"):
+        for etiq in ("", "_largo", "_neutro", "_tokens", "_p26"):
             dj = os.path.join(a.datos, "DATT_" + regimen + etiq + ".json")
             if not os.path.exists(dj):
                 continue
@@ -345,8 +399,8 @@ def main() -> int:
             with open(dj, encoding="utf-8") as f:
                 d = json.load(f)
             for nombre, blo in d.items():
-                clave = ("Datt " + nombre
-                         + (" largo" if etiq else " corto"))
+                clave = "Datt " + nombre + " " + (etiq.lstrip("_")
+                                                          or "corto")
                 met[clave] = np.array(blo["Datt"])
         if not hubo:
             print("    aun no hay Datt para " + regimen)
