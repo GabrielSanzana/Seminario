@@ -1321,7 +1321,15 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-**PR #37** — Task-034: lista de figuras y nombres de los índices, leyendas en tamaño 10
+**PR #37** — Task-034 y Task-035. Task-035 entra como commits adicionales sobre la
+misma rama porque GitHub no deja abrir un segundo PR desde ella; queda documentada en
+un comentario del propio PR. Lo que suma: capítulos en hoja propia y el reemplazo de la
+triangulación de cinco paradigmas por validación mediante pruebas de dependencia e
+independencia condicional entre los índices. **Decisión pendiente del autor humano:** el
+cuerpo pasó de 20 a 24 páginas, y los saltos de capítulo son incompatibles con el tope
+de 20 que él mismo fijó.
+
+**PR #37, alcance original** — Task-034: lista de figuras y nombres de los índices, leyendas en tamaño 10
 justificadas a la izquierda, `tab:indices` con los doce índices y sus bandas, notas al pie
 a Google Earth Engine y al IDE del Ministerio de Agricultura, §3.2.4 recortada, §5.5
 borrada, y §5.3 y §6.5 reescritas contra lo que `Framework.py` implementa hoy. Abierto por
