@@ -52,10 +52,10 @@
 
 \include{Resumen/resumen.tex}
 
-\newpage\addcontentsline{toc}{chapter}{\texorpdfstring{Índice General\vspace{-0.5cm}}{Índice General}}
+\newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Índice General\vspace{-0.5cm}}{Índice General}}
 \tableofcontents
 
-\newpage\addcontentsline{toc}{chapter}{\texorpdfstring{Lista de Tablas\vspace{-0.5cm}}{Lista de Tablas}}
+\newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Lista de Tablas\vspace{-0.5cm}}{Lista de Tablas}}
 \listoftables
 
 \newpage
@@ -74,7 +74,7 @@
 \input{secciones/06_propuesta}
 \input{secciones/07_conclusiones}
 
-\newpage\addcontentsline{toc}{chapter}{\texorpdfstring{Referencias\vspace{-0.5cm}}{Referencias}}
+\newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Referencias\vspace{-0.5cm}}{Referencias}}
 \printbibliography[title=Referencias]
 
 \end{document}
