@@ -19,8 +19,10 @@ varios casos el motivo del abandono es el resultado.
 6. [Cuatro intentos de arreglar la lectura](#6-cuatro-intentos-de-arreglar-la-lectura)
 7. [Invariancia causal con la fenología como entorno](#7-invariancia-causal-con-la-fenología-como-entorno)
 8. [Separar los regímenes](#8-separar-los-regímenes)
-9. [Conclusión](#9-conclusión)
-10. [Mapa de archivos](#10-mapa-de-archivos)
+9. [Disociación por fase y el control de exposición](#9-disociación-por-fase-y-el-control-de-exposición)
+10. [Conclusión](#10-conclusión)
+11. [Errores cometidos y cómo se detectaron](#11-errores-cometidos-y-cómo-se-detectaron)
+12. [Mapa de archivos](#12-mapa-de-archivos)
 
 ---
 
@@ -573,7 +575,93 @@ receptor, lo que invierte la expectativa de tratar NDVI como índice maestro.
 
 ---
 
-## 9. Conclusión
+## 9. Disociación por fase y el control de exposición
+
+Módulos: `datt_por_fase.py`, `entrenar_balanceado.py`
+
+Última pregunta del hilo: si el ICP clasifica las aristas en estructurales y de
+régimen usando sólo el dato, ¿el modelo respalda esa clasificación? Se corre
+$D_{att}$ restringiendo la entrada a cada fase y se mira cuántas fases aguanta
+cada arista por encima de tres veces el ruido.
+
+**Control que el diseño ingenuo no tiene.** El suelo de ruido depende del
+tamaño de muestra, y las fases van de 8 a 90 fechas. Sin igualar, una arista se
+"apaga" por falta de datos. Se igualaron fechas (8) y parches (128) en las
+cinco fases, y el suelo se recalcula dentro de cada una con su propia cola
+negativa.
+
+**La predicción no se cumple.**
+
+```
+                              invariantes ICP (7)   de régimen ICP (12)
+fases por encima del umbral          3.00                  2.83
+Mann-Whitney unilateral                        p = 0.4134
+```
+
+La etiqueta del ICP no predice la persistencia de $D_{att}$. Las dos medidas no
+se validan entre sí, y la clasificación del grafo queda apoyada sólo en el lado
+del dato.
+
+**Lo que sí apareció, y el confound que casi se me pasa.**
+
+```
+fase           aristas de las 19 sobre 3x    MSE base    suelo de ruido
+dormancia                6                    0.2918        8.96e-03
+brotacion               17                    0.1696        1.73e-03
+crecimiento             15                    0.1159        1.20e-03
+maduracion              13                    0.1094        1.28e-03
+postcosecha              4                    0.1747        5.75e-03
+```
+
+La lectura inmediata fue biológica: sin hoja la reconstrucción se desestabiliza.
+Pero al medir el MSE base por fase apareció otra explicación, y las fechas de
+entrenamiento por fase son 8, 17, 40, 76 y 7. El modelo reconstruye peor donde
+menos entrenó. Igualar la evaluación no toca ese desbalance.
+
+**El control decisivo.** `entrenar_balanceado.py` reentrena 15 semillas
+sobremuestreando cada fase hasta que todas pesen igual en la pérdida: dormancia
+×10.00, postcosecha ×11.25, brotación ×4.09, crecimiento ×1.58, maduración
+×1.00. Razones contra maduración:
+
+```
+fase           MSE base  ruido  |  MSE bal  ruido bal
+dormancia         2.67    7.02  |    2.87     6.75
+postcosecha       1.60    4.51  |    1.71     4.03
+crecimiento       1.06    0.94  |    0.96     0.64
+maduracion        1.00    1.00  |    1.00     1.00
+```
+
+Igualar el peso **no cierra la brecha**. La explicación por exposición queda
+descartada. Lo que no se separa, y estaba declarado antes de correr: biología
+frente a que 8 escenas distintas no alcancen. Repetirlas diez veces iguala el
+gradiente sin añadir información; distinguirlo pide más fechas de invierno.
+
+El brazo balanceado es peor modelo en las cinco fases, entre 2.3 y 2.6 veces de
+MSE, porque la duplicación reduce la diversidad efectiva por paso de gradiente.
+Sirve como control, no como estimación.
+
+**Dos hallazgos del brazo base que este control tumba.**
+
+La arista `ARI <- KNDVI` daba $D_{att}$ = −6.0 veces el ruido en brotación, o
+sea que cortarla mejoraba la reconstrucción, y se propuso como ruta mal
+aprendida. En el brazo balanceado da **+5.6**. Cambia de signo, así que no es un
+defecto estable del modelo. Se retira.
+
+La prueba contra el ICP empeora en el brazo balanceado: invariantes 1.57 fases
+contra 2.17 de las de régimen, p = 0.8364, con la diferencia en sentido
+contrario al esperado. En ninguno de los dos brazos hay apoyo.
+
+**Lo que queda en pie de esta sección.** La dependencia interna del modelo
+varía con la fase de forma sistemática y robusta al balanceo, con la estructura
+concentrada en la estación de crecimiento. Eso no equivale a que el modelo
+capture la biología: `reinferir_por_fase.py` ya había medido que evaluado en una
+fase el modelo no expone la estructura de esa fase (2 aciertos de 5, azar 1 de
+5). Lo compatible es más chico: la calidad de reconstrucción depende de la fase,
+la estructura relacional no identifica la fase.
+
+---
+
+## 10. Conclusión
 
 El trabajo demuestra que no es necesario sacrificar la capacidad no lineal y
 espacial de los Transformers para obtener interpretabilidad. Mediante ablación
@@ -619,7 +707,30 @@ estructura verdadera.
 
 ---
 
-## 10. Mapa de archivos
+## 11. Errores cometidos y cómo se detectaron
+
+Se dejan escritos porque varios cambiaron conclusiones ya reportadas, y porque
+el mecanismo de detección es reutilizable.
+
+| Error | Cómo apareció | Efecto |
+|---|---|---|
+| Modularidad decidida contra la media del nulo en vez de contra cero | Etiquetas contradictorias en la misma tabla | Se invirtió el sentido en 6 de 8 fuentes |
+| `b1` = 55 en las 8 fuentes | El mismo número en todas: señal de constante matemática | Se pasó al complejo de clíques |
+| Entropía de von Neumann = 2.398 en todas | log(11), otra constante | Se pasó al laplaciano combinatorio |
+| Asimetría dominada por efecto de nodo | Se midió el reparto: 85% de la varianza | Invirtió la conclusión sobre qué fuente tiene dirección |
+| Nulo del ICC barajando dentro de columna | El p salía pegado a 1 pase lo que pasase | Permutar dentro de columna no cambia media ni varianza |
+| Nulo del ICP por arista sin agrupar | Control sintético con efecto enorme daba q = 0.995 | Resolución mínima 1/n; se agrupó entre aristas |
+| Control de distancia a la inicialización | Todos los bloques en 1.42 = raíz de 2 | Comparaba dos sorteos independientes; no distingue nada |
+| "Igualé el tamaño de muestra" | Se midió el MSE base por fase | Sólo se había igualado la evaluación, no el entrenamiento |
+
+El patrón que los une: **cuando un estadístico da el mismo valor en fuentes que
+deberían diferir, o un p pegado a un extremo, casi siempre es la métrica y no el
+dato.** Y el remedio que más veces funcionó fue construir un control sintético
+con respuesta conocida antes de correr sobre datos reales.
+
+---
+
+## 12. Mapa de archivos
 
 ### Módulos (`modulos/`)
 
@@ -643,6 +754,8 @@ estructura verdadera.
 | `atencion_por_grupos.py` | Partición intra/inter grupo, estabilidad por mitades, resolución de grupo |
 | `signo_por_fase.py` | El signo intra-familia contra `\|pc\|` estimado dentro de cada fase |
 | `grafo_datt.py` | Figura del grafo de las 19 aristas |
+| `datt_por_fase.py` | $D_{att}$ restringido a cada fase, con fechas y parches igualados y MSE base |
+| `entrenar_balanceado.py` | Reentrenamiento con sobremuestreo por fase, control del confound de exposición |
 
 ### Pruebas (`pruebas/`)
 

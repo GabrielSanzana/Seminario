@@ -1,0 +1,27 @@
+{
+  "dormancia (may-ago)": {
+    "originales": 9,
+    "tras_balanceo": 90,
+    "factor": 10.0
+  },
+  "brotacion (sep-oct)": {
+    "originales": 22,
+    "tras_balanceo": 90,
+    "factor": 4.09
+  },
+  "crecimiento (nov-dic)": {
+    "originales": 57,
+    "tras_balanceo": 90,
+    "factor": 1.58
+  },
+  "maduracion (ene-mar)": {
+    "originales": 90,
+    "tras_balanceo": 90,
+    "factor": 1.0
+  },
+  "postcosecha (abr)": {
+    "originales": 8,
+    "tras_balanceo": 90,
+    "factor": 11.25
+  }
+}
