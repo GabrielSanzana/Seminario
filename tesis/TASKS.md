@@ -112,8 +112,7 @@ antes de tocar nada:
      una arista se sostiene si la dependencia entre los dos índices persiste al
      condicionar sobre los demás, y se descarta si existe algún subconjunto que la
      explica por completo. Va con su ecuación,
-     $(v_i,v_j) \in E_H \iff 
-exists\, S \subseteq V \setminus \{v_i,v_j\} : X_i \perp X_j \mid X_S$.
+     $(v_i,v_j) \in E_H \iff \nexists\, S \subseteq V \setminus \{v_i,v_j\} : X_i \perp X_j \mid X_S$.
      Lo que el framework fija es la condición; **con qué prueba se decide cada
      independencia queda explícitamente abierto**, que es lo que pidió el autor humano,
      y la sección argumenta por qué comprometerse con un estadístico concreto limitaría
