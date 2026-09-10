@@ -29,10 +29,10 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 32 | Task-029: nuevo título principal, "Framework para reconstrucción de estructuras relacionales desde representaciones latentes" |
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 30 | Task-029: corrige la inconsistencia "siempre se entrena un modelo alternativo" -> framework agnóstico (aplica directo si el modelo desplegado ya cumple la condición, entrena alternativa si no) |
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 47 | Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
-| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027/028/029 las editó claude-2, instrucción directa del autor humano) | 111 | Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
+| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 26 | Task-031: el objetivo 2 pasa de cuatro preguntas a las cinco de §6.5, con la quinta explícita (especificidad del efecto y tamaño de la hipótesis) y referencia cruzada a `sec:criterio`. Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027/028/029 las editó claude-2, instrucción directa del autor humano) | 130 | Task-031: §3.1.2 transcribe completa la cadena booleana de los cuatro bloques PICO; orden de autores corregido en §3.1.3. Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
 | `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 55 | Task-029: quita una raya larga en §4.1 (regla de estilo sin rayas). Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
-| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-028 la editó claude-2, instrucción directa del autor humano) | 54 | Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
+| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-028 la editó claude-2, instrucción directa del autor humano) | 88 | Task-031: capítulo reorganizado, §5.2 Datos (conjunto real y sintético) y §5.3 Procedimiento nuevas, orden de autores en el caption, tercera dependencia corregida. Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
 | `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 (Task-029 la editó claude-2, instrucción directa) | 90 | Task-029: §Planteamiento corrige la misma inconsistencia de agnosticismo del framework (ver nota de cierre abajo); quita 5 rayas largas en el archivo; elimina §"Alcance de esta etapa" completa por redundar con el capítulo de plan de trabajo — **ojo**: eso deja `teleconnections2026causal` en solo 2 usos, bajo el mínimo de 3, ver nota de cierre. Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
 | `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `figuras/framework_pipeline.tex` | `NEED_REVIEW` | claude-1 | 57 | Task-026: esquema de la composición, `standalone` + TikZ, se compila aparte |
@@ -71,6 +71,88 @@ antes de tocar nada:
    `LTchunksize`. Las tres tablas del documento dependen de ambos.
 
 ## Cola de tareas
+
+### Task-031 — cerrada por claude-1, pendiente de revisión
+
+- **Task-031 — descripción de los datos, método en el capítulo 5, cadena de búsqueda,
+  quinta pregunta del objetivo 2 y orden de los autores.** Seis observaciones del autor
+  humano, 2026-09-10, todas sobre archivos de claude-1:
+
+  1. El informe no describe en ningún punto los datos que va a analizar. Pidió entre
+     media y tres cuartos de página sobre los dos conjuntos (el sintético y el del
+     Ministerio de Agricultura): qué índices, cuántos datos, qué región, qué año,
+     temporalidad, resolución espacial, partición y qué se predice.
+  2. El capítulo 5 tiene que describir el método, no solo la carta Gantt.
+  3. Revisar el objetivo 2 contra §6.5: el objetivo enumeraba **cuatro** preguntas y
+     §6.5 enumera **cinco**. Es una contradicción de cifras del tipo que el protocolo
+     debía atrapar.
+  4. Incluir en §3.1.2 la cadena de búsqueda booleana completa, que hoy solo aparece
+     resumida con ejemplos por componente PICO.
+  5. Orden de los autores: primero Patricio, después Gabriel.
+
+  Archivos reservados: `secciones/02_objetivos.tex`, `secciones/03_estado_arte.tex`,
+  `secciones/05_plan_trabajo.tex`. No se toca `04_marco_teorico.tex`, `referencias.bib`
+  ni §6.2 (de claude-2), ni `07_conclusiones.tex` (ver abajo por qué no hace falta).
+
+  Restricción dura que sigue vigente: máximo 20 páginas de cuerpo sin contar portada,
+  índices ni referencias. El punto de partida son 18, así que hay dos páginas de margen
+  para todo lo anterior.
+
+  Fuente de las cifras de los datos: `Framework.py` (sección 0 de configuración y
+  `INDEX_FAMILIES`) para el conjunto real, y `analisis_xai/modulos/verdad_sintetica.py`
+  de la rama `analisis/xai-atencion-interventiva` para el sintético. Ninguna de las dos
+  es una cifra de ejecución del prototipo, así que la exclusión de Task-019/Task-025
+  (sin Jaccard, sin persistencia entre semillas, sin sensibilidad a $K$) se mantiene
+  intacta: se describe el dato de entrada, no el resultado.
+
+  **Lo que se hizo.**
+
+  1. **§5.2 Datos, nueva.** Dos subsecciones. La del caso real declara los doce índices
+     (NDVI, EVI, EVI2, SAVI, KNDVI, MARI, ARI, CHL\_REDEDGE, NDMI, NDII, NDWI, PSRI),
+     su agrupación en cinco familias espectrales según las bandas compartidas, el sitio
+     (predio de \emph{Vitis vinifera} de 41,05 ha en Pencahue, Valle del Maule, elegido
+     del catastro de viveros 2024 del Ministerio de Agricultura: 3185 polígonos, 72 con
+     vid o uva), la ventana 2018--2025, el filtro de nubosidad bajo 3\% que deja 186
+     fechas de cadencia irregular, la resolución de 10 m sobre 500 m de lado, el tensor
+     resultante de 186 por 52 por 52 por 12, la advertencia de que seis índices vienen
+     de bandas nativas de 20 m remuestreadas, la tarea (reconstrucción enmascarada, con
+     el pronóstico a la fecha siguiente como referencia de que el modelo aprendió algo)
+     y la partición del último 20\% tomada dentro de cada una de las cinco fases
+     fenológicas. La del sintético declara las mismas dimensiones, el grafo acíclico
+     dirigido de 19 aristas sobre 12 nodos fijado por construcción, los dos regímenes
+     (lineal, que es control adverso porque ahí los supuestos clásicos se cumplen
+     exactos, y no lineal con interacción entre padres y no linealidad simétrica), el
+     hecho de que los campos son espaciales y no píxeles independientes, y el límite de
+     identificabilidad (la dependencia condicional alcanza el grafo moralizado, no el
+     dirigido).
+  2. **§5.3 Procedimiento, nueva.** Los siete pasos del método, del dato a la hipótesis
+     y de ahí al contraste, con el contraste distinto según el conjunto: estructura
+     conocida en el sintético, partición analítica en familias en el real.
+  3. **Objetivo 2.** Enumeraba cuatro preguntas contra las cinco de §6.5. Ahora dice
+     cinco, la quinta queda explícita (especificidad del efecto y tamaño de la
+     hipótesis, que antes solo aparecía suelta en el párrafo de `rulexai2024events`) y
+     apunta con `
+ef` a la sección del criterio, que ganó el label `sec:criterio`. §6.5
+     también dice ahora "cadena de cinco preguntas" en vez de "cadena de preguntas".
+  4. **§3.1.2.** La cadena booleana completa, transcrita en los cuatro bloques PICO.
+  5. **Orden de autores.** Corregido en §3.1.3 y en el caption de `tab:plan`. La portada
+     ya lo tenía bien.
+  6. **Tercera dependencia de §5.5.** Decía que el conjunto del Ministerio de
+     Agricultura es la referencia externa de contraste, lo que contradecía a
+     `07_conclusiones.tex`, que dice que el sintético es la única. Resuelto a favor de
+     la versión correcta: el catastro fija el sitio y la especie, no dice nada sobre qué
+     índice depende de cuál. Con eso queda cerrada la contradicción que claude-2 dejó
+     anotada en la nota de colisión Task-030/PR#30 sobre §5.3 y `07_conclusiones.tex`.
+
+  **Verificación.** `./scripts/compilar.sh` -> `OK: main.pdf compilado, 28 paginas`, sin
+  referencias ni citas colgantes. Cuerpo en 20 páginas sin contar portada, índices ni
+  referencias, que es el tope: partía de 18 y las dos secciones nuevas ocuparon las dos
+  disponibles, quedando unas once líneas libres en la última. Bibliografía con las 25
+  entradas impresas y biber sin advertencias; no se agregó ni se quitó ninguna cita.
+  Auditoría de prosa con `humanizer` (`thesis-prose-audit` sigue sin estar instalada en
+  esta máquina): seis correcciones aplicadas, todas del mismo tipo, contraste "no X sino
+  Y" y significancia inflada. [claude-1]
+
 
 ### Nota — colisión Task-030 / PR #30, resuelta
 
@@ -816,6 +898,22 @@ notas de cierre abajo. Se sacan de la cola para que no se vuelvan a tomar por er
 Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mergea lo
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
+
+**PR #33** — Task-031: descripción de los datos (§5.2, conjunto real y sintético) y del
+método (§5.3) en el capítulo 5, cadena booleana completa en §3.1.2, quinta pregunta del
+objetivo 2 para que cuadre con §6.5, orden de los autores y la tercera dependencia de
+§5.5. Abierto por claude-1, 2026-09-10. **Espera revisión de claude-2.** Lo que más
+conviene auditar es que las cifras de §5.2 cuadren con `Framework.py` e
+`INDEX_FAMILIES`, y con `analisis_xai/modulos/verdad_sintetica.py` de la rama
+`analisis/xai-atencion-interventiva`, de donde salen las del sintético. Cierra además el
+pendiente que quedó anotado en la nota de colisión Task-030/PR#30: §5.5 ya no contradice
+a `07_conclusiones.tex` sobre cuál es la referencia externa del caso de estudio.
+
+**PR #32** — mergeado por claude-1 el 2026-09-10 antes de tomar Task-031. Toca solo
+`scripts/generar_pdf.py` (nuevo, compila el documento desde Python con la misma
+secuencia que `compilar.sh`) y la nota de colisión en `TASKS.md`; no toca prosa ni
+citas, así que los cuatro puntos del protocolo pasan por vacuidad y la compuerta de
+compilación no cambia respecto de `main`.
 
 **PR #28** — Task-029: agnosticismo del framework (corrige la inconsistencia de que
 siempre se entrena un modelo alternativo), título de portada, propaga a
