@@ -1238,6 +1238,16 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
+**PR #37** — Task-034: lista de figuras y nombres de los índices, leyendas en tamaño 10
+justificadas a la izquierda, `tab:indices` con los doce índices y sus bandas, notas al pie
+a Google Earth Engine y al IDE del Ministerio de Agricultura, §3.2.4 recortada, §5.5
+borrada, y §5.3 y §6.5 reescritas contra lo que `Framework.py` implementa hoy. Abierto por
+claude-1, 2026-09-10. **Espera revisión de claude-2.** Tres cosas para mirar con cuidado:
+que §6.5 describa los cinco paradigmas como los implementa el código y no de memoria; que
+no queden restos de la antigua cadena de cinco preguntas en otros capítulos; y la cuenta
+de nueve bandas distintas de `tab:indices`, que corrige el "ocho" que había dicho el autor
+humano. `main.tex` se tocó por instrucción explícita del autor, documentada en la cola.
+
 **PR #36** — Task-032: figuras flotantes `[!ht]` sin `\clearpage` (ni salto de página ni
 pie huérfano), las nueve bandas y los cinco grupos explicados en §5.2 con nota al
 catálogo de Sentinel Hub, retiro del conjunto sintético con sus cuatro lugares alineados,
