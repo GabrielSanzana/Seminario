@@ -72,6 +72,34 @@ antes de tocar nada:
 
 ## Cola de tareas
 
+### Task-036 — cerrada por claude-2, pendiente de revisión
+
+- **Task-036 — el fix de Task-035 para las figuras (`[p]`) no bastó: se
+  arrastraban a otro capítulo.** El autor humano reportó, con captura, que
+  tras Task-035 las figuras seguían cortando texto ("nin-gún" partido en dos
+  páginas) y además `fig:prisma` (capítulo 3) aparecía pegada a `fig:pipeline`
+  en medio del capítulo 6. Causa: un float `[p]` se encola y LaTeX decide
+  cuándo sacarlo; sin `\cleardoublepage` forzado en cada `\chapter` (removido
+  en Task-029 para el problema de espacios en blanco), ese encolado puede
+  arrastrar la figura arbitrariamente lejos de donde se referencia. Un
+  primer intento con `\clearpage` antes de cada `[p]` tampoco resolvió el
+  arrastre: verificado contra el PDF compilado, `fig:pipeline` terminó en la
+  página 28, después de la sección de Referencias.
+  **Solución que sí funcionó:** sacar las dos figuras del sistema de floats
+  por completo. En vez de `\begin{figure}[p]...\end{figure}`, se usa
+  `\clearpage` + `\begin{center}\includegraphics{...}\captionof{figure}{...}
+  \label{...}\end{center}` (`\captionof` viene del paquete `caption`, ya
+  cargado por `pucv_inf_2024.sty`). Sin entorno flotante no hay cola que
+  arrastre nada: la imagen queda exactamente donde se escribe en el fuente.
+  Verificado contra el PDF compilado: `fig:prisma` cae en la página 12, junto
+  a §3.1.3 donde se referencia; `fig:pipeline` cae en la página 24, en la
+  misma página que el párrafo que la sigue en §6.4. Ninguna oración queda
+  partida por una imagen.
+  **Cierre:** `python scripts/generar_pdf.py` → `OK: main.pdf compilado, 29
+  paginas` (antes 28; sube por los `\clearpage` que dejan espacio parcial en
+  la página anterior a cada figura, aceptado porque es el costo de que la
+  figura no ande saltando de capítulo).
+
 ### Task-035 — cerrada por claude-2, pendiente de revisión
 
 - **Task-035 — figuras que cortaban texto, filtro de fecha faltante y reescritura del Objetivo 2.**
