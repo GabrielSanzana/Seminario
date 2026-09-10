@@ -11,11 +11,11 @@
 
 \section{Estado a la fecha de este informe}
 
-El trabajo avanza en tres etapas, y a la fecha de este informe dos están cerradas: la revisión sistemática, que recorrió el protocolo desde la formulación de la pregunta hasta la extracción de datos y dejó como producto el corpus de veinticinco referencias sobre el que se apoya el capítulo \ref{cap:estado_arte}, y el diseño, con las transformaciones definidas, la condición de entrada válida explícita, el criterio de validación especificado pregunta por pregunta y la taxonomía de resultados formulada. Queda pendiente la etapa de validación, donde el diseño se pone a prueba y se concentra el resto del calendario: el criterio se fijó antes de mirar cualquier resultado, para que no termine acomodándose a lo que los datos entreguen.
+El trabajo avanza en tres etapas. Dos están cerradas a la fecha de este informe: la revisión sistemática, que recorrió el protocolo desde la formulación de la pregunta hasta la extracción de datos y dejó como producto el corpus de veinticinco referencias sobre el que se apoya el capítulo \ref{cap:estado_arte}, y el diseño, con las transformaciones definidas, la condición de entrada válida explícita, el criterio de validación especificado pregunta por pregunta y la taxonomía de resultados formulada. La tercera, la etapa de validación, ya está en curso: el modelo alternativo se entrenó sobre el conjunto de repeticiones y las primeras preguntas del criterio se están evaluando sobre el caso de estudio. Esta entrega no reporta esos resultados ni cifras de ejecución, conforme a lo acordado para este informe de avance; el criterio se fijó antes de mirar cualquier resultado, para que no termine acomodándose a lo que los datos entreguen.
 
 \section{Actividades y calendario}
 
-La tabla \ref{tab:plan} detalla las actividades comprometidas. Las tres primeras filas corresponden a trabajo concluido y se incluyen para dejar constancia del punto de partida; el resto pertenece a la etapa de validación y aparece ordenado por dependencia, ya que cada pregunta del criterio solo tiene sentido sobre las relaciones que superaron la anterior, lo que deja poco margen para paralelizar.
+La tabla \ref{tab:plan} detalla las actividades comprometidas, con entrega del informe final el 20 de noviembre de 2026. Las filas iniciales corresponden a trabajo concluido y se incluyen para dejar constancia del punto de partida; el resto pertenece a la etapa de validación y aparece ordenado por dependencia, ya que cada pregunta del criterio solo tiene sentido sobre las relaciones que superaron la anterior, lo que deja poco margen para paralelizar. La validación sobre un conjunto sintético de estructura conocida y sobre un segundo dominio real quedan fuera del alcance comprometido para esta entrega: el calendario ya no tiene margen para ambas antes del 20 de noviembre, así que se retoman como trabajo futuro si el resto de la cadena lo permite.
 
 {\footnotesize
 \renewcommand{\arraystretch}{0.72}
@@ -34,21 +34,20 @@ Revisión sistemática de literatura bajo protocolo PRISMA 2020 & Hasta septiemb
 Formalización de las transformaciones y de la condición de admisibilidad & Hasta septiembre 2026 & Concluida\\
 Especificación del criterio de validación y de la taxonomía de resultados & Hasta septiembre 2026 & Concluida\\
 Redacción del informe de avance & Septiembre 2026 & En curso\\
-Implementación del modelo alternativo y entrenamiento del conjunto de repeticiones & Octubre 2026 & Pendiente\\
-Evaluación de la estabilidad de las relaciones ante la inicialización del entrenamiento & Octubre 2026 & Pendiente\\
-Evaluación de la estabilidad ante el criterio de discretización & Octubre 2026 & Pendiente\\
-Contraste de las relaciones frente a la hipótesis nula & Noviembre 2026 & Pendiente\\
-Medición de la dependencia del modelo respecto de cada relación & Noviembre 2026 & Pendiente\\
-Evaluación de especificidad y compacidad de la hipótesis & Noviembre a diciembre 2026 & Pendiente\\
-Contraste contra referencias construidas fuera del modelo & Diciembre 2026 & Pendiente\\
-Aplicación de la taxonomía sobre los resultados obtenidos & Diciembre 2026 & Pendiente\\
-Validación sobre un conjunto sintético de estructura conocida & Enero 2027 & Pendiente\\
-Validación sobre un segundo dominio real & Enero a febrero 2027 & Pendiente\\
-Redacción del informe final & Marzo 2027 & Pendiente\\
+Implementación del modelo alternativo y entrenamiento del conjunto de repeticiones & Septiembre 2026 & Concluida\\
+Evaluación de la estabilidad de las relaciones ante la inicialización del entrenamiento & Septiembre 2026 & En curso\\
+Evaluación de la estabilidad ante el criterio de discretización & Septiembre a octubre 2026 & Pendiente\\
+Contraste de las relaciones frente a la hipótesis nula & Septiembre 2026 & En curso\\
+Medición de la dependencia del modelo respecto de cada relación & Septiembre 2026 & En curso\\
+Evaluación de especificidad y compacidad de la hipótesis & Octubre 2026 & Pendiente\\
+Contraste contra referencias construidas fuera del modelo & Septiembre a octubre 2026 & En curso\\
+Aplicación de la taxonomía sobre los resultados obtenidos & Octubre 2026 & Pendiente\\
+Revisión general del documento y redacción de fórmulas y métricas usadas & Octubre a noviembre 2026 & Pendiente\\
+Redacción del informe final & Noviembre 2026 & Pendiente\\
 \bottomrule
 \end{longtable}
 }
 
 \section{Dependencias y riesgos}
 
-Tres dependencias condicionan ese calendario: el cómputo, porque evaluar la estabilidad exige entrenar varias decenas de modelos equivalentes y el costo por corrida determina cuánto puede avanzarse por semana; la disponibilidad del segundo dominio, que exige acceso al modelo y no solo a su matriz, para poder repredecir bajo condiciones alteradas; y la construcción del conjunto sintético, única referencia externa con la que cuente el trabajo, dado que no existe una topología verificada de antemano entre las variables del caso de estudio. El riesgo principal es que la cadena se detenga temprano y ninguna relación supere la primera o segunda pregunta; aun así no invalidaría el trabajo, porque cada caída diagnostica la relación entre atención y estructura, y ahí sirve el conjunto sintético, para verificar si detecta una estructura conocida.
+Dos dependencias condicionan ese calendario: el cómputo, porque evaluar la estabilidad exige entrenar varias decenas de modelos equivalentes y el costo por corrida determina cuánto puede avanzarse por semana; y la disponibilidad de una referencia externa contra la cual contrastar las relaciones extraídas. A diferencia de lo que se asumió al planificar esta etapa, sí existe una para el caso de estudio: el catastro regional de viñedos, que fija variedad y ubicación del cultivo, y la fenología propia de la vid, ambas ajenas al modelo y verificables de forma independiente. El riesgo principal es que la cadena se detenga temprano y ninguna relación supere la primera o segunda pregunta; aun así no invalidaría el trabajo, porque cada caída diagnostica la relación entre atención y estructura.

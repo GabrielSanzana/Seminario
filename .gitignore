@@ -43,3 +43,4 @@ __pycache__/
 
 # Archivos de bloqueo temporal de Word/Office (~$archivo.docx)
 ~$*
+.aider*

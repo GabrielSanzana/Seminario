@@ -29,10 +29,10 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 32 | Task-029: nuevo título principal, "Framework para reconstrucción de estructuras relacionales desde representaciones latentes" |
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 30 | Task-029: corrige la inconsistencia "siempre se entrena un modelo alternativo" -> framework agnóstico (aplica directo si el modelo desplegado ya cumple la condición, entrena alternativa si no) |
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 47 | Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
-| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 | 24 | Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
+| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 (Task-030 la editó claude-2, instrucción directa) | 24 | Task-030: objetivo 2 reescrito, describe la cadena de 5 condiciones y la taxonomía de 4 resultados en vez de solo nombrar "estabilidad y fidelidad" (autor humano lo marcó ambiguo). Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
 | `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027/028/029 las editó claude-2, instrucción directa del autor humano) | 111 | Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
 | `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 55 | Task-029: quita una raya larga en §4.1 (regla de estilo sin rayas). Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
-| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-028 la editó claude-2, instrucción directa del autor humano) | 54 | Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
+| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-028/030 la editó claude-2, instrucción directa del autor humano) | 53 | Task-030: **fechas confirmadas** contra `plan_trabajo_semanal.md` (informe final 20-nov-2026, no marzo 2027); §5.1/§5.3 y `tab:plan` reflejan que la etapa de validación ya está en curso (50 semillas entrenadas, primeras preguntas del criterio evaluándose) sin reportar cifras; corrige en §5.3 la afirmación falsa de que no existe referencia externa (sí existe: catastro CIREN + fenología de la vid); segundo dominio y conjunto sintético quedan fuera del alcance comprometido. Ver nota de cierre abajo. Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página |
 | `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 (Task-029 la editó claude-2, instrucción directa) | 90 | Task-029: §Planteamiento corrige la misma inconsistencia de agnosticismo del framework (ver nota de cierre abajo); quita 5 rayas largas en el archivo; elimina §"Alcance de esta etapa" completa por redundar con el capítulo de plan de trabajo — **ojo**: eso deja `teleconnections2026causal` en solo 2 usos, bajo el mínimo de 3, ver nota de cierre. Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
 | `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `figuras/framework_pipeline.tex` | `NEED_REVIEW` | claude-1 | 57 | Task-026: esquema de la composición, `standalone` + TikZ, se compila aparte |
@@ -71,6 +71,59 @@ antes de tocar nada:
    `LTchunksize`. Las tres tablas del documento dependen de ambos.
 
 ## Cola de tareas
+
+### Task-030 — cerrada por claude-2, pendiente de revisión
+
+- **Task-030 — objetivo 2 y plan de trabajo, a raíz del trabajo experimental de
+  claude-1 en `analisis_xai/`.** Instrucción directa del autor humano,
+  2026-09-10. Contexto: en paralelo al flujo de `TASKS.md`, claude-1 (con
+  coautoría de Claude Opus 5) entrenó 50 ConvTransformers del caso de estudio y
+  corrió un análisis interventivo extenso en la rama
+  `analisis/xai-atencion-interventiva` (PR #29, mergeado y luego revertido por
+  un sesgo en un control que ya está corregido en el branch, 3 commits;
+  **claude-2 no mergeó esa rama, queda para claude-1** — instrucción explícita
+  del autor humano). El `README.md` de esa rama, sección 10, lista
+  "Correcciones que hay que llevar al documento de tesis"; de esas, la única
+  que no es una cifra de ejecución (excluida de esta entrega por la regla de
+  Task-019/025) es que **la afirmación de que no existe referencia externa
+  para el caso de estudio es falsa**: existe el catastro CIREN 2024 de viñedos
+  y la fenología de la vid.
+  1. **Objetivo 2** (`secciones/02_objetivos.tex`): el autor humano lo marcó
+     ambiguo — solo nombraba "estabilidad y fidelidad" sin decir que el
+     criterio real es una cadena de 5 condiciones acumulativas que termina en
+     una taxonomía de 4 resultados (ya formalizada en `06_propuesta.tex`
+     desde Task-022). Reescrito para declarar esa estructura explícitamente,
+     conservando las tres citas que ya tenía.
+  2. **Plan de trabajo** (`secciones/05_plan_trabajo.tex`): se encontró
+     `plan_trabajo_semanal.md` (calendario real semana a semana, suelto en la
+     raíz del repo, no versionado) con la fecha real de entrega del informe
+     final: **20 de noviembre de 2026**, no marzo de 2027 como decía
+     `tab:plan`. Cambios:
+     - `tab:plan`: fechas corregidas al calendario real; "Implementación del
+       modelo alternativo y entrenamiento" pasa a `Concluida` (50 semillas
+       entrenadas, confirmado); cuatro filas pasan a `En curso` (estabilidad
+       ante inicialización, contraste con hipótesis nula, dependencia del
+       modelo, contraste con referencia externa) porque el trabajo de
+       claude-1 ya las tiene en marcha, aunque sin resultados reportados en
+       esta entrega; "Validación sobre un conjunto sintético" y "sobre un
+       segundo dominio real" se retiran de la tabla y se declaran fuera del
+       alcance comprometido en la prosa de §5.2, porque el calendario real no
+       tiene margen para ambas antes del 20 de noviembre (el segundo dominio
+       ya aparecía solo como opcional en `plan_trabajo_semanal.md`).
+     - §5.1: ya no dice "queda pendiente la etapa de validación" sin matices;
+       dice que está en curso, sin reportar resultados (coherente con la
+       regla de no cifras de ejecución en esta entrega).
+     - §5.3: corregida la afirmación falsa sobre la referencia externa (ver
+       arriba); "tres dependencias" pasa a "dos" al retirar la dependencia del
+       segundo dominio, ahora fuera de alcance.
+  **No se tocó:** `07_conclusiones.tex` línea "…no existe nada equivalente…"
+  tiene la misma afirmación falsa sobre la referencia externa y **sigue sin
+  corregir** — fuera del alcance que pidió el autor humano para esta tarea
+  (solo plan de trabajo y un objetivo). Pendiente de decisión.
+  **Cierre:** `./scripts/compilar.sh` → `OK: main.pdf compilado, 25 paginas`
+  (cuerpo de 17, sin cambios porque ninguna edición agregó o quitó líneas de
+  forma significativa). Citas sin cambios: 25/25 resuelven,
+  `teleconnections2026causal` sigue en 2 usos (Task-029, sin resolver).
 
 ### Task-029 — cerrada por claude-2, pendiente de revisión
 
