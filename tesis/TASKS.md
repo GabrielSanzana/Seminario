@@ -28,13 +28,13 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `pucv_inf_2024.sty` | `NEED_REVIEW` | autor humano (Task-029 la editó claude-2, autorización explícita) | 91 | Task-029: `\titleclass{\chapter}{straight}` para que `\chapter` deje de forzar página nueva (ver TASKS.md, nota de cierre). Task-021: unica linea cambiada, biblatex apa -> ieee (citas numericas) |
 | `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 32 | Task-029: nuevo título principal, "Framework para reconstrucción de estructuras relacionales desde representaciones latentes" |
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 (Task-032 y Task-029 las editó claude-2, instrucción directa) | 31 | Task-032: `\phantomsection` antes del `\addcontentsline` de "Resumen/Abstract" (ver main.tex, mismo bug de hyperref). Task-029: corrige la inconsistencia "siempre se entrena un modelo alternativo" -> framework agnóstico (aplica directo si el modelo desplegado ya cumple la condición, entrena alternativa si no) |
-| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 47 | Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
-| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 (Task-032 la editó claude-2, instrucción directa) | 23 | Task-032: objetivo 2 acortado a pedido del autor humano (quedaba muy largo) — una oración en vez de dos párrafos, mismas 3 citas y las cinco etapas, sin el `\ref{sec:criterio}`. Task-031: el objetivo 2 pasa de cuatro preguntas a las cinco de §6.5, con la quinta explícita (especificidad del efecto y tamaño de la hipótesis) y referencia cruzada a `sec:criterio`. Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-027/028/029 las editó claude-2, instrucción directa del autor humano) | 130 | Task-031: §3.1.2 transcribe completa la cadena booleana de los cuatro bloques PICO; orden de autores corregido en §3.1.3. Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-033/029 las editó claude-2, instrucción directa) | 47 | Task-033: corrige "no se ha ejecutado nada" -> "ya está en curso" en §Propuesta y contribución (contradecía `tab:plan`). Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
+| `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 (Task-033/032 las editó claude-2, instrucción directa) | 23 | Task-033: objetivo general corregido a la formulación agnóstica (decía "entrenado sobre los mismos datos que el modelo principal", sin condición, inconsistente desde Task-029). Task-032: objetivo 2 acortado a pedido del autor humano (quedaba muy largo) — una oración en vez de dos párrafos, mismas 3 citas y las cinco etapas, sin el `\ref{sec:criterio}`. Task-031: el objetivo 2 pasa de cuatro preguntas a las cinco de §6.5, con la quinta explícita (especificidad del efecto y tamaño de la hipótesis) y referencia cruzada a `sec:criterio`. Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-033/027/028/029 las editó claude-2, instrucción directa del autor humano) | 130 | Task-033: celda "Propuesta" de `tab:familias` a formulación agnóstica. Task-031: §3.1.2 transcribe completa la cadena booleana de los cuatro bloques PICO; orden de autores corregido en §3.1.3. Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
 | `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 55 | Task-029: quita una raya larga en §4.1 (regla de estilo sin rayas). Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
-| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-028 la editó claude-2, instrucción directa del autor humano) | 88 | Task-031: capítulo reorganizado, §5.2 Datos (conjunto real y sintético) y §5.3 Procedimiento nuevas, orden de autores en el caption, tercera dependencia corregida. Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
+| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-033/028 las editó claude-2, instrucción directa del autor humano) | 88 | Task-033: corrige "queda pendiente la etapa de validación" -> "ya está en curso" en §5.1 (contradecía `tab:plan`, mismo problema que Task-030 había arreglado antes de que PR#30 lo revirtiera sin querer). Task-031: capítulo reorganizado, §5.2 Datos (conjunto real y sintético) y §5.3 Procedimiento nuevas, orden de autores en el caption, tercera dependencia corregida. Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
 | `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 (Task-029 la editó claude-2, instrucción directa) | 90 | Task-029: §Planteamiento corrige la misma inconsistencia de agnosticismo del framework (ver nota de cierre abajo); quita 5 rayas largas en el archivo; elimina §"Alcance de esta etapa" completa por redundar con el capítulo de plan de trabajo — **ojo**: eso deja `teleconnections2026causal` en solo 2 usos, bajo el mínimo de 3, ver nota de cierre. Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
-| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 | 17 | Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
+| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 (Task-033 la editó claude-2, instrucción directa) | 17 | Task-033: corrige "no se ha ejecutado nada, es todo etapa futura" -> "ya está en curso" (contradecía `tab:plan`); "modelo alternativo" sin condición -> formulación agnóstica; quita la última raya larga del documento. Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `figuras/framework_pipeline.tex` | `NEED_REVIEW` | claude-1 | 57 | Task-026: esquema de la composición, `standalone` + TikZ, se compila aparte |
 | `figuras/prisma_flujo.tex` | `NEED_REVIEW` | claude-1 | 65 | Task-026: flujo de cribado PRISMA, cifras de la bitácora |
 | `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | 25 entradas, ahora renderizadas en estilo IEEE numerico |
@@ -71,6 +71,147 @@ antes de tocar nada:
    `LTchunksize`. Las tres tablas del documento dependen de ambos.
 
 ## Cola de tareas
+
+### Task-036 — cerrada por claude-2, pendiente de revisión
+
+- **Task-036 — el fix de Task-035 para las figuras (`[p]`) no bastó: se
+  arrastraban a otro capítulo.** El autor humano reportó, con captura, que
+  tras Task-035 las figuras seguían cortando texto ("nin-gún" partido en dos
+  páginas) y además `fig:prisma` (capítulo 3) aparecía pegada a `fig:pipeline`
+  en medio del capítulo 6. Causa: un float `[p]` se encola y LaTeX decide
+  cuándo sacarlo; sin `\cleardoublepage` forzado en cada `\chapter` (removido
+  en Task-029 para el problema de espacios en blanco), ese encolado puede
+  arrastrar la figura arbitrariamente lejos de donde se referencia. Un
+  primer intento con `\clearpage` antes de cada `[p]` tampoco resolvió el
+  arrastre: verificado contra el PDF compilado, `fig:pipeline` terminó en la
+  página 28, después de la sección de Referencias.
+  **Solución que sí funcionó:** sacar las dos figuras del sistema de floats
+  por completo. En vez de `\begin{figure}[p]...\end{figure}`, se usa
+  `\clearpage` + `\begin{center}\includegraphics{...}\captionof{figure}{...}
+  \label{...}\end{center}` (`\captionof` viene del paquete `caption`, ya
+  cargado por `pucv_inf_2024.sty`). Sin entorno flotante no hay cola que
+  arrastre nada: la imagen queda exactamente donde se escribe en el fuente.
+  Verificado contra el PDF compilado: `fig:prisma` cae en la página 12, junto
+  a §3.1.3 donde se referencia; `fig:pipeline` cae en la página 24, en la
+  misma página que el párrafo que la sigue en §6.4. Ninguna oración queda
+  partida por una imagen.
+  **Cierre:** `python scripts/generar_pdf.py` → `OK: main.pdf compilado, 29
+  paginas` (antes 28; sube por los `\clearpage` que dejan espacio parcial en
+  la página anterior a cada figura, aceptado porque es el costo de que la
+  figura no ande saltando de capítulo).
+
+### Task-035 — cerrada por claude-2, pendiente de revisión
+
+- **Task-035 — figuras que cortaban texto, filtro de fecha faltante y reescritura del Objetivo 2.**
+  1. **Figuras partiendo oraciones a la mitad.** Las dos figuras del documento
+     (`fig:prisma` en `03_estado_arte.tex` y `fig:pipeline` en `06_propuesta.tex`)
+     usaban `[htbp]` con `width=\textwidth}`. Verificado contra el PDF compilado:
+     `fig:prisma` flotaba literalmente en medio de la oración "...producir una
+     estructura relacional entre" [FIGURA] "variables.", partiendo "entre
+     variables" en dos páginas distintas. Cambiadas ambas a `[p]` (página propia),
+     que es lo estándar para una imagen a ancho completo. Verificado tras
+     recompilar: la oración queda íntegra.
+  2. **Filtro de fecha faltante.** `03_estado_arte.tex` (§3.1.2) listaba los
+     filtros que la búsqueda complementaria no pasó (deduplicación, DOI, acceso
+     a texto, cribado título/resumen) pero omitía el marco temporal de
+     publicación (2022-2026), pese a que el mismo párrafo reconoce que esa
+     búsqueda trajo una referencia de 2020 (`abnar2020quantifying`). Agregado
+     "marco temporal de publicación" a la lista.
+  3. **Objetivo 2 reescrito, más corto y sin comprometerse a un mecanismo
+     interno.** A pedido del autor humano: la versión anterior citaba tres
+     referencias (`keratoconus2026instability`, `simic2025perturbation`,
+     `rulexai2024events`) para justificar detalles ("cinco etapas", "criterio
+     doble") que ya estaban explicados con más contexto en `03_estado_arte.tex`
+     y `06_propuesta.tex`, y un objetivo con citas sin desarrollar resultaba
+     difícil de leer sin ir a buscar la fuente. Nueva redacción: "Diseñar un
+     criterio que evalúe las relaciones extraídas y determine cuáles se
+     sostienen como hipótesis estructurales genuinas." Sin citas, sin
+     mecanismo, deja espacio para seguir ajustando el criterio durante la
+     experimentación.
+     **Excepción explícita a la regla de mínimo 3 usos (Task-023):**
+     `keratoconus2026instability` y `simic2025perturbation` quedan en 2 usos
+     cada una (antes en 3, justo en el mínimo). El autor humano autorizó
+     explícitamente esta excepción ("me da igual si esas citas quedan en
+     dos") al pedir el recorte del objetivo. No se tocó su uso en
+     `03_estado_arte.tex` ni `06_propuesta.tex`, donde siguen plenamente
+     desarrolladas.
+  4. **Referencia externa en `01_introduccion.tex` §Qué se ha hecho hasta
+     ahora.** La frase "existe una referencia externa verificable, y entre las
+     variables del caso de estudio esa referencia no existe" era imprecisa:
+     sí existe una referencia (el catastro del Ministerio de Agricultura,
+     verificado contra el shapefile real `viveros_2024_h19.shp`: 3185 puntos,
+     58 de ellos con vid o uva, no 72 ni polígonos como decía
+     `05_plan_trabajo.tex` antes de esta corrección), solo que da sitio y
+     especie, no una topología entre índices espectrales. Reescrito para
+     nombrar esa referencia y precisar qué le falta, en vez de negar que
+     exista.
+  **Cierre:** `python scripts/generar_pdf.py` → `OK: main.pdf compilado, 28
+  paginas` (cuerpo de 20, sin cambio). Verificado con extracción de texto del
+  PDF que la oración de `fig:prisma` ya no queda partida.
+
+### Task-034 — cerrada por claude-2, pendiente de revisión
+
+- **Task-034 — espacio en blanco entre Resumen y Abstract, y formato de cita
+  directa.** Dos correcciones puntuales pedidas por el autor humano:
+  1. **Espacio en blanco excesivo antes de "ABSTRACT".** `Resumen/resumen.tex`
+     tenía un `\vspace{1.5cm}` explícito entre "Palabras clave" y
+     `\chapter*{Abstract}`. El formato institucional
+     (`Formato_Informes_Proyecto_Título-2024.pdf` §1.2) prohíbe espacios
+     adicionales entre el fin de una sección y el encabezado siguiente.
+     Eliminado; el espaciado entre ambos títulos queda solo el que define
+     `\titlespacing*{\chapter}` en `pucv_inf_2024.sty` (5pt).
+  2. **Cita directa sin el formato correcto.** `01_introduccion.tex` §Descripción
+     del problema envolvía la cita textual de `mechinterp2025ts` con
+     `\enquote{...}`, que en este documento (sin `csquotes` configurado para
+     comillas curvas específicas) no produce las comillas dobles rectas que
+     exige el formato institucional para cita directa. Cambiado a
+     `` ``...'' `` explícito, igual al ejemplo del formato
+     ("De acuerdo a [8] un algoritmo... es 'un conjunto de reglas...'").
+  **Cierre:** `python scripts/generar_pdf.py` → `OK: main.pdf compilado, 28
+  paginas` (cuerpo de 20, sin cambio).
+
+### Task-033 — cerrada por claude-2, pendiente de revisión
+
+- **Task-033 — auditoría de contradicciones de todo el documento.** El autor
+  humano pidió revisar si quedaba alguna contradicción o error, a raíz de los
+  cambios acumulados en Task-029/030/031/032. Se releyó el documento completo
+  (los 4 puntos del protocolo de contradicciones) y se encontraron y
+  corrigieron:
+  1. **Nomenclatura — "modelo alternativo" sin condición.** Task-029
+     estableció que el framework es agnóstico (aplica directo si el modelo
+     desplegado cumple la condición; entrena una alternativa solo si no la
+     cumple o para el caso de estudio) y corrigió Resumen, Introducción y
+     `06_propuesta.tex` §Planteamiento. Quedaron sin corregir tres lugares
+     con la afirmación vieja, sin condición: el **Objetivo general**
+     (`02_objetivos.tex`), un párrafo de `07_conclusiones.tex`, y la celda
+     "Propuesta" de `tab:familias` (`03_estado_arte.tex`). Los tres ahora
+     usan la misma formulación agnóstica.
+  2. **Alcance — estado de ejecución.** `07_conclusiones.tex`,
+     `01_introduccion.tex` §Propuesta y contribución, y `05_plan_trabajo.tex`
+     §5.1 afirmaban que la ejecución sobre el caso de estudio no había
+     empezado y correspondía enteramente a una etapa futura. Contradice el
+     propio `tab:plan`, que documenta actividades de esa etapa ya en curso
+     desde antes de esta entrega (semanas del 13 de agosto en adelante,
+     "experimento de intervención" y "experimentos en curso"). Es la misma
+     contradicción que se había corregido en un intento anterior de
+     Task-030 y que se perdió al mergear PR #30 sobre esa versión (ver nota
+     de colisión Task-030/PR#30 arriba). Corregida de nuevo en los tres
+     archivos: la ejecución está en curso, este informe no reporta
+     resultados, sin afirmar ni más ni menos que eso.
+  3. **Formato — raya larga** en `07_conclusiones.tex`, la única que quedaba
+     en todo el documento (regla sin rayas desde Task-019).
+  **No se tocó, por quedar fuera de lo que se pidió revisar esta vez, pero
+  sigue abierto:** `teleconnections2026causal` en 2 usos (Task-029).
+  **Verificado, sin encontrar problema:** el punto sobre la referencia
+  externa (`05_plan_trabajo.tex` §5.5 y `07_conclusiones.tex` §3) que
+  Task-030/PR#30 había dejado como pendiente en realidad quedó bien resuelto
+  por Task-031/PR#33 — ambos textos dicen lo mismo (no hay topología
+  verificada entre índices; el catastro da sitio y especie, no dependencia
+  entre variables), solo con palabras distintas. Se cierra esa nota.
+  **Cierre:** `./scripts/compilar.sh` → `OK: main.pdf compilado, 28 paginas`
+  (cuerpo de 20, sin cambio). Citas sin cambios: 25/25 resuelven, todas con
+  3+ usos salvo `teleconnections2026causal` (2). Sin referencias colgantes,
+  sin rayas largas en todo el documento.
 
 ### Task-031 — cerrada por claude-1, pendiente de revisión
 

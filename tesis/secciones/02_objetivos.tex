@@ -9,16 +9,16 @@
 
 \section{Objetivo general}
 
-Desarrollar un framework metodológico que transforme la representación relacional aprendida por un modelo de aprendizaje automático, entrenado sobre los mismos datos que el modelo principal del dominio, en una hipótesis relacional compacta e interpretable sobre las variables del fenómeno, y establecer el criterio que decide cuándo esa hipótesis puede sostenerse.
+Desarrollar un framework metodológico que, operando de forma agnóstica sobre cualquier modelo cuya atención se calcule entre tokens de variables con nombre, transforme esa representación en una hipótesis relacional compacta e interpretable sobre las variables del fenómeno, y establecer el criterio que decide cuándo esa hipótesis puede sostenerse.
 
 \section{Objetivos específicos}
 
-Los tres objetivos siguientes cubren, en orden, la formalización del método, la construcción del criterio con que se lo evalúa y su aplicación sobre el caso de estudio. Su alcance está acotado deliberadamente al trabajo que puede completarse dentro del periodo de la tesis.
+Los tres objetivos siguientes cubren, en orden, la formalización del método, la construcción del criterio con que se lo evalúa y su aplicación sobre el caso de estudio.
 
 \begin{enumerate}
 \item Formalizar matemáticamente las transformaciones que llevan de la matriz de interacción entre variables al grafo dirigido, y de este a la hipótesis relacional compacta, junto con las condiciones que debe cumplir una representación para ser entrada válida del framework.
 
-\item Diseñar un criterio de decisión secuencial de cinco etapas que filtre las relaciones extraídas para discriminar hipótesis estructurales genuinas de atajos predictivos, artefactos del modelo o ruido estocástico. El criterio recoge dos advertencias del estado del arte: que una explicación más estable no es necesariamente más fiel \cite{keratoconus2026instability}, y que la métrica de fidelidad más extendida falla al trasladarse a datos temporales \cite{simic2025perturbation}; también evalúa el tamaño de la hipótesis, siguiendo el criterio doble que plantean \textcite{rulexai2024events}.
+\item Diseñar un criterio que evalúe las relaciones extraídas y determine cuáles se sostienen como hipótesis estructurales genuinas.
 
 \item Aplicar el framework sobre el caso de estudio de índices espectrales y evaluar la hipótesis obtenida con el criterio anterior, reportando relación por relación cuáles se sostienen y cuáles quedan descartadas.
 \end{enumerate}

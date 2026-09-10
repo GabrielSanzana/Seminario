@@ -33,19 +33,73 @@ CARPETA_TESIS = REPO_RAIZ / "tesis"
 ARCHIVO_PRINCIPAL = "main.tex"
 
 # Ruta tipica de TinyTeX en Windows, por si pdflatex/biber no estan en el
-# PATH del sistema. TinyTeX se instala por usuario, no por maquina.
-RUTA_TINYTEX = Path.home() / "AppData" / "Roaming" / "TinyTeX" / "bin" / "windows"
+# PATH del sistema. TinyTeX se instala por usuario, no por maquina. Se prueba
+# con Path.home() y tambien con USERPROFILE por separado: bajo el depurador
+# de VS Code (F5) el proceso a veces hereda un PATH distinto al de una
+# terminal normal (por ejemplo si TinyTeX solo se agrego al PATH de git-bash
+# y no al PATH de Windows que usan PowerShell y el depurador), asi que no hay
+# que asumir que shutil.which() vaya a encontrarlo ahi.
+def _raices_home():
+    raices = [Path.home()]
+    perfil = os.environ.get("USERPROFILE")
+    if perfil:
+        raices.append(Path(perfil))
+    # sin duplicados, conservando el orden
+    vistas = []
+    for r in raices:
+        if r not in vistas:
+            vistas.append(r)
+    return vistas
+
+
+def _carpetas_tinytex_candidatas():
+    carpetas = []
+    for raiz in _raices_home():
+        # Ruta estándar
+        carpetas.append(raiz / "AppData" / "Roaming" / "TinyTeX" / "bin" / "windows")
+        # Ruta en la carpeta AppData/Local/Packages (Claude/Packages)
+        carpetas.append(raiz / "AppData" / "Local" / "Packages" / "Claude_pzs8sxrjxfjjc" / "LocalCache" / "Roaming" / "TinyTeX" / "bin" / "windows")
+    
+    try:
+        import glob as _glob
+        for patron in _glob.glob(r"C:\Users\*\AppData\Roaming\TinyTeX\bin\windows"):
+            carpetas.append(Path(patron))
+        # Glob extendido para instalaciones dentro de Packages
+        for patron in _glob.glob(r"C:\Users\*\AppData\Local\Packages\*\LocalCache\Roaming\TinyTeX\bin\windows"):
+            carpetas.append(Path(patron))
+    except OSError:
+        pass
+
+    vistas = []
+    for c in carpetas:
+        if c not in vistas:
+            vistas.append(c)
+    return vistas
 
 
 def resolver_binario(nombre):
-    """Busca un ejecutable en el PATH; si no aparece, prueba la ruta de TinyTeX."""
+    """Busca un ejecutable en el PATH; si no aparece, prueba rutas conocidas de TinyTeX."""
     encontrado = shutil.which(nombre)
     if encontrado:
         return encontrado
-    candidato = RUTA_TINYTEX / f"{nombre}.exe"
-    if candidato.exists():
-        return str(candidato)
+    for carpeta in _carpetas_tinytex_candidatas():
+        candidato = carpeta / f"{nombre}.exe"
+        if candidato.exists():
+            return str(candidato)
     return None
+
+
+def rutas_tinytex_probadas():
+    return [str(c) for c in _carpetas_tinytex_candidatas()]
+
+
+def diagnostico_entorno():
+    return (
+        f"Path.home()={Path.home()}  "
+        f"USERPROFILE={os.environ.get('USERPROFILE')}  "
+        f"HOMEDRIVE={os.environ.get('HOMEDRIVE')}  "
+        f"HOMEPATH={os.environ.get('HOMEPATH')}"
+    )
 
 
 def correr(comando, cwd):
@@ -67,13 +121,19 @@ def main():
     biber = resolver_binario("biber")
 
     if not pdflatex:
-        print("FALLO: pdflatex no esta en el PATH ni en la ruta de TinyTeX.", file=sys.stderr)
-        print(f"  Se busco en: {RUTA_TINYTEX}", file=sys.stderr)
-        print("  Instalar TinyTeX: https://yihui.org/tinytex/", file=sys.stderr)
+        print("FALLO: pdflatex no esta en el PATH ni en las rutas de TinyTeX.", file=sys.stderr)
+        for ruta in rutas_tinytex_probadas():
+            estado = "existe" if Path(ruta).exists() else "no existe"
+            print(f"  Se busco en: {ruta} ({estado})", file=sys.stderr)
+        print(f"  Diagnostico: {diagnostico_entorno()}", file=sys.stderr)
+        print("  Si TinyTeX esta instalado pero esto sigue fallando, es probable", file=sys.stderr)
+        print("  que este en el PATH de git-bash y no en el de Windows/PowerShell:", file=sys.stderr)
+        print("  correr este script desde una terminal normal (no F5/depurador)", file=sys.stderr)
+        print("  puede evitarlo. Si no esta instalado: https://yihui.org/tinytex/", file=sys.stderr)
         return 1
 
     if not biber:
-        print("FALLO: biber no esta en el PATH ni en la ruta de TinyTeX.", file=sys.stderr)
+        print("FALLO: biber no esta en el PATH ni en las rutas de TinyTeX.", file=sys.stderr)
         print("  Instalar con: tlmgr install biber biblatex biblatex-apa", file=sys.stderr)
         return 1
 
