@@ -1,0 +1,243 @@
+==============================================================================
+ ANALISIS ESTRUCTURAL DEL GRAFO
+
+ No pregunta si el ranking de las 66 aristas coincide con una
+ verdad externa -eso lo hace certificar_todo.py y ninguna fuente
+ lo pasa-. Pregunta si el GRAFO tiene estructura: si las semillas
+ coinciden, si agrupa por familia espectral, si el orden de los
+ nodos es estable y si el operador tiene un modo dominante.
+
+ Nulo en todo: permutar las 12 etiquetas, 2000 veces.
+==============================================================================
+
+  fuente                           repro    ICC  SNR>3    ARI       p   Jacc       p   modul       p
+  atencion rollout                +0.654  0.563   66/66  0.383  0.0050  0.411  0.0050  -0.057  0.0040
+  atencion capa A1                +0.606  0.620   66/66  0.104  0.0050  0.450  0.0050  -0.073  0.0005
+  atencion capa A2                +0.513  0.395   55/66  0.284  0.0050  0.305  0.0050  -0.077  0.0850
+  atencion A2*A1 (sin residual)   +0.497  0.548   66/66  0.583  0.0050  0.334  0.0050  -0.062  0.0005
+  atencion A1+A2 (aditiva)        +0.609  0.465   65/66  0.288  0.0050  0.335  0.0050  -0.075  0.0125
+  atencion max sobre cabezas      +0.725  0.609   54/66  0.188  0.0050  0.350  0.0050  -0.090  0.0005
+  dependencia por ablacion        +0.784  0.769   12/66  0.542  0.0050  0.577  0.0050  -0.079  0.9005
+  dependencia por ablacion (cruda)  +0.794  0.782   11/66  0.349  0.0050  0.421  0.0050  -0.099  0.2919
+
+  repro = Spearman medio entre las fuerzas de dos semillas.
+  ICC = fraccion de la varianza total que es sistematica entre
+     aristas, y no de la semilla. Es la version correcta de 'si
+     fuera ruido no habria estructura': cerca de 0 las aristas
+     son indistinguibles y solo se ve la semilla; cerca de 1 cada
+     arista tiene un valor propio que las semillas reproducen.
+  SNR>3 = aristas cuya media supera 3 veces su desviacion entre
+     semillas. Es la potencia por arista, no del grafo entero.
+  ARI = acuerdo entre las comunidades que detecta cada semilla
+     POR SU CUENTA, corregido por azar. No se le da la particion.
+  Jacc = solapamiento del grafo binario Top-P entre semillas, o
+     sea la reproducibilidad de G y no de A.
+  modul = modularidad contra las familias espectrales, test
+     BILATERAL: negativa significa que conecta ENTRE familias.
+
+------------------------------------------------------------------------------
+ QUE SE PUEDE AFIRMAR
+  8/8 fuentes son reproducibles entre
+  semillas por encima del azar. Ahi el promedio sobre 50
+  entrenamientos mide algo, no suaviza ruido:
+    dependencia por ablacion (cruda) +0.794  contra -0.000 de nulo  p=0.0050
+    dependencia por ablacion       +0.784  contra -0.002 de nulo  p=0.0050
+    atencion max sobre cabezas     +0.725  contra +0.002 de nulo  p=0.0050
+    atencion rollout               +0.654  contra +0.001 de nulo  p=0.0050
+    atencion A1+A2 (aditiva)       +0.609  contra +0.000 de nulo  p=0.0050
+    atencion capa A1               +0.606  contra -0.004 de nulo  p=0.0050
+    atencion capa A2               +0.513  contra -0.002 de nulo  p=0.0050
+    atencion A2*A1 (sin residual)  +0.497  contra +0.001 de nulo  p=0.0050
+
+  8/8 fuentes detectan las MISMAS
+  comunidades en semillas distintas, sin que se les de ninguna
+  particion; y en el grafo discretizado (el G de Phi: A -> G):
+    atencion A2*A1 (sin residual) ARI=+0.583 (nulo +0.002, p=0.0050)  Jaccard=0.334 (nulo 0.089, p=0.0050)
+    dependencia por ablacion      ARI=+0.542 (nulo -0.001, p=0.0050)  Jaccard=0.577 (nulo 0.081, p=0.0050)
+    atencion rollout              ARI=+0.383 (nulo +0.000, p=0.0050)  Jaccard=0.411 (nulo 0.083, p=0.0050)
+    dependencia por ablacion (cruda)ARI=+0.349 (nulo -0.000, p=0.0050)  Jaccard=0.421 (nulo 0.081, p=0.0050)
+    atencion A1+A2 (aditiva)      ARI=+0.288 (nulo +0.001, p=0.0050)  Jaccard=0.335 (nulo 0.090, p=0.0050)
+    atencion capa A2              ARI=+0.284 (nulo +0.000, p=0.0050)  Jaccard=0.305 (nulo 0.086, p=0.0050)
+    atencion max sobre cabezas    ARI=+0.188 (nulo +0.000, p=0.0050)  Jaccard=0.350 (nulo 0.094, p=0.0050)
+    atencion capa A1              ARI=+0.104 (nulo +0.000, p=0.0050)  Jaccard=0.450 (nulo 0.095, p=0.0050)
+
+  Contra las familias espectrales, las comunidades detectadas dan
+  un ARI de:
+    atencion A2*A1 (sin residual) +0.612   modularidad -0.062 (conecta ENTRE familias, p=0.0005)
+    atencion rollout              +0.343   modularidad -0.057 (conecta ENTRE familias, p=0.0040)
+    dependencia por ablacion      +0.210   modularidad -0.079 (conecta ENTRE familias, p=0.9005)
+    dependencia por ablacion (cruda)+0.146   modularidad -0.099 (conecta ENTRE familias, p=0.2919)
+    atencion capa A2              +0.085   modularidad -0.077 (conecta ENTRE familias, p=0.0850)
+    atencion A1+A2 (aditiva)      +0.026   modularidad -0.075 (conecta ENTRE familias, p=0.0125)
+    atencion capa A1              +0.021   modularidad -0.073 (conecta ENTRE familias, p=0.0005)
+    atencion max sobre cabezas    -0.002   modularidad -0.090 (conecta ENTRE familias, p=0.0005)
+
+  ALCANCE DE ESTAS AFIRMACIONES. Reproducibilidad y modularidad
+  no dicen que las aristas concretas sean relaciones reales del
+  fenomeno: dicen que el grafo es consistente y que concuerda con
+  una particion conocida. Recuperar las familias espectrales es
+  recuperar algo que ya se sabia por la formula de cada indice.
+  Es la prueba de que el canal funciona, no un hallazgo sobre el
+  terreno.
+------------------------------------------------------------------------------
+
+  --- atencion rollout  (50 semillas) ---
+  nodos por centralidad (PageRank): SAVI, EVI2, EVI, NDVI, KNDVI, NDII...
+  modularidad por semilla: desviacion 0.0044
+  gap espectral 0.737 +-0.024
+  ICC 0.563  (var entre aristas 3.302e-05, var entre semillas 2.563e-05)
+  aristas con senal/ruido > 3: 66/66, mediana 17.04
+    MARI-SAVI            SNR=  20.7
+    SAVI-KNDVI           SNR=  20.4
+    MARI-EVI             SNR=  20.3
+    CHL_REDEDGE-SAVI     SNR=  20.3
+    NDVI-EVI2            SNR=  20.3
+  grafo Top-P de consenso: 10 aristas
+    NDVI-EVI, NDVI-EVI2, NDVI-SAVI, NDVI-KNDVI, EVI-EVI2, EVI-SAVI, EVI2-SAVI, EVI2-KNDVI, NDWI-PSRI, SAVI-KNDVI
+  comunidades detectadas en el consenso:
+    {NDVI, EVI, EVI2, SAVI, KNDVI}
+    {NDMI, NDII}
+    {NDWI, PSRI}
+    {CHL_REDEDGE}
+    {MARI, ARI}
+
+  --- atencion capa A1  (50 semillas) ---
+  nodos por centralidad (PageRank): CHL_REDEDGE, KNDVI, NDVI, NDII, NDMI, EVI2...
+  modularidad por semilla: desviacion 0.0019
+  gap espectral 0.869 +-0.010
+  ICC 0.620  (var entre aristas 1.123e-04, var entre semillas 6.883e-05)
+  aristas con senal/ruido > 3: 66/66, mediana 13.63
+    NDMI-NDII            SNR=  20.4
+    NDMI-SAVI            SNR=  19.6
+    EVI-NDMI             SNR=  19.0
+    EVI2-NDMI            SNR=  18.9
+    EVI2-SAVI            SNR=  18.9
+  grafo Top-P de consenso: 10 aristas
+    NDVI-CHL_REDEDGE, MARI-KNDVI, EVI-CHL_REDEDGE, EVI2-CHL_REDEDGE, NDMI-CHL_REDEDGE, NDMI-KNDVI, CHL_REDEDGE-NDII, CHL_REDEDGE-SAVI, CHL_REDEDGE-KNDVI, NDII-KNDVI
+  comunidades detectadas en el consenso:
+    {NDVI, MARI, EVI2, NDMI}
+    {PSRI}
+    {NDWI}
+    {EVI, CHL_REDEDGE, NDII, SAVI}
+    {ARI, KNDVI}
+
+  --- atencion capa A2  (50 semillas) ---
+  nodos por centralidad (PageRank): KNDVI, CHL_REDEDGE, NDWI, NDVI, PSRI, NDII...
+  modularidad por semilla: desviacion 0.0105
+  gap espectral 0.778 +-0.066
+  ICC 0.395  (var entre aristas 6.669e-04, var entre semillas 1.021e-03)
+  aristas con senal/ruido > 3: 55/66, mediana 4.43
+    ARI-EVI2             SNR=   7.4
+    MARI-EVI             SNR=   7.2
+    ARI-SAVI             SNR=   7.2
+    MARI-SAVI            SNR=   6.9
+    MARI-EVI2            SNR=   6.8
+  grafo Top-P de consenso: 10 aristas
+    NDVI-NDWI, NDVI-CHL_REDEDGE, NDVI-KNDVI, MARI-KNDVI, EVI2-CHL_REDEDGE, NDWI-PSRI, NDWI-KNDVI, CHL_REDEDGE-SAVI, CHL_REDEDGE-KNDVI, NDII-KNDVI
+  comunidades detectadas en el consenso:
+    {NDVI, MARI, ARI, KNDVI}
+    {EVI2, CHL_REDEDGE, SAVI}
+    {NDWI, PSRI}
+    {EVI, NDII}
+    {NDMI}
+
+  --- atencion A2*A1 (sin residual)  (50 semillas) ---
+  nodos por centralidad (PageRank): CHL_REDEDGE, KNDVI, NDVI, NDII, NDMI, EVI2...
+  modularidad por semilla: desviacion 0.0013
+  gap espectral 0.977 +-0.005
+  ICC 0.548  (var entre aristas 5.539e-05, var entre semillas 4.573e-05)
+  aristas con senal/ruido > 3: 66/66, mediana 15.72
+    NDMI-SAVI            SNR=  23.2
+    NDII-SAVI            SNR=  22.9
+    EVI-NDMI             SNR=  22.9
+    EVI2-NDII            SNR=  22.5
+    NDMI-NDII            SNR=  22.2
+  grafo Top-P de consenso: 10 aristas
+    NDVI-CHL_REDEDGE, NDVI-KNDVI, MARI-CHL_REDEDGE, EVI2-CHL_REDEDGE, EVI2-KNDVI, NDMI-CHL_REDEDGE, CHL_REDEDGE-NDII, CHL_REDEDGE-SAVI, CHL_REDEDGE-KNDVI, SAVI-KNDVI
+  comunidades detectadas en el consenso:
+    {NDVI, EVI, EVI2, SAVI, KNDVI}
+    {NDWI, CHL_REDEDGE}
+    {MARI, NDMI, NDII}
+    {ARI}
+    {PSRI}
+
+  --- atencion A1+A2 (aditiva)  (50 semillas) ---
+  nodos por centralidad (PageRank): CHL_REDEDGE, KNDVI, NDVI, NDWI, NDII, SAVI...
+  modularidad por semilla: desviacion 0.0046
+  gap espectral 0.837 +-0.025
+  ICC 0.465  (var entre aristas 1.039e-03, var entre semillas 1.194e-03)
+  aristas con senal/ruido > 3: 65/66, mediana 7.59
+    ARI-SAVI             SNR=  13.2
+    MARI-SAVI            SNR=  12.3
+    ARI-EVI2             SNR=  11.9
+    EVI2-SAVI            SNR=  11.9
+    ARI-NDII             SNR=  11.8
+  grafo Top-P de consenso: 10 aristas
+    NDVI-CHL_REDEDGE, NDVI-KNDVI, MARI-KNDVI, EVI-CHL_REDEDGE, EVI2-CHL_REDEDGE, NDWI-PSRI, NDMI-KNDVI, CHL_REDEDGE-SAVI, CHL_REDEDGE-KNDVI, NDII-KNDVI
+  comunidades detectadas en el consenso:
+    {NDVI, MARI, KNDVI}
+    {EVI, EVI2, CHL_REDEDGE, NDII, SAVI}
+    {NDWI, PSRI}
+    {NDMI}
+    {ARI}
+
+  --- atencion max sobre cabezas  (50 semillas) ---
+  nodos por centralidad (PageRank): NDWI, PSRI, CHL_REDEDGE, KNDVI, NDVI, NDMI...
+  modularidad por semilla: desviacion 0.0108
+  gap espectral 0.767 +-0.066
+  ICC 0.609  (var entre aristas 6.925e-03, var entre semillas 4.444e-03)
+  aristas con senal/ruido > 3: 54/66, mediana 5.76
+    EVI2-SAVI            SNR=  11.5
+    ARI-SAVI             SNR=  11.2
+    SAVI-KNDVI           SNR=  10.2
+    EVI-KNDVI            SNR=   9.9
+    EVI2-NDMI            SNR=   9.9
+  grafo Top-P de consenso: 10 aristas
+    NDVI-NDWI, EVI-NDWI, EVI2-NDWI, NDWI-NDMI, NDWI-CHL_REDEDGE, NDWI-SAVI, NDWI-PSRI, NDWI-KNDVI, CHL_REDEDGE-KNDVI, PSRI-KNDVI
+  comunidades detectadas en el consenso:
+    {NDVI, ARI, KNDVI}
+    {EVI, NDWI, PSRI}
+    {EVI2, NDMI, CHL_REDEDGE, NDII}
+    {SAVI}
+    {MARI}
+
+  --- dependencia por ablacion  (50 semillas) ---
+  nodos por centralidad (PageRank): CHL_REDEDGE, PSRI, KNDVI, NDWI, NDVI, ARI...
+  modularidad por semilla: desviacion 0.0319
+  gap espectral 0.311 +-0.080
+  ICC 0.769  (var entre aristas 2.335e-02, var entre semillas 7.031e-03)
+  aristas con senal/ruido > 3: 12/66, mediana 1.04
+    CHL_REDEDGE-KNDVI    SNR=   7.4
+    NDVI-CHL_REDEDGE     SNR=   6.6
+    PSRI-KNDVI           SNR=   6.4
+    NDVI-PSRI            SNR=   5.0
+    NDVI-KNDVI           SNR=   4.5
+  grafo Top-P de consenso: 10 aristas
+    NDVI-CHL_REDEDGE, NDVI-PSRI, MARI-NDWI, ARI-NDWI, EVI2-NDII, NDWI-PSRI, NDMI-NDII, CHL_REDEDGE-PSRI, CHL_REDEDGE-KNDVI, PSRI-KNDVI
+  comunidades detectadas en el consenso:
+    {NDVI, CHL_REDEDGE, PSRI, KNDVI}
+    {EVI, EVI2, SAVI}
+    {NDMI, NDII}
+    {MARI, NDWI}
+    {ARI}
+
+  --- dependencia por ablacion (cruda)  (50 semillas) ---
+  nodos por centralidad (PageRank): CHL_REDEDGE, KNDVI, NDII, NDMI, PSRI, NDVI...
+  modularidad por semilla: desviacion 0.0277
+  gap espectral 0.714 +-0.038
+  ICC 0.782  (var entre aristas 5.600e-05, var entre semillas 1.564e-05)
+  aristas con senal/ruido > 3: 11/66, mediana 1.56
+    PSRI-KNDVI           SNR=   5.1
+    NDVI-PSRI            SNR=   4.6
+    CHL_REDEDGE-PSRI     SNR=   4.3
+    CHL_REDEDGE-KNDVI    SNR=   3.7
+    NDMI-KNDVI           SNR=   3.6
+  grafo Top-P de consenso: 10 aristas
+    NDVI-CHL_REDEDGE, NDVI-PSRI, ARI-NDWI, ARI-KNDVI, NDMI-NDII, NDMI-PSRI, NDMI-KNDVI, CHL_REDEDGE-PSRI, CHL_REDEDGE-KNDVI, PSRI-KNDVI
+  comunidades detectadas en el consenso:
+    {NDVI, CHL_REDEDGE, PSRI, KNDVI}
+    {EVI2, SAVI}
+    {MARI, EVI}
+    {ARI, NDWI}
+    {NDMI, NDII}
+==============================================================================

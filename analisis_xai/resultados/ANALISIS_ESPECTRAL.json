@@ -1,0 +1,2062 @@
+[
+  {
+    "etiqueta": "atencion rollout",
+    "n_semillas": 50,
+    "estacionaria": {
+      "NDVI": 0.09227050334391829,
+      "MARI": 0.07491537303082044,
+      "ARI": 0.06713269075065931,
+      "EVI": 0.0926191265337771,
+      "EVI2": 0.0926132411136828,
+      "NDWI": 0.07650308547090778,
+      "NDMI": 0.0813133055670579,
+      "CHL_REDEDGE": 0.08232776565450822,
+      "NDII": 0.08327995836717712,
+      "SAVI": 0.09393364370701433,
+      "PSRI": 0.07260938404156742,
+      "KNDVI": 0.09048192241890923
+    },
+    "irreversibilidad": 0.019786144706753064,
+    "p_irreversibilidad": 0.42714570858283435,
+    "irreversibilidad_nulo": 0.019786144706753057,
+    "irreversibilidad_semilla_std": 0.0072148793781653155,
+    "entropia_tasa": 3.4470664748127673,
+    "entropia_maxima": 3.4594316186372973,
+    "corrientes_top": [
+      {
+        "de": "PSRI",
+        "a": "MARI",
+        "J": 0.001223530760816563
+      },
+      {
+        "de": "PSRI",
+        "a": "ARI",
+        "J": 0.0012155124165946834
+      },
+      {
+        "de": "ARI",
+        "a": "MARI",
+        "J": 0.0009842945005961602
+      },
+      {
+        "de": "NDWI",
+        "a": "ARI",
+        "J": 0.0009821417106959836
+      },
+      {
+        "de": "NDWI",
+        "a": "MARI",
+        "J": 0.0008026416040258647
+      },
+      {
+        "de": "SAVI",
+        "a": "NDWI",
+        "J": 0.0007501815588057013
+      },
+      {
+        "de": "EVI",
+        "a": "NDWI",
+        "J": 0.0006589485559785734
+      },
+      {
+        "de": "EVI2",
+        "a": "NDWI",
+        "J": 0.0006480709115325133
+      }
+    ],
+    "fiedler": 1.0429053243345197,
+    "k_sugerido": 1,
+    "autovalores": [
+      -1.060143236704477e-30,
+      1.0429053243345197,
+      1.0666831932330105,
+      1.0871641218155002,
+      1.0944585446828807,
+      1.0962701754234585,
+      1.0989782636270493,
+      1.0993818300038216,
+      1.1001735268294395,
+      1.1016864856751023,
+      1.1023437237532756,
+      1.109954810621941
+    ],
+    "rango_efectivo": 9.99926983105738,
+    "energia_primer_modo": 0.6468082135183283,
+    "angulos_principales": 0.8572916458835157,
+    "angulos_principales_nulo": 0.5749810419787783,
+    "pasada_media": 11.142010175081088,
+    "barrido_k": [
+      {
+        "k": 2,
+        "ari_entre_semillas": 0.5555252329225705,
+        "ari_vs_familias": 0.2851985559566787,
+        "modularidad": -0.02029036208582682,
+        "conductancia_media": 0.7217971121300684,
+        "grupos": [
+          [
+            "NDVI",
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "MARI",
+            "ARI",
+            "NDWI",
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 3,
+        "ari_entre_semillas": 0.5664334847437572,
+        "ari_vs_familias": 0.27177700348432055,
+        "modularidad": -0.039878495096090524,
+        "conductancia_media": 0.7079876941287407,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "ARI",
+            "CHL_REDEDGE",
+            "KNDVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "NDII",
+            "SAVI"
+          ]
+        ]
+      },
+      {
+        "k": 4,
+        "ari_entre_semillas": 0.5512125952152426,
+        "ari_vs_familias": 0.248995983935743,
+        "modularidad": -0.047803287509759124,
+        "conductancia_media": 0.8005838297919514,
+        "grupos": [
+          [
+            "NDVI",
+            "CHL_REDEDGE",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "MARI",
+            "ARI"
+          ]
+        ]
+      },
+      {
+        "k": 5,
+        "ari_entre_semillas": 0.40358263443731773,
+        "ari_vs_familias": 0.8603667136812412,
+        "modularidad": -0.05381079852213985,
+        "conductancia_media": 0.8596965443701204,
+        "grupos": [
+          [
+            "NDVI",
+            "EVI",
+            "EVI2",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "NDMI",
+            "NDII"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "CHL_REDEDGE"
+          ],
+          [
+            "MARI",
+            "ARI"
+          ]
+        ]
+      },
+      {
+        "k": 6,
+        "ari_entre_semillas": 0.36403663695013944,
+        "ari_vs_familias": 0.5308056872037915,
+        "modularidad": -0.06188505024581923,
+        "conductancia_media": 0.8994008140201633,
+        "grupos": [
+          [
+            "NDVI",
+            "EVI2",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "NDII"
+          ],
+          [
+            "NDMI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "CHL_REDEDGE"
+          ],
+          [
+            "MARI",
+            "ARI"
+          ]
+        ]
+      }
+    ],
+    "mejor_k": 3,
+    "comunidades_mejor_k": [
+      [
+        "NDVI",
+        "MARI",
+        "ARI",
+        "CHL_REDEDGE",
+        "KNDVI"
+      ],
+      [
+        "NDWI",
+        "PSRI"
+      ],
+      [
+        "EVI",
+        "EVI2",
+        "NDMI",
+        "NDII",
+        "SAVI"
+      ]
+    ],
+    "ari_mejor_k": 0.5664334847437572,
+    "conductancia_mejor_k": 0.7079876941287407
+  },
+  {
+    "etiqueta": "atencion capa A1",
+    "n_semillas": 50,
+    "estacionaria": {
+      "NDVI": 0.0909559413596671,
+      "MARI": 0.0820152075110538,
+      "ARI": 0.06768069036927327,
+      "EVI": 0.08299544010206393,
+      "EVI2": 0.0847436994296812,
+      "NDWI": 0.06727424349794843,
+      "NDMI": 0.08698147992591934,
+      "CHL_REDEDGE": 0.10274512889551292,
+      "NDII": 0.08805064000583242,
+      "SAVI": 0.08451539452628595,
+      "PSRI": 0.06360017532815038,
+      "KNDVI": 0.09844195904861135
+    },
+    "irreversibilidad": 0.005792055164545863,
+    "p_irreversibilidad": 0.9820359281437125,
+    "irreversibilidad_nulo": 0.005792055164545918,
+    "irreversibilidad_semilla_std": 0.0014757588525894944,
+    "entropia_tasa": 3.4420297693176147,
+    "entropia_maxima": 3.4594316186372973,
+    "corrientes_top": [
+      {
+        "de": "CHL_REDEDGE",
+        "a": "ARI",
+        "J": 0.00032264618519813135
+      },
+      {
+        "de": "CHL_REDEDGE",
+        "a": "MARI",
+        "J": 0.0002950620024338123
+      },
+      {
+        "de": "NDMI",
+        "a": "NDWI",
+        "J": 0.00027544849155045504
+      },
+      {
+        "de": "PSRI",
+        "a": "KNDVI",
+        "J": 0.00022579270245445034
+      },
+      {
+        "de": "NDMI",
+        "a": "PSRI",
+        "J": 0.00022217792837082428
+      },
+      {
+        "de": "SAVI",
+        "a": "CHL_REDEDGE",
+        "J": 0.00021189669688612134
+      },
+      {
+        "de": "NDWI",
+        "a": "KNDVI",
+        "J": 0.00021091872227947672
+      },
+      {
+        "de": "ARI",
+        "a": "KNDVI",
+        "J": 0.00019894052546117359
+      }
+    ],
+    "fiedler": 1.0773041465559496,
+    "k_sugerido": 1,
+    "autovalores": [
+      -1.3574090797889727e-47,
+      1.0773041465559496,
+      1.0794064498931284,
+      1.080090124093488,
+      1.0875398730201888,
+      1.088180957927677,
+      1.088921535383713,
+      1.0895270295020085,
+      1.0926018072740518,
+      1.0951942020024537,
+      1.1009598389447826,
+      1.1202740354025567
+    ],
+    "rango_efectivo": 6.53235016650294,
+    "energia_primer_modo": 0.9158287882735132,
+    "angulos_principales": 0.8422720035200636,
+    "angulos_principales_nulo": 0.5718034358572796,
+    "pasada_media": 11.250410412448133,
+    "barrido_k": [
+      {
+        "k": 2,
+        "ari_entre_semillas": 0.038174354804747526,
+        "ari_vs_familias": 0.20448877805486282,
+        "modularidad": -0.03257995938369588,
+        "conductancia_media": 0.8260745161904889,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "ARI",
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "NDII",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "NDWI",
+            "CHL_REDEDGE",
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 3,
+        "ari_entre_semillas": 0.10843887052104835,
+        "ari_vs_familias": -0.0361560418648906,
+        "modularidad": -0.042238443816902595,
+        "conductancia_media": 0.8491187315670151,
+        "grupos": [
+          [
+            "NDVI",
+            "ARI",
+            "KNDVI"
+          ],
+          [
+            "PSRI"
+          ],
+          [
+            "MARI",
+            "EVI",
+            "EVI2",
+            "NDWI",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI"
+          ]
+        ]
+      },
+      {
+        "k": 4,
+        "ari_entre_semillas": 0.17658900578974804,
+        "ari_vs_familias": 0.1557285873192436,
+        "modularidad": -0.051702652643263396,
+        "conductancia_media": 0.8647805157532802,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "PSRI"
+          ],
+          [
+            "NDWI",
+            "CHL_REDEDGE"
+          ],
+          [
+            "ARI",
+            "KNDVI"
+          ]
+        ]
+      },
+      {
+        "k": 5,
+        "ari_entre_semillas": 0.10454917125639128,
+        "ari_vs_familias": -0.07052186177715093,
+        "modularidad": -0.06270063300512535,
+        "conductancia_media": 0.8672137550807655,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "EVI2",
+            "NDMI"
+          ],
+          [
+            "PSRI"
+          ],
+          [
+            "NDWI"
+          ],
+          [
+            "EVI",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "ARI",
+            "KNDVI"
+          ]
+        ]
+      },
+      {
+        "k": 6,
+        "ari_entre_semillas": 0.09050755979383483,
+        "ari_vs_familias": 0.11565585331452749,
+        "modularidad": -0.06320602459428518,
+        "conductancia_media": 0.9044297517931401,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "CHL_REDEDGE",
+            "SAVI"
+          ],
+          [
+            "PSRI"
+          ],
+          [
+            "NDWI"
+          ],
+          [
+            "ARI"
+          ],
+          [
+            "NDII"
+          ]
+        ]
+      }
+    ],
+    "mejor_k": 4,
+    "comunidades_mejor_k": [
+      [
+        "NDVI",
+        "MARI",
+        "EVI",
+        "EVI2",
+        "NDMI",
+        "NDII",
+        "SAVI"
+      ],
+      [
+        "PSRI"
+      ],
+      [
+        "NDWI",
+        "CHL_REDEDGE"
+      ],
+      [
+        "ARI",
+        "KNDVI"
+      ]
+    ],
+    "ari_mejor_k": 0.17658900578974804,
+    "conductancia_mejor_k": 0.8647805157532802
+  },
+  {
+    "etiqueta": "atencion capa A2",
+    "n_semillas": 50,
+    "estacionaria": {
+      "NDVI": 0.09873903412387898,
+      "MARI": 0.0595684546389845,
+      "ARI": 0.03980916824314181,
+      "EVI": 0.07151699166983534,
+      "EVI2": 0.07723090563473312,
+      "NDWI": 0.10639410895468153,
+      "NDMI": 0.07555062559585571,
+      "CHL_REDEDGE": 0.1115926464191282,
+      "NDII": 0.0783095904280218,
+      "SAVI": 0.07805244576701191,
+      "PSRI": 0.09157104272661819,
+      "KNDVI": 0.11166498579810903
+    },
+    "irreversibilidad": 0.06288598648344229,
+    "p_irreversibilidad": 0.14570858283433133,
+    "irreversibilidad_nulo": 0.06288598648344224,
+    "irreversibilidad_semilla_std": 0.015294380139410738,
+    "entropia_tasa": 3.3882382834137323,
+    "entropia_maxima": 3.4594316186372973,
+    "corrientes_top": [
+      {
+        "de": "NDWI",
+        "a": "PSRI",
+        "J": 0.004754060023329619
+      },
+      {
+        "de": "NDWI",
+        "a": "ARI",
+        "J": 0.004612360710473044
+      },
+      {
+        "de": "CHL_REDEDGE",
+        "a": "NDWI",
+        "J": 0.0036435957956254383
+      },
+      {
+        "de": "PSRI",
+        "a": "ARI",
+        "J": 0.0035236765388793573
+      },
+      {
+        "de": "ARI",
+        "a": "KNDVI",
+        "J": 0.0029660497397551336
+      },
+      {
+        "de": "KNDVI",
+        "a": "NDWI",
+        "J": 0.0023829095067905565
+      },
+      {
+        "de": "ARI",
+        "a": "NDVI",
+        "J": 0.0022858091071867002
+      },
+      {
+        "de": "PSRI",
+        "a": "MARI",
+        "J": 0.002131666468564123
+      }
+    ],
+    "fiedler": 1.0289539574721704,
+    "k_sugerido": 1,
+    "autovalores": [
+      -4.440892098500626e-16,
+      1.0289539574721704,
+      1.0454666462449533,
+      1.0622258373462645,
+      1.0826218464458288,
+      1.084284434526122,
+      1.0877292987350924,
+      1.0925378575544376,
+      1.0958034502255,
+      1.1173952038830253,
+      1.1459818458298499,
+      1.1569996217367562
+    ],
+    "rango_efectivo": 6.475602256167718,
+    "energia_primer_modo": 0.8989877205607301,
+    "angulos_principales": 0.7846369720244488,
+    "angulos_principales_nulo": 0.5616598938168096,
+    "pasada_media": 12.007949815631315,
+    "barrido_k": [
+      {
+        "k": 2,
+        "ari_entre_semillas": 0.31497003011752533,
+        "ari_vs_familias": 0.20448877805486282,
+        "modularidad": -0.014272707743327501,
+        "conductancia_media": 0.7880674072879384,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "ARI",
+            "NDWI",
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 3,
+        "ari_entre_semillas": 0.2923254311932794,
+        "ari_vs_familias": 0.27177700348432055,
+        "modularidad": -0.037098013479547894,
+        "conductancia_media": 0.7030362948060351,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "ARI",
+            "CHL_REDEDGE",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 4,
+        "ari_entre_semillas": 0.3591642778688518,
+        "ari_vs_familias": 0.20127388535031848,
+        "modularidad": -0.04710477042723665,
+        "conductancia_media": 0.8045914102870195,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "ARI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "CHL_REDEDGE"
+          ]
+        ]
+      },
+      {
+        "k": 5,
+        "ari_entre_semillas": 0.27169179977108976,
+        "ari_vs_familias": 0.06557377049180327,
+        "modularidad": -0.0515133097784727,
+        "conductancia_media": 0.8560786602727994,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "ARI",
+            "KNDVI"
+          ],
+          [
+            "EVI2",
+            "CHL_REDEDGE",
+            "SAVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "EVI",
+            "NDII"
+          ],
+          [
+            "NDMI"
+          ]
+        ]
+      },
+      {
+        "k": 6,
+        "ari_entre_semillas": 0.24217872853803044,
+        "ari_vs_familias": 0.08895705521472394,
+        "modularidad": -0.05558623048665538,
+        "conductancia_media": 0.8980931426165166,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "ARI",
+            "KNDVI"
+          ],
+          [
+            "EVI2",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "EVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "NDMI"
+          ],
+          [
+            "CHL_REDEDGE"
+          ]
+        ]
+      }
+    ],
+    "mejor_k": 4,
+    "comunidades_mejor_k": [
+      [
+        "NDVI",
+        "MARI",
+        "ARI",
+        "KNDVI"
+      ],
+      [
+        "EVI",
+        "EVI2",
+        "NDMI",
+        "NDII",
+        "SAVI"
+      ],
+      [
+        "NDWI",
+        "PSRI"
+      ],
+      [
+        "CHL_REDEDGE"
+      ]
+    ],
+    "ari_mejor_k": 0.3591642778688518,
+    "conductancia_mejor_k": 0.8045914102870195
+  },
+  {
+    "etiqueta": "atencion A2*A1 (sin residual)",
+    "n_semillas": 50,
+    "estacionaria": {
+      "NDVI": 0.0891735435552794,
+      "MARI": 0.08469386845503134,
+      "ARI": 0.0716888556833402,
+      "EVI": 0.08432927055764328,
+      "EVI2": 0.08547075835942165,
+      "NDWI": 0.06533881899959555,
+      "NDMI": 0.08793374043390784,
+      "CHL_REDEDGE": 0.09930000026744813,
+      "NDII": 0.08875969737273309,
+      "SAVI": 0.08518643124558438,
+      "PSRI": 0.06344060022571418,
+      "KNDVI": 0.09468441484430085
+    },
+    "irreversibilidad": 0.006351654790676037,
+    "p_irreversibilidad": 0.47704590818363274,
+    "irreversibilidad_nulo": 0.006351654790676032,
+    "irreversibilidad_semilla_std": 0.0017354703308847153,
+    "entropia_tasa": 3.4450187258742027,
+    "entropia_maxima": 3.4594316186372973,
+    "corrientes_top": [
+      {
+        "de": "KNDVI",
+        "a": "ARI",
+        "J": 0.00042676330996757
+      },
+      {
+        "de": "ARI",
+        "a": "NDWI",
+        "J": 0.00034505365537257273
+      },
+      {
+        "de": "ARI",
+        "a": "PSRI",
+        "J": 0.0003111042450918561
+      },
+      {
+        "de": "NDVI",
+        "a": "ARI",
+        "J": 0.00028505371160664466
+      },
+      {
+        "de": "KNDVI",
+        "a": "MARI",
+        "J": 0.00028084052745112886
+      },
+      {
+        "de": "NDWI",
+        "a": "CHL_REDEDGE",
+        "J": 0.0002493512304400083
+      },
+      {
+        "de": "PSRI",
+        "a": "NDWI",
+        "J": 0.0002404819411095764
+      },
+      {
+        "de": "MARI",
+        "a": "PSRI",
+        "J": 0.0002131786516344934
+      }
+    ],
+    "fiedler": 1.073198452543457,
+    "k_sugerido": 1,
+    "autovalores": [
+      -2.7824040663657485e-50,
+      1.073198452543457,
+      1.0809981252221332,
+      1.0854327462588176,
+      1.0895825550464133,
+      1.0919818074177685,
+      1.0923717507319495,
+      1.0932802671124155,
+      1.0949560391167834,
+      1.095762755885907,
+      1.0988081397978051,
+      1.1036273608665481
+    ],
+    "rango_efectivo": 1.670433353582112,
+    "energia_primer_modo": 0.9988341163961708,
+    "angulos_principales": 0.8076164381195733,
+    "angulos_principales_nulo": 0.5494510379202026,
+    "pasada_media": 11.218864156020155,
+    "barrido_k": [
+      {
+        "k": 2,
+        "ari_entre_semillas": 0.11718609519267024,
+        "ari_vs_familias": 0.4034253092293054,
+        "modularidad": -0.040954317998145556,
+        "conductancia_media": 0.6374571133340798,
+        "grupos": [
+          [
+            "NDVI",
+            "EVI",
+            "EVI2",
+            "NDWI",
+            "NDII",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "MARI",
+            "ARI",
+            "NDMI",
+            "CHL_REDEDGE",
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 3,
+        "ari_entre_semillas": 0.3923202039942674,
+        "ari_vs_familias": 0.6125933831376734,
+        "modularidad": -0.04705886946616364,
+        "conductancia_media": 0.7226616177548691,
+        "grupos": [
+          [
+            "NDVI",
+            "EVI",
+            "EVI2",
+            "NDWI",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "MARI",
+            "ARI",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII"
+          ],
+          [
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 4,
+        "ari_entre_semillas": 0.6473410117198835,
+        "ari_vs_familias": 0.7648456057007126,
+        "modularidad": -0.05276403340739085,
+        "conductancia_media": 0.8115583786138533,
+        "grupos": [
+          [
+            "NDVI",
+            "EVI",
+            "EVI2",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "MARI",
+            "ARI",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII"
+          ],
+          [
+            "NDWI"
+          ],
+          [
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 5,
+        "ari_entre_semillas": 0.5533981480378735,
+        "ari_vs_familias": 0.728021978021978,
+        "modularidad": -0.06163441741898062,
+        "conductancia_media": 0.8680942596355304,
+        "grupos": [
+          [
+            "NDVI",
+            "EVI",
+            "EVI2",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "NDWI",
+            "CHL_REDEDGE"
+          ],
+          [
+            "MARI",
+            "NDMI",
+            "NDII"
+          ],
+          [
+            "ARI"
+          ],
+          [
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 6,
+        "ari_entre_semillas": 0.4370926965209986,
+        "ari_vs_familias": 0.4938650306748466,
+        "modularidad": -0.06756050021429362,
+        "conductancia_media": 0.9055041385486512,
+        "grupos": [
+          [
+            "NDVI",
+            "EVI2",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "NDWI",
+            "CHL_REDEDGE"
+          ],
+          [
+            "MARI",
+            "NDMI",
+            "NDII"
+          ],
+          [
+            "EVI"
+          ],
+          [
+            "ARI"
+          ],
+          [
+            "PSRI"
+          ]
+        ]
+      }
+    ],
+    "mejor_k": 4,
+    "comunidades_mejor_k": [
+      [
+        "NDVI",
+        "EVI",
+        "EVI2",
+        "SAVI",
+        "KNDVI"
+      ],
+      [
+        "MARI",
+        "ARI",
+        "NDMI",
+        "CHL_REDEDGE",
+        "NDII"
+      ],
+      [
+        "NDWI"
+      ],
+      [
+        "PSRI"
+      ]
+    ],
+    "ari_mejor_k": 0.6473410117198835,
+    "conductancia_mejor_k": 0.8115583786138533
+  },
+  {
+    "etiqueta": "atencion A1+A2 (aditiva)",
+    "n_semillas": 50,
+    "estacionaria": {
+      "NDVI": 0.09503475790057783,
+      "MARI": 0.0706730306491205,
+      "ARI": 0.053409550299441326,
+      "EVI": 0.07716571295185766,
+      "EVI2": 0.08098011593132287,
+      "NDWI": 0.08675436801051734,
+      "NDMI": 0.08131238486292508,
+      "CHL_REDEDGE": 0.10773530222170528,
+      "NDII": 0.08324590835220708,
+      "SAVI": 0.08125675110407188,
+      "PSRI": 0.07676014922327266,
+      "KNDVI": 0.10567196849298047
+    },
+    "irreversibilidad": 0.032013079955600085,
+    "p_irreversibilidad": 0.40718562874251496,
+    "irreversibilidad_nulo": 0.032013079955600064,
+    "irreversibilidad_semilla_std": 0.006887013276319373,
+    "entropia_tasa": 3.42989850239084,
+    "entropia_maxima": 3.4594316186372973,
+    "corrientes_top": [
+      {
+        "de": "NDWI",
+        "a": "ARI",
+        "J": 0.0021663140887376612
+      },
+      {
+        "de": "NDWI",
+        "a": "PSRI",
+        "J": 0.002001999193374482
+      },
+      {
+        "de": "PSRI",
+        "a": "ARI",
+        "J": 0.0018158689165249874
+      },
+      {
+        "de": "ARI",
+        "a": "KNDVI",
+        "J": 0.0017223439822452898
+      },
+      {
+        "de": "CHL_REDEDGE",
+        "a": "NDWI",
+        "J": 0.0015636782463250704
+      },
+      {
+        "de": "ARI",
+        "a": "NDVI",
+        "J": 0.0012899274014773667
+      },
+      {
+        "de": "PSRI",
+        "a": "MARI",
+        "J": 0.0011003543834821779
+      },
+      {
+        "de": "MARI",
+        "a": "KNDVI",
+        "J": 0.0009361884808696454
+      }
+    ],
+    "fiedler": 1.0526458658472115,
+    "k_sugerido": 1,
+    "autovalores": [
+      -2.220446049250313e-16,
+      1.0526458658472115,
+      1.0644373653046442,
+      1.0757554402643739,
+      1.0852618186761067,
+      1.0866614016718237,
+      1.088641560588039,
+      1.0936658477183823,
+      1.0954642441627733,
+      1.1039599915588554,
+      1.1188252040875286,
+      1.1346812601202585
+    ],
+    "rango_efectivo": 6.509331088032223,
+    "energia_primer_modo": 0.9108951310150196,
+    "angulos_principales": 0.801132949869448,
+    "angulos_principales_nulo": 0.5806102866587237,
+    "pasada_media": 11.388713241285704,
+    "barrido_k": [
+      {
+        "k": 2,
+        "ari_entre_semillas": 0.2813116799487125,
+        "ari_vs_familias": 0.20958083832335328,
+        "modularidad": -0.015383760825869475,
+        "conductancia_media": 0.8824371790250282,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "ARI",
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI",
+            "KNDVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 3,
+        "ari_entre_semillas": 0.3576552515769475,
+        "ari_vs_familias": 0.04909284951974388,
+        "modularidad": -0.04292598749720253,
+        "conductancia_media": 0.7735499659135892,
+        "grupos": [
+          [
+            "NDVI",
+            "ARI",
+            "KNDVI"
+          ],
+          [
+            "MARI",
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 4,
+        "ari_entre_semillas": 0.37417368157351255,
+        "ari_vs_familias": 0.07776427703523695,
+        "modularidad": -0.04717339281717844,
+        "conductancia_media": 0.8065602406867473,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "ARI"
+          ]
+        ]
+      },
+      {
+        "k": 5,
+        "ari_entre_semillas": 0.3359337806392168,
+        "ari_vs_familias": 0.0934065934065934,
+        "modularidad": -0.05418109485613693,
+        "conductancia_media": 0.8607319606044237,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "NDMI"
+          ],
+          [
+            "ARI"
+          ]
+        ]
+      },
+      {
+        "k": 6,
+        "ari_entre_semillas": 0.24572881396019278,
+        "ari_vs_familias": -0.012269938650306737,
+        "modularidad": -0.0602245297899743,
+        "conductancia_media": 0.8987916015965388,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "KNDVI"
+          ],
+          [
+            "EVI"
+          ],
+          [
+            "EVI2",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "NDMI"
+          ],
+          [
+            "ARI"
+          ]
+        ]
+      }
+    ],
+    "mejor_k": 4,
+    "comunidades_mejor_k": [
+      [
+        "NDVI",
+        "MARI",
+        "KNDVI"
+      ],
+      [
+        "EVI",
+        "EVI2",
+        "NDMI",
+        "CHL_REDEDGE",
+        "NDII",
+        "SAVI"
+      ],
+      [
+        "NDWI",
+        "PSRI"
+      ],
+      [
+        "ARI"
+      ]
+    ],
+    "ari_mejor_k": 0.37417368157351255,
+    "conductancia_mejor_k": 0.8065602406867473
+  },
+  {
+    "etiqueta": "atencion max sobre cabezas",
+    "n_semillas": 50,
+    "estacionaria": {
+      "NDVI": 0.08565199601858049,
+      "MARI": 0.05788964164630994,
+      "ARI": 0.05247748429556794,
+      "EVI": 0.058747324928185934,
+      "EVI2": 0.0605714722408117,
+      "NDWI": 0.1577527083794978,
+      "NDMI": 0.06269186201396958,
+      "CHL_REDEDGE": 0.10206206082247543,
+      "NDII": 0.06237480634681004,
+      "SAVI": 0.06204682907468077,
+      "PSRI": 0.13666316714365082,
+      "KNDVI": 0.10107064708945965
+    },
+    "irreversibilidad": 0.05677375784693532,
+    "p_irreversibilidad": 0.5089820359281437,
+    "irreversibilidad_nulo": 0.05677375784693531,
+    "irreversibilidad_semilla_std": 0.014914427434405061,
+    "entropia_tasa": 3.3223605480699403,
+    "entropia_maxima": 3.4594316186372973,
+    "corrientes_top": [
+      {
+        "de": "NDWI",
+        "a": "PSRI",
+        "J": 0.007597127860195087
+      },
+      {
+        "de": "KNDVI",
+        "a": "NDWI",
+        "J": 0.0044230601535211606
+      },
+      {
+        "de": "PSRI",
+        "a": "ARI",
+        "J": 0.003872581392677504
+      },
+      {
+        "de": "ARI",
+        "a": "KNDVI",
+        "J": 0.0035249583369054956
+      },
+      {
+        "de": "NDWI",
+        "a": "ARI",
+        "J": 0.0035006982481651863
+      },
+      {
+        "de": "NDVI",
+        "a": "NDWI",
+        "J": 0.00318266774531494
+      },
+      {
+        "de": "ARI",
+        "a": "NDVI",
+        "J": 0.0024346127109979698
+      },
+      {
+        "de": "PSRI",
+        "a": "MARI",
+        "J": 0.0023624816934588984
+      }
+    ],
+    "fiedler": 1.0314064978845032,
+    "k_sugerido": 1,
+    "autovalores": [
+      -2.220446049250325e-16,
+      1.0314064978845032,
+      1.0649012002321365,
+      1.0694027231927636,
+      1.072635817095895,
+      1.0759030603967763,
+      1.076734424755873,
+      1.0832666104919988,
+      1.0910822776426101,
+      1.1259800823514479,
+      1.1479367348190752,
+      1.160750571136921
+    ],
+    "rango_efectivo": 5.963759835461708,
+    "energia_primer_modo": 0.9095061658088668,
+    "angulos_principales": 0.8109212902501048,
+    "angulos_principales_nulo": 0.5709171483311984,
+    "pasada_media": 12.597504551766596,
+    "barrido_k": [
+      {
+        "k": 2,
+        "ari_entre_semillas": 0.3132187720630508,
+        "ari_vs_familias": 0.08943862987630825,
+        "modularidad": -0.02230095513894739,
+        "conductancia_media": 0.6145610347640205,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "ARI",
+            "CHL_REDEDGE",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDWI",
+            "NDMI",
+            "NDII",
+            "SAVI",
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 3,
+        "ari_entre_semillas": 0.2560292904355312,
+        "ari_vs_familias": 0.04909284951974388,
+        "modularidad": -0.037606177416869405,
+        "conductancia_media": 0.7789772997160528,
+        "grupos": [
+          [
+            "NDVI",
+            "ARI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDWI",
+            "NDMI",
+            "NDII",
+            "SAVI",
+            "PSRI"
+          ],
+          [
+            "MARI",
+            "CHL_REDEDGE"
+          ]
+        ]
+      },
+      {
+        "k": 4,
+        "ari_entre_semillas": 0.23011174136064497,
+        "ari_vs_familias": -0.0339425587467363,
+        "modularidad": -0.053592409929576354,
+        "conductancia_media": 0.8069266120391976,
+        "grupos": [
+          [
+            "NDVI",
+            "ARI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "EVI2",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "MARI"
+          ]
+        ]
+      },
+      {
+        "k": 5,
+        "ari_entre_semillas": 0.19602390455861787,
+        "ari_vs_familias": -0.05217391304347826,
+        "modularidad": -0.05744088402789868,
+        "conductancia_media": 0.8613358338183084,
+        "grupos": [
+          [
+            "NDVI",
+            "ARI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "EVI2",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII"
+          ],
+          [
+            "SAVI"
+          ],
+          [
+            "MARI"
+          ]
+        ]
+      },
+      {
+        "k": 6,
+        "ari_entre_semillas": 0.17798907163507025,
+        "ari_vs_familias": -0.0749185667752443,
+        "modularidad": -0.062341496426717755,
+        "conductancia_media": 0.8988937104530739,
+        "grupos": [
+          [
+            "NDVI",
+            "ARI",
+            "KNDVI"
+          ],
+          [
+            "NDMI",
+            "CHL_REDEDGE"
+          ],
+          [
+            "EVI",
+            "NDWI",
+            "PSRI"
+          ],
+          [
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "MARI"
+          ],
+          [
+            "EVI2"
+          ]
+        ]
+      }
+    ],
+    "mejor_k": 2,
+    "comunidades_mejor_k": [
+      [
+        "NDVI",
+        "MARI",
+        "ARI",
+        "CHL_REDEDGE",
+        "KNDVI"
+      ],
+      [
+        "EVI",
+        "EVI2",
+        "NDWI",
+        "NDMI",
+        "NDII",
+        "SAVI",
+        "PSRI"
+      ]
+    ],
+    "ari_mejor_k": 0.3132187720630508,
+    "conductancia_mejor_k": 0.6145610347640205
+  },
+  {
+    "etiqueta": "dependencia por ablacion",
+    "n_semillas": 50,
+    "estacionaria": {
+      "NDVI": 0.10663549329231105,
+      "MARI": 0.04626203426576449,
+      "ARI": 0.0700382761288106,
+      "EVI": 0.016857472069458857,
+      "EVI2": 0.013170436628825973,
+      "NDWI": 0.12344290784898396,
+      "NDMI": 0.014928717163953357,
+      "CHL_REDEDGE": 0.22789727110081814,
+      "NDII": 0.0174599162822583,
+      "SAVI": 0.013813152034558436,
+      "PSRI": 0.1888040064498187,
+      "KNDVI": 0.1606903167344383
+    },
+    "irreversibilidad": 0.40575022963302765,
+    "p_irreversibilidad": 0.8043912175648703,
+    "irreversibilidad_nulo": 0.40575022963302765,
+    "irreversibilidad_semilla_std": 0.09742857239119179,
+    "entropia_tasa": 2.062080548374815,
+    "entropia_maxima": 3.4594316186372973,
+    "corrientes_top": [
+      {
+        "de": "NDVI",
+        "a": "CHL_REDEDGE",
+        "J": 0.04261435419623701
+      },
+      {
+        "de": "NDWI",
+        "a": "PSRI",
+        "J": 0.042512543427260414
+      },
+      {
+        "de": "CHL_REDEDGE",
+        "a": "NDWI",
+        "J": 0.040733840801099604
+      },
+      {
+        "de": "PSRI",
+        "a": "NDVI",
+        "J": 0.03726600712907899
+      },
+      {
+        "de": "CHL_REDEDGE",
+        "a": "PSRI",
+        "J": 0.033518315460365586
+      },
+      {
+        "de": "KNDVI",
+        "a": "CHL_REDEDGE",
+        "J": 0.032674710751195365
+      },
+      {
+        "de": "PSRI",
+        "a": "KNDVI",
+        "J": 0.02779100449143662
+      },
+      {
+        "de": "NDWI",
+        "a": "ARI",
+        "J": 0.02149988162750743
+      }
+    ],
+    "fiedler": 0.31787089661496115,
+    "k_sugerido": 3,
+    "autovalores": [
+      5.033611873671295e-16,
+      0.31787089661496115,
+      0.608945966361522,
+      0.9629031953619179,
+      1.0454570275420627,
+      1.1000927165616758,
+      1.1492397622248878,
+      1.199607550512079,
+      1.2104100304222245,
+      1.373475462858265,
+      1.4429620537663672,
+      1.589035337774036
+    ],
+    "rango_efectivo": 8.23189099883542,
+    "energia_primer_modo": 0.4370321718502,
+    "angulos_principales": 0.8031998923669055,
+    "angulos_principales_nulo": 0.559529666669277,
+    "pasada_media": 37.23078771143992,
+    "barrido_k": [
+      {
+        "k": 2,
+        "ari_entre_semillas": 0.7546071411962321,
+        "ari_vs_familias": 0.08943862987630825,
+        "modularidad": 0.28986619723912754,
+        "conductancia_media": 0.23665895110134208,
+        "grupos": [
+          [
+            "NDVI",
+            "MARI",
+            "ARI",
+            "NDWI",
+            "CHL_REDEDGE",
+            "PSRI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "NDII",
+            "SAVI"
+          ]
+        ]
+      },
+      {
+        "k": 3,
+        "ari_entre_semillas": 0.9098333569442775,
+        "ari_vs_familias": 0.15795868772782504,
+        "modularidad": 0.33306163592382276,
+        "conductancia_media": 0.3378449209653887,
+        "grupos": [
+          [
+            "NDVI",
+            "CHL_REDEDGE",
+            "PSRI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDMI",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "MARI",
+            "ARI",
+            "NDWI"
+          ]
+        ]
+      },
+      {
+        "k": 4,
+        "ari_entre_semillas": 0.6305318827306149,
+        "ari_vs_familias": 0.3018335684062059,
+        "modularidad": 0.2598370981022621,
+        "conductancia_media": 0.5000506384957073,
+        "grupos": [
+          [
+            "NDVI",
+            "CHL_REDEDGE",
+            "PSRI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "SAVI"
+          ],
+          [
+            "MARI",
+            "ARI",
+            "NDWI"
+          ],
+          [
+            "NDMI",
+            "NDII"
+          ]
+        ]
+      },
+      {
+        "k": 5,
+        "ari_entre_semillas": 0.5217247688563974,
+        "ari_vs_familias": 0.26229508196721313,
+        "modularidad": 0.22692910058944424,
+        "conductancia_media": 0.6241917501729116,
+        "grupos": [
+          [
+            "NDVI",
+            "CHL_REDEDGE",
+            "PSRI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "SAVI"
+          ],
+          [
+            "NDMI",
+            "NDII"
+          ],
+          [
+            "MARI",
+            "NDWI"
+          ],
+          [
+            "ARI"
+          ]
+        ]
+      },
+      {
+        "k": 6,
+        "ari_entre_semillas": 0.49964598995243603,
+        "ari_vs_familias": 0.27899159663865547,
+        "modularidad": 0.13272009374055402,
+        "conductancia_media": 0.715933995218077,
+        "grupos": [
+          [
+            "NDVI",
+            "PSRI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "SAVI"
+          ],
+          [
+            "ARI"
+          ],
+          [
+            "MARI",
+            "NDWI"
+          ],
+          [
+            "NDMI",
+            "NDII"
+          ],
+          [
+            "CHL_REDEDGE",
+            "KNDVI"
+          ]
+        ]
+      }
+    ],
+    "mejor_k": 3,
+    "comunidades_mejor_k": [
+      [
+        "NDVI",
+        "CHL_REDEDGE",
+        "PSRI",
+        "KNDVI"
+      ],
+      [
+        "EVI",
+        "EVI2",
+        "NDMI",
+        "NDII",
+        "SAVI"
+      ],
+      [
+        "MARI",
+        "ARI",
+        "NDWI"
+      ]
+    ],
+    "ari_mejor_k": 0.9098333569442775,
+    "conductancia_mejor_k": 0.3378449209653887
+  },
+  {
+    "etiqueta": "dependencia por ablacion (cruda)",
+    "n_semillas": 50,
+    "estacionaria": {
+      "NDVI": 0.07429189977193473,
+      "MARI": 0.04880247986908506,
+      "ARI": 0.024316053369730133,
+      "EVI": 0.05146555884334691,
+      "EVI2": 0.0629257448929369,
+      "NDWI": 0.0607169489576181,
+      "NDMI": 0.10216009263885106,
+      "CHL_REDEDGE": 0.19193389632051236,
+      "NDII": 0.11587217935304826,
+      "SAVI": 0.05973454418396807,
+      "PSRI": 0.09191050949017411,
+      "KNDVI": 0.11587009230879426
+    },
+    "irreversibilidad": 0.26496749839469125,
+    "p_irreversibilidad": 0.07984031936127745,
+    "irreversibilidad_nulo": 0.26496749839469114,
+    "irreversibilidad_semilla_std": 0.04372064525279912,
+    "entropia_tasa": 3.0216239852236573,
+    "entropia_maxima": 3.4594316186372973,
+    "corrientes_top": [
+      {
+        "de": "NDVI",
+        "a": "CHL_REDEDGE",
+        "J": 0.03036189181992567
+      },
+      {
+        "de": "KNDVI",
+        "a": "CHL_REDEDGE",
+        "J": 0.02675256036100054
+      },
+      {
+        "de": "CHL_REDEDGE",
+        "a": "MARI",
+        "J": 0.014552505414442527
+      },
+      {
+        "de": "CHL_REDEDGE",
+        "a": "PSRI",
+        "J": 0.012507714089709871
+      },
+      {
+        "de": "CHL_REDEDGE",
+        "a": "NDII",
+        "J": 0.012109433169832987
+      },
+      {
+        "de": "CHL_REDEDGE",
+        "a": "NDWI",
+        "J": 0.011633808141394652
+      },
+      {
+        "de": "NDWI",
+        "a": "PSRI",
+        "J": 0.011526342041089486
+      },
+      {
+        "de": "SAVI",
+        "a": "KNDVI",
+        "J": 0.00819410864644275
+      }
+    ],
+    "fiedler": 0.7176218985033507,
+    "k_sugerido": 1,
+    "autovalores": [
+      3.4523951798577636e-16,
+      0.7176218985033507,
+      0.8764089920276891,
+      1.0035486064151669,
+      1.0262221106200988,
+      1.1056580475829751,
+      1.1229226807262551,
+      1.1312014326196025,
+      1.1883946701182346,
+      1.204336053725256,
+      1.2855533059526296,
+      1.3381322017087427
+    ],
+    "rango_efectivo": 7.000644876794851,
+    "energia_primer_modo": 0.7329895958539975,
+    "angulos_principales": 0.8095218514682062,
+    "angulos_principales_nulo": 0.5228189523343653,
+    "pasada_media": 14.716958327439153,
+    "barrido_k": [
+      {
+        "k": 2,
+        "ari_entre_semillas": 0.5794302202682672,
+        "ari_vs_familias": -0.02325581395348835,
+        "modularidad": 0.11553106004698904,
+        "conductancia_media": 0.47588708115853984,
+        "grupos": [
+          [
+            "NDVI",
+            "NDMI",
+            "CHL_REDEDGE",
+            "NDII",
+            "PSRI",
+            "KNDVI"
+          ],
+          [
+            "MARI",
+            "ARI",
+            "EVI",
+            "EVI2",
+            "NDWI",
+            "SAVI"
+          ]
+        ]
+      },
+      {
+        "k": 3,
+        "ari_entre_semillas": 0.5005913274278025,
+        "ari_vs_familias": 0.07776427703523695,
+        "modularidad": 0.08060194499178681,
+        "conductancia_media": 0.6004515241974665,
+        "grupos": [
+          [
+            "NDVI",
+            "NDMI",
+            "CHL_REDEDGE",
+            "PSRI",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "NDII",
+            "SAVI"
+          ],
+          [
+            "MARI",
+            "ARI",
+            "NDWI"
+          ]
+        ]
+      },
+      {
+        "k": 4,
+        "ari_entre_semillas": 0.3818176231843225,
+        "ari_vs_familias": 0.33043478260869563,
+        "modularidad": 0.051407474032367166,
+        "conductancia_media": 0.6896598508617049,
+        "grupos": [
+          [
+            "NDVI",
+            "CHL_REDEDGE",
+            "KNDVI"
+          ],
+          [
+            "EVI",
+            "EVI2",
+            "SAVI"
+          ],
+          [
+            "MARI",
+            "ARI",
+            "NDWI"
+          ],
+          [
+            "NDMI",
+            "NDII",
+            "PSRI"
+          ]
+        ]
+      },
+      {
+        "k": 5,
+        "ari_entre_semillas": 0.3521191593862916,
+        "ari_vs_familias": 0.08895705521472394,
+        "modularidad": 0.044822923275799016,
+        "conductancia_media": 0.7622784794633323,
+        "grupos": [
+          [
+            "NDVI",
+            "CHL_REDEDGE",
+            "PSRI",
+            "KNDVI"
+          ],
+          [
+            "EVI2",
+            "SAVI"
+          ],
+          [
+            "MARI",
+            "EVI"
+          ],
+          [
+            "ARI",
+            "NDWI"
+          ],
+          [
+            "NDMI",
+            "NDII"
+          ]
+        ]
+      },
+      {
+        "k": 6,
+        "ari_entre_semillas": 0.32901210669566444,
+        "ari_vs_familias": 0.05714285714285714,
+        "modularidad": -0.002541345317800878,
+        "conductancia_media": 0.8362943801712236,
+        "grupos": [
+          [
+            "NDVI",
+            "CHL_REDEDGE"
+          ],
+          [
+            "KNDVI"
+          ],
+          [
+            "MARI",
+            "EVI",
+            "PSRI"
+          ],
+          [
+            "EVI2",
+            "SAVI"
+          ],
+          [
+            "NDMI",
+            "NDII"
+          ],
+          [
+            "ARI",
+            "NDWI"
+          ]
+        ]
+      }
+    ],
+    "mejor_k": 2,
+    "comunidades_mejor_k": [
+      [
+        "NDVI",
+        "NDMI",
+        "CHL_REDEDGE",
+        "NDII",
+        "PSRI",
+        "KNDVI"
+      ],
+      [
+        "MARI",
+        "ARI",
+        "EVI",
+        "EVI2",
+        "NDWI",
+        "SAVI"
+      ]
+    ],
+    "ari_mejor_k": 0.5794302202682672,
+    "conductancia_mejor_k": 0.47588708115853984
+  }
+]

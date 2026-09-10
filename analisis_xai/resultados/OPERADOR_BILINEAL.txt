@@ -1,0 +1,107 @@
+==============================================================================
+ EL OPERADOR RELACIONAL COMO PARAMETRO
+
+ logit[i,j] de la capa 1, abierto en nueve terminos exactos con
+ src = contenido + posicion y M = W_Q^T W_K. Los cuatro terminos con
+ sesgo son unarios POR ALGEBRA: no pueden llevar informacion de par.
+
+ Control de exactitud: la suma de los nueve reconstruye el logit del
+ modelo con error maximo 1.82e-06.
+==============================================================================
+
+  DE DONDE VIENE LA VARIACION DEL LOGIT  (media de 50 semillas)
+  termino           aridad      fraccion de SS
+  pos-pos           2                     0.4%
+  pos-cont          2                    38.9%
+  cont-pos          2                    22.5%
+  cont-cont         2                    38.2%
+  fila (p.bK)       1                     0.0%
+  fila (c.bK)       1                     0.0%
+  col (bQ.p)        1                     0.0%
+  col (bQ.c)        1                     0.0%
+  constante         0                     0.0%
+  TOTAL aridad 2                        100.0%
+  TOTAL aridad 1                          0.0%
+
+  Ese reparto es ALGEBRAICO: dice de que argumentos depende cada
+  termino. Un termino de aridad 2 puede seguir siendo casi todo
+  efecto de nodo, asi que la cifra comparable con el rollout es
+  la descomposicion de dos vias del logit COMPLETO:
+
+  objeto                                     fila  columna      PAR
+  logit de la capa 1 (antes de normalizar)    33.9%    65.9%     0.2%
+    el mismo, promediado por semilla        42.3%    56.9%     0.9%
+  rollout, ya normalizado (medido antes)     1.0%    74.7%    24.3%
+
+  La diferencia entre esas dos filas es lo que la normalizacion
+  y la renormalizacion por fila le hacen a la matriz.
+
+==============================================================================
+  P[i,j] = p_i^T M p_j   (posicion-posicion, solo parametros)
+
+  ICC entre semillas                     0.044
+  Spearman medio entre semillas         +0.023
+  fraccion de aridad 2                   91.8%
+  fraccion simetrica                     63.2%
+  fraccion antisimetrica (DIRECCION)     36.8%
+
+  Contra la verdad
+    Spearman con |pc|, matriz cruda     -0.030
+    Spearman con |pc|, parte de par     +0.000
+    Spearman con |r| (liston)           -0.206
+    auc contra el invariante del ICP     0.530   p 0.5585
+    Spearman con |beta| del ICP         +0.035
+
+  Contra las fuentes que ya se analizaban
+  fuente                            rho crudo   rho par
+  atencion rollout                     -0.126    +0.724
+  atencion capa A1                     -0.135    +0.274
+  atencion capa A2                     -0.173    +0.419
+  atencion A2*A1 (sin residual)        -0.098    -0.367
+  atencion A1+A2 (aditiva)             -0.175    +0.379
+  atencion max sobre cabezas           -0.067    +0.117
+  dependencia por ablacion             +0.127    +0.394
+  dependencia por ablacion (cruda      +0.050    +0.317
+
+  Los doce indices ordenados por cuanto RECIBEN en P
+    PSRI +0.003  EVI +0.002  NDWI +0.000  EVI2 +0.000  ARI -0.001  SAVI -0.001
+    NDII -0.001  MARI -0.002  KNDVI -0.002  NDMI -0.002  CHL_REDEDGE -0.003  NDVI -0.004
+
+==============================================================================
+  CONTROL: SE ENTRENO EL BLOQUE DE ATENCION?
+
+  Primer intento, que NO SIRVE y se deja escrito por eso:
+  distancia relativa a una inicializacion fresca, por bloque.
+
+    frame_proj                 1.514
+    pos_embed                  1.444
+    encoder conv               1.439
+    atencion (out_proj)        1.424
+    atencion (in_proj)         1.423
+    MLP del bloque             1.422
+    decoder                    0.986
+
+  Casi todos los bloques salen en 1.42, que es raiz de 2. Ese es
+  exactamente el valor que dan dos vectores aleatorios
+  independientes de norma parecida, y sale igual este o no
+  entrenado el bloque: la inicializacion fresca usa otra semilla,
+  asi que la comparacion mide que son dos sorteos distintos y
+  nada mas. Haria falta guardar el estado inicial de cada
+  entrenamiento, que no se hizo. El control valido es el de
+  abajo, sobre el espectro.
+
+==============================================================================
+  ESPECTRO DE M = W_Q^T W_K, POR CAPA
+
+  capa      rango efectivo  antisimetrica  rango SIN entrenar  antisim. SIN entr.
+  A1                  85.0          50.2%                85.6               50.0%
+  A2                  83.7          49.7%                85.6               50.0%
+
+  Las dos ultimas columnas son el mismo estadistico sobre un
+  modelo recien inicializado. Si coinciden con las dos primeras,
+  M no tiene estructura que la inicializacion no tuviera ya.
+
+  El operador de la capa 2 se lista solo por su espectro: su
+  entrada es la salida de la capa 1, donde contenido y posicion
+  ya estan mezclados y no se pueden separar.
+==============================================================================

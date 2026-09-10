@@ -1,0 +1,80 @@
+==============================================================================
+ ATENCION CRUDA Y PONDERADA POR EL VALOR
+
+ Los 50 modelos se entrenaron con sigmoid, que permite que una fila
+ sume menos de 1. La lectura del pipeline lo deshace: divide por la
+ suma de fila en dos sitios y las matrices guardadas tienen suma
+ 1.0000 con desviacion 5e-08. Aqui se lee sin ninguna division.
+
+ Y se compara el peso contra lo que de verdad entra en el contexto,
+ ||c_ij|| con c_ij = suma_h A_h[i,j] O_h W_V^h x_j.
+==============================================================================
+
+  semillas: 15    parches: 64    condicion: familia de v oculta
+
+  SUMA DE FILA DEL PESO CRUDO   (la observable que se perdia)
+    NDWI             1.381
+    PSRI             1.228
+    MARI             1.216
+    CHL_REDEDGE      1.177
+    NDII             1.159
+    NDMI             1.149
+    ARI              1.124
+    SAVI             0.990
+    EVI              0.988
+    EVI2             0.983
+    KNDVI            0.964
+    NDVI             0.928
+
+  Con sigmoid la fila no tiene por que sumar 1. Alta significa
+  que ese indice necesita mirar mucho para reconstruirse.
+
+  NORMA DEL VALOR POR INDICE   ||suma_h O_h W_V^h x_j||
+    NDMI             5.301
+    NDII             5.241
+    CHL_REDEDGE      5.199
+    KNDVI            5.036
+    ARI              5.023
+    MARI             5.018
+    NDVI             5.015
+    SAVI             4.996
+    EVI2             4.950
+    EVI              4.947
+    PSRI             4.876
+    NDWI             4.839
+
+==============================================================================
+  LAS CUATRO LECTURAS
+
+  lectura                   ICC    fila     col     PAR
+  A cruda                 0.714      4%     22%     74%
+  A renormalizada         0.923      0%     22%     78%
+  ||c_ij||                0.737      7%     20%     73%
+  A x norma de valor      0.699      4%     25%     72%
+
+  La fila 'A renormalizada' es lo que analizaba todo el resto
+  del proyecto. La diferencia con 'A cruda' es exactamente lo
+  que costaba la division por la suma de fila.
+
+==============================================================================
+  CONTRA LA ABLACION DE ARISTAS  (la prediccion falsable)
+
+  Si lo que importa es A[v,j]*v_j y no A[v,j], la norma de la
+  contribucion tiene que predecir Datt mejor que el +0.369 que
+  daba el peso solo.
+
+  lectura                 rho Datt  por semilla  signo +
+  A cruda                   +0.290       +0.248    15/15
+  A renormalizada           +0.292       +0.283    15/15
+  ||c_ij||                  +0.313       +0.285    15/15
+  A x norma de valor        +0.279       +0.244    15/15
+
+==============================================================================
+  CONTRA TODO LO DEMAS
+
+  lectura                 abl. entrada  su parte par    |pc|  auc ICP
+  A cruda                       +0.092        +0.288  -0.233    0.459
+  A renormalizada               +0.087        +0.294  -0.254    0.457
+  ||c_ij||                      +0.120        +0.297  -0.174    0.456
+  A x norma de valor            +0.081        +0.289  -0.241    0.455
+==============================================================================

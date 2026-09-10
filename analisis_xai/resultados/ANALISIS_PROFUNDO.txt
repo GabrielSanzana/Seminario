@@ -1,0 +1,150 @@
+==============================================================================
+ ANALISIS GEOMETRICO Y TOPOLOGICO PROFUNDO
+==============================================================================
+
+  fuente                          b1  rango  escala  bandas    curv  vonNeu  fuera     p1
+  atencion rollout                 0  0.000    0.76   0.328   0.532   2.396      0  0.005
+  atencion capa A1                 0  0.000    0.76   0.145   0.538   2.395      0  0.005
+  atencion capa A2                 0  0.000    0.86   0.161   0.521   2.387      0  0.005
+  atencion A2*A1 (sin residual)    0  0.000    0.76   0.441   0.541   2.396      0  0.005
+  atencion A1+A2 (aditiva)         0  0.000    0.86   0.147   0.530   2.393      0  0.005
+  atencion max sobre cabezas       0  0.000    0.99   0.152   0.518   2.377      0  0.005
+  dependencia por ablacion         2  0.029    1.46   0.365   0.236   2.301      1  0.667
+  dependencia por ablacion (cruda)   1  0.002    1.28   0.200   0.401   2.335      0  0.010
+
+  b1 = ciclos maximos del complejo de cliques a lo largo de la
+     filtracion. La version sobre el grafo pelado daba 55 en las
+     ocho fuentes: es E-V+C del grafo completo, una constante.
+  rango = ancho de umbrales en que hay ciclos vivos.
+  escala = tiempo de difusion donde el grafo revela su
+     estructura; pequena = estructura local, grande = global.
+  bandas = similitud de Procrustes entre el embedding espectral
+     del grafo y el espacio de bandas Sentinel-2. Alta significa
+     que el grafo reproduce la construccion algebraica de los
+     indices y no el fenomeno.
+  curv = curvatura de Ollivier-Ricci media. Negativa = grafo con
+     cuellos de botella entre regiones.
+  vonNeu = entropia de von Neumann, complejidad estructural.
+  fuera = autovalores fuera del bulk del nulo (senal espectral).
+  p1 = p del primer autovalor contra el nulo por permutacion.
+
+------------------------------------------------------------------------------
+ atencion rollout  (50 semillas)
+  topologia: 55 ciclos H1 (por semilla 55.0 +-0.0), b1 maximo 0, umbral de conexion 0.0631
+    persistencia H0 mas larga: 0.0142, 0.0119, 0.0104, 0.0072
+  difusion: escala caracteristica 0.758; trazas t=0.1 11.02, t=0.5 7.91, t=1 5.35, t=3 1.69, t=10 1.00
+    nodos que mas retienen calor (t=1): ARI 0.480, PSRI 0.470, NDWI 0.464, MARI 0.461
+    pares mas cercanos en difusion (papel estructural igual):
+      NDWI-PSRI, EVI-SAVI, EVI2-SAVI, EVI-EVI2, NDVI-KNDVI
+  geometria vs bandas: similitud 0.328 (disparidad 0.672)
+  curvatura media +0.532, minima +0.518, 0 aristas negativas
+    puentes (curvatura mas negativa): EVI-PSRI (+0.52), SAVI-PSRI (+0.52), EVI2-PSRI (+0.52), EVI-NDWI (+0.52)
+  espectro: radio 0.7144, Estrada 12.35, autovalores top 0.714, -0.029, -0.045, -0.061
+    fuera del bulk: 0, borde -0.0232, separacion del primero +0.0011, p=0.0050
+    comunicabilidad por caminos: 0.1=0.010, 0.3=0.038, 0.5=0.087, 0.7=0.199, 0.9=0.754
+
+------------------------------------------------------------------------------
+ atencion capa A1  (50 semillas)
+  topologia: 55 ciclos H1 (por semilla 55.0 +-0.0), b1 maximo 0, umbral de conexion 0.0898
+    persistencia H0 mas larga: 0.0290, 0.0266, 0.0252, 0.0153
+  difusion: escala caracteristica 0.758; trazas t=0.1 11.07, t=0.5 8.09, t=1 5.57, t=3 1.80, t=10 1.00
+    nodos que mas retienen calor (t=1): PSRI 0.509, NDWI 0.500, ARI 0.499, MARI 0.467
+    pares mas cercanos en difusion (papel estructural igual):
+      CHL_REDEDGE-KNDVI, NDVI-CHL_REDEDGE, EVI2-CHL_REDEDGE, CHL_REDEDGE-SAVI, EVI-CHL_REDEDGE
+  geometria vs bandas: similitud 0.145 (disparidad 0.855)
+  curvatura media +0.538, minima +0.533, 0 aristas negativas
+    puentes (curvatura mas negativa): ARI-KNDVI (+0.53), ARI-EVI (+0.53), NDVI-ARI (+0.53), MARI-KNDVI (+0.53)
+  espectro: radio 1.0052, Estrada 12.77, autovalores top 1.005, -0.068, -0.071, -0.074
+    fuera del bulk: 0, borde -0.0210, separacion del primero +0.0034, p=0.0050
+    comunicabilidad por caminos: 0.1=0.010, 0.3=0.038, 0.5=0.087, 0.7=0.198, 0.9=0.752
+
+------------------------------------------------------------------------------
+ atencion capa A2  (50 semillas)
+  topologia: 55 ciclos H1 (por semilla 55.0 +-0.0), b1 maximo 0, umbral de conexion 0.0981
+    persistencia H0 mas larga: 0.0639, 0.0539, 0.0522, 0.0501
+  difusion: escala caracteristica 0.864; trazas t=0.1 11.15, t=0.5 8.36, t=1 5.94, t=3 2.04, t=10 1.01
+    nodos que mas retienen calor (t=1): ARI 0.595, MARI 0.548, EVI 0.520, NDMI 0.511
+    pares mas cercanos en difusion (papel estructural igual):
+      NDWI-PSRI, CHL_REDEDGE-KNDVI, NDVI-CHL_REDEDGE, MARI-KNDVI, EVI2-CHL_REDEDGE
+  geometria vs bandas: similitud 0.161 (disparidad 0.839)
+  curvatura media +0.521, minima +0.497, 0 aristas negativas
+    puentes (curvatura mas negativa): PSRI-KNDVI (+0.50), ARI-KNDVI (+0.50), NDWI-KNDVI (+0.50), ARI-NDWI (+0.50)
+  espectro: radio 1.0169, Estrada 12.80, autovalores top 1.017, -0.031, -0.036, -0.055
+    fuera del bulk: 0, borde 0.0503, separacion del primero +0.0095, p=0.0050
+    comunicabilidad por caminos: 0.1=0.010, 0.3=0.037, 0.5=0.085, 0.7=0.196, 0.9=0.744
+
+------------------------------------------------------------------------------
+ atencion A2*A1 (sin residual)  (50 semillas)
+  topologia: 55 ciclos H1 (por semilla 55.0 +-0.0), b1 maximo 0, umbral de conexion 0.0826
+    persistencia H0 mas larga: 0.0119, 0.0108, 0.0077, 0.0036
+  difusion: escala caracteristica 0.758; trazas t=0.1 11.04, t=0.5 7.98, t=1 5.43, t=3 1.72, t=10 1.00
+    nodos que mas retienen calor (t=1): PSRI 0.493, NDWI 0.489, ARI 0.475, EVI 0.450
+    pares mas cercanos en difusion (papel estructural igual):
+      MARI-CHL_REDEDGE, NDVI-KNDVI, CHL_REDEDGE-NDII, NDMI-CHL_REDEDGE, EVI2-KNDVI
+  geometria vs bandas: similitud 0.441 (disparidad 0.559)
+  curvatura media +0.541, minima +0.536, 0 aristas negativas
+    puentes (curvatura mas negativa): NDWI-PSRI (+0.54), PSRI-KNDVI (+0.54), ARI-NDWI (+0.54), CHL_REDEDGE-PSRI (+0.54)
+  espectro: radio 0.9119, Estrada 12.61, autovalores top 0.912, -0.059, -0.068, -0.075
+    fuera del bulk: 0, borde -0.0318, separacion del primero +0.0022, p=0.0050
+    comunicabilidad por caminos: 0.1=0.010, 0.3=0.038, 0.5=0.087, 0.7=0.199, 0.9=0.754
+
+------------------------------------------------------------------------------
+ atencion A1+A2 (aditiva)  (50 semillas)
+  topologia: 55 ciclos H1 (por semilla 55.0 +-0.0), b1 maximo 0, umbral de conexion 0.1917
+    persistencia H0 mas larga: 0.0769, 0.0674, 0.0543, 0.0535
+  difusion: escala caracteristica 0.864; trazas t=0.1 11.11, t=0.5 8.22, t=1 5.75, t=3 1.90, t=10 1.00
+    nodos que mas retienen calor (t=1): ARI 0.546, MARI 0.507, PSRI 0.494, EVI 0.492
+    pares mas cercanos en difusion (papel estructural igual):
+      NDWI-PSRI, CHL_REDEDGE-KNDVI, NDVI-CHL_REDEDGE, MARI-KNDVI, EVI2-CHL_REDEDGE
+  geometria vs bandas: similitud 0.147 (disparidad 0.853)
+  curvatura media +0.530, minima +0.515, 0 aristas negativas
+    puentes (curvatura mas negativa): PSRI-KNDVI (+0.52), NDWI-KNDVI (+0.52), NDWI-CHL_REDEDGE (+0.52), CHL_REDEDGE-PSRI (+0.52)
+  espectro: radio 2.0156, Estrada 16.68, autovalores top 2.016, -0.105, -0.108, -0.144
+    fuera del bulk: 0, borde 0.0070, separacion del primero +0.0085, p=0.0050
+    comunicabilidad por caminos: 0.1=0.010, 0.3=0.038, 0.5=0.086, 0.7=0.198, 0.9=0.750
+
+------------------------------------------------------------------------------
+ atencion max sobre cabezas  (50 semillas)
+  topologia: 55 ciclos H1 (por semilla 55.0 +-0.0), b1 maximo 0, umbral de conexion 0.1946
+    persistencia H0 mas larga: 0.1478, 0.1389, 0.1225, 0.1217
+  difusion: escala caracteristica 0.986; trazas t=0.1 11.28, t=0.5 8.86, t=1 6.64, t=3 2.56, t=10 1.02
+    nodos que mas retienen calor (t=1): ARI 0.619, EVI 0.604, MARI 0.602, EVI2 0.598
+    pares mas cercanos en difusion (papel estructural igual):
+      NDWI-PSRI, CHL_REDEDGE-KNDVI, NDVI-NDWI, ARI-KNDVI, NDVI-CHL_REDEDGE
+  geometria vs bandas: similitud 0.152 (disparidad 0.848)
+  curvatura media +0.518, minima +0.486, 0 aristas negativas
+    puentes (curvatura mas negativa): PSRI-KNDVI (+0.49), ARI-NDWI (+0.49), NDWI-KNDVI (+0.49), NDVI-PSRI (+0.50)
+  espectro: radio 1.8594, Estrada 15.75, autovalores top 1.859, -0.051, -0.097, -0.106
+    fuera del bulk: 0, borde 0.1758, separacion del primero +0.0373, p=0.0050
+    comunicabilidad por caminos: 0.1=0.010, 0.3=0.037, 0.5=0.084, 0.7=0.193, 0.9=0.732
+
+------------------------------------------------------------------------------
+ dependencia por ablacion  (50 semillas)
+  topologia: 55 ciclos H1 (por semilla 55.0 +-0.0), b1 maximo 2, umbral de conexion 0.1326
+    persistencia H0 mas larga: 0.2973, 0.2661, 0.2656, 0.2501
+  difusion: escala caracteristica 1.461; trazas t=0.1 11.43, t=0.5 9.46, t=1 7.59, t=3 3.73, t=10 1.34
+    nodos que mas retienen calor (t=1): MARI 0.710, EVI 0.698, ARI 0.679, EVI2 0.675
+    pares mas cercanos en difusion (papel estructural igual):
+      NDMI-NDII, MARI-NDWI, CHL_REDEDGE-KNDVI, NDVI-CHL_REDEDGE, CHL_REDEDGE-PSRI
+  geometria vs bandas: similitud 0.365 (disparidad 0.635)
+  curvatura media +0.236, minima -0.221, 4 aristas negativas
+    puentes (curvatura mas negativa): CHL_REDEDGE-KNDVI (-0.22), EVI-CHL_REDEDGE (-0.03), NDWI-PSRI (-0.01), CHL_REDEDGE-SAVI (-0.01)
+  espectro: radio 1.0869, Estrada 13.63, autovalores top 1.087, 0.643, 0.415, 0.032
+    fuera del bulk: 1, borde 0.6174, separacion del primero -0.1404, p=0.6667
+    comunicabilidad por caminos: 0.1=0.009, 0.3=0.034, 0.5=0.076, 0.7=0.173, 0.9=0.651
+
+------------------------------------------------------------------------------
+ dependencia por ablacion (cruda)  (50 semillas)
+  topologia: 55 ciclos H1 (por semilla 55.0 +-0.0), b1 maximo 1, umbral de conexion 0.0047
+    persistencia H0 mas larga: 0.0126, 0.0124, 0.0112, 0.0103
+  difusion: escala caracteristica 1.281; trazas t=0.1 11.39, t=0.5 9.29, t=1 7.31, t=3 3.31, t=10 1.12
+    nodos que mas retienen calor (t=1): SAVI 0.716, EVI 0.712, EVI2 0.703, MARI 0.679
+    pares mas cercanos en difusion (papel estructural igual):
+      ARI-NDWI, NDVI-CHL_REDEDGE, CHL_REDEDGE-KNDVI, NDMI-NDII, NDVI-PSRI
+  geometria vs bandas: similitud 0.200 (disparidad 0.800)
+  curvatura media +0.401, minima +0.144, 0 aristas negativas
+    puentes (curvatura mas negativa): ARI-KNDVI (+0.14), ARI-CHL_REDEDGE (+0.24), MARI-PSRI (+0.27), NDVI-CHL_REDEDGE (+0.29)
+  espectro: radio 0.0583, Estrada 12.00, autovalores top 0.058, 0.013, 0.005, -0.000
+    fuera del bulk: 0, borde 0.0172, separacion del primero +0.0010, p=0.0100
+    comunicabilidad por caminos: 0.1=0.009, 0.3=0.034, 0.5=0.077, 0.7=0.176, 0.9=0.663
+==============================================================================

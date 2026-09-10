@@ -1,0 +1,893 @@
+==============================================================================
+ CERTIFICACION GLOBAL DEL FRAMEWORK
+
+ Pregunta unica: alguna fuente de aristas del framework encuentra
+ relaciones REALES entre las 12 variables, por encima del azar?
+
+ T = puesto medio de los pares realmente dependientes (K=3..12).
+ Azar = 33.5 sobre 66 pares. Mas bajo es mejor.
+ p = permutacion de las 12 etiquetas, 5000 repeticiones.
+==============================================================================
+
+  fuente                                  T   p perm   q FDR  >liston  solo cond   %sem  no lineal   %sem  no lin bl   %sem   ctrl   emp
+  |pc| (VERDAD, control del script)     4.2   0.0002     -        -    7.5*         -   43.0          -   37.8          -    2/2    0%
+  |r| marginal (SIN MODELO, liston)    25.2   0.0280     -        -   41.0          -   24.4          -   44.0          -    1/2    0%
+  atencion rollout                     23.3   0.0228  0.1390      54%   30.4        72%   17.9*       96%   26.7        92%    1/2    0%
+  atencion capa A1                     45.6   0.9976  0.9976       0%   37.9        14%   22.3        94%   26.9        88%    1/2    0%
+  atencion capa A2                     39.8   0.9086  0.9976       0%   29.5        62%   26.7        72%   28.6        66%    1/2    0%
+  atencion A2*A1 (sin residual)        39.1   0.8984  0.9976       0%   38.9         8%   23.0        94%   33.1        46%    1/2    0%
+  atencion A1+A2 (aditiva)             39.0   0.8830  0.9976       0%   31.9        62%   20.9        80%   25.6        82%    1/2    0%
+  atencion max sobre cabezas           40.5   0.9512  0.9976       0%   27.8        88%   37.7        28%   39.6        24%    0/2    0%
+  dependencia por ablacion             21.0   0.0260  0.1390      88%   24.6        98%   38.9        16%   27.8        92%    0/2   12%
+  dependencia por ablacion (cruda)     24.0   0.0666  0.2663      74%   30.6        90%   34.1        30%   26.8       100%    1/2    0%
+  Rashomon (percentil de fila)         42.4   0.9764  0.9976        -   32.5          -   21.3          -   27.8          -    1/2   18%
+  P1 probabilistico (frecuencia)       29.4   0.1846  0.5273        -   30.2          -   15.6*         -   24.8          -    1/2   76%
+  P1 probabilistico (-p_value)         30.5   0.2601  0.6504        -   30.2          -   14.9*         -   25.6          -    0/2   32%
+  P2 interventivo (auc_degradation)    44.0   0.9880  0.9976        -   30.8          -   49.3          -   48.3          -    0/2    0%
+  P2 interventivo (max_degradation)    23.3   0.0278  0.1390        -   29.6          -   19.3*         -   29.1          -    1/2    0%
+  P2 interventivo (jaccard_drop)       31.3   0.3149  0.6999        -   33.5          -   16.0*         -   28.4          -    0/2  100%
+  P3 topologico (brecha)               48.9   0.9962  0.9976        -   43.0          -   42.7          -   30.6          -    0/2   17%
+  P3 topologico (peso)                 22.2   0.0148  0.1390        -   34.2          -   17.0*         -   33.6          -    1/2    0%
+  P4 triangulacion (te_brecha)         48.9   0.9954  0.9976        -   43.0          -   42.7          -   30.6          -    0/2   17%
+  CONSENSO todas (13)                  35.4   0.6419  0.9976        -   29.2          -   25.0          -   29.4          -    1/2   21%
+  CONSENSO intervencion (4)            26.2   0.1224  0.4079        -   28.1          -   33.5          -   33.5          -    0/2   32%
+  CONSENSO pesos de atencion (6)       39.3   0.9044  0.9976        -   32.3          -   21.8          -   29.4          -    1/2   36%
+
+  azar = 33.5   ·   liston |r| sin modelo = 25.2
+  '>liston' = en que porcentaje de las 50 semillas la fuente
+  bate a np.corrcoef. Vacio = la fuente solo deja un agregado en
+  disco y no se puede medir esa variabilidad.
+  'solo condicional' = puesto medio de 8 pares. * = p<0.05 por
+  permutacion. %sem = en que fraccion de las 50 semillas esa
+  fuente queda por debajo del azar en ese subconjunto.
+  'no lineal' = puesto medio de 7 pares. * = p<0.05 por
+  permutacion. %sem = en que fraccion de las 50 semillas esa
+  fuente queda por debajo del azar en ese subconjunto.
+  'no lin blindado' = puesto medio de 9 pares. * = p<0.05 por
+  permutacion. %sem = en que fraccion de las 50 semillas esa
+  fuente queda por debajo del azar en ese subconjunto.
+
+------------------------------------------------------------------------------
+ LA PREGUNTA NO CIRCULAR
+
+  Comparar el framework contra |pc| tiene un techo obvio: si
+  lo que se quiere es el ranking de |pc|, se calcula |pc| y
+  listo. Bajo ese criterio ningun modelo puede aportar nada.
+
+  Pero |pc| es la correlacion parcial GAUSSIANA LINEAL. Es
+  ciega a la dependencia condicional no lineal. Estos son los
+  pares con dependencia condicional alta medida sin suponer
+  linealidad (correlacion de distancia sobre los residuos de
+  quitar los otros 10) y baja en |pc|: existen, y ninguna
+  correlacion los encuentra.
+
+  par                  dcor  gauss  exceso    |pc|  puesto     |r|  puesto  frec
+  NDVI-EVI2           0.358  0.240  +0.118   0.218    35/66   0.967    10/66    88%
+  NDVI-CHL_REDEDGE    0.270  0.157  +0.113   0.042    58/66   0.905    31/66   100%
+  NDVI-SAVI           0.557  0.500  +0.057   0.482    14/66   0.977     6/66    62%
+  MARI-EVI2           0.178  0.106  +0.072   0.021    62/66   0.801    51/66   100%
+  ARI-KNDVI           0.148  0.100  +0.048   0.033    59/66   0.603    58/66    88%
+  EVI2-KNDVI          0.263  0.190  +0.073   0.160    41/66   0.970     8/66   100%
+  SAVI-KNDVI          0.351  0.280  +0.071   0.230    32/66   0.970     7/66   100%
+
+  QUE FORMA TIENE. Permutando uno de los dos residuos
+  (rompe la dependencia, deja las marginales intactas):
+  par                rho parc  curvat      p  hetero      p   cola      p  forma
+  NDVI-EVI2            -0.246  0.0330  0.002  +0.325  0.002 -0.146  0.002  heterocedasticidad
+  NDVI-CHL_REDEDGE     +0.190  0.0196  0.002  +0.234  0.002 -0.215  0.002  heterocedasticidad
+  NDVI-SAVI            +0.566  0.0062  0.002  +0.213  0.002 +0.040  0.150  heterocedasticidad
+  MARI-EVI2            +0.060  0.0079  0.002  +0.358  0.002 +0.069  0.022  heterocedasticidad
+  ARI-KNDVI            -0.111  0.0185  0.002  +0.176  0.002 -0.224  0.002  dependencia de cola
+  EVI2-KNDVI           +0.217  0.0275  0.002  +0.264  0.002 -0.224  0.002  heterocedasticidad
+  SAVI-KNDVI           -0.346  0.0544  0.002  +0.238  0.002 -0.086  0.005  heterocedasticidad
+
+  ES RELACION O ES LA ESCENA. La heterocedasticidad
+  separada en la parte de ENTRE fechas (escenas malas
+  enteras: nube, angulo solar) y la de DENTRO de cada
+  fecha (estructura espacial, ya controlada la escena):
+  par                 total  entre      p  dentro      p  veredicto
+  NDVI-EVI2          +0.384 +0.738  0.002  +0.314  0.002  mezcla, domina el efecto de escena
+  NDVI-CHL_REDEDGE   +0.288 +0.595  0.002  +0.235  0.002  mezcla, domina el efecto de escena
+  NDVI-SAVI          +0.481 +0.720  0.002  +0.440  0.002  estructura espacial real
+  MARI-EVI2          +0.363 +0.651  0.002  +0.290  0.002  mezcla, domina el efecto de escena
+  ARI-KNDVI          +0.203 +0.562  0.002  +0.124  0.002  mezcla, domina el efecto de escena
+  EVI2-KNDVI         +0.278 +0.617  0.002  +0.224  0.002  mezcla, domina el efecto de escena
+  SAVI-KNDVI         +0.318 +0.510  0.002  +0.279  0.002  estructura espacial real
+
+  Escenas con mayor residuo medio (z sobre las 148 de
+  train). Pocas y sueltas apunta a nubosidad; seguir el
+  calendario apunta a fenologia:
+    2021-07-17   residuo 3.125   z=+3.79
+    2024-05-17   residuo 3.090   z=+3.70
+    2024-07-01   residuo 3.071   z=+3.65
+    2023-02-07   residuo 2.960   z=+3.38
+    2024-07-21   residuo 2.881   z=+3.18
+    2020-08-31   residuo 2.818   z=+3.03
+    2020-08-11   residuo 2.662   z=+2.64
+    2023-08-26   residuo 2.649   z=+2.61
+    2021-09-15   residuo 2.633   z=+2.57
+    2021-02-02   residuo 2.509   z=+2.26
+  curvat = R2 que ganan los terminos cuadratico y cubico
+  sobre el lineal. hetero = Spearman entre |residuo de i|
+  y |residuo de j sobre i|: si es alto, lo que depende es
+  la VARIANZA, no la media. cola = cuanto mas fuerte es la
+  relacion en el 20% extremo que en el 60% central.
+
+  frec = en que fraccion de las replicas de submuestreo
+  entra el par en el top-8. Solo se certifican los que pasan
+  del 50%: una seleccion que se mueve con la semilla del
+  muestreo no puede sostener ninguna conclusion.
+  dcor = dependencia condicional total (sin suponer forma).
+  gauss = la que tendria una normal con la misma correlacion
+  parcial y el mismo n. exceso = lo que no explica ninguna
+  correlacion, ni marginal ni parcial.
+
+  Si una fuente los pone arriba, eso NO se puede obtener con
+  np.corrcoef ni con la correlacion parcial, y es lo unico de
+  esta salida que justifica haber entrenado 50 modelos.
+
+  SIN blindar (incluye el efecto de escena)
+  Quien los encuentra (puesto medio, azar 33.5):
+    P1 probabilistico (-p_value)           14.9  p=0.0102  q=0.1040
+    P1 probabilistico (frecuencia)         15.6  p=0.0104  q=0.1040
+    P2 interventivo (jaccard_drop)         16.0  p=0.0178  q=0.1100
+    P3 topologico (peso)                   17.0  p=0.0220  q=0.1100
+    atencion rollout                       17.9  p=0.0284  q=0.1136  96% de semillas p=1.1e-12
+    P2 interventivo (max_degradation)      19.3  p=0.0424  q=0.1413
+    atencion A1+A2 (aditiva)               20.9  p=0.0652  q=0.1822  80% de semillas p=1.2e-05
+    Rashomon (percentil de fila)           21.3  p=0.0736  q=0.1822
+    |pc| (VERDAD, control del script)      43.0  p=0.9180   (referencia)
+    |r| marginal (SIN MODELO, liston)      24.4  p=0.1598   (referencia)
+
+  BLINDADO: escena estandarizada por fecha antes de medir
+  Quien los encuentra (puesto medio, azar 33.5):
+    P1 probabilistico (frecuencia)         24.8  p=0.1062  q=0.4418
+    atencion A1+A2 (aditiva)               25.6  p=0.1420  q=0.4418  82% de semillas p=2.8e-06
+    P1 probabilistico (-p_value)           25.6  p=0.1358  q=0.4418
+    atencion rollout                       26.7  p=0.1798  q=0.4418  92% de semillas p=2.2e-10
+    dependencia por ablacion (cruda)       26.8  p=0.1352  q=0.4418  100% de semillas p=8.9e-16
+    atencion capa A1                       26.9  p=0.1812  q=0.4418  88% de semillas p=1.6e-08
+    dependencia por ablacion               27.8  p=0.1646  q=0.4418  92% de semillas p=2.2e-10
+    Rashomon (percentil de fila)           27.8  p=0.2170  q=0.4418
+    |pc| (VERDAD, control del script)      37.8  p=0.7620   (referencia)
+    |r| marginal (SIN MODELO, liston)      44.0  p=0.9266   (referencia)
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+ DIRECCION: LO QUE NINGUNA CORRELACION PUEDE EXPRESAR
+
+  La correlacion marginal, la parcial y la de distancia son
+  simetricas por construccion. Un grafo hecho con cualquiera
+  de ellas no tiene direccion ni puede tenerla. Bajo el modelo
+  lineal-gaussiano tampoco hay direccion que encontrar: con
+  medias lineales, la varianza de i explicada por j iguala a la
+  de j por i, y el problema no esta identificado.
+
+  Con heterocedasticidad si lo esta. Que el nivel de j gobierne
+  la VARIABILIDAD de i no es lo mismo que la reciproca:
+    d[i,j] = R2(|res i| ~ res j) - R2(|res j| ~ res i)
+  Una matriz de atencion es dirigida y puede acertarla o no.
+
+  BRUTO incluye el efecto de nodo (que indice es sumidero);
+  DE PAR lo descuenta y es el unico que habla de pares. Las
+  matrices de atencion vienen renormalizadas por fila, asi que
+  el bruto esta contaminado por construccion: leer solo DE PAR.
+  fuente                             bruto  %sem   DE PAR       p  %sem  p signos
+  dependencia por ablacion (cruda)  +0.071   66%   +0.186  0.1572   86%     1e-07
+  atencion max sobre cabezas        -0.086    4%   +0.074  0.5865   56%      0.24
+  atencion rollout                  -0.376    2%   -0.064  0.6371   22%         1
+  atencion capa A1                  -0.487    0%   +0.062  0.6491   60%       0.1
+  atencion A2*A1 (sin residual)     -0.454    0%   +0.053  0.6855   74%   0.00047
+  dependencia por ablacion          -0.023   28%   -0.020  0.8804   30%         1
+  atencion capa A2                  -0.411    0%   +0.008  0.9518   40%      0.94
+  atencion A1+A2 (aditiva)          -0.496    0%   -0.002  0.9860   42%       0.9
+  rho = Spearman entre la asimetria de la fuente (A[i,j]-A[j,i])
+  y la asimetria heterocedastica de los datos, sobre los 66
+  pares. %sem+ = en cuantas de las 50 semillas sale positiva;
+  si la direccion fuera ruido de inicializacion, seria 50%.
+
+  Pares con direccion sostenible (20 de 66); el resto no aguanta el remuestreo:
+            MARI anuncia la variabilidad de CHL_REDEDGE  d=0.0213 +-0.0023  z=9.3  signo 100%
+             ARI anuncia la variabilidad de NDVI         d=0.0193 +-0.0020  z=9.8  signo 100%
+           KNDVI anuncia la variabilidad de NDVI         d=0.0145 +-0.0022  z=6.6  signo 100%
+            MARI anuncia la variabilidad de EVI          d=0.0142 +-0.0026  z=5.4  signo 92%
+             ARI anuncia la variabilidad de KNDVI        d=0.0137 +-0.0030  z=4.6  signo 100%
+            MARI anuncia la variabilidad de EVI2         d=0.0122 +-0.0026  z=4.8  signo 92%
+            MARI anuncia la variabilidad de SAVI         d=0.0119 +-0.0023  z=5.2  signo 92%
+            EVI2 anuncia la variabilidad de NDVI         d=0.0117 +-0.0009  z=12.5  signo 100%
+             ARI anuncia la variabilidad de CHL_REDEDGE  d=0.0116 +-0.0018  z=6.4  signo 92%
+           KNDVI anuncia la variabilidad de CHL_REDEDGE  d=0.0115 +-0.0019  z=6.0  signo 92%
+             ARI anuncia la variabilidad de EVI          d=0.0112 +-0.0022  z=5.0  signo 92%
+            MARI anuncia la variabilidad de NDVI         d=0.0097 +-0.0020  z=4.8  signo 92%
+
+  'anuncia' y no 'causa': d dice cual de los dos sirve
+  de INDICADOR DE REGIMEN -saber su valor te dice si el
+  otro va a estar bien predicho por el resto o se va a
+  desbandar-, no que uno produzca al otro.
+
+  DE DONDE VIENE LA ASIMETRIA. Tres hipotesis alternativas
+  a la biologica, cada una con su particion de los pares:
+  grupo                   pares  sosten.   frac  |d| medio  z medio
+  comparten bandas           32        6    19%     0.0051      3.0
+  sin bandas comunes         34       14    41%     0.0060      3.1
+  ambos solo 10 m            15        3    20%     0.0053      3.3
+  mixto 10/20 m              36       14    39%     0.0062      3.4
+  ambos con 20 m             15        3    20%     0.0042      2.2
+
+  Remuestreo: en 10 de 15 pares sostenibles con distinta
+  composicion de resolucion, el que ANUNCIA es el que tiene mas
+  bandas de 20 m (67%, binomial p=0.3018). Si el efecto fuera
+  ruido de remuestreo, esa fraccion tenderia a 100%.
+
+  Fisher exacto sobre esa tabla 2x2 (14/34 sin solapamiento contra 6/32 con):
+    odds ratio 3.03   p = 0.0627
+  Es evidencia, no prueba: sin corregir por la
+  cantidad de contrastes que lleva este informe.
+
+  Lo que decide: 'sin bandas comunes' son pares que NO
+  comparten ninguna banda Sentinel-2, asi que su asimetria
+  no puede salir de la formula. Si el efecto vive tambien
+  ahi, es acoplamiento entre regiones del espectro.
+
+  ROBUSTEZ DE LA DIRECCION a como y donde se mide:
+  medida                       sostenibles  |d| medio
+  R2, todos los pixeles           20 de 66     0.0055
+  R2, vegetacion NDVI>0.3         16 de 66     0.0041
+  R2, suelo desnudo 0.1-0.3       18 de 66     0.0052
+  R2, oscuro o mezcla             28 de 66     0.0102
+  dcor, todos los pixeles         33 de 66     0.0089
+
+  UN FENOMENO O DOS. Concordancia entre las matrices D de
+  cada clase, sobre los 66 pares. Alta: es la misma
+  asimetria y la baja reflectancia solo la amplifica.
+  Baja: hay dos dinamicas distintas superpuestas, y solo
+  la que vive en vegetacion y suelo es reportable como
+  propiedad espectral de la superficie.
+                              R2, todos l  R2, vegetac  R2, suelo d  R2, oscuro   dcor, todos
+  R2, todos los pixeles            +1.000       +0.449       +0.217       -0.230       +0.667
+  R2, vegetacion NDVI>0.3          +0.449       +1.000       +0.269       -0.165       +0.232
+  R2, suelo desnudo 0.1-0.3        +0.217       +0.269       +1.000       -0.320       -0.002
+  R2, oscuro o mezcla              -0.230       -0.165       -0.320       +1.000       -0.029
+  dcor, todos los pixeles          +0.667       +0.232       -0.002       -0.029       +1.000
+
+  Aguantar igual dentro y fuera de la vegetacion
+  descarta que sea estres vegetal. Que se concentre en
+  agua o en 'oscuro o mezcla' apuntaria a propagacion de
+  error donde la reflectancia colapsa; que viva en suelo
+  desnudo apuntaria a la firma espectral del material.
+  Sin las bandas crudas no se puede aislar la sombra: la
+  clase 'oscuro o mezcla' es un cajon, no una superficie.
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+ CONCLUSION
+  5 fuentes no son certificables: mas del 30% de sus
+  pares empatan, asi que su ranking lo decide el desempate y
+  no la medida. Cualquier puesto suyo, y cualquier sesgo que
+  se les mida, es artefacto de ordenacion:
+    P1 probabilistico (frecuencia)       76% empates
+    P1 probabilistico (-p_value)         32% empates
+    P2 interventivo (jaccard_drop)       100% empates
+    CONSENSO intervencion (4)            32% empates
+    CONSENSO pesos de atencion (6)       36% empates
+
+  4/20 fuentes superan el azar con p
+  sin corregir, pero NINGUNA sobrevive a la correccion por
+  multiplicidad (Benjamini-Hochberg sobre las 20 fuentes
+  probadas). Se probaron muchos rankings contra la misma
+  verdad; con alfa 0.05 se espera 1.0 fuentes significativas solo
+  por probar. Los p sin corregir mas bajos fueron:
+    P3 topologico (peso)                 T=22.2  p=0.0148  q=0.139  ctrl 1/2
+    atencion rollout                     T=23.3  p=0.0228  q=0.139  ctrl 1/2
+    dependencia por ablacion             T=21.0  p=0.0260  q=0.139  ctrl 0/2
+    P2 interventivo (max_degradation)    T=23.3  p=0.0278  q=0.139  ctrl 1/2
+
+  Ese test tiene un techo de potencia que conviene decir: la
+  nulidad baraja 12 etiquetas, o sea 12 unidades
+  intercambiables, asi que su p no puede bajar mucho por
+  construccion, y encima se le aplica FDR sobre 20 fuentes.
+  No pasarlo no prueba que no haya efecto.
+
+  El test con potencia para esta pregunta es el de
+  solo-condicionales POR SEMILLA: 50 modelos dan la
+  variabilidad que a 8 pares les falta. Ordenado por
+  tamano del efecto (puestos de ventaja sobre el azar):
+    dependencia por ablacion             mediana 27.3 (+6.2 puestos)  98% de semillas  p=4.5e-14
+    dependencia por ablacion (cruda)     mediana 29.1 (+4.4 puestos)  90% de semillas  p=2.1e-09
+    atencion max sobre cabezas           mediana 29.2 (+4.3 puestos)  88% de semillas  p=1.6e-08
+    atencion rollout                     mediana 31.0 (+2.5 puestos)  72% de semillas  p=0.0013
+    atencion capa A2                     mediana 31.7 (+1.8 puestos)  62% de semillas  p=0.059
+    atencion A1+A2 (aditiva)             mediana 32.6 (+0.9 puestos)  62% de semillas  p=0.059
+    atencion capa A1                     mediana 36.9 (-3.4 puestos)  14% de semillas  p=1
+    atencion A2*A1 (sin residual)        mediana 37.9 (-4.4 puestos)  8% de semillas  p=1
+  Con 50 semillas el test de signos detecta sesgos muy
+  pequenos, asi que lo que separa a las fuentes aqui NO es
+  el p sino el tamano del efecto: mirar la columna de
+  puestos de ventaja, no cual pasa 0.05.
+
+  Conclusion honesta: esta corrida no prueba la afirmacion
+  general de que el framework recupera relaciones entre las
+  variables -ningun ranking global sobrevive la correccion-, y
+  documenta un resultado negativo bien caracterizado (el sesgo
+  por racimo colineal). Lo que si queda medido es cuanta
+  ventaja sobre el azar conserva cada fuente donde la
+  correlacion marginal falla, y con cuanta reproducibilidad.
+
+  6/20 fuentes prefieren el racimo
+  colineal grande incluso descontando la dependencia real:
+    atencion rollout                     rho=-0.467
+    atencion capa A1                     rho=-0.413
+    atencion A1+A2 (aditiva)             rho=-0.312
+    Rashomon (percentil de fila)         rho=-0.323
+    P2 interventivo (max_degradation)    rho=-0.407
+    CONSENSO todas (13)                  rho=-0.288
+  Es la firma del atajo medida sin mirar |r|, y es coherente
+  con que casi todas sigan la correlacion marginal.
+------------------------------------------------------------------------------
+
+  --- |pc| (VERDAD, control del script)  (0 semillas) ---
+  es el ground truth; si no sale perfecto el bug esta aqui
+  VEREDICTO: ENCUENTRA RELACIONES REALES
+  T=4.25   nulo 33.42 (percentil 5 = 23.08)   p=0.0002
+  [solo condicional] 8 pares: puesto medio 7.5 (azar 33.5)  p=0.0002
+  [no lineal] 7 pares: puesto medio 43.0 (azar 33.5)  p=0.9180
+  [no lin blindado] 9 pares: puesto medio 37.8 (azar 33.5)  p=0.7620
+  Spearman global: condicional +1.000 (p=0.000)  ·  marginal +0.181 (p=0.146)
+  el ranking entero sigue la dependencia condicional
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente  4/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente  3/66   [OK]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825      1/66           3
+  NDMI-NDII         0.817      2/66           0
+  MARI-ARI          0.775      3/66           1
+  NDVI-KNDVI        0.721      4/66           3
+  NDVI-PSRI         0.642      5/66           4
+  NDWI-PSRI         0.633      6/66           0
+  sustitutos (controlando |pc|): rho=+0.007 p=0.9537
+    sin sesgo detectable por numero de sustitutos
+
+  --- |r| marginal (SIN MODELO, liston)  (0 semillas) ---
+  dos lineas de numpy; el framework tiene que ganarle
+  VEREDICTO: ENCUENTRA RELACIONES REALES pero falla 1/2 controles
+  T=25.20   nulo 33.53 (percentil 5 = 26.14)   p=0.0280
+  [solo condicional] 8 pares: puesto medio 41.0 (azar 33.5)  p=0.8618
+  [no lineal] 7 pares: puesto medio 24.4 (azar 33.5)  p=0.1598
+  [no lin blindado] 9 pares: puesto medio 44.0 (azar 33.5)  p=0.9266
+  Spearman global: condicional +0.181 (p=0.146)  ·  marginal +1.000 (p=0.000)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente  5/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 50/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825      1/66           3
+  NDMI-NDII         0.817      9/66           0
+  MARI-ARI          0.775     50/66           1
+  NDVI-KNDVI        0.721      5/66           3
+  NDVI-PSRI         0.642     27/66           4
+  NDWI-PSRI         0.633     45/66           0
+  sustitutos (controlando |pc|): rho=-0.021 p=0.8684
+    sin sesgo detectable por numero de sustitutos
+
+  --- atencion rollout  (50 semillas) ---
+  pesos de atencion agregados
+  VEREDICTO: ENCUENTRA RELACIONES REALES pero falla 1/2 controles
+  T=23.34   nulo 33.50 (percentil 5 = 25.32)   p=0.0228
+  q FDR sobre las fuentes probadas: 0.1390
+  [solo condicional] 8 pares: puesto medio 30.4 (azar 33.5)  p=0.3291  q=0.6404
+      por semilla: mediana 31.0, mejor que el azar en 72% de las semillas (signos p=0.001301)
+  [no lineal] 7 pares: puesto medio 17.9 (azar 33.5)  p=0.0284  q=0.1136
+      por semilla: mediana 19.4, mejor que el azar en 96% de las semillas (signos p=1.133e-12)
+  [no lin blindado] 9 pares: puesto medio 26.7 (azar 33.5)  p=0.1798  q=0.4418
+      por semilla: mediana 26.4, mejor que el azar en 92% de las semillas (signos p=2.231e-10)
+  contra el liston (25.2): T mediano por semilla 24.7, le gana en 54% de las semillas (test de signos p=0.3359)
+  Spearman global: condicional +0.132 (p=0.290)  ·  marginal +0.569 (p=0.000)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 11/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 24/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825      2/66           3
+  NDMI-NDII         0.817     36/66           0
+  MARI-ARI          0.775     24/66           1
+  NDVI-KNDVI        0.721     11/66           3
+  NDVI-PSRI         0.642     35/66           4
+  NDWI-PSRI         0.633     26/66           0
+  sustitutos (controlando |pc|): rho=-0.467 p=0.0001
+    favorece los pares del racimo colineal grande (firma del atajo)
+
+  --- atencion capa A1  (50 semillas) ---
+  pesos de una sola capa, sin rollout
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=45.60   nulo 33.59 (percentil 5 = 26.34)   p=0.9976
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 37.9 (azar 33.5)  p=0.7441  q=0.8754
+      por semilla: mediana 36.9, mejor que el azar en 14% de las semillas (signos p=1)
+  [no lineal] 7 pares: puesto medio 22.3 (azar 33.5)  p=0.0968  q=0.1936
+      por semilla: mediana 25.4, mejor que el azar en 94% de las semillas (signos p=1.854e-11)
+  [no lin blindado] 9 pares: puesto medio 26.9 (azar 33.5)  p=0.1812  q=0.4418
+      por semilla: mediana 28.0, mejor que el azar en 88% de las semillas (signos p=1.622e-08)
+  contra el liston (25.2): T mediano por semilla 42.7, le gana en 0% de las semillas (test de signos p=1.0000)
+  Spearman global: condicional -0.061 (p=0.624)  ·  marginal +0.198 (p=0.110)
+  el ranking entero no sigue a ninguna de las dos
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 17/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 63/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     54/66           3
+  NDMI-NDII         0.817     57/66           0
+  MARI-ARI          0.775     63/66           1
+  NDVI-KNDVI        0.721     17/66           3
+  NDVI-PSRI         0.642     30/66           4
+  NDWI-PSRI         0.633     65/66           0
+  sustitutos (controlando |pc|): rho=-0.413 p=0.0006
+    favorece los pares del racimo colineal grande (firma del atajo)
+
+  --- atencion capa A2  (50 semillas) ---
+  pesos de una sola capa, sin rollout
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=39.83   nulo 33.48 (percentil 5 = 24.94)   p=0.9086
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 29.5 (azar 33.5)  p=0.2823  q=0.6404
+      por semilla: mediana 31.7, mejor que el azar en 62% de las semillas (signos p=0.05946)
+  [no lineal] 7 pares: puesto medio 26.7 (azar 33.5)  p=0.2058  q=0.3166
+      por semilla: mediana 27.6, mejor que el azar en 72% de las semillas (signos p=0.001301)
+  [no lin blindado] 9 pares: puesto medio 28.6 (azar 33.5)  p=0.2523  q=0.4418
+      por semilla: mediana 31.3, mejor que el azar en 66% de las semillas (signos p=0.01642)
+  contra el liston (25.2): T mediano por semilla 40.2, le gana en 0% de las semillas (test de signos p=1.0000)
+  Spearman global: condicional +0.104 (p=0.406)  ·  marginal +0.259 (p=0.035)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 21/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 66/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     50/66           3
+  NDMI-NDII         0.817     56/66           0
+  MARI-ARI          0.775     66/66           1
+  NDVI-KNDVI        0.721     21/66           3
+  NDVI-PSRI         0.642     30/66           4
+  NDWI-PSRI         0.633      1/66           0
+  sustitutos (controlando |pc|): rho=-0.175 p=0.1610
+    sin sesgo detectable por numero de sustitutos
+
+  --- atencion A2*A1 (sin residual)  (50 semillas) ---
+  composicion de las dos capas, sin el termino identidad
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=39.12   nulo 33.48 (percentil 5 = 25.99)   p=0.8984
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 38.9 (azar 33.5)  p=0.7938  q=0.8820
+      por semilla: mediana 37.9, mejor que el azar en 8% de las semillas (signos p=1)
+  [no lineal] 7 pares: puesto medio 23.0 (azar 33.5)  p=0.1160  q=0.2109
+      por semilla: mediana 26.0, mejor que el azar en 94% de las semillas (signos p=1.854e-11)
+  [no lin blindado] 9 pares: puesto medio 33.1 (azar 33.5)  p=0.4887  q=0.5599
+      por semilla: mediana 34.3, mejor que el azar en 46% de las semillas (signos p=0.7601)
+  contra el liston (25.2): T mediano por semilla 37.0, le gana en 0% de las semillas (test de signos p=1.0000)
+  Spearman global: condicional +0.035 (p=0.779)  ·  marginal +0.238 (p=0.054)
+  el ranking entero no sigue a ninguna de las dos
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 16/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 46/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     50/66           3
+  NDMI-NDII         0.817     28/66           0
+  MARI-ARI          0.775     46/66           1
+  NDVI-KNDVI        0.721     16/66           3
+  NDVI-PSRI         0.642     34/66           4
+  NDWI-PSRI         0.633     66/66           0
+  sustitutos (controlando |pc|): rho=+0.041 p=0.7432
+    sin sesgo detectable por numero de sustitutos
+
+  --- atencion A1+A2 (aditiva)  (50 semillas) ---
+  parte aditiva del rollout, sin identidad
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=39.05   nulo 33.46 (percentil 5 = 25.54)   p=0.8830
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 31.9 (azar 33.5)  p=0.4127  q=0.6404
+      por semilla: mediana 32.6, mejor que el azar en 62% de las semillas (signos p=0.05946)
+  [no lineal] 7 pares: puesto medio 20.9 (azar 33.5)  p=0.0652  q=0.1822
+      por semilla: mediana 25.1, mejor que el azar en 80% de las semillas (signos p=1.193e-05)
+  [no lin blindado] 9 pares: puesto medio 25.6 (azar 33.5)  p=0.1420  q=0.4418
+      por semilla: mediana 28.2, mejor que el azar en 82% de las semillas (signos p=2.807e-06)
+  contra el liston (25.2): T mediano por semilla 40.1, le gana en 0% de las semillas (test de signos p=1.0000)
+  Spearman global: condicional +0.053 (p=0.674)  ·  marginal +0.303 (p=0.013)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 17/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 65/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     45/66           3
+  NDMI-NDII         0.817     56/66           0
+  MARI-ARI          0.775     65/66           1
+  NDVI-KNDVI        0.721     17/66           3
+  NDVI-PSRI         0.642     23/66           4
+  NDWI-PSRI         0.633     10/66           0
+  sustitutos (controlando |pc|): rho=-0.312 p=0.0108
+    favorece los pares del racimo colineal grande (firma del atajo)
+
+  --- atencion max sobre cabezas  (50 semillas) ---
+  la cabeza mas fuerte de cada arista, sin promediar
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=40.48   nulo 33.49 (percentil 5 = 26.22)   p=0.9512
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 27.8 (azar 33.5)  p=0.2008  q=0.6404
+      por semilla: mediana 29.2, mejor que el azar en 88% de las semillas (signos p=1.622e-08)
+  [no lineal] 7 pares: puesto medio 37.7 (azar 33.5)  p=0.6893  q=0.8616
+      por semilla: mediana 37.4, mejor que el azar en 28% de las semillas (signos p=0.9995)
+  [no lin blindado] 9 pares: puesto medio 39.6 (azar 33.5)  p=0.7994  q=0.8415
+      por semilla: mediana 39.8, mejor que el azar en 24% de las semillas (signos p=1)
+  contra el liston (25.2): T mediano por semilla 41.3, le gana en 0% de las semillas (test de signos p=1.0000)
+  Spearman global: condicional +0.105 (p=0.400)  ·  marginal +0.082 (p=0.514)
+  el ranking entero no sigue a ninguna de las dos
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 37/66   [NO]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 66/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     58/66           3
+  NDMI-NDII         0.817     47/66           0
+  MARI-ARI          0.775     66/66           1
+  NDVI-KNDVI        0.721     37/66           3
+  NDVI-PSRI         0.642     12/66           4
+  NDWI-PSRI         0.633      3/66           0
+  sustitutos (controlando |pc|): rho=+0.160 p=0.2003
+    sin sesgo detectable por numero de sustitutos
+
+  --- dependencia por ablacion  (50 semillas) ---
+  interviene la entrada, no lee pesos
+  VEREDICTO: ENCUENTRA RELACIONES REALES pero falla 2/2 controles
+  T=21.05   nulo 33.45 (percentil 5 = 22.86)   p=0.0260
+  q FDR sobre las fuentes probadas: 0.1390
+  [solo condicional] 8 pares: puesto medio 24.6 (azar 33.5)  p=0.0842  q=0.6404
+      por semilla: mediana 27.3, mejor que el azar en 98% de las semillas (signos p=4.53e-14)
+  [no lineal] 7 pares: puesto medio 38.9 (azar 33.5)  p=0.7938  q=0.9293
+      por semilla: mediana 38.6, mejor que el azar en 16% de las semillas (signos p=1)
+  [no lin blindado] 9 pares: puesto medio 27.8 (azar 33.5)  p=0.1646  q=0.4418
+      por semilla: mediana 29.8, mejor que el azar en 92% de las semillas (signos p=2.231e-10)
+  contra el liston (25.2): T mediano por semilla 23.6, le gana en 88% de las semillas (test de signos p=0.0000)
+  Spearman global: condicional +0.097 (p=0.437)  ·  marginal +0.118 (p=0.347)
+  el ranking entero no sigue a ninguna de las dos
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 25/66   [NO]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 41/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     17/66           3
+  NDMI-NDII         0.817      4/66           0
+  MARI-ARI          0.775     41/66           1
+  NDVI-KNDVI        0.721     25/66           3
+  NDVI-PSRI         0.642     10/66           4
+  NDWI-PSRI         0.633      6/66           0
+  sustitutos (controlando |pc|): rho=-0.117 p=0.3516
+    sin sesgo detectable por numero de sustitutos
+
+  --- dependencia por ablacion (cruda)  (50 semillas) ---
+  la misma sin normalizar por fila
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=23.99   nulo 33.46 (percentil 5 = 23.21)   p=0.0666
+  q FDR sobre las fuentes probadas: 0.2663
+  [solo condicional] 8 pares: puesto medio 30.6 (azar 33.5)  p=0.3301  q=0.6404
+      por semilla: mediana 29.1, mejor que el azar en 90% de las semillas (signos p=2.105e-09)
+  [no lineal] 7 pares: puesto medio 34.1 (azar 33.5)  p=0.5485  q=0.7313
+      por semilla: mediana 35.9, mejor que el azar en 30% de las semillas (signos p=0.9987)
+  [no lin blindado] 9 pares: puesto medio 26.8 (azar 33.5)  p=0.1352  q=0.4418
+      por semilla: mediana 27.1, mejor que el azar en 100% de las semillas (signos p=8.882e-16)
+  contra el liston (25.2): T mediano por semilla 23.9, le gana en 74% de las semillas (test de signos p=0.0005)
+  Spearman global: condicional +0.095 (p=0.447)  ·  marginal +0.172 (p=0.167)
+  el ranking entero no sigue a ninguna de las dos
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 11/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 59/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     20/66           3
+  NDMI-NDII         0.817      8/66           0
+  MARI-ARI          0.775     59/66           1
+  NDVI-KNDVI        0.721     11/66           3
+  NDVI-PSRI         0.642      6/66           4
+  NDWI-PSRI         0.633     15/66           0
+  sustitutos (controlando |pc|): rho=-0.174 p=0.1630
+    sin sesgo detectable por numero de sustitutos
+
+  --- Rashomon (percentil de fila)  (28 semillas) ---
+  importancia agregada sobre el conjunto Rashomon
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=42.41   nulo 33.48 (percentil 5 = 25.93)   p=0.9764
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 32.5 (azar 33.5)  p=0.4483  q=0.6404
+  [no lineal] 7 pares: puesto medio 21.3 (azar 33.5)  p=0.0736  q=0.1822
+  [no lin blindado] 9 pares: puesto medio 27.8 (azar 33.5)  p=0.2170  q=0.4418
+  Spearman global: condicional +0.033 (p=0.792)  ·  marginal +0.282 (p=0.022)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 14/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 66/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     56/66           3
+  NDMI-NDII         0.817     62/66           0
+  MARI-ARI          0.775     66/66           1
+  NDVI-KNDVI        0.721     14/66           3
+  NDVI-PSRI         0.642     11/66           4
+  NDWI-PSRI         0.633     36/66           0
+  sustitutos (controlando |pc|): rho=-0.323 p=0.0081
+    favorece los pares del racimo colineal grande (firma del atajo)
+
+  --- P1 probabilistico (frecuencia)  (50 semillas) ---
+  en cuantas semillas sobrevive la arista
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=29.43   nulo 33.66 (percentil 5 = 25.89)   p=0.1846
+  q FDR sobre las fuentes probadas: 0.5273
+  [solo condicional] 8 pares: puesto medio 30.2 (azar 33.5)  p=0.3167  q=0.6404
+  [no lineal] 7 pares: puesto medio 15.6 (azar 33.5)  p=0.0104  q=0.1040
+  [no lin blindado] 9 pares: puesto medio 24.8 (azar 33.5)  p=0.1062  q=0.4418
+  Spearman global: condicional +0.158 (p=0.206)  ·  marginal +0.579 (p=0.000)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 21/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 41/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825      9/66           3
+  NDMI-NDII         0.817     49/66           0
+  MARI-ARI          0.775     41/66           1
+  NDVI-KNDVI        0.721     21/66           3
+  NDVI-PSRI         0.642     21/66           4
+  NDWI-PSRI         0.633     38/66           0
+  sustitutos (controlando |pc|): rho=-0.532 p=0.0000
+    favorece los pares del racimo colineal grande (firma del atajo)
+    CUIDADO: 76% de los pares empatan; el puesto lo decide el desempate, no la fuente
+
+  --- P1 probabilistico (-p_value)  (50 semillas) ---
+  significacion contra el modelo nulo
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=30.47   nulo 33.57 (percentil 5 = 25.30)   p=0.2601
+  q FDR sobre las fuentes probadas: 0.6504
+  [solo condicional] 8 pares: puesto medio 30.2 (azar 33.5)  p=0.3067  q=0.6404
+  [no lineal] 7 pares: puesto medio 14.9 (azar 33.5)  p=0.0102  q=0.1040
+  [no lin blindado] 9 pares: puesto medio 25.6 (azar 33.5)  p=0.1358  q=0.4418
+  Spearman global: condicional +0.117 (p=0.349)  ·  marginal +0.566 (p=0.000)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 23/66   [NO]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 38/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     14/66           3
+  NDMI-NDII         0.817     49/66           0
+  MARI-ARI          0.775     38/66           1
+  NDVI-KNDVI        0.721     23/66           3
+  NDVI-PSRI         0.642     28/66           4
+  NDWI-PSRI         0.633     39/66           0
+  sustitutos (controlando |pc|): rho=-0.561 p=0.0000
+    favorece los pares del racimo colineal grande (firma del atajo)
+    CUIDADO: 32% de los pares empatan; el puesto lo decide el desempate, no la fuente
+
+  --- P2 interventivo (auc_degradation)  (50 semillas) ---
+  area de la curva de degradacion al debilitar la arista
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=44.00   nulo 33.49 (percentil 5 = 25.81)   p=0.9880
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 30.8 (azar 33.5)  p=0.3687  q=0.6404
+  [no lineal] 7 pares: puesto medio 49.3 (azar 33.5)  p=0.9746  q=0.9746
+  [no lin blindado] 9 pares: puesto medio 48.3 (azar 33.5)  p=0.9840  q=0.9840
+  Spearman global: condicional -0.123 (p=0.325)  ·  marginal +0.079 (p=0.528)
+  el ranking entero no sigue a ninguna de las dos
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 61/66   [NO]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 51/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     65/66           3
+  NDMI-NDII         0.817     32/66           0
+  MARI-ARI          0.775     51/66           1
+  NDVI-KNDVI        0.721     61/66           3
+  NDVI-PSRI         0.642     49/66           4
+  NDWI-PSRI         0.633     11/66           0
+  sustitutos (controlando |pc|): rho=+0.117 p=0.3477
+    sin sesgo detectable por numero de sustitutos
+
+  --- P2 interventivo (max_degradation)  (50 semillas) ---
+  peor degradacion alcanzada
+  VEREDICTO: ENCUENTRA RELACIONES REALES pero falla 1/2 controles
+  T=23.25   nulo 33.49 (percentil 5 = 24.76)   p=0.0278
+  q FDR sobre las fuentes probadas: 0.1390
+  [solo condicional] 8 pares: puesto medio 29.6 (azar 33.5)  p=0.2917  q=0.6404
+  [no lineal] 7 pares: puesto medio 19.3 (azar 33.5)  p=0.0424  q=0.1413
+  [no lin blindado] 9 pares: puesto medio 29.1 (azar 33.5)  p=0.2801  q=0.4418
+  Spearman global: condicional +0.138 (p=0.270)  ·  marginal +0.646 (p=0.000)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 14/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 26/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825      3/66           3
+  NDMI-NDII         0.817     37/66           0
+  MARI-ARI          0.775     26/66           1
+  NDVI-KNDVI        0.721     14/66           3
+  NDVI-PSRI         0.642     38/66           4
+  NDWI-PSRI         0.633      2/66           0
+  sustitutos (controlando |pc|): rho=-0.407 p=0.0007
+    favorece los pares del racimo colineal grande (firma del atajo)
+
+  --- P2 interventivo (jaccard_drop)  (50 semillas) ---
+  cuanto cambia el grafo al intervenir
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=31.32   nulo 33.51 (percentil 5 = 26.57)   p=0.3149
+  q FDR sobre las fuentes probadas: 0.6999
+  [solo condicional] 8 pares: puesto medio 33.5 (azar 33.5)  p=0.5647  q=0.7059
+  [no lineal] 7 pares: puesto medio 16.0 (azar 33.5)  p=0.0178  q=0.1100
+  [no lin blindado] 9 pares: puesto medio 28.4 (azar 33.5)  p=0.2611  q=0.4418
+  Spearman global: condicional +0.071 (p=0.573)  ·  marginal +0.541 (p=0.000)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 37/66   [NO]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 37/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     12/66           3
+  NDMI-NDII         0.817     37/66           0
+  MARI-ARI          0.775     37/66           1
+  NDVI-KNDVI        0.721     37/66           3
+  NDVI-PSRI         0.642     37/66           4
+  NDWI-PSRI         0.633     37/66           0
+  sustitutos (controlando |pc|): rho=-0.582 p=0.0000
+    favorece los pares del racimo colineal grande (firma del atajo)
+    CUIDADO: 100% de los pares empatan; el puesto lo decide el desempate, no la fuente
+
+  --- P3 topologico (brecha)  (50 semillas) ---
+  brecha topologica de la arista
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=48.85   nulo 33.46 (percentil 5 = 25.09)   p=0.9962
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 43.0 (azar 33.5)  p=0.9296  q=0.9296
+  [no lineal] 7 pares: puesto medio 42.7 (azar 33.5)  p=0.8822  q=0.9293
+  [no lin blindado] 9 pares: puesto medio 30.6 (azar 33.5)  p=0.3305  q=0.4418
+  Spearman global: condicional -0.273 (p=0.026)  ·  marginal -0.708 (p=0.000)
+  el ranking entero sigue la dependencia condicional
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 61/66   [NO]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 61/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     61/66           3
+  NDMI-NDII         0.817     32/66           0
+  MARI-ARI          0.775     61/66           1
+  NDVI-KNDVI        0.721     61/66           3
+  NDVI-PSRI         0.642     40/66           4
+  NDWI-PSRI         0.633     61/66           0
+  sustitutos (controlando |pc|): rho=+0.266 p=0.0310
+    pierde los pares que tienen sustitutos (enmascaramiento por redundancia)
+
+  --- P3 topologico (peso)  (50 semillas) ---
+  peso de la arista en el grafo de consenso
+  VEREDICTO: ENCUENTRA RELACIONES REALES pero falla 1/2 controles
+  T=22.21   nulo 33.52 (percentil 5 = 25.45)   p=0.0148
+  q FDR sobre las fuentes probadas: 0.1390
+  [solo condicional] 8 pares: puesto medio 34.2 (azar 33.5)  p=0.5291  q=0.7055
+  [no lineal] 7 pares: puesto medio 17.0 (azar 33.5)  p=0.0220  q=0.1100
+  [no lin blindado] 9 pares: puesto medio 33.6 (azar 33.5)  p=0.4983  q=0.5599
+  Spearman global: condicional +0.140 (p=0.262)  ·  marginal +0.786 (p=0.000)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente  4/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 30/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825      2/66           3
+  NDMI-NDII         0.817     23/66           0
+  MARI-ARI          0.775     30/66           1
+  NDVI-KNDVI        0.721      4/66           3
+  NDVI-PSRI         0.642     41/66           4
+  NDWI-PSRI         0.633      9/66           0
+  sustitutos (controlando |pc|): rho=-0.233 p=0.0594
+    sin sesgo detectable por numero de sustitutos
+
+  --- P4 triangulacion (te_brecha)  (0 semillas) ---
+  brecha del criterio de estabilidad topologica
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=48.85   nulo 33.51 (percentil 5 = 25.13)   p=0.9954
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 43.0 (azar 33.5)  p=0.9290  q=0.9296
+  [no lineal] 7 pares: puesto medio 42.7 (azar 33.5)  p=0.8828  q=0.9293
+  [no lin blindado] 9 pares: puesto medio 30.6 (azar 33.5)  p=0.3313  q=0.4418
+  Spearman global: condicional -0.273 (p=0.026)  ·  marginal -0.708 (p=0.000)
+  el ranking entero sigue la dependencia condicional
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 61/66   [NO]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 61/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     61/66           3
+  NDMI-NDII         0.817     32/66           0
+  MARI-ARI          0.775     61/66           1
+  NDVI-KNDVI        0.721     61/66           3
+  NDVI-PSRI         0.642     40/66           4
+  NDWI-PSRI         0.633     61/66           0
+  sustitutos (controlando |pc|): rho=+0.266 p=0.0310
+    pierde los pares que tienen sustitutos (enmascaramiento por redundancia)
+
+  --- CONSENSO todas (13)  (13 semillas) ---
+  rango medio de atencion rollout, atencion capa A1, atencion capa A2, atencion A2*A1 (sin residual), atencion A1+A2 (aditiva), atencion max sobre cabezas, dependencia por ablacion, dependencia por ablacion (cruda), Rashomon (percentil de fila), P2 interventivo (auc_degradation), P2 interventivo (max_degradation), P3 topologico (brecha), P3 topologico (peso)
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=35.40   nulo 33.47 (percentil 5 = 25.15)   p=0.6419
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 29.2 (azar 33.5)  p=0.2783  q=0.6404
+  [no lineal] 7 pares: puesto medio 25.0 (azar 33.5)  p=0.1584  q=0.2639
+  [no lin blindado] 9 pares: puesto medio 29.4 (azar 33.5)  p=0.2991  q=0.4418
+  Spearman global: condicional +0.104 (p=0.406)  ·  marginal +0.413 (p=0.001)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente  9/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 64/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     45/66           3
+  NDMI-NDII         0.817     43/66           0
+  MARI-ARI          0.775     64/66           1
+  NDVI-KNDVI        0.721      9/66           3
+  NDVI-PSRI         0.642     18/66           4
+  NDWI-PSRI         0.633     10/66           0
+  sustitutos (controlando |pc|): rho=-0.288 p=0.0192
+    favorece los pares del racimo colineal grande (firma del atajo)
+    CUIDADO: 21% de los pares empatan; el puesto lo decide el desempate, no la fuente
+
+  --- CONSENSO intervencion (4)  (4 semillas) ---
+  rango medio de dependencia por ablacion, dependencia por ablacion (cruda), P2 interventivo (auc_degradation), P2 interventivo (max_degradation)
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=26.21   nulo 33.43 (percentil 5 = 23.30)   p=0.1224
+  q FDR sobre las fuentes probadas: 0.4079
+  [solo condicional] 8 pares: puesto medio 28.1 (azar 33.5)  p=0.2138  q=0.6404
+  [no lineal] 7 pares: puesto medio 33.5 (azar 33.5)  p=0.5251  q=0.7313
+  [no lin blindado] 9 pares: puesto medio 33.5 (azar 33.5)  p=0.5039  q=0.5599
+  Spearman global: condicional +0.072 (p=0.567)  ·  marginal +0.400 (p=0.001)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 27/66   [NO]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 46/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     25/66           3
+  NDMI-NDII         0.817     13/66           0
+  MARI-ARI          0.775     46/66           1
+  NDVI-KNDVI        0.721     27/66           3
+  NDVI-PSRI         0.642     24/66           4
+  NDWI-PSRI         0.633      1/66           0
+  sustitutos (controlando |pc|): rho=-0.224 p=0.0706
+    sin sesgo detectable por numero de sustitutos
+    CUIDADO: 32% de los pares empatan; el puesto lo decide el desempate, no la fuente
+
+  --- CONSENSO pesos de atencion (6)  (6 semillas) ---
+  rango medio de atencion rollout, atencion capa A1, atencion capa A2, atencion A2*A1 (sin residual), atencion A1+A2 (aditiva), atencion max sobre cabezas
+  VEREDICTO: NO SE DISTINGUE DEL AZAR
+  T=39.26   nulo 33.51 (percentil 5 = 26.00)   p=0.9044
+  q FDR sobre las fuentes probadas: 0.9976
+  [solo condicional] 8 pares: puesto medio 32.3 (azar 33.5)  p=0.4373  q=0.6404
+  [no lineal] 7 pares: puesto medio 21.8 (azar 33.5)  p=0.0820  q=0.1822
+  [no lin blindado] 9 pares: puesto medio 29.4 (azar 33.5)  p=0.2943  q=0.4418
+  Spearman global: condicional +0.098 (p=0.434)  ·  marginal +0.385 (p=0.001)
+  el ranking entero sigue la correlacion marginal
+  controles positivos (identidades exactas):
+    NDVI-KNDVI     |pc|=0.721   verdad  4/66   fuente 13/66   [OK]
+    MARI-ARI       |pc|=0.775   verdad  3/66   fuente 63/66   [NO]
+  par real           |pc|    puesto  sustitutos
+  EVI2-SAVI         0.825     46/66           3
+  NDMI-NDII         0.817     51/66           0
+  MARI-ARI          0.775     63/66           1
+  NDVI-KNDVI        0.721     13/66           3
+  NDVI-PSRI         0.642     25/66           4
+  NDWI-PSRI         0.633     26/66           0
+  sustitutos (controlando |pc|): rho=-0.253 p=0.0401
+    favorece los pares del racimo colineal grande (firma del atajo)
+    CUIDADO: 36% de los pares empatan; el puesto lo decide el desempate, no la fuente
+
+  COMO LEERLO:
+   p perm < 0.05  -> la fuente pone arriba los pares que de verdad
+          existen, mas de lo que consigue barajar las etiquetas.
+          Es el unico p de esta salida que esta calibrado: corrige
+          el barrido de K y la dependencia entre los 66 pares.
+   q FDR < 0.05 -> ademas sobrevive a haber probado once
+          rankings distintos contra la misma verdad. Es el
+          criterio para reportar algo como hallazgo.
+   >liston -> porcentaje de semillas en que la fuente bate a
+          np.corrcoef. Superar el azar no basta: el liston
+          tambien lo supera.
+   empates -> por encima del 30% el ranking lo decide el
+          desempate y la fuente no dice nada.
+   T solo -> lo mismo restringido a los pares que la correlacion
+          marginal NO encuentra. Es la prueba especifica de la
+          tesis: ahi copiar np.corrcoef no sirve de nada.
+   T      -> puesto medio de los pares reales. 33.5 es azar puro.
+   ctrl   -> identidades exactas (KNDVI=tanh(NDVI^2), MARI=ARI*B7)
+          recuperadas en el tercio superior. Una fuente que no las
+          encuentre no puede pedir que se le crean las demas.
+   sustitutos -> sesgo por numero de hermanos de familia, ya
+          descontado el |pc| real. rho>0: la fuente pierde los
+          pares que tienen sustitutos (redundancia los tapa).
+          rho<0: la fuente prefiere el racimo colineal grande por
+          ser colineal. Las dos cosas acotan donde se le cree.
+==============================================================================
