@@ -24,17 +24,17 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 
 | Archivo | Estado | Dueño | Líneas | Nota |
 |---|---|---|---|---|
-| `main.tex` | `IN_PROGRESS` | autor humano (Task-032 y Task-029 las editó claude-2, autorización explícita) | 79 | Task-032: `\phantomsection` antes de los `\addcontentsline` de Índice General, Lista de Tablas y Referencias — sin eso los tres enlaces del índice apuntaban a la portada (bug de hyperref: sin ancla propia, cae al último ancla real, que era la página 1). Task-029: `\include` -> `\input` en los 7 capítulos del cuerpo, para que dejen de forzar página nueva entre ellos. Task-021: hyperref (indice navegable), parskip 0 y titlespacing segun formato |
+| `main.tex` | `NEED_REVIEW` | autor humano (Task-032 y Task-029 las editó claude-2, autorización explícita) | 100 | Task-034 (instrucción explícita del autor humano): lista de figuras antes de la de tablas y ambas en el índice general; `Lista de Tablas` y `Tabla` en vez de `Índice de cuadros` y `Cuadro`; leyendas en tamaño 10, justificadas a la izquierda y centradas si ocupan una línea. Task-032: `\phantomsection` antes de los `\addcontentsline` de Índice General, Lista de Tablas y Referencias — sin eso los tres enlaces del índice apuntaban a la portada (bug de hyperref: sin ancla propia, cae al último ancla real, que era la página 1). Task-029: `\include` -> `\input` en los 7 capítulos del cuerpo, para que dejen de forzar página nueva entre ellos. Task-021: hyperref (indice navegable), parskip 0 y titlespacing segun formato |
 | `pucv_inf_2024.sty` | `NEED_REVIEW` | autor humano (Task-029 la editó claude-2, autorización explícita) | 91 | Task-029: `\titleclass{\chapter}{straight}` para que `\chapter` deje de forzar página nueva (ver TASKS.md, nota de cierre). Task-021: unica linea cambiada, biblatex apa -> ieee (citas numericas) |
 | `Portadas/portada_principal.tex` | `NEED_REVIEW` | claude-1 (Task-029 la editó claude-2, instrucción directa) | 32 | Task-029: nuevo título principal, "Framework para reconstrucción de estructuras relacionales desde representaciones latentes" |
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 (Task-032 y Task-029 las editó claude-2, instrucción directa) | 31 | Task-032: `\phantomsection` antes del `\addcontentsline` de "Resumen/Abstract" (ver main.tex, mismo bug de hyperref). Task-029: corrige la inconsistencia "siempre se entrena un modelo alternativo" -> framework agnóstico (aplica directo si el modelo desplegado ya cumple la condición, entrena alternativa si no) |
-| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-033/029 las editó claude-2, instrucción directa) | 47 | Task-033: corrige "no se ha ejecutado nada" -> "ya está en curso" en §Propuesta y contribución (contradecía `tab:plan`). Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
+| `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-033/029 las editó claude-2, instrucción directa) | 47 | Task-034: la contribución habla de cinco paradigmas en vez de una cadena acumulativa. Task-033: corrige "no se ha ejecutado nada" -> "ya está en curso" en §Propuesta y contribución (contradecía `tab:plan`). Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 (Task-033/032 las editó claude-2, instrucción directa) | 23 | Task-033: objetivo general corregido a la formulación agnóstica (decía "entrenado sobre los mismos datos que el modelo principal", sin condición, inconsistente desde Task-029). Task-032: objetivo 2 acortado a pedido del autor humano (quedaba muy largo) — una oración en vez de dos párrafos, mismas 3 citas y las cinco etapas, sin el `\ref{sec:criterio}`. Task-031: el objetivo 2 pasa de cuatro preguntas a las cinco de §6.5, con la quinta explícita (especificidad del efecto y tamaño de la hipótesis) y referencia cruzada a `sec:criterio`. Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `IN_PROGRESS` | claude-1 (Task-033/027/028/029 las editó claude-2, instrucción directa del autor humano) | 132 | Task-032: la figura del flujo PRISMA vuelve a ser flotante `[!ht]`, sin `\clearpage` delante. Task-033: celda "Propuesta" de `tab:familias` a formulación agnóstica. Task-031: §3.1.2 transcribe completa la cadena booleana de los cuatro bloques PICO; orden de autores corregido en §3.1.3. Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
+| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-033/027/028/029 las editó claude-2, instrucción directa del autor humano) | 130 | Task-034: §3.2.4 reducida de cuatro párrafos a dos, sin perder ninguna de sus siete citas; de paso salen dos afirmaciones de desempeño de algoritmos ajenos que `CLAUDE.md` prohíbe. Task-032: la figura del flujo PRISMA vuelve a ser flotante `[!ht]`, sin `\clearpage` delante. Task-033: celda "Propuesta" de `tab:familias` a formulación agnóstica. Task-031: §3.1.2 transcribe completa la cadena booleana de los cuatro bloques PICO; orden de autores corregido en §3.1.3. Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
 | `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 55 | Task-029: quita una raya larga en §4.1 (regla de estilo sin rayas). Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
-| `secciones/05_plan_trabajo.tex` | `IN_PROGRESS` | claude-1 (Task-033/028 las editó claude-2, instrucción directa del autor humano) | 78 | Task-032: §5.2 nombra las nueve bandas y cómo se reparten en los cinco grupos, con nota al catálogo de Sentinel Hub; se retira el conjunto sintético; se reescriben la partición por fase fenológica y el séptimo paso. Task-033: corrige "queda pendiente la etapa de validación" -> "ya está en curso" en §5.1 (contradecía `tab:plan`, mismo problema que Task-030 había arreglado antes de que PR#30 lo revirtiera sin querer). Task-031: capítulo reorganizado, §5.2 Datos (conjunto real y sintético) y §5.3 Procedimiento nuevas, orden de autores en el caption, tercera dependencia corregida. Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
-| `secciones/06_propuesta.tex` | `IN_PROGRESS` | claude-1/claude-2 (Task-029 la editó claude-2, instrucción directa) | 93 | Task-032: la agregación entre capas deja de comprometerse con el rollout; figura flotante sin `\clearpage`. Task-029: §Planteamiento corrige la misma inconsistencia de agnosticismo del framework (ver nota de cierre abajo); quita 5 rayas largas en el archivo; elimina §"Alcance de esta etapa" completa por redundar con el capítulo de plan de trabajo — **ojo**: eso deja `teleconnections2026causal` en solo 2 usos, bajo el mínimo de 3, ver nota de cierre. Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
-| `secciones/07_conclusiones.tex` | `IN_PROGRESS` | claude-1 (Task-033 la editó claude-2, instrucción directa) | 17 | Task-032: la tercera advertencia ya no se apoya en el conjunto sintético; el rollout queda como elección del caso de estudio. Task-033: corrige "no se ha ejecutado nada, es todo etapa futura" -> "ya está en curso" (contradecía `tab:plan`); "modelo alternativo" sin condición -> formulación agnóstica; quita la última raya larga del documento. Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
+| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-033/028 las editó claude-2, instrucción directa del autor humano) | 105 | Task-034: tabla `tab:indices` con los doce índices, su significado y sus bandas; notas al pie a Google Earth Engine y al IDE del Ministerio de Agricultura; corregidos contra `Framework.py` el párrafo de la tarea (se ocultan cinco, se lee con uno) y el de la partición (es cronológica); §5.3 reescrita en cuatro etapas; §5.5 borrada. Task-032: §5.2 nombra las nueve bandas y cómo se reparten en los cinco grupos, con nota al catálogo de Sentinel Hub; se retira el conjunto sintético; se reescriben la partición por fase fenológica y el séptimo paso. Task-033: corrige "queda pendiente la etapa de validación" -> "ya está en curso" en §5.1 (contradecía `tab:plan`, mismo problema que Task-030 había arreglado antes de que PR#30 lo revirtiera sin querer). Task-031: capítulo reorganizado, §5.2 Datos (conjunto real y sintético) y §5.3 Procedimiento nuevas, orden de autores en el caption, tercera dependencia corregida. Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
+| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 (Task-029 la editó claude-2, instrucción directa) | 103 | Task-034: §6.5 reescrita como triangulación de cinco paradigmas, que es lo que el código implementa, en vez de la cadena de cinco preguntas. Task-032: la agregación entre capas deja de comprometerse con el rollout; figura flotante sin `\clearpage`. Task-029: §Planteamiento corrige la misma inconsistencia de agnosticismo del framework (ver nota de cierre abajo); quita 5 rayas largas en el archivo; elimina §"Alcance de esta etapa" completa por redundar con el capítulo de plan de trabajo — **ojo**: eso deja `teleconnections2026causal` en solo 2 usos, bajo el mínimo de 3, ver nota de cierre. Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
+| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 (Task-033 la editó claude-2, instrucción directa) | 17 | Task-034: `simic2025perturbation` repuesta al mínimo de tres usos y la última frase habla de paradigmas y no de la cadena. Task-032: la tercera advertencia ya no se apoya en el conjunto sintético; el rollout queda como elección del caso de estudio. Task-033: corrige "no se ha ejecutado nada, es todo etapa futura" -> "ya está en curso" (contradecía `tab:plan`); "modelo alternativo" sin condición -> formulación agnóstica; quita la última raya larga del documento. Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `figuras/framework_pipeline.tex` | `NEED_REVIEW` | claude-1 | 57 | Task-026: esquema de la composición, `standalone` + TikZ, se compila aparte |
 | `figuras/prisma_flujo.tex` | `NEED_REVIEW` | claude-1 | 65 | Task-026: flujo de cribado PRISMA, cifras de la bitácora |
 | `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | 25 entradas, ahora renderizadas en estilo IEEE numerico |
@@ -72,7 +72,7 @@ antes de tocar nada:
 
 ## Cola de tareas
 
-### Task-034 — `IN_PROGRESS` por claude-1
+### Task-034 — cerrada por claude-1, pendiente de revisión
 
 - **Task-034 — formato de índices y leyendas, tabla de índices espectrales,
   actualización de §5.3 y §6.5 contra la implementación real, y borrado de §5.5.**
@@ -83,7 +83,8 @@ antes de tocar nada:
      las dos aparecía completa en el índice general.
   2. "Índice de cuadros" debe decir "Lista de Tablas", y los pies de tabla deben decir
      "Tabla" y no "Cuadro". Es el nombre que impone babel en español; se corrige con
-     `enewcommand`, no tocando el `.sty`.
+     `
+enewcommand`, no tocando el `.sty`.
   3. Leyendas en tamaño 10, justificadas a la izquierda y centradas si ocupan una sola
      línea; debajo en figuras, encima en tablas.
   4. Figuras y tablas lo más cerca posible del párrafo que las referencia, y si no caben
@@ -108,6 +109,79 @@ antes de tocar nada:
   ediciones anteriores que recortaron prosa sin recontar. `keratoconus2026instability`
   (2), `simic2025perturbation` (2) y `teleconnections2026causal` (2). Las tres se
   reponen en la reescritura de §6.5, donde encajan por contenido y no por relleno.
+
+  **Lo que se hizo.**
+
+  1. **Formato (`main.tex`).** `\listoffigures` antes de `\listoftables`, ambos con su
+     `\addcontentsline` para que aparezcan en el índice general. Los nombres se corrigen
+     dentro de `\captionsspanish` con `\renewcommand`: `Lista de Figuras`, `Lista de
+     Tablas`, `Figura` y `Tabla`, en vez de los `Índice de cuadros` y `Cuadro` que
+     impone babel en español. Las leyendas quedan con
+     `\captionsetup{font=footnotesize, justification=raggedright, singlelinecheck=true}`:
+     `footnotesize` sobre un cuerpo de 12 pt es exactamente 10 pt, `raggedright` las
+     justifica a la izquierda y `singlelinecheck` centra las de una sola línea, que es
+     literal lo que pide el formato. Verificado renderizando: la leyenda de la figura
+     6.1 ocupa una línea y sale centrada; la de la tabla 5.1 ocupa dos y sale a la
+     izquierda. La palabra "Cuadro" ya no aparece en el documento.
+  2. **Colocación de flotantes.** El formato pide que figuras y tablas queden lo más
+     cerca posible del párrafo que las referencia y que, si no caben, se desplacen
+     dejando que el texto llene el hueco. Es lo que ya hacía `[!ht]` desde Task-032; se
+     recorrió el cuerpo página por página y no queda ninguna con espacio en blanco
+     atribuible a un flotante.
+  3. **§3.2.4.** De cuatro párrafos a dos, conservando las siete citas que contenía. Se
+     aprovechó para retirar dos afirmaciones de desempeño de algoritmos ajenos ("estado
+     del arte sobre siete familias de conjuntos", "resultados comparables o mejores
+     sobre seis conjuntos"), que la regla de Task-023 en `CLAUDE.md` prohíbe.
+  4. **Tabla de índices.** `tab:indices` en §5.2, con los doce índices, la magnitud que
+     describe cada uno y sus bandas. La cuenta de bandas distintas da **nueve**
+     (B2, B3, B4, B5, B6, B7, B8, B8A y B11), no ocho: B8 y B8A son bandas separadas
+     del sensor, la ancha y la estrecha del infrarrojo cercano, y NDMI usa la estrecha
+     mientras NDII usa la ancha. Se dejó anotado para el autor humano, que había dicho
+     ocho.
+  5. **Citas al pie.** Google Earth Engine (Gorelick et al., \emph{Remote Sensing of
+     Environment} 202, 2017) y el IDE del Ministerio de Agricultura, ambas como nota al
+     pie y no como entrada del `.bib`, porque el corpus sigue cerrado en 25.
+  6. **Verificación contra `Framework.py`, que era lo que el autor humano pidió
+     revisar.** El párrafo tenía tres afirmaciones y las tres estaban mal:
+     - Decía que se oculta un índice y se reconstruye desde los once restantes. En
+       realidad `MASCARA_K = 5`: se ocultan cinco, el objetivo más cuatro distractores
+       sorteados, y el modelo reconstruye desde siete canales visibles. La razón está
+       documentada en el propio archivo: con un solo índice oculto basta mirar al
+       vecino colineal, y la atención puede quedar plana sin que el desempeño lo
+       delate. La lectura de la matriz sí es con uno solo oculto
+       (`MASCARA_K_LECTURA = 1`), que es la condición canónica.
+     - Decía que la variante de pronóstico "se conserva como referencia". No es así:
+       `TAREA` es una u otra, y hoy vale `"enmascarado"`. Se retiró la afirmación.
+     - Decía que la partición reserva el último 20\% dentro de cada fase fenológica.
+       `process_indices_data` hace un corte cronológico simple sobre la serie completa.
+       La variante por fase existe, pero como control en la rama de análisis, no en el
+       pipeline principal. Ahora el texto declara la partición real y la asimetría que
+       arrastra, y deja la elección para la etapa de validación.
+  7. **§5.3 reescrita.** Cuatro etapas en vez de siete pasos, y describe lo que el
+     código hace hoy: preparación del dato, entrenamiento repetido del que salen dos
+     matrices por corrida (la de atención agregada y la de ablación), las dos
+     transformaciones sobre la estructura de consenso, y el criterio de validación.
+  8. **§5.5 borrada**, por instrucción directa.
+  9. **§6.5 reescrita.** La cadena de cinco preguntas acumulativas no es lo que el
+     código implementa. `Framework.py` evalúa cada arista desde **cinco paradigmas**
+     (probabilístico, intervencional, geométrico-topológico, informacional y contrastes
+     deterministas) y la clasifica por el perfil de cuáles aprueba, que es una
+     triangulación y no una cadena. La sección quedó reescrita en esos términos, sin
+     nombrar métricas ni umbrales, como exige la restricción de esta entrega. Se
+     propagó a `01_introduccion.tex`, a §5.1, a §6.2 y a la última frase del capítulo 7,
+     que hablaban de la cadena.
+
+  **Contradicción cerrada.** Las tres claves por debajo del mínimo vuelven a tres usos:
+  `keratoconus2026instability` y `teleconnections2026causal` en §6.5, y
+  `simic2025perturbation` en el capítulo 7, donde se suma a la advertencia sobre
+  perturbaciones de `meng2023perturbation` con una afirmación distinta.
+
+  **Verificación.** `./scripts/compilar.sh` -> `OK: main.pdf compilado, 29 paginas`, sin
+  referencias ni citas colgantes y sin advertencias de biber. Cuerpo en 20 páginas sin
+  contar portada, índices ni referencias, que sigue siendo el tope. Recuento de citas:
+  25 claves, 25 entradas, ninguna por debajo de tres usos. Auditoría de prosa con
+  `humanizer`: cinco correcciones, un cierre que repetía lo ya dicho, un contraste
+  "no X sino Y" y tres arranques repetidos en la enumeración de paradigmas. [claude-1]
 
 
 ### Task-032 — cerrada por claude-1, pendiente de revisión

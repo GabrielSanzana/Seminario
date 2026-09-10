@@ -41,6 +41,21 @@
 \titlespacing*{\section}{0cm}{10pt}{0pt}
 \titlespacing*{\subsection}{0cm}{8pt}{0pt}
 
+% Nombres que impone babel en espanol. El formato de la Escuela pide "Lista de
+% Tablas" y "Tabla", no "Indice de cuadros" ni "Cuadro". Se corrigen con
+% \renewcommand dentro de \captionsspanish, sin tocar pucv_inf_2024.sty.
+\addto\captionsspanish{%
+  \renewcommand{\listfigurename}{Lista de Figuras}%
+  \renewcommand{\listtablename}{Lista de Tablas}%
+  \renewcommand{\figurename}{Figura}%
+  \renewcommand{\tablename}{Tabla}%
+}
+
+% Leyendas: tamano 10 (footnotesize sobre un cuerpo de 12), justificadas a la
+% izquierda y centradas cuando ocupan una sola linea, como pide el formato.
+\captionsetup{font=footnotesize, labelfont=footnotesize,
+              justification=raggedright, singlelinecheck=true}
+
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
 
@@ -54,6 +69,11 @@
 
 \newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Índice General\vspace{-0.5cm}}{Índice General}}
 \tableofcontents
+
+% La lista de figuras va antes que la de tablas, y ambas entran al indice
+% general (formato de la Escuela).
+\newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Lista de Figuras\vspace{-0.5cm}}{Lista de Figuras}}
+\listoffigures
 
 \newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Lista de Tablas\vspace{-0.5cm}}{Lista de Tablas}}
 \listoftables
