@@ -30,11 +30,11 @@ editar. El cambio de estado y el trabajo terminado van en el mismo commit al cer
 | `Resumen/resumen.tex` | `NEED_REVIEW` | claude-1 (Task-032 y Task-029 las editó claude-2, instrucción directa) | 31 | Task-032: `\phantomsection` antes del `\addcontentsline` de "Resumen/Abstract" (ver main.tex, mismo bug de hyperref). Task-029: corrige la inconsistencia "siempre se entrena un modelo alternativo" -> framework agnóstico (aplica directo si el modelo desplegado ya cumple la condición, entrena alternativa si no) |
 | `secciones/01_introduccion.tex` | `NEED_REVIEW` | claude-1 (Task-033/029 las editó claude-2, instrucción directa) | 47 | Task-033: corrige "no se ha ejecutado nada" -> "ya está en curso" en §Propuesta y contribución (contradecía `tab:plan`). Task-029: misma corrección de agnosticismo que en Resumen; propaga a la pregunta/población PICO el cambio "modelos Transformer" -> "modelos de aprendizaje profundo" que el autor humano hizo en la bitácora. Task-025: "umbrales" -> "criterios" en la cadena de evidencia (sin compromiso operativo) |
 | `secciones/02_objetivos.tex` | `NEED_REVIEW` | claude-1 (Task-033/032 las editó claude-2, instrucción directa) | 23 | Task-033: objetivo general corregido a la formulación agnóstica (decía "entrenado sobre los mismos datos que el modelo principal", sin condición, inconsistente desde Task-029). Task-032: objetivo 2 acortado a pedido del autor humano (quedaba muy largo) — una oración en vez de dos párrafos, mismas 3 citas y las cinco etapas, sin el `\ref{sec:criterio}`. Task-031: el objetivo 2 pasa de cuatro preguntas a las cinco de §6.5, con la quinta explícita (especificidad del efecto y tamaño de la hipótesis) y referencia cruzada a `sec:criterio`. Task-025: objetivo 2 ya no compromete "umbrales declarados antes de la ejecución", queda en el nivel de estabilidad/fidelidad como propiedades a construir |
-| `secciones/03_estado_arte.tex` | `NEED_REVIEW` | claude-1 (Task-033/027/028/029 las editó claude-2, instrucción directa del autor humano) | 130 | Task-033: celda "Propuesta" de `tab:familias` a formulación agnóstica. Task-031: §3.1.2 transcribe completa la cadena booleana de los cuatro bloques PICO; orden de autores corregido en §3.1.3. Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
+| `secciones/03_estado_arte.tex` | `IN_PROGRESS` | claude-1 (Task-033/027/028/029 las editó claude-2, instrucción directa del autor humano) | 130 | Task-033: celda "Propuesta" de `tab:familias` a formulación agnóstica. Task-031: §3.1.2 transcribe completa la cadena booleana de los cuatro bloques PICO; orden de autores corregido en §3.1.3. Task-029: propaga a la pregunta/población PICO el cambio de la bitácora, "modelos Transformer" -> "modelos de aprendizaje profundo". Task-028: recorta la prosa de "Metodología de la revisión" y "Trabajos similares" (cifras y citas intactas) para bajar el cuerpo del documento a 20 páginas. Ver nota de cierre abajo |
 | `secciones/04_marco_teorico.tex` | `NEED_REVIEW` | claude-2 | 55 | Task-029: quita una raya larga en §4.1 (regla de estilo sin rayas). Task-025: recortado el detalle de implementación del encoder (ConvTransformer); attention rollout se conserva por ser formalización. Task-023: ampliada la seccion de dominio del caso de estudio (2a cita a segarra2020sentinel, 1a a reichstein2019deep) para cumplir el minimo de 3 usos |
-| `secciones/05_plan_trabajo.tex` | `NEED_REVIEW` | claude-1 (Task-033/028 las editó claude-2, instrucción directa del autor humano) | 88 | Task-033: corrige "queda pendiente la etapa de validación" -> "ya está en curso" en §5.1 (contradecía `tab:plan`, mismo problema que Task-030 había arreglado antes de que PR#30 lo revirtiera sin querer). Task-031: capítulo reorganizado, §5.2 Datos (conjunto real y sintético) y §5.3 Procedimiento nuevas, orden de autores en el caption, tercera dependencia corregida. Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
-| `secciones/06_propuesta.tex` | `NEED_REVIEW` | claude-1/claude-2 (Task-029 la editó claude-2, instrucción directa) | 90 | Task-029: §Planteamiento corrige la misma inconsistencia de agnosticismo del framework (ver nota de cierre abajo); quita 5 rayas largas en el archivo; elimina §"Alcance de esta etapa" completa por redundar con el capítulo de plan de trabajo — **ojo**: eso deja `teleconnections2026causal` en solo 2 usos, bajo el mínimo de 3, ver nota de cierre. Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
-| `secciones/07_conclusiones.tex` | `NEED_REVIEW` | claude-1 (Task-033 la editó claude-2, instrucción directa) | 17 | Task-033: corrige "no se ha ejecutado nada, es todo etapa futura" -> "ya está en curso" (contradecía `tab:plan`); "modelo alternativo" sin condición -> formulación agnóstica; quita la última raya larga del documento. Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
+| `secciones/05_plan_trabajo.tex` | `IN_PROGRESS` | claude-1 (Task-033/028 las editó claude-2, instrucción directa del autor humano) | 88 | Task-033: corrige "queda pendiente la etapa de validación" -> "ya está en curso" en §5.1 (contradecía `tab:plan`, mismo problema que Task-030 había arreglado antes de que PR#30 lo revirtiera sin querer). Task-031: capítulo reorganizado, §5.2 Datos (conjunto real y sintético) y §5.3 Procedimiento nuevas, orden de autores en el caption, tercera dependencia corregida. Task-028: compacta la tabla `tab:plan` (arraystretch, tabcolsep, columnas) y recorta levemente la prosa de §5.1/§5.3 para que el capítulo quepa en una página. **Fechas por confirmar** sigue pendiente |
+| `secciones/06_propuesta.tex` | `IN_PROGRESS` | claude-1/claude-2 (Task-029 la editó claude-2, instrucción directa) | 90 | Task-029: §Planteamiento corrige la misma inconsistencia de agnosticismo del framework (ver nota de cierre abajo); quita 5 rayas largas en el archivo; elimina §"Alcance de esta etapa" completa por redundar con el capítulo de plan de trabajo — **ojo**: eso deja `teleconnections2026causal` en solo 2 usos, bajo el mínimo de 3, ver nota de cierre. Task-026: figura `fig:pipeline` con la composición del framework, en §Interpretación metodológica. Task-025: retira el compromiso Top-K fijo (§Transformación matriz-grafo) y el detalle operativo del criterio de validación (método de perturbación, métricas de fidelidad); conserva la cadena de 5 preguntas y la taxonomía de 4 resultados. Task-022: reescrita por completo. Alcance corregido (hipotesis como fin, modelo alternativo generico con tokens/iTransformer en vez de ConvTransformer, sin la regla inventada de "cinco condiciones") |
+| `secciones/07_conclusiones.tex` | `IN_PROGRESS` | claude-1 (Task-033 la editó claude-2, instrucción directa) | 17 | Task-033: corrige "no se ha ejecutado nada, es todo etapa futura" -> "ya está en curso" (contradecía `tab:plan`); "modelo alternativo" sin condición -> formulación agnóstica; quita la última raya larga del documento. Task-025: "con umbrales fijados" -> "con sus condiciones fijadas". Task-023: 3 citas nuevas (abnar2020quantifying, reichstein2019deep, segarra2020sentinel, meng2023perturbation) para cumplir el minimo de 3 usos |
 | `figuras/framework_pipeline.tex` | `NEED_REVIEW` | claude-1 | 57 | Task-026: esquema de la composición, `standalone` + TikZ, se compila aparte |
 | `figuras/prisma_flujo.tex` | `NEED_REVIEW` | claude-1 | 65 | Task-026: flujo de cribado PRISMA, cifras de la bitácora |
 | `referencias.bib` | `NEED_REVIEW` | claude-2 | 280 | 25 entradas, ahora renderizadas en estilo IEEE numerico |
@@ -71,6 +71,43 @@ antes de tocar nada:
    `LTchunksize`. Las tres tablas del documento dependen de ambos.
 
 ## Cola de tareas
+
+### Task-032 — `IN_PROGRESS` por claude-1
+
+- **Task-032 — figuras sin salto de página, bandas del caso de estudio, retiro del
+  conjunto sintético y ablandamiento del compromiso con el \emph{attention rollout}.**
+  Cinco observaciones del autor humano, 2026-09-10:
+
+  1. Las dos figuras arrastran un `\clearpage` delante, así que cada una fuerza un salto
+     de página y deja media página en blanco antes. Sacarlo.
+  2. La descripción de los datos dice "cinco familias espectrales" y el lector cuenta
+     ocho o nueve bandas distintas, sin ver cómo se concilian las dos cifras. Hay que
+     nombrar las bandas por familia. Sugirió además referenciar el catálogo de scripts
+     de Sentinel Hub como fuente de las fórmulas.
+  3. La frase de la partición por fase fenológica quedó confusa.
+  4. **El conjunto sintético (§5.2.2) no se está usando en el estado actual del
+     proyecto.** Se retira del documento en vez de describir un dato que no existe, y
+     se alinean los tres lugares que se apoyaban en él (§5.2 intro, §5.3 paso siete,
+     §5.5 tercera dependencia y la tercera advertencia del capítulo 7). El argumento
+     queda de hecho más limpio: la propuesta se define por operar donde **no** hay
+     referencia externa, que es justo el hueco que el capítulo 7 detecta en el corpus.
+  5. El compromiso con el \emph{attention rollout} es demasiado firme para lo que la
+     experimentación está mostrando. Pasa a presentarse como la elección concreta de
+     esta instancia y no como parte del framework: agregar las matrices por capa y
+     cabeza sigue siendo obligatorio, qué procedimiento se use para hacerlo no.
+
+  Archivos reservados: `secciones/03_estado_arte.tex`, `secciones/05_plan_trabajo.tex`,
+  `secciones/06_propuesta.tex`, `secciones/07_conclusiones.tex` y
+  `figuras/framework_pipeline.tex`.
+
+  **Pedido a claude-2, no se toca desde aquí:** §4.2 de `04_marco_teorico.tex` presenta
+  el rollout como "se emplea para eso el attention rollout", que es el mismo compromiso
+  firme que el autor humano pidió aflojar. Conviene dejarlo como el procedimiento que
+  adopta el caso de estudio, conservando la ecuación y la advertencia de los propios
+  autores sobre la mezcla entre capas. Ojo con el mínimo de tres usos: la clave
+  `abnar2020quantifying` tiene exactamente tres apariciones (capítulos 4, 6 y 7), así
+  que ninguna puede eliminarse, solo reformularse alrededor.
+
 
 ### Task-036 — cerrada por claude-2, pendiente de revisión
 
