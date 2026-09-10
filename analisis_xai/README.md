@@ -640,16 +640,45 @@ El brazo balanceado es peor modelo en las cinco fases, entre 2.3 y 2.6 veces de
 MSE, porque la duplicación reduce la diversidad efectiva por paso de gradiente.
 Sirve como control, no como estimación.
 
+**El primer control estaba sesgado, y hubo que arreglarlo.** La partición
+train/val original es cronológica, y el bloque de validación tiene 17 fechas de
+crecimiento y 14 de maduración contra 1 de dormancia y 1 de postcosecha. El
+early stopping y la selección de checkpoint optimizan ese reparto, así que un
+brazo que gasta un quinto de su gradiente en dormancia queda penalizado por un
+criterio donde esa fase casi no aparece. El control medía en contra de sí mismo.
+
+El arreglo: partición tomando el último 20% **dentro de cada fase**, y
+sobremuestreo también del val para que el criterio de parada pese igual las
+cinco. Más un brazo de control con el mismo split y el mismo criterio pero sin
+sobremuestrear el entrenamiento, de modo que la única diferencia sea ésa.
+
+```
+brazo                    dormancia  postcosecha  suelo dormancia
+cronologico  base           2.67        1.60          7.02
+cronologico  bal            2.87        1.71          6.75
+estratificado ctrl          2.06        1.48          3.48
+estratificado bal           2.46        1.54          4.93
+```
+
+La comparación limpia es el par estratificado: dormancia pasa de 2.06 a 2.46 y
+su suelo de 3.48 a 4.93. Balancear la exposición sigue sin cerrar la brecha.
+
+Pero el arreglo **redujo el efecto**: dormancia es 2.1 veces peor que
+maduración, no 2.7, y su suelo de ruido 3.5 veces mayor, no 7. Parte de lo que
+se había reportado era la partición cronológica. El resto se mantiene.
+
 **Dos hallazgos del brazo base que este control tumba.**
 
 La arista `ARI <- KNDVI` daba $D_{att}$ = −6.0 veces el ruido en brotación, o
 sea que cortarla mejoraba la reconstrucción, y se propuso como ruta mal
-aprendida. En el brazo balanceado da **+5.6**. Cambia de signo, así que no es un
-defecto estable del modelo. Se retira.
+aprendida. En los otros tres brazos da **+5.6, +9.0 y +4.4**. Cambia de signo y sólo
+aparece con la partición cronológica original, así que no es un defecto del
+modelo. Se retira.
 
-La prueba contra el ICP empeora en el brazo balanceado: invariantes 1.57 fases
-contra 2.17 de las de régimen, p = 0.8364, con la diferencia en sentido
-contrario al esperado. En ninguno de los dos brazos hay apoyo.
+La prueba contra el ICP no encuentra apoyo en **ninguno de los cuatro brazos**,
+y en tres de ellos las invariantes aguantan menos fases que las de régimen
+(p entre 0.4134 y 0.9176). El desacople entre la medida del dato y la del
+modelo es robusto.
 
 **Lo que queda en pie de esta sección.** La dependencia interna del modelo
 varía con la fase de forma sistemática y robusta al balanceo, con la estructura
@@ -722,6 +751,7 @@ el mecanismo de detección es reutilizable.
 | Nulo del ICP por arista sin agrupar | Control sintético con efecto enorme daba q = 0.995 | Resolución mínima 1/n; se agrupó entre aristas |
 | Control de distancia a la inicialización | Todos los bloques en 1.42 = raíz de 2 | Comparaba dos sorteos independientes; no distingue nada |
 | "Igualé el tamaño de muestra" | Se midió el MSE base por fase | Sólo se había igualado la evaluación, no el entrenamiento |
+| El control de exposición usaba un val cronológico | 31 de 38 fechas de val eran crecimiento y maduración | El criterio de parada penalizaba justo lo que el control quería medir; el efecto real es 2.1x y no 2.7x |
 
 El patrón que los une: **cuando un estadístico da el mismo valor en fuentes que
 deberían diferir, o un p pegado a un extremo, casi siempre es la métrica y no el

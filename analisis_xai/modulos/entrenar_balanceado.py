@@ -86,6 +86,46 @@ DOS RESULTADOS DEL BRAZO BASE QUE ESTE CONTROL TUMBA
    2.83 con p = 0.4134. En ninguno de los dos hay apoyo, y en el balanceado la
    diferencia va en el sentido contrario al esperado.
 
+FALLO DEL PRIMER CONTROL, Y SU ARREGLO
+--------------------------------------
+La primera version comparaba contra el brazo base dejando la particion
+cronologica, y ahi el bloque de validacion tiene 17 fechas de crecimiento y 14
+de maduracion contra 1 de dormancia y 1 de postcosecha. El early stopping y la
+seleccion de checkpoint optimizan ese reparto, asi que un brazo que gasta un
+quinto de su gradiente en dormancia queda penalizado por un criterio donde esa
+fase casi no aparece. El control estaba sesgado en contra de lo que medía.
+
+Arreglo: particion train/val tomando el ultimo 20% DENTRO de cada fase
+(--estratificado) y sobremuestreo tambien del val (--balancear-val), de modo
+que el criterio de parada pese igual las cinco. Y un brazo de control con el
+mismo split y el mismo criterio pero sin sobremuestrear el train
+(--sin-balancear-train), para que la unica diferencia sea esa.
+
+Cuatro brazos, razones del MSE base contra maduracion:
+
+    brazo                  dormancia  postcosecha   suelo dormancia
+    cronologico  base         2.67       1.60            7.02
+    cronologico  bal          2.87       1.71            6.75
+    estratificado ctrl        2.06       1.48            3.48
+    estratificado bal         2.46       1.54            4.93
+
+La comparacion limpia es la del par estratificado, que solo difiere en el
+sobremuestreo del train: dormancia pasa de 2.06 a 2.46 y su suelo de 3.48 a
+4.93. Balancear la exposicion no cierra la brecha, la ensancha un poco.
+
+Lo que si cambio el arreglo: la brecha es MENOR de lo que decia el primer
+control. Dormancia es 2.1 veces peor que maduracion, no 2.7, y su suelo de
+ruido 3.5 veces mayor, no 7. Parte del efecto original era la particion
+cronologica. El resto se mantiene.
+
+La arista ARI <- KNDVI en brotacion da -6.0 solo en el brazo cronologico
+original y +5.6, +9.0 y +4.4 en los otros tres. Queda confirmado que era
+artefacto de esa particion.
+
+La prueba contra el ICP no encuentra apoyo en ninguno de los cuatro brazos, y
+en tres de ellos las invariantes aguantan MENOS fases que las de regimen
+(p entre 0.41 y 0.92).
+
 USO
     srun --partition=student --qos=student --gres=gpu:1 --mem=16G \\
          .venv/bin/python -u entrenar_balanceado.py --semillas 15
@@ -109,7 +149,10 @@ from analisis_fenologico import FASES  # noqa: E402
 
 _ORIG_PID = H.process_indices_data
 MESES = None
-BALANCEAR = False
+BALANCEAR = False           # sobremuestrear el TRAIN
+ESTRATIFICADO = False       # particion train/val por fase en vez de cronologica
+BALANCEAR_VAL = False       # sobremuestrear el VAL, para que el criterio de
+                            # early stopping pese igual las cinco fases
 REPORTE = {}
 
 
@@ -132,25 +175,84 @@ def _indices_balanceados(meses_tr: np.ndarray) -> np.ndarray:
     return np.concatenate(salida)
 
 
+def _split_estratificado(meses_all, frac_val=0.2):
+    """Particion train/val tomando el ultimo frac_val de CADA fase.
+
+    La particion original es cronologica: el ultimo 20% de fechas va a val. Con
+    eso el bloque de validacion queda con 17 fechas de crecimiento y 14 de
+    maduracion contra 1 de dormancia y 1 de postcosecha, asi que el early
+    stopping y la seleccion de checkpoint optimizan casi solo la estacion de
+    crecimiento. Un brazo que reparte gradiente entre las cinco fases queda
+    penalizado por un criterio donde dos de ellas casi no aparecen, que es
+    justo lo que el experimento quiere medir.
+
+    Se toma el ultimo tramo DENTRO de cada fase y no una muestra al azar: las
+    fechas vecinas se parecen mucho, y con muestreo aleatorio una fecha de train
+    y su vecina de val serian casi la misma escena.
+    """
+    tr, va = [], []
+    for _nombre, ms in FASES:
+        idx = np.where(np.isin(meses_all, ms))[0]
+        if not len(idx):
+            continue
+        corte = max(1, int(round((1 - frac_val) * len(idx))))
+        tr.append(idx[:corte])
+        va.append(idx[corte:] if corte < len(idx) else idx[-1:])
+    return np.sort(np.concatenate(tr)), np.sort(np.concatenate(va))
+
+
 def _pid_balanceado(stack, seq_length=1, dates_millis=None, **kw):
     out = _ORIG_PID(stack, seq_length=seq_length, dates_millis=dates_millis,
                     **kw)
     (Xtr, Ytr), (Xva, Yva), img, scaler = out
-    if not BALANCEAR or MESES is None:
+    if MESES is None or not (BALANCEAR or ESTRATIFICADO or BALANCEAR_VAL):
         return out
-    meses_tr = MESES[:len(Xtr)]
-    idx = _indices_balanceados(meses_tr)
-    Xtr2 = Xtr[idx]
-    Ytr2 = Ytr[idx] if Ytr is not None else Ytr
-    return (Xtr2, Ytr2), (Xva, Yva), img, scaler
+
+    if ESTRATIFICADO:
+        # Se recompone el orden original -el cronologico- y se reparte por
+        # fase. El scaler sigue siendo el que ajusto la particion cronologica;
+        # es el MISMO para los dos brazos, asi que la comparacion es limpia,
+        # pero conviene declararlo.
+        X = np.concatenate([Xtr, Xva], axis=0)
+        Y = (np.concatenate([Ytr, Yva], axis=0) if Ytr is not None else None)
+        i_tr, i_va = _split_estratificado(MESES[:len(X)])
+        Xtr, Xva = X[i_tr], X[i_va]
+        Ytr = Y[i_tr] if Y is not None else None
+        Yva = Y[i_va] if Y is not None else None
+        meses_tr, meses_va = MESES[i_tr], MESES[i_va]
+    else:
+        meses_tr = MESES[:len(Xtr)]
+        meses_va = MESES[len(Xtr):len(Xtr) + len(Xva)]
+
+    if BALANCEAR:
+        idx = _indices_balanceados(meses_tr)
+        Xtr = Xtr[idx]
+        Ytr = Ytr[idx] if Ytr is not None else Ytr
+    if BALANCEAR_VAL:
+        # Sin esto el criterio de parada pesa las fases como vengan en el
+        # bloque de validacion, y ese reparto es justo el confound.
+        idx = _indices_balanceados(meses_va)
+        Xva = Xva[idx]
+        Yva = Yva[idx] if Yva is not None else Yva
+    return (Xtr, Ytr), (Xva, Yva), img, scaler
 
 
 def main() -> int:
-    global MESES, BALANCEAR
+    global MESES, BALANCEAR, ESTRATIFICADO, BALANCEAR_VAL
     ap = argparse.ArgumentParser()
     ap.add_argument("--semillas", type=int, default=15)
     ap.add_argument("--epocas", type=int, default=H.TOTAL_EPOCHS)
     ap.add_argument("--destino", default="resultados/fase_balanceada")
+    ap.add_argument("--estratificado", action="store_true",
+                    help="particion train/val por fase en vez de cronologica")
+    ap.add_argument("--balancear-val", action="store_true",
+                    dest="balancear_val",
+                    help="sobremuestrear tambien el val, para que el early "
+                         "stopping pese igual las cinco fases")
+    ap.add_argument("--sin-balancear-train", action="store_true",
+                    dest="sin_train",
+                    help="brazo de control: mismo split y mismo criterio, sin "
+                         "sobremuestrear el entrenamiento")
     a = ap.parse_args()
 
     os.makedirs(a.destino, exist_ok=True)
@@ -159,6 +261,12 @@ def main() -> int:
     MESES = np.array([dt.datetime.utcfromtimestamp(int(m) / 1000).month
                       for m in fechas])
     H.process_indices_data = _pid_balanceado
+    ESTRATIFICADO = a.estratificado
+    BALANCEAR_VAL = a.balancear_val
+    print("  split: " + ("estratificado por fase" if ESTRATIFICADO
+                         else "cronologico"))
+    print("  val: " + ("balanceado" if BALANCEAR_VAL else "como venga"))
+    print("  train: " + ("sin balancear" if a.sin_train else "balanceado"))
 
     semillas = list(H.SEEDS)[:a.semillas]
     print("  semillas: " + str(semillas))
@@ -170,7 +278,7 @@ def main() -> int:
             continue
         t0 = time.time()
         H.set_seed(s)
-        BALANCEAR = True
+        BALANCEAR = not a.sin_train
         try:
             _m, _v, _h, best = H.train_convtransformer(
                 stack, seq_length=H.SEQ_LENGTH, total_epochs=a.epocas,

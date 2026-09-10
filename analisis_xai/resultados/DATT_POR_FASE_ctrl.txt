@@ -1,0 +1,55 @@
+==================================================================================
+ Datt DISOCIADO POR FASE FENOLOGICA
+
+ Se corre la ablacion de aristas restringiendo la entrada a cada fase.
+ La etiqueta invariante/regimen viene del ICP sobre los DATOS crudos,
+ sin tocar el modelo, asi que si las dos coinciden es validacion
+ cruzada entre una medida del dato y una del modelo.
+
+ Igualados entre fases el numero de FECHAS (8) y de parches (128),
+ y el suelo de ruido recalculado dentro de cada fase. Igualar solo
+ parches no basta: los de una misma escena estan correlacionados, asi
+ que 128 parches de 9 fechas valen menos que 128 de 90.
+==================================================================================
+
+  fase                     fechas  parches   MSE base       ruido  aristas sobre 3x
+  dormancia (may-ago)           8      128     0.8102    1.79e-02                 8
+  brotacion (sep-oct)           8      128     0.5276    5.92e-03                25
+  crecimiento (nov-dic)         8      128     0.4037    7.01e-03                 4
+  maduracion (ene-mar)          8      128     0.3934    5.15e-03                12
+  postcosecha (abr)             8      128     0.5812    1.41e-02                 0
+
+  LAS 19 ARISTAS DEL GRAFO GLOBAL, FASE POR FASE
+  (numeros en multiplos del ruido de esa fase; * = sobre 3x)
+
+  arista                    ICP     global  dormancia  brotacion  crecimien  maduracio  postcosec  fases
+  NDVI <- CHL_REDEDGE       reg       16.0       2.8        6.3*       0.9        4.6*       0.8     2/5
+  KNDVI <- CHL_REDEDGE      reg       14.6       3.1*       6.7*       2.1        5.8*       1.5     3/5
+  ARI <- KNDVI              reg       12.4       5.4*       9.0*      -1.1       -1.6       -2.6     2/5
+  ARI <- NDWI               inv        6.3      -0.9        1.7       -0.3       -0.8       -0.7     0/5
+  PSRI <- CHL_REDEDGE       inv        6.2      -1.0        0.6        0.2        1.3        0.3     0/5
+  EVI <- CHL_REDEDGE        inv        6.2       3.0        8.8*       2.8        4.6*       0.8     2/5
+  ARI <- NDVI               inv        6.1       5.2*      10.0*      -1.5       -1.7       -2.0     2/5
+  PSRI <- KNDVI             reg        5.8      -0.5        0.4        0.2        0.9        0.1     0/5
+  PSRI <- NDVI              reg        5.8       0.2        0.8        0.6        1.2        0.1     0/5
+  MARI <- NDWI              inv        5.0      -0.7       -0.1       -0.2        0.0       -0.0     0/5
+  SAVI <- CHL_REDEDGE       reg        4.5       3.8*       9.9*       2.4        4.2*       0.9     3/5
+  EVI2 <- NDII              reg        4.5       1.0        5.3*       3.3*       4.2*       1.0     3/5
+  MARI <- KNDVI             reg        4.5       2.1        2.8        0.2        0.3        0.4     0/5
+  EVI2 <- CHL_REDEDGE       reg        4.4       3.4*       8.4*       2.3        3.8*       0.9     3/5
+  EVI <- NDII               inv        4.3       1.1        5.8*       4.0*       4.5*       1.1     3/5
+  SAVI <- NDII              reg        4.0       0.8        5.7*       3.4*       4.4*       1.1     3/5
+  EVI2 <- NDMI              reg        3.5       1.6        6.0*       2.9        3.8*       0.8     2/5
+  EVI <- NDMI               reg        3.4       1.7        6.3*       3.5*       4.1*       0.8     3/5
+  SAVI <- NDMI              inv        3.0       1.4        6.5*       2.9        3.9*       0.8     2/5
+
+  Fases por encima del umbral, promedio
+    invariantes segun el ICP (7):  1.29
+    de regimen segun el ICP (12):   2.00
+    Mann-Whitney unilateral (invariantes aguantan mas): p = 0.9176
+
+    La hipotesis es que las invariantes aguanten en mas
+    fases. Un p alto significa que la clasificacion del ICP
+    no se refleja en la persistencia de Datt, y entonces las
+    dos medidas no se validan entre si.
+==================================================================================
