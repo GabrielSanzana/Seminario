@@ -52,23 +52,54 @@ def _raices_home():
     return vistas
 
 
+def _carpetas_tinytex_candidatas():
+    """Todas las carpetas donde podria estar el TinyTeX de este usuario.
+
+    Ademas de Path.home()/USERPROFILE, busca con glob sobre C:/Users/*: si
+    por lo que sea Path.home() no resuelve al perfil correcto en el proceso
+    que corre este script (se ha visto que difiere entre una terminal normal
+    y el depurador de VS Code en esta misma maquina, sin causa clara), el
+    glob igual encuentra la carpeta real.
+    """
+    carpetas = []
+    for raiz in _raices_home():
+        carpetas.append(raiz / "AppData" / "Roaming" / "TinyTeX" / "bin" / "windows")
+    try:
+        import glob as _glob
+        for patron in _glob.glob(r"C:\Users\*\AppData\Roaming\TinyTeX\bin\windows"):
+            carpetas.append(Path(patron))
+    except OSError:
+        pass
+    vistas = []
+    for c in carpetas:
+        if c not in vistas:
+            vistas.append(c)
+    return vistas
+
+
 def resolver_binario(nombre):
     """Busca un ejecutable en el PATH; si no aparece, prueba rutas conocidas de TinyTeX."""
     encontrado = shutil.which(nombre)
     if encontrado:
         return encontrado
-    for raiz in _raices_home():
-        candidato = raiz / "AppData" / "Roaming" / "TinyTeX" / "bin" / "windows" / f"{nombre}.exe"
+    for carpeta in _carpetas_tinytex_candidatas():
+        candidato = carpeta / f"{nombre}.exe"
         if candidato.exists():
             return str(candidato)
     return None
 
 
 def rutas_tinytex_probadas():
-    return [
-        str(r / "AppData" / "Roaming" / "TinyTeX" / "bin" / "windows")
-        for r in _raices_home()
-    ]
+    return [str(c) for c in _carpetas_tinytex_candidatas()]
+
+
+def diagnostico_entorno():
+    return (
+        f"Path.home()={Path.home()}  "
+        f"USERPROFILE={os.environ.get('USERPROFILE')}  "
+        f"HOMEDRIVE={os.environ.get('HOMEDRIVE')}  "
+        f"HOMEPATH={os.environ.get('HOMEPATH')}"
+    )
 
 
 def correr(comando, cwd):
@@ -94,6 +125,7 @@ def main():
         for ruta in rutas_tinytex_probadas():
             estado = "existe" if Path(ruta).exists() else "no existe"
             print(f"  Se busco en: {ruta} ({estado})", file=sys.stderr)
+        print(f"  Diagnostico: {diagnostico_entorno()}", file=sys.stderr)
         print("  Si TinyTeX esta instalado pero esto sigue fallando, es probable", file=sys.stderr)
         print("  que este en el PATH de git-bash y no en el de Windows/PowerShell:", file=sys.stderr)
         print("  correr este script desde una terminal normal (no F5/depurador)", file=sys.stderr)
