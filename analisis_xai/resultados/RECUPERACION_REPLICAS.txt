@@ -1,0 +1,48 @@
+====================================================================================
+ RECUPERACION DE LA ESTRUCTURA VERDADERA, AGREGADO SOBRE 4 DAG
+
+ Cada replica es un DAG distinto de 19 aristas sobre 12 nodos, con
+ sus propios mecanismos y su propio entrenamiento de 5 semillas.
+
+ La orientacion se agrega sumando aciertos y ensayos, no promediando
+ proporciones. Azar 0.5. Con un solo DAG el error estandar es 0.115
+ y no se puede afirmar nada; aqui baja a 0.057.
+====================================================================================
+
+ REGIMEN LINEAL   (4 replicas)
+ ----------------------------------------------------------------------------------
+  metodo                    auc esq     sd  auc moral  prec@k  orientacion    n        p
+  correlacion                 0.865  0.048      0.634    0.64    simetrico    -        -
+  correlacion parcial         0.983  0.012      0.963    0.88    simetrico    -        -
+  PC (Fisher z)               0.918  0.051      0.704    0.86    simetrico    -        -
+  informacion mutua           0.865  0.048      0.633    0.64    simetrico    -        -
+  distancia de corr.          0.865  0.045      0.630    0.68    simetrico    -        -
+  LOCO con arboles            0.977  0.012      0.931    0.88        0.671   76   0.0019
+  LOCO con vecindario         0.975  0.015      0.936    0.86        0.671   76   0.0019
+
+ REGIMEN NO LINEAL   (4 replicas)
+ ----------------------------------------------------------------------------------
+  metodo                    auc esq     sd  auc moral  prec@k  orientacion    n        p
+  correlacion                 0.715  0.074      0.631    0.54    simetrico    -        -
+  correlacion parcial         0.710  0.090      0.703    0.57    simetrico    -        -
+  PC (Fisher z)               0.631  0.093      0.629    0.38    simetrico    -        -
+  informacion mutua           0.900  0.036      0.740    0.67    simetrico    -        -
+  distancia de corr.          0.842  0.062      0.715    0.67    simetrico    -        -
+  LOCO con arboles            0.912  0.089      0.854    0.76        0.763   76   0.0000
+  LOCO con vecindario         0.893  0.104      0.844    0.74        0.697   76   0.0004
+  Datt identidad largo        0.613  0.114      0.580    0.46        0.526   76   0.3655
+  Datt familia largo          0.601  0.139      0.587    0.43        0.618   76   0.0252
+
+ REGIMEN ESPACIAL   (4 replicas)
+ ----------------------------------------------------------------------------------
+  metodo                    auc esq     sd  auc moral  prec@k  orientacion    n        p
+  correlacion                 0.826  0.052      0.653    0.62    simetrico    -        -
+  correlacion parcial         0.901  0.039      0.742    0.75    simetrico    -        -
+  PC (Fisher z)               0.775  0.017      0.624    0.55    simetrico    -        -
+  informacion mutua           0.830  0.047      0.659    0.62    simetrico    -        -
+  distancia de corr.          0.809  0.054      0.645    0.62    simetrico    -        -
+  LOCO con arboles            0.883  0.038      0.724    0.76        0.539   76   0.2833
+  LOCO con vecindario         0.952  0.016      0.823    0.83        0.684   76   0.0009
+  Datt identidad largo        0.618  0.063      0.592    0.48        0.513   76   0.4544
+  Datt familia largo          0.619  0.077      0.593    0.48        0.553   76   0.2111
+====================================================================================

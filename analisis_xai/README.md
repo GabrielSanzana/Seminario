@@ -23,6 +23,7 @@ varios casos el motivo del abandono es el resultado.
 10. [Conclusión](#10-conclusión)
 11. [Errores cometidos y cómo se detectaron](#11-errores-cometidos-y-cómo-se-detectaron)
 12. [Mapa de archivos](#12-mapa-de-archivos)
+13. [El experimento que faltaba: verdad conocida por construcción](#13-el-experimento-que-faltaba-verdad-conocida-por-construcción)
 
 ---
 
@@ -833,12 +834,19 @@ Lo que la evidencia sostiene, con los números que la respaldan:
 | Suelo de ruido y multiplicidad | sí, teoría | sí, cola negativa y BH |
 | Coincide con `\|pc\|` | por definición | parcialmente, `rho` hasta 0.63 intra-familia |
 | Validado contra verdad externa | no lo intenta | no, `auc` 0.29 a 0.56 |
+| Recupera estructura conocida (sintética) | sí, `auc` 0.98 lineal | no, `auc` 0.61 (sección 13) |
+| Orienta contra verdad conocida | hasta la clase de Markov | no, 0.51 a 0.62 con azar 0.5 |
 
 ### Lo que queda pendiente
 
-La equivalencia epistémica está establecida; la superioridad en validez no. Los
-dos operadores dan respuestas distintas y el ICP con fenología, que fue el
-intento de arbitrar, no favorece a ninguno. El experimento que decidiría es una
+La equivalencia epistémica está establecida; la superioridad en validez está
+**refutada**. La sección 13 corrió el experimento que faltaba —verdad conocida
+por construcción, no lineal y espacial— y $D_{att}$ queda último en los tres
+regímenes, con la afirmación de direccionalidad sin sostén. El uso que
+sobrevive es auditar un modelo desplegado, no descubrir estructura en el
+mundo. Para eso último la recomendación es LOCO con árboles potenciados.
+
+El experimento que quedaba pendiente y ya no lo está era una
 verdad conocida por construcción y a la vez no lineal y espacial: simulación de
 transferencia radiativa tipo PROSAIL con doseles sintéticos de parámetros
 conocidos, calculando los 12 índices y midiendo qué método recupera la
@@ -921,6 +929,10 @@ reproduce el viejo hasta 1e-9.
 | `datt_por_fase.py` | $D_{att}$ por fase: MSE con todas las fechas e intervalo, suelo de ruido igualando fechas por sorteo |
 | `entrenar_balanceado.py` | Reentrenamiento con sobremuestreo por fase, partición estratificada, control del confound de exposición |
 | `errores_por_fecha.py` | Tensor `E[semilla, fecha, canal, corte]` en una pasada por GPU; de él salen todas las agrupaciones sin volver a evaluar |
+| `verdad_sintetica.py` | Genera los tres regímenes sintéticos con el DAG conocido por construcción |
+| `entrenar_sintetico.py` | Entrena el ConvTransformer sobre cada régimen y calcula $D_{att}$ |
+| `benchmark_recuperacion.py` | Siete estimadores de estructura puntuados contra la misma verdad |
+| `resumen_replicas.py` | Agrega las réplicas; la orientación se suma, no se promedia |
 | `control_fases.py` | Los cuatro controles del efecto por fase: bootstrap, placebo de etiquetas, calendario rotado, suelo con `n` igualado, dificultad de escena, regresión por fecha, ICP con permutación exacta |
 
 ### Pruebas (`pruebas/`)
@@ -955,6 +967,183 @@ sufijos `_base` y `_alea` distinguen los dos brazos de entrenamiento;
 ### Figuras (`figuras/`)
 
 `grafo_datt.pdf` (vectorial, para LaTeX) y `grafo_datt.png`.
+
+---
+
+## 13. El experimento que faltaba: verdad conocida por construcción
+
+La sección 10 dejó escrito que la superioridad en validez no estaba demostrada
+y nombró el experimento que la decidiría: una verdad conocida por
+construcción, a la vez no lineal y espacial. Está hecho, y el resultado va en
+contra del framework.
+
+### 13.1 El diseño
+
+Un DAG disperso de 19 aristas sobre 12 nodos, la misma densidad que el grafo
+real, genera campos de 186×52×52×12. Tres regímenes:
+
+```
+lineal      mecanismos lineales, ruido gaussiano. Los supuestos del metodo
+            clasico se cumplen EXACTAMENTE. Es una trampa deliberada: si el
+            framework gana aqui, el montaje esta mal.
+no lineal   interacciones entre padres y no linealidad simetrica (x^2). La
+            segunda anula la correlacion de Pearson dejando la dependencia
+            intacta.
+espacial    el mecanismo pasa por el LAPLACIANO y la media local del padre,
+            no por su valor en el pixel. Es el unico regimen donde el
+            contexto espacial aporta, y por tanto el unico donde la
+            arquitectura convolucional puede justificar su coste.
+```
+
+Los campos son aleatorios suavizados por filtrado en frecuencia, no píxeles
+independientes. Sin eso la parte convolucional no tendría nada que hacer y la
+comparación estaría amañada a favor del método clásico.
+
+**El blanco justo no es el DAG.** El predictor óptimo de $X_i$ dado el resto
+usa su manto de Markov —padres, hijos y cónyuges— así que ningún método basado
+en dependencia condicional puede recuperar el DAG: ni $D_{att}$, ni la
+correlación parcial, ni LOCO. Se puntúa contra el esqueleto, contra el grafo
+moralizado, y por separado la orientación de las aristas verdaderas.
+
+**Un solo DAG no alcanza.** Con 19 aristas el error estándar de la orientación
+bajo la nula es 0.115, así que 0.63 y 0.37 caben los dos dentro del azar. Se
+replicó con cuatro DAG independientes: 76 ensayos, error estándar 0.057.
+
+### 13.2 El montaje es correcto
+
+```
+REGIMEN LINEAL, 4 replicas    auc esq     sd  auc moral  prec@k  orientacion
+correlacion parcial             0.983  0.012      0.963    0.88   simetrico
+LOCO con arboles                0.977  0.012      0.931    0.88   0.671  p 0.0019
+LOCO con vecindario             0.975  0.015      0.936    0.86   0.671  p 0.0019
+PC (Fisher z)                   0.918  0.051      0.704    0.86   simetrico
+correlacion                     0.865  0.048      0.634    0.64   simetrico
+```
+
+Gana la correlación parcial, que es lo que tenía que pasar donde sus supuestos
+se cumplen exactamente. Si el framework hubiera ganado aquí, habría que
+sospechar del experimento antes que celebrarlo.
+
+### 13.3 Lo no lineal sí rompe a lo clásico, pero no gana el transformer
+
+```
+REGIMEN NO LINEAL             auc esq     sd  auc moral  prec@k  orientacion
+LOCO con arboles                0.912  0.089      0.854    0.76   0.763  p 0.0000
+informacion mutua               0.900  0.036      0.740    0.67   simetrico
+LOCO con vecindario             0.893  0.104      0.844    0.74   0.697  p 0.0004
+distancia de corr.              0.842  0.062      0.715    0.67   simetrico
+correlacion parcial             0.710  0.090      0.703    0.57   simetrico
+PC (Fisher z)                   0.631  0.093      0.629    0.38   simetrico
+Datt identidad                  0.613  0.114      0.580    0.46   0.526  p 0.3655
+Datt familia                    0.601  0.139      0.587    0.43   0.618  p 0.0252
+```
+
+La predicción teórica se cumple: PC cae de 0.918 a **0.631**, por debajo de la
+correlación cruda, con precisión en `k` de 0.38. Con interacciones y no
+linealidad simétrica, los métodos de correlación se desploman.
+
+**Quien recoge los pedazos es LOCO con árboles potenciados**: 0.912 de AUC y
+**0.763 de orientación con p < 0.0001**. Sin red neuronal, sin atención, sin
+contexto espacial. Es la misma lógica interventiva de $D_{att}$ aplicada a las
+variables en vez de a las aristas de atención.
+
+### 13.4 Ni siquiera en su propio terreno
+
+```
+REGIMEN ESPACIAL              auc esq     sd  auc moral  prec@k  orientacion
+LOCO con vecindario             0.952  0.016      0.823    0.83   0.684  p 0.0009
+correlacion parcial             0.901  0.039      0.742    0.75   simetrico
+LOCO con arboles                0.883  0.038      0.724    0.76   0.539  p 0.2833
+informacion mutua               0.830  0.047      0.659    0.62   simetrico
+Datt familia                    0.619  0.077      0.593    0.48   0.553  p 0.2111
+Datt identidad                  0.618  0.063      0.592    0.48   0.513  p 0.4544
+```
+
+El régimen espacial se diseñó para que un método por píxel esté ciego por
+construcción. Para no amañarlo al revés, LOCO recibe además la media 5×5 de
+cada canal: la misma información de vecindario que ve el modelo. Con eso llega
+a 0.952 contra 0.618 de $D_{att}$.
+
+Dar acceso al vecindario a unos árboles potenciados basta. La arquitectura
+convolucional no aporta sobre eso.
+
+### 13.5 El único hallazgo positivo, y es sobre el estimador
+
+La primera tanda entrenó 50 épocas y el log mostraba el régimen lineal
+mejorando todavía en la época 48. Infraentrenado. Concluir "$D_{att}$ falla"
+con ese log habría sido atribuir al fenómeno lo que era del protocolo. Se
+repitió con 600 épocas y paciencia 60, con la predicción escrita antes de
+mirar el resultado:
+
+```
+regimen      val 50 ep   val 600 ep   varianza expl.   auc de Datt
+lineal          0.643       0.634       36% a 37%      0.844 a 0.814
+no_lineal       0.811       0.801       19% a 20%      0.665 a 0.663
+espacial        0.958       0.848        4% a 15%      0.513 a 0.695
+```
+
+Los dos regímenes ya convergidos no se movieron. El espacial, que era el único
+sin converger, pasó de **azar exacto (0.513) a 0.695**.
+
+$D_{att}$ recupera exactamente en la medida en que el modelo aprendió. No es
+un fallo del estimador: es fidelidad. **$D_{att}$ audita al modelo, y el
+modelo era el eslabón débil.** Ésa es la propiedad que se le pide a un
+auditor, y es el resultado positivo del experimento.
+
+### 13.6 Lo que hay que retirar de la tesis
+
+1. Que $D_{att}$ recupere estructura mejor que un método clásico. Queda último
+   en los tres regímenes, con AUC de 0.60 a 0.62 contra 0.88 a 0.98.
+2. **Que la asimetría de $D_{att}$ indique dirección causal.** De cuatro
+   mediciones con potencia (dos máscaras × dos regímenes), una sola supera el
+   azar —0.618 con p = 0.0252— y con dos máscaras probadas queda en el límite
+   de la multiplicidad. LOCO llega a 0.763 con p < 0.0001 sobre los mismos
+   datos. Era la única afirmación que $D_{att}$ hacía y los demás no podían
+   hacer.
+3. Que la arquitectura espacial aporte. Árboles con rasgos de vecindario la
+   superan, 0.952 contra 0.618.
+
+### 13.7 Por qué falla, que es lo publicable
+
+Cortar una arista de atención **no elimina la variable**. El ConvTransformer
+tiene convolución y conexiones residuales, así que la información se enruta
+por otro camino. $D_{att}$ mide cuánto aporta *esa arista*, no cuánto aporta
+*esa variable*.
+
+Eso reconcilia las dos observaciones que parecían contradictorias: el `rho`
++0.893 con LOCO sobre el dato real —coinciden en magnitud, porque las dos
+miden dependencia— y el fracaso en orientación, porque la asimetría de una
+arista de atención no hereda la asimetría causal que sí tiene la ablación de
+una variable.
+
+**La ablación de atención no es un sustituto de la ablación de variable.**
+Buena parte de la literatura de XAI sobre atención lo asume sin comprobarlo.
+Aquí está comprobado que no, con verdad conocida y cuatro réplicas.
+
+### 13.8 Lo que queda en pie
+
+$D_{att}$ sigue siendo válido para lo que nunca dejó de ser: **auditar un
+modelo desplegado**, donde el modelo *es* el objeto de estudio y la pregunta
+"de qué depende esta decisión" no tiene método clásico, porque el modelo no es
+un proceso natural del que tomar muestras sino un artefacto que se puede
+intervenir directamente. Ahí no compite con nadie.
+
+Para descubrir estructura en el mundo, la recomendación que sale de este
+experimento es LOCO con árboles potenciados: más barato, más simple y mejor en
+los tres regímenes.
+
+### 13.9 Límites de este experimento
+
+Cuatro DAG, cinco semillas por DAG, una arquitectura, 12 nodos. No es un
+barrido. Lo que sí está establecido con esa potencia es lo negativo: con 76
+aristas verdaderas y error estándar 0.057, una orientación de 0.51 a 0.62 no
+sostiene la afirmación de direccionalidad, y una AUC de 0.61 contra 0.91 de
+LOCO no sostiene la de recuperación.
+
+Lo que no está establecido es el límite superior: la relación monótona entre
+ajuste del modelo y AUC de $D_{att}$ deja abierto que un modelo mucho mejor
+entrenado lo acerque a LOCO. Es contrastable y barato, y es lo siguiente que
+haría falta correr.
 
 ---
 

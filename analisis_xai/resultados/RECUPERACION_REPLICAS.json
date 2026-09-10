@@ -1,0 +1,258 @@
+{
+  "lineal": {
+    "correlacion": {
+      "auc_esqueleto": 0.8645016797312429,
+      "sd_auc": 0.04792170278560517,
+      "auc_moral": 0.6335838109023593,
+      "precision_en_k": 0.6447368421052632,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "correlacion parcial": {
+      "auc_esqueleto": 0.9829227323628219,
+      "sd_auc": 0.011579005128216581,
+      "auc_moral": 0.9630003610326586,
+      "precision_en_k": 0.881578947368421,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "PC (Fisher z)": {
+      "auc_esqueleto": 0.9182530795072789,
+      "sd_auc": 0.05111259401877248,
+      "auc_moral": 0.7041334892793621,
+      "precision_en_k": 0.8618421052631579,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "informacion mutua": {
+      "auc_esqueleto": 0.8650615901455767,
+      "sd_auc": 0.04751437296791407,
+      "auc_moral": 0.6333892462129139,
+      "precision_en_k": 0.6447368421052632,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "distancia de corr.": {
+      "auc_esqueleto": 0.864501679731243,
+      "sd_auc": 0.04457768411907761,
+      "auc_moral": 0.6297687693540793,
+      "precision_en_k": 0.6842105263157895,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "LOCO con arboles": {
+      "auc_esqueleto": 0.9767637178051511,
+      "sd_auc": 0.011925785141169048,
+      "auc_moral": 0.9306341803462149,
+      "precision_en_k": 0.875,
+      "orientacion": 0.6710526315789473,
+      "n_orientadas": 76,
+      "p_orientacion": 0.0019181178758073132,
+      "n_replicas": 4
+    },
+    "LOCO con vecindario": {
+      "auc_esqueleto": 0.9745240761478163,
+      "sd_auc": 0.014838506316014154,
+      "auc_moral": 0.9364094041083486,
+      "precision_en_k": 0.8618421052631579,
+      "orientacion": 0.6710526315789473,
+      "n_orientadas": 76,
+      "p_orientacion": 0.0019181178758073132,
+      "n_replicas": 4
+    }
+  },
+  "no_lineal": {
+    "correlacion": {
+      "auc_esqueleto": 0.7152855543113101,
+      "sd_auc": 0.07387069643711056,
+      "auc_moral": 0.6308649362407862,
+      "precision_en_k": 0.5394736842105263,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "correlacion parcial": {
+      "auc_esqueleto": 0.7096864501679732,
+      "sd_auc": 0.09000171680071863,
+      "auc_moral": 0.7026762533314952,
+      "precision_en_k": 0.5657894736842105,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "PC (Fisher z)": {
+      "auc_esqueleto": 0.6312989921612542,
+      "sd_auc": 0.09311979612211324,
+      "auc_moral": 0.6291574059432614,
+      "precision_en_k": 0.3815789473684211,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "informacion mutua": {
+      "auc_esqueleto": 0.9000559910414334,
+      "sd_auc": 0.03569840566471461,
+      "auc_moral": 0.7399332290298254,
+      "precision_en_k": 0.6710526315789473,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "distancia de corr.": {
+      "auc_esqueleto": 0.8421052631578947,
+      "sd_auc": 0.062261769531163906,
+      "auc_moral": 0.7151528096993783,
+      "precision_en_k": 0.6710526315789473,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "LOCO con arboles": {
+      "auc_esqueleto": 0.9116741321388578,
+      "sd_auc": 0.08932355388856095,
+      "auc_moral": 0.853938615268964,
+      "precision_en_k": 0.763157894736842,
+      "orientacion": 0.7631578947368421,
+      "n_orientadas": 76,
+      "p_orientacion": 2.3566211197875785e-06,
+      "n_replicas": 4
+    },
+    "LOCO con vecindario": {
+      "auc_esqueleto": 0.89256718924972,
+      "sd_auc": 0.10378484271307115,
+      "auc_moral": 0.8438424816855449,
+      "precision_en_k": 0.743421052631579,
+      "orientacion": 0.6973684210526315,
+      "n_orientadas": 76,
+      "p_orientacion": 0.0003822908695775238,
+      "n_replicas": 4
+    },
+    "Datt identidad largo": {
+      "auc_esqueleto": 0.6133818589025757,
+      "sd_auc": 0.11415331628820653,
+      "auc_moral": 0.5801953472835233,
+      "precision_en_k": 0.4605263157894737,
+      "orientacion": 0.5263157894736842,
+      "n_orientadas": 76,
+      "p_orientacion": 0.3655044411113028,
+      "n_replicas": 4
+    },
+    "Datt familia largo": {
+      "auc_esqueleto": 0.600853863381859,
+      "sd_auc": 0.13939096462876024,
+      "auc_moral": 0.5870600952749563,
+      "precision_en_k": 0.4342105263157895,
+      "orientacion": 0.618421052631579,
+      "n_orientadas": 76,
+      "p_orientacion": 0.025226205123608833,
+      "n_replicas": 4
+    }
+  },
+  "espacial": {
+    "correlacion": {
+      "auc_esqueleto": 0.8255879059350504,
+      "sd_auc": 0.051547247459528,
+      "auc_moral": 0.6525013896515319,
+      "precision_en_k": 0.618421052631579,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "correlacion parcial": {
+      "auc_esqueleto": 0.9011758118701008,
+      "sd_auc": 0.03907490118883343,
+      "auc_moral": 0.742363900027661,
+      "precision_en_k": 0.75,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "PC (Fisher z)": {
+      "auc_esqueleto": 0.7751959686450168,
+      "sd_auc": 0.01705966575230369,
+      "auc_moral": 0.6240762553097012,
+      "precision_en_k": 0.5460526315789473,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "informacion mutua": {
+      "auc_esqueleto": 0.83006718924972,
+      "sd_auc": 0.046822037619595816,
+      "auc_moral": 0.6588795929294426,
+      "precision_en_k": 0.618421052631579,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "distancia de corr.": {
+      "auc_esqueleto": 0.8090705487122061,
+      "sd_auc": 0.05446597926225257,
+      "auc_moral": 0.644746855754525,
+      "precision_en_k": 0.618421052631579,
+      "orientacion": null,
+      "n_orientadas": 0,
+      "p_orientacion": null,
+      "n_replicas": 4
+    },
+    "LOCO con arboles": {
+      "auc_esqueleto": 0.8828387458006719,
+      "sd_auc": 0.03836816499608201,
+      "auc_moral": 0.7240949623893074,
+      "precision_en_k": 0.756578947368421,
+      "orientacion": 0.5394736842105263,
+      "n_orientadas": 76,
+      "p_orientacion": 0.2832867211993425,
+      "n_replicas": 4
+    },
+    "LOCO con vecindario": {
+      "auc_esqueleto": 0.9517077267637178,
+      "sd_auc": 0.015759762536436257,
+      "auc_moral": 0.8230932917464385,
+      "precision_en_k": 0.8289473684210527,
+      "orientacion": 0.6842105263157895,
+      "n_orientadas": 76,
+      "p_orientacion": 0.0008809360014703125,
+      "n_replicas": 4
+    },
+    "Datt identidad largo": {
+      "auc_esqueleto": 0.6175111982082867,
+      "sd_auc": 0.06345886369514786,
+      "auc_moral": 0.5920042698217854,
+      "precision_en_k": 0.48026315789473684,
+      "orientacion": 0.5131578947368421,
+      "n_orientadas": 76,
+      "p_orientacion": 0.45438846263774635,
+      "n_replicas": 4
+    },
+    "Datt familia largo": {
+      "auc_esqueleto": 0.618631019036954,
+      "sd_auc": 0.07692143982443606,
+      "auc_moral": 0.5929495822071477,
+      "precision_en_k": 0.48026315789473684,
+      "orientacion": 0.5526315789473685,
+      "n_orientadas": 76,
+      "p_orientacion": 0.21109555249615783,
+      "n_replicas": 4
+    }
+  }
+}
