@@ -1,8 +1,9 @@
 %% ============================================================
 %%  Plan de trabajo
 %%  Duenio inicial: claude-1
-%%  OJO: el calendario propuesto esta pendiente de confirmacion del autor
-%%  humano contra las fechas reales de la asignatura.
+%%  Calendario semana a semana entregado por el autor humano el 2026-09-10.
+%%  Horizonte: hasta el informe final del 20 de noviembre de 2026, ultima
+%%  entrega del ano. No es el cierre de la tesis.
 %%  Reglas: ver ../../CLAUDE.md
 %% ============================================================
 
@@ -15,40 +16,45 @@ El trabajo avanza en tres etapas, y a la fecha de este informe dos están cerrad
 
 \section{Actividades y calendario}
 
-La tabla \ref{tab:plan} detalla las actividades comprometidas. Las tres primeras filas corresponden a trabajo concluido y se incluyen para dejar constancia del punto de partida; el resto pertenece a la etapa de validación y aparece ordenado por dependencia, ya que cada pregunta del criterio solo tiene sentido sobre las relaciones que superaron la anterior, lo que deja poco margen para paralelizar.
+La tabla \ref{tab:plan} detalla el plan semana a semana del equipo, desde el inicio del trabajo hasta la última entrega del año. Las cuatro primeras semanas corresponden a trabajo concluido y se incluyen para dejar constancia del punto de partida; el resto pertenece a la etapa de validación. La columna \emph{Opcional} recoge una línea de trabajo paralela y no comprometida: la exploración de un segundo dominio ajeno a los datos satelitales, que se aborda solo si el avance de la línea principal lo permite.
 
 {\footnotesize
 \renewcommand{\arraystretch}{0.72}
 \setlength{\tabcolsep}{3pt}
-\begin{longtable}{P{0.65}P{0.22}P{0.10}}
-\caption{Actividades del plan de trabajo, con periodo estimado y estado.}\label{tab:plan}\\
+\begin{longtable}{P{0.19}P{0.47}P{0.34}}
+\caption{Plan de trabajo semana a semana del equipo, integrado por Gabriel Cuibin Sanzana y Patricio Figueroa Gallardo.}\label{tab:plan}\\
 \toprule
-\textbf{Actividad} & \textbf{Periodo} & \textbf{Estado}\\
+\textbf{Semana} & \textbf{Plan para la semana} & \textbf{Opcional}\\
 \midrule
 \endfirsthead
 \toprule
-\textbf{Actividad} & \textbf{Periodo} & \textbf{Estado}\\
+\textbf{Semana} & \textbf{Plan para la semana} & \textbf{Opcional}\\
 \midrule
 \endhead
-Revisión sistemática de literatura bajo protocolo PRISMA 2020 & Hasta septiembre 2026 & Concluida\\
-Formalización de las transformaciones y de la condición de admisibilidad & Hasta septiembre 2026 & Concluida\\
-Especificación del criterio de validación y de la taxonomía de resultados & Hasta septiembre 2026 & Concluida\\
-Redacción del informe de avance & Septiembre 2026 & En curso\\
-Implementación del modelo alternativo y entrenamiento del conjunto de repeticiones & Octubre 2026 & Pendiente\\
-Evaluación de la estabilidad de las relaciones ante la inicialización del entrenamiento & Octubre 2026 & Pendiente\\
-Evaluación de la estabilidad ante el criterio de discretización & Octubre 2026 & Pendiente\\
-Contraste de las relaciones frente a la hipótesis nula & Noviembre 2026 & Pendiente\\
-Medición de la dependencia del modelo respecto de cada relación & Noviembre 2026 & Pendiente\\
-Evaluación de especificidad y compacidad de la hipótesis & Noviembre a diciembre 2026 & Pendiente\\
-Contraste contra referencias construidas fuera del modelo & Diciembre 2026 & Pendiente\\
-Aplicación de la taxonomía sobre los resultados obtenidos & Diciembre 2026 & Pendiente\\
-Validación sobre un conjunto sintético de estructura conocida & Enero 2027 & Pendiente\\
-Validación sobre un segundo dominio real & Enero a febrero 2027 & Pendiente\\
-Redacción del informe final & Marzo 2027 & Pendiente\\
+13--19 ago 2026 & Revisión del estado del arte; estructuración del framework como método generalizable sobre cinco paradigmas; pruebas de robustez entre semillas & \\
+20--26 ago 2026 & Incorporación del conjunto de datos del Ministerio de Agricultura como referencia de contraste; primeras pruebas del framework propio & \\
+27 ago--2 sept 2026 & Puesta en marcha del servidor de cómputo; se constata que el volumen de artículos por filtrar, cuarenta y cinco, exige un cribado sistemático & \\
+3--9 sept 2026 & Aplicación del protocolo PRISMA; actualización de la carta Gantt; redacción del informe de avance & \\
+\midrule
+\textbf{11 de septiembre de 2026} & \textbf{Entrega del informe de avance} & \\
+\midrule
+14--20 sept 2026 & Continuación de los experimentos en curso: experimento de intervención sobre el grafo de dependencia dirigida entre índices espectrales & \\
+21--27 sept 2026 & Continuación de los experimentos del framework; documentación de los primeros hallazgos; mejora de la legibilidad de las salidas del código & \\
+28 sept--4 oct 2026 & Contraste de los hallazgos del experimento contra la literatura y el marco teórico & \\
+5--11 oct 2026 & Repetición de los experimentos sobre distintas coordenadas; ordenamiento de las salidas del código para facilitar su lectura & \\
+12--18 oct 2026 & Redacción del análisis del experimento; continuación de los experimentos; redacción de las formulaciones empleadas & Exploración de un segundo dominio que no use datos satelitales\\
+19--25 oct 2026 & Profundización de los experimentos según lo que arroje el análisis; elaboración de un diagrama; presentación de las salidas del código & Preparación de los datos y del entorno del segundo dominio; primeros experimentos\\
+26 oct--1 nov 2026 & Análisis en profundidad de los resultados y de su relación con la propuesta & Ampliación de los experimentos del segundo dominio y revisión de resultados preliminares\\
+2--8 nov 2026 & Revisión general del documento previa a la redacción del informe final; redacción de las formulaciones empleadas & Cierre de los experimentos del segundo dominio y ordenamiento de los hallazgos para el informe final\\
+9--15 nov 2026 & Redacción del informe final & \\
+\midrule
+\textbf{20 de noviembre de 2026} & \textbf{Entrega del informe final, última entrega del año} & \\
 \bottomrule
 \end{longtable}
 }
 
 \section{Dependencias y riesgos}
 
-Tres dependencias condicionan ese calendario: el cómputo, porque evaluar la estabilidad exige entrenar varias decenas de modelos equivalentes y el costo por corrida determina cuánto puede avanzarse por semana; la disponibilidad del segundo dominio, que exige acceso al modelo y no solo a su matriz, para poder repredecir bajo condiciones alteradas; y la construcción del conjunto sintético, única referencia externa con la que cuente el trabajo, dado que no existe una topología verificada de antemano entre las variables del caso de estudio. El riesgo principal es que la cadena se detenga temprano y ninguna relación supere la primera o segunda pregunta; aun así no invalidaría el trabajo, porque cada caída diagnostica la relación entre atención y estructura, y ahí sirve el conjunto sintético, para verificar si detecta una estructura conocida.
+Tres dependencias condicionan ese calendario. La primera es el cómputo, porque evaluar la estabilidad exige entrenar varias decenas de modelos equivalentes y el costo por corrida determina cuánto puede avanzarse por semana; de ahí que la puesta en marcha del servidor figure como hito propio a fines de agosto. La segunda es la disponibilidad del segundo dominio, que exige acceso al modelo y no solo a su matriz de interacción, para poder repredecir bajo condiciones alteradas; por esa razón se mantiene como línea opcional y no como compromiso del calendario principal. La tercera es la ausencia de una topología verificada de antemano entre las variables del caso de estudio, que obliga a apoyarse en el conjunto de datos del Ministerio de Agricultura como referencia externa de contraste.
+
+El riesgo principal es que la cadena de preguntas se detenga temprano y ninguna relación supere las primeras. Aun así no invalidaría el trabajo, porque cada caída diagnostica la relación entre la representación aprendida y la estructura del fenómeno, que es precisamente lo que el criterio busca discriminar. El segundo riesgo es de calendario: la línea opcional del segundo dominio comparte las semanas de octubre con la redacción del análisis, de modo que se abandona antes que comprometer el informe final.
