@@ -99,9 +99,33 @@ def main() -> int:
     ap.add_argument("--paciencia", type=int, default=60)
     ap.add_argument("--lote", type=int, default=64)
     ap.add_argument("--retardos", type=int, nargs="*", default=[1, 2])
+    ap.add_argument("--stack", default=None,
+                    help="ruta a un .npy cualquiera; con esto se corre sobre "
+                         "el vinedo real en vez de sobre el sintetico")
+    ap.add_argument("--etiqueta-salida", default=None, dest="etsal")
     a = ap.parse_args()
 
-    X = np.load(os.path.join(a.datos, "stack_" + a.regimen + ".npy"))
+    if a.stack:
+        X = np.load(a.stack)
+        # Las fechas de Sentinel-2 no son equiespaciadas: hay revisita de 5
+        # dias y huecos por nubes. "t-1" es la escena anterior DISPONIBLE, no
+        # un intervalo fijo, asi que el retardo esta emborronado y hay que
+        # saber cuanto antes de leer nada. Se reporta la distribucion.
+        try:
+            f = H.cargar_fechas_stack(len(X))
+            if f is not None:
+                d = np.diff(np.asarray(f, dtype=np.float64)) / 86400000.0
+                print("  huecos entre escenas en dias: mediana %.0f, "
+                      "p10 %.0f, p90 %.0f, max %.0f"
+                      % (np.median(d), np.percentile(d, 10),
+                         np.percentile(d, 90), d.max()))
+                print("  ATENCION: el retardo 1 es la escena anterior, no un "
+                      "intervalo fijo")
+        except Exception as e:  # noqa: BLE001
+            print("  sin fechas para reportar huecos (" + type(e).__name__
+                  + ")")
+    else:
+        X = np.load(os.path.join(a.datos, "stack_" + a.regimen + ".npy"))
     Xl = apilar_retardos(X, tuple(a.retardos))
     n_tok = Xl.shape[-1]
     H.NUM_INDICES = n_tok
@@ -115,7 +139,8 @@ def main() -> int:
     print("  %s a %s, %d tokens (%d indices x %d instantes)"
           % (X.shape, Xl.shape, n_tok, N_BASE, 1 + len(a.retardos)))
 
-    destino = os.path.join(a.datos, "modelos_" + a.regimen + "_tokens")
+    etsal = a.etsal or (a.regimen + "_tokens")
+    destino = os.path.join(a.datos, "modelos_" + etsal)
     os.makedirs(destino, exist_ok=True)
     semillas = list(H.SEEDS)[:a.semillas]
     for s in semillas:
@@ -197,7 +222,7 @@ def main() -> int:
         print("  ablacion de %-9s (%d tokens) ruido %.3e  sobre 3x: %d"
               % (nombre, n_tok, r, int((S > 3 * r).sum())))
 
-    ruta = os.path.join(a.datos, "DATT_" + a.regimen + "_tokens.json")
+    ruta = os.path.join(a.datos, "DATT_" + etsal + ".json")
     with open(ruta, "w", encoding="utf-8") as f:
         json.dump(salida, f)
     print("  guardado " + ruta)

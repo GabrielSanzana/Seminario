@@ -1,0 +1,75 @@
+====================================================================================
+ EL VINEDO CON RETARDOS: HAY ESTRUCTURA TEMPORAL CRUZADA?
+
+ 36 tokens = 12 indices x 3 instantes. Una arista puede cruzar
+ instantes, asi que por primera vez se puede preguntar si el modelo
+ depende del pasado o solo del mismo momento.
+
+ AVISO: las fechas no son equiespaciadas. Mediana de huecos 5 dias,
+ percentil 90 igual a 23, maximo 200. Para las escenas detras de un
+ hueco grande, 't-1' es otra fase fenologica. Contamina alrededor
+ del 10% de las filas y no se arregla promediando.
+====================================================================================
+
+ ABLACION DE ATENCION
+ ----------------------------------------------------------------------------------
+  reparto de la dependencia POSITIVA por instante del origen:
+    retardo t-0 (mismo instante)  99.1%
+    retardo t-1                   0.5%
+    retardo t-2                   0.4%
+
+  Si el retardo 0 se lleva casi todo, el dato no tiene
+  estructura temporal cruzada y el grafo publicado no se
+  queda corto por no haberla mirado.
+
+  aristas que cruzan instantes sobre 3x el ruido: 5
+    ARI            <- ARI            (t-1)   27.9x
+    ARI            <- ARI            (t-2)   12.4x
+    PSRI           <- MARI           (t-1)   9.1x
+    MARI           <- NDWI           (t-1)   3.5x
+    PSRI           <- MARI           (t-2)   3.1x
+
+  el bloque del mismo instante contra el grafo publicado:
+    rho de Spearman 0.063
+    de las 19 aristas publicadas, siguen sobre 3x: 7
+
+    Un rho alto dice que anadir el pasado no cambio lo que el
+    modelo hace en el presente, o sea que el grafo publicado
+    aguanta. Un rho bajo dice que el modelo de 12 tokens
+    estaba atribuyendo al presente algo que era del pasado.
+
+ ABLACION DE ENTRADA
+ ----------------------------------------------------------------------------------
+  reparto de la dependencia POSITIVA por instante del origen:
+    retardo t-0 (mismo instante)  99.3%
+    retardo t-1                   0.4%
+    retardo t-2                   0.3%
+
+  Si el retardo 0 se lleva casi todo, el dato no tiene
+  estructura temporal cruzada y el grafo publicado no se
+  queda corto por no haberla mirado.
+
+  aristas que cruzan instantes sobre 3x el ruido: 13
+    ARI            <- ARI            (t-1)   22.4x
+    PSRI           <- MARI           (t-1)   10.2x
+    ARI            <- ARI            (t-2)   7.1x
+    ARI            <- EVI            (t-1)   5.1x
+    ARI            <- NDII           (t-1)   4.7x
+    ARI            <- EVI2           (t-1)   4.6x
+    ARI            <- SAVI           (t-1)   4.5x
+    ARI            <- NDMI           (t-1)   4.4x
+    MARI           <- NDWI           (t-1)   4.3x
+    ARI            <- NDII           (t-2)   4.1x
+    PSRI           <- MARI           (t-2)   3.9x
+    ARI            <- NDMI           (t-2)   3.6x
+    MARI           <- NDWI           (t-2)   3.6x
+
+  el bloque del mismo instante contra el grafo publicado:
+    rho de Spearman 0.003
+    de las 19 aristas publicadas, siguen sobre 3x: 7
+
+    Un rho alto dice que anadir el pasado no cambio lo que el
+    modelo hace en el presente, o sea que el grafo publicado
+    aguanta. Un rho bajo dice que el modelo de 12 tokens
+    estaba atribuyendo al presente algo que era del pasado.
+====================================================================================

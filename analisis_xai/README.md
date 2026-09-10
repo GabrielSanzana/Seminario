@@ -24,6 +24,7 @@ varios casos el motivo del abandono es el resultado.
 11. [Errores cometidos y cómo se detectaron](#11-errores-cometidos-y-cómo-se-detectaron)
 12. [Mapa de archivos](#12-mapa-de-archivos)
 13. [El experimento que faltaba: verdad conocida por construcción](#13-el-experimento-que-faltaba-verdad-conocida-por-construcción)
+14. [El viñedo con retardos, y el hallazgo sobre el propio estimador](#14-el-viñedo-con-retardos-y-el-hallazgo-sobre-el-propio-estimador)
 
 ---
 
@@ -899,6 +900,9 @@ el mecanismo de detección es reutilizable.
 | Se concluyó que la direccionalidad no existe con el experimento mal montado | Al arreglar los dos anteriores sale 0.645 y 0.974 con p bajo | Se retira la retirada: la afirmación central del framework se sostiene |
 | El modelo del caso de estudio no puede ver tiempo | `SEQ_LENGTH = 1` y la tarea enmascarada descarta ventanas por diseño | Toda afirmación temporal del documento queda sin respaldo hasta reentrenar |
 | El test del parche 26×26 no separaba lo que decía separar | Cuadruplicar el parche divide por cuatro las muestras; el `val` sube a 0.944 | Test contaminado: sirve si sale bien, no si sale mal |
+| Se umbralizaron los tres bloques de retardo con el suelo de la matriz 36×36 completa | Los suelos por bloque van de 4.11e-5 a 2.02e-4, un factor 5 | Inflaba el conteo de aristas del presente |
+| El grafo de 19 aristas se presentaba como "el grafo del modelo" | Con `k=1` el `rho` contra él es 0.05 y el solapamiento no supera el azar | Es el grafo bajo `familia_balanceada`; la condición es parte del resultado |
+| El suelo de ruido por cola negativa se daba por universal | Bajo `k=1` hay 0 de 132 valores negativos y el suelo sale `nan` | El estimador exige un enmascarado que produzca cortes con efecto negativo |
 
 El patrón que los une: **cuando un estadístico da el mismo valor en fuentes que
 deberían diferir, o un p pegado a un extremo, casi siempre es la métrica y no el
@@ -947,6 +951,7 @@ reproduce el viejo hasta 1e-9.
 | `benchmark_recuperacion.py` | Siete estimadores de estructura puntuados contra la misma verdad |
 | `resumen_replicas.py` | Agrega las réplicas; la orientación se suma, no se promedia |
 | `entrenar_temporal_tokens.py` | Los retardos como tokens (12 índices × 3 instantes = 36) para darle tiempo al transformer sin tocar `forward_enmascarado` |
+| `grafo_temporal.py` | Reparto de la dependencia por instante y comparación con el grafo publicado |
 | `control_fases.py` | Los cuatro controles del efecto por fase: bootstrap, placebo de etiquetas, calendario rotado, suelo con `n` igualado, dificultad de escena, regresión por fecha, ICP con permutación exacta |
 
 ### Pruebas (`pruebas/`)
@@ -1333,6 +1338,136 @@ y la tarea enmascarada sin ventanas temporales. Con esa configuración el
 modelo del caso de estudio no puede captar ninguna relación temporal, así que
 cualquier frase del documento que lo afirme está sin respaldo hasta reentrenar
 con los retardos como tokens.
+
+---
+
+## 14. El viñedo con retardos, y el hallazgo sobre el propio estimador
+
+La sección 13 mostró que el transformer sólo compite con lo clásico cuando el
+mecanismo pasa por el pasado, y que con `SEQ_LENGTH = 1` no puede verlo. Se
+reentrenó el viñedo real metiendo los retardos como tokens: 12 índices × 3
+instantes = 36 tokens, 15 semillas, para preguntar si el dato tiene estructura
+temporal cruzada que el grafo publicado se estuviera perdiendo.
+
+La respuesta a esa pregunta es no. Pero por el camino apareció algo sobre el
+estimador que importa más.
+
+### 14.1 El dato del viñedo casi no tiene estructura temporal cruzada
+
+```
+reparto de la dependencia positiva por instante del origen
+                        atencion   entrada
+  retardo t-0             99.1%     99.3%
+  retardo t-1              0.5%      0.4%
+  retardo t-2              0.4%      0.3%
+
+  quitando la autocorrelacion del mismo indice
+  retardo t-0             99.4%     99.5%
+
+  conteo de aristas sobre 3x, con suelo POR BLOQUE
+  t-0                        80        82
+  t-1                         3         7
+  t-2                         4         7
+```
+
+Por masa y por conteo, el presente se lo lleva todo. El grafo de 19 aristas no
+se queda corto por no haber mirado el tiempo.
+
+La única arista temporal que aparece en las dos ablaciones y en los dos
+retardos es `PSRI <- MARI`, con 11.1x y 12.4x en t-1. Antocianina precediendo
+a senescencia en una vid caducifolia es plausible, pero es una arista de 132 y
+queda como candidata, no como hallazgo.
+
+**Un fallo propio, corregido:** la primera versión umbralizaba los tres bloques
+con el suelo de la matriz 36×36 completa. Los suelos por bloque son
+2.02e-4 (t-0), 5.43e-5 (t-1) y 4.11e-5 (t-2): el del presente es tres veces el
+global. Usar el global inflaba el conteo del presente. Las cifras de arriba ya
+usan suelo por bloque.
+
+**Y una limitación que no se puede quitar:** las fechas de Sentinel-2 no son
+equiespaciadas. Mediana de huecos 5 días, percentil 90 igual a 23, máximo 200.
+Para las escenas detrás de un hueco grande, "t-1" es otra fase fenológica. Con
+retardo mediano de 5 días, además, `X_j(t-1)` aporta poquísimo sobre `X_j(t)`
+que ya está visible. **Este diseño puede estar condenado a dar cero por
+construcción**, y eso limita lo que la ausencia de estructura temporal
+significa. Un diseño que sí lo probaría: ocultar el presente entero y forzar
+la predicción desde el pasado.
+
+### 14.2 El grafo publicado no sobrevive al cambio de enmascarado, y no es lo que parece
+
+El modelo con retardos usa `MASCARA_MODO="aleatoria"` con `MASCARA_K = 1`
+—ocultar sólo el token objetivo—, mientras el grafo publicado se calculó con
+`familia_balanceada` y máscara base de familia. Al comparar salió `rho = 0.063`
+contra el grafo publicado, y 7 de 19 aristas sobreviviendo cuando el azar
+predice 8.6 (`p` hipergeométrico 0.857). O sea, **ningún parecido**.
+
+Eso admitía dos lecturas: los retardos reordenan el presente, o el
+enmascarado. Se corrió el control que las separa: 12 tokens, sin retardos,
+mismo enmascarado neutro, mismo entrenamiento.
+
+```
+rho(control 12 tokens, publicado)   +0.050   IC95 [-0.122, +0.219]  p 0.5660
+rho(36 tokens,         publicado)   +0.063   IC95 [-0.109, +0.231]  p 0.4749
+rho(control 12 tokens, 36 tokens)   +0.661   IC95 [+0.552, +0.747]  p 0.0000
+```
+
+Concluyente. Los dos modelos de máscara neutra se parecen entre sí (0.661, al
+nivel de la reproducibilidad entre semillas que ya se había medido, ICC 0.650)
+y ninguno se parece al publicado. **Los retardos no cambian nada; el
+enmascarado lo cambia todo.**
+
+### 14.3 Por qué, y es lo publicable de esta sección
+
+La distribución de valores lo explica:
+
+```
+                      negativos    mediana       maximo
+publicado (familia)     60/132     +6.83e-4    +4.54e-2
+36 tokens (k=1)         24/132     +3.96e-4    +4.63e-1
+control 12 tok (k=1)     0/132     +2.81e-3    +4.95e-1
+```
+
+Bajo `familia_balanceada`, casi la mitad de los cortes **mejoran** la
+reconstrucción: la familia del objetivo ya está oculta, así que cortar una
+arista más a menudo no quita nada y el ruido de estimación domina. Bajo
+`k = 1`, con los once canales disponibles, cortar cualquier arista siempre
+duele, y duele diez veces más.
+
+No son la misma magnitud reescalada. Son dos cantidades distintas:
+
+```
+familia_balanceada    lo que j aporta MAS ALLA de la familia de v
+                      dependencia condicional excluyendo la redundancia
+k = 1                 lo que j aporta en total, redundancia incluida
+```
+
+No hay razón para que correlacionen, y no correlacionan. El grafo de 19
+aristas es válido, pero **es un grafo de dependencia no redundante**, y esa
+condición hay que escribirla junto al resultado: no es "el grafo del modelo",
+es "el grafo bajo enmascarado por familia".
+
+**Consecuencia para el método, que es lo que trasciende al caso:** el suelo de
+ruido se estima de la cola negativa de $D_{att}$, y bajo `k = 1` **no hay cola
+negativa** —cero de 132 valores negativos—, así que el suelo sale `nan` y el
+criterio de 3x no se puede aplicar. El estimador de ruido del framework
+**requiere un esquema de enmascarado que genere cortes con efecto negativo**.
+Es un requisito no declarado en ninguna parte del trabajo hasta aquí, y quien
+reutilice el método sin saberlo se encuentra con un `nan` o, peor, con un
+umbral inventado.
+
+### 14.4 Qué queda escrito
+
+1. El viñedo no tiene estructura temporal cruzada detectable con este diseño,
+   con la salvedad de 14.1 sobre huecos y retardo corto. `PSRI <- MARI (t-1)`
+   queda como única candidata.
+2. El grafo de 19 aristas es válido bajo `familia_balanceada` y no transfiere a
+   otros esquemas de enmascarado. La condición pasa a formar parte del
+   enunciado del resultado.
+3. $D_{att}$ mide cosas distintas según el enmascarado: dependencia no
+   redundante con familia, dependencia total con `k = 1`. Elegir el esquema es
+   elegir la pregunta, no un detalle de implementación.
+4. El suelo de ruido por cola negativa exige un enmascarado que la produzca.
+   Bajo `k = 1` el método se queda sin criterio de umbral.
 
 ---
 

@@ -1,0 +1,31 @@
+==========================================================================
+ CONTROL: mismo enmascarado neutro, SIN retardos, contra todo lo demas
+==========================================================================
+ Aisla el cambio de mascara del cambio de retardos. El grafo publicado
+ se calculo con familia_balanceada; los dos modelos nuevos con k=1.
+
+ grafo publicado: 19 aristas sobre 3x, suelo 2.837e-03
+
+===== ablacion de atencion
+  control 12 tokens: 0 aristas sobre 3x, suelo nan
+  de las 19 publicadas sobreviven 0, esperado por azar 0.0, p=1.0000
+  rho(control 12tok, publicado) = +0.050  IC95 [-0.122, +0.219]  p=0.5660
+  rho(36 tokens   , publicado) = +0.063  IC95 [-0.109, +0.231]  p=0.4749
+  rho(control 12tok, 36 tokens) = +0.661  IC95 [+0.552, +0.747]  p=0.0000
+
+===== ablacion de entrada
+  control 12 tokens: 0 aristas sobre 3x, suelo nan
+  de las 19 publicadas sobreviven 0, esperado por azar 0.0, p=1.0000
+  rho(control 12tok, publicado) = -0.040  IC95 [-0.210, +0.131]  p=0.6458
+  rho(36 tokens   , publicado) = +0.003  IC95 [-0.168, +0.174]  p=0.9740
+  rho(control 12tok, 36 tokens) = +0.649  IC95 [+0.538, +0.738]  p=0.0000
+
+ COMO LEERLO
+ rho(control, publicado) ~ 0  y  rho(control, 36tok) alto:
+    la mascara explica la diferencia, los retardos no cambian nada.
+    El grafo publicado es valido SOLO bajo familia_balanceada.
+ rho(control, publicado) alto y rho(control, 36tok) ~ 0:
+    la mascara no era la causa; los retardos si reordenan el presente.
+ los dos ~ 0:
+    el grafo no es reproducible bajo reentrenamiento, y eso es grave.
+==========================================================================
