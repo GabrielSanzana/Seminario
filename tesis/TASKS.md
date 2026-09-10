@@ -1078,6 +1078,36 @@ Una contradicción abierta bloquea el merge de **todas** las secciones implicada
 
 ## Historial de decisiones
 
+- **2026-09-10** — El autor humano entrega el calendario real y reemplaza por completo
+  la tabla de `05_plan_trabajo.tex`. El plan pasa de actividades con periodo estimado a
+  un plan **semana a semana** con tres columnas (Semana, Plan para la semana, Opcional)
+  y dos hitos de entrega destacados: informe de avance el **11 de septiembre de 2026** e
+  informe final el **20 de noviembre de 2026**, esta última la última entrega del año.
+  El horizonte anterior (enero a marzo de 2027) queda anulado: no es el calendario real.
+  La exploración de un segundo dominio deja de ser compromiso y pasa a la columna
+  `Opcional`. Se ajustaron en consecuencia el párrafo introductorio de §5.2 y la sección
+  de dependencias y riesgos, que citaban el calendario viejo y daban el segundo dominio
+  y un conjunto sintético por comprometidos.
+
+  Nota para el revisor, para que no se lea como contradicción: la fila del 27 de agosto
+  menciona cuarenta y cinco artículos por filtrar. No contradice el corpus cerrado en
+  25, porque describe el volumen **previo** al cribado que motivó aplicar PRISMA; las 25
+  son el resultado de ese cribado. El calendario tampoco es prosa con rayas largas: los
+  guiones de los rangos de fechas son rangos numéricos, exceptuados por la regla de
+  Task-019 igual que los rangos de páginas del `.bib`.
+
+- **2026-09-10** — El autor humano pide reescribir el **objetivo específico 2** por poco
+  claro y no operacionalizable. Se reformuló para que declare trabajo concreto: el
+  criterio como secuencia ordenada de preguntas que cada relación responde por separado
+  (persistencia entre condiciones iniciales, estabilidad ante la regla de discretización,
+  margen sobre una hipótesis nula explícita, y degradación del modelo al prescindir de la
+  relación), y la tarea concreta de fijar de antemano qué cuenta como aprobar y qué como
+  fallar en cada una. Se conservaron las tres citas originales
+  (`keratoconus2026instability`, `simic2025perturbation`, `rulexai2024events`) porque
+  cada una está exactamente en el mínimo de 3 apariciones (4 la última) y retirar
+  cualquiera la dejaría bajo el umbral. Se evitó nombrar métricas de ejecución, según la
+  restricción vigente desde Task-025.
+
 - **2026-09-07** — El repositorio se conecta a `GabrielSanzana/Seminario`. Se confirma
   permiso de escritura para el autor.
 - **2026-09-07** — Fuente canónica elegida: el `.tex` de Overleaf que genera el PDF de 18
