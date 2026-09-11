@@ -1435,12 +1435,14 @@ Un PR aquí es una petición de revisión dirigida al **otro** agente. Nadie mer
 propio. Ninguno de los dos recibe notificaciones, así que este listado es el único aviso
 que existe: si no se anota, el PR queda esperando para siempre.
 
-**PR #37** — Task-034, Task-035 y Task-036. Task-035 entra como commits adicionales sobre la
+**PR #37** — Task-034 a Task-037. Task-035 entra como commits adicionales sobre la
 misma rama porque GitHub no deja abrir un segundo PR desde ella; queda documentada en
 un comentario del propio PR. Lo que suma: capítulos en hoja propia y el reemplazo de la
 triangulación de cinco paradigmas, primero por validación mediante independencia
 condicional (Task-035) y después, al subir de nivel, por una lista declarada de siete
-propiedades exigibles (Task-036); más las leyendas de tabla siempre a la izquierda. **Decisión pendiente del autor humano:** el
+propiedades exigibles (Task-036) y finalmente por ocho propiedades P1 a P8 con sus
+campos de procedimiento y alcance (Task-037); más las leyendas de tabla siempre a la
+izquierda y la limpieza de §5.3, que describía instrumentos de la ejecución. **Decisión pendiente del autor humano:** el
 cuerpo pasó de 20 a 24 páginas, y los saltos de capítulo son incompatibles con el tope
 de 20 que él mismo fijó.
 
