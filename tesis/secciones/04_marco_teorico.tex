@@ -41,7 +41,7 @@ donde $X$ es el espacio de entrada, $Y$ el espacio de salida y $\theta$ los par�
 Z = M^{L}_{\theta}(X),
 \end{equation}
 
-con $Z$ el espacio interno aprendido por la red en una capa $L$. A partir de esa representación se construye la matriz relacional $A \in \mathbb{R}^{n\times n}$, donde cada elemento $A_{ij}$ expresa la intensidad de interacción entre dos componentes latentes $i$ y $j$. La matriz es agnóstica al dominio: el índice $n$ puede recorrer índices espectrales, sensores industriales o variables de proceso sin que cambie nada de lo anterior.
+con $Z$ el espacio interno aprendido por la red en una capa $L$. A partir de esa representación se construye la matriz de interacción $A \in \mathbb{R}^{n\times n}$, que es la matriz agregada de la sección anterior y no una de las matrices de atención por capa y cabeza de las que proviene, y donde cada elemento $A_{ij}$ expresa la intensidad de interacción entre dos componentes latentes $i$ y $j$. La matriz es agnóstica al dominio: el índice $n$ puede recorrer índices espectrales, sensores industriales o variables de proceso sin que cambie nada de lo anterior.
 
 Esa matriz se comporta como un operador relacional y debe cumplir tres propiedades para ser entrada válida del framework. Sus valores son no negativos, $A_{ij} \geq 0$. Sus filas suman aproximadamente uno, $\sum_j A_{ij} \approx 1$, lo que permite leerla como una cadena de Markov dirigida. Y es asimétrica, de modo que en general $A_{ij} \neq A_{ji}$ y la dirección de la relación queda codificada. Las tres en conjunto forman la condición de admisibilidad, y una representación que no las satisfaga queda fuera del alcance del framework mientras no se le aplique una adaptación explícita.
 

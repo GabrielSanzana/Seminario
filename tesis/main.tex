@@ -20,7 +20,10 @@
 
 \usepackage{pucv_inf_2024}
 
-\usepackage[spanish,es-noquoting,es-noshorthands]{babel}
+% es-lcroman: el formato de la Escuela pide numeros romanos en minuscula para
+% las paginas previas a la introduccion. Sin esta opcion, babel-spanish los
+% compone en versalitas (I, III) y no en minuscula (i, iii).
+\usepackage[spanish,es-noquoting,es-noshorthands,es-lcroman]{babel}
 \usepackage{csquotes}
 \usepackage{longtable}
 \usepackage{array}
@@ -37,6 +40,14 @@
 % sencillo y sin espacio extra entre parrafos ni antes de los encabezados.
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{1cm}
+
+% El formato pide encabezado de capitulo en mayuscula, negrita y tamano 14.
+% pucv_inf_2024.sty lo compone con \Large, que sobre un cuerpo de 12 son 17,28
+% pt. Se redefine aqui con \large (14,4 pt) en vez de tocar el .sty, que es
+% copia literal del template. Las secciones ya estaban en 14 y las
+% subsecciones en 12, asi que solo cambia el capitulo.
+\titleformat{\chapter}[block]{\normalfont\bfseries\large}{\thechapter.}{0.5em}{\MakeUppercase}
+
 \titlespacing*{\chapter}{0cm}{0pt}{8pt}
 \titlespacing*{\section}{0cm}{10pt}{0pt}
 \titlespacing*{\subsection}{0cm}{8pt}{0pt}
@@ -65,6 +76,15 @@
 \usepackage{float}
 
 \addbibresource{referencias.bib}
+
+% Los DOI y los titulos largos del estilo IEEE no tienen puntos de corte
+% naturales y se salian del margen derecho. Las tres penalizaciones permiten
+% que biblatex parta una URL o un DOI, y el \emergencystretch le da a TeX un
+% ultimo margen de maniobra en las lineas que aun asi no calzan.
+\setcounter{biburlnumpenalty}{9000}
+\setcounter{biburlucpenalty}{9000}
+\setcounter{biburllcpenalty}{9000}
+\setlength{\emergencystretch}{1em}
 
 \begin{document}
 

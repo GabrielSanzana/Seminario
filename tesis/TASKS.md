@@ -72,6 +72,98 @@ antes de tocar nada:
 
 ## Cola de tareas
 
+### Task-038 — cerrada en sesión directa con el autor humano, commit en `main`
+
+- **Task-038 — Auditoría del PDF contra la pauta de evaluación y el formato de la
+  Escuela: nueve contradicciones y seis incumplimientos de formato.** El autor humano
+  pidió la auditoría el 2026-09-10, revisó el informe y ordenó aplicar los arreglos y
+  comitear directo en `main`, sin rama ni PR. Esa instrucción cubre también
+  `main.tex`, que en condiciones normales solo edita él.
+
+  **Contradicciones corregidas.**
+
+  1. **Referencia externa del caso de estudio (la más grave).** El documento daba cuatro
+     versiones incompatibles de qué referencia externa existe: la introducción decía que
+     el catastro del Ministerio de Agricultura "actúa como la referencia disponible,
+     proporcionando propiedades agronómicas... necesidades hídricas"; §5.3 decía que la
+     partición en grupos de bandas es "la única referencia analítica disponible"; P5 de
+     §6.5 decía que el caso de estudio "no cuenta con esa referencia"; y las
+     conclusiones, que "no existe nada equivalente". Además §5.2 usa el catastro solo
+     para elegir el predio y no aporta ninguna propiedad agronómica, de modo que la
+     frase de la introducción no se sostenía ni en su propia sección de datos. Queda una
+     sola versión en las cuatro secciones: no hay topología conocida, y la única
+     referencia disponible es la partición en grupos de bandas compartidas, que sale de
+     la aritmética de las fórmulas y no dice nada de la relación entre grupos.
+  2. **Estado de ejecución.** Task-033 había corregido introducción, §5.1 y conclusiones
+     a "ya está en curso" y no tocó el resumen, que seguía diciendo "describe el diseño,
+     no su ejecución" y "corresponde a la etapa siguiente". Resumen y abstract quedan
+     alineados con las otras tres.
+  3. **Cifra de cribado.** La fila del 27 de agosto de `tab:plan` decía "cuarenta y
+     cinco" artículos por filtrar, número que no aparece en ninguna caja del flujo
+     PRISMA. Pasa a treinta y seis, que es el volumen de la búsqueda complementaria
+     (instrucción del autor humano).
+  4. **Taxonomía.** La introducción llamaba al tercer resultado "artefacto de la
+     arquitectura" y §3.3, §6.5 y las conclusiones lo llaman "hallazgo no reproducible".
+     Queda el segundo nombre en las cuatro.
+  5. **Nombres de $A$.** §4.3 la llamaba "matriz relacional" una sola vez. Pasa a
+     "matriz de interacción", con una cláusula que la distingue de las matrices de
+     atención por capa y cabeza de las que proviene.
+  6. **Promesa colgante.** §3.2.1 anunciaba que el trabajo "calibra su criterio de
+     contraste contra un modelo nulo propio", que Task-035 había retirado de §6.2. La
+     frase remite ahora al control declarado antes de medir de `sec:criterio`.
+  7. **Pregunta de investigación.** Se transcribe literal en §1.1 y en §3.1.1, y las dos
+     transcripciones diferían en el último tramo ("posteriores al entrenamiento" contra
+     "post-hoc"). Unificadas en la primera forma, que es además la que titula §3.2.1.
+  8. **Clever Hans.** §3.2.2 afirmaba que el término "forma parte de la pregunta de este
+     trabajo"; la pregunta no lo contiene. Queda descrito como lo que es, un descriptor
+     del bloque de intervención de la cadena de búsqueda.
+  9. **Ventana temporal.** El criterio de inclusión declara 2022-2026 y seis de las 25
+     referencias son anteriores. §3.1.2 lo declara ahora de forma explícita: la búsqueda
+     complementaria es anterior a la aplicación del protocolo y no estaba sujeta a ese
+     filtro, y esas seis son las obras que definen las técnicas que la propuesta emplea
+     (instrucción del autor humano).
+  10. **Procedencia de las 25.** El resumen las presentaba como resultado del protocolo
+      PRISMA, contra `CLAUDE.md` y contra §3.1.2, que atribuye 13 de 25 a la búsqueda
+      complementaria. Corregido en resumen y abstract.
+
+  **Formato corregido.**
+
+  - **Resumen.** El formato pide que no supere la media plana y que resumen y abstract
+    queden en la misma página; ocupaba dos tercios de la página i y desbordaba el
+    abstract a la ii. Reescritos ambos en tres párrafos más breves, en el orden que pide
+    el formato. El resumen mide ahora 9,6 cm y los dos caben en la página i.
+  - **Encabezado de capítulo.** `pucv_inf_2024.sty` lo compone con `\Large`, 17,28 pt
+    sobre un cuerpo de 12; el formato pide 14. Se redefine `\titleformat{\chapter}` en
+    `main.tex` con `\large`, sin tocar el `.sty`.
+  - **Folio romano.** Salía en versalitas (I, III) y el formato pide minúscula. Se
+    agregó la opción `es-lcroman` a babel en `main.tex`.
+  - **Declaración de uso de IA.** El §10.3 del formato exige decir en la metodología qué
+    herramienta se usó y con qué propósito. §3.1.2 nombra ahora Claude Scientist, puesta
+    a disposición por el profesor guía, con sus dos usos (localizar artículos y revisar
+    el formato del documento) y la responsabilidad del equipo sobre la verificación de
+    cada estudio (instrucción del autor humano).
+  - **Tabla 3.1.** La fila `Propuesta` usaba `\multicolumn{3}{p{0.80\linewidth}}`, que
+    sumado a la primera columna daba 1,02 del ancho de texto y desbordaba el margen
+    derecho en 21,4 pt. Pasa a `P{0.78}`, que cierra exactamente en el ancho.
+  - **Figura PRISMA.** Con `[H]` quedaba clavada donde se declara y dejaba 8,7 cm en
+    blanco en la página anterior. Pasa a `[t]`: el texto rellena esa página y la figura
+    encabeza la siguiente.
+  - **Dos arreglos tipográficos de paso:** los DOI del estilo IEEE desbordaban el margen
+    en la lista de referencias (se agregaron las penalizaciones `biburl*` y un
+    `\emergencystretch`), y la definición de $V$ en §6.2 desbordaba 33 pt (reescrita sin
+    cambiar lo que dice). El documento compila ahora con cero cajas desbordadas.
+  - Un error gramatical: "y no como resultado que competir" en §6.1.
+
+  **Verificación.** `./scripts/compilar.sh` en verde, 33 páginas, cero citas o
+  referencias sin resolver y cero `Overfull`. Las 25 entradas de `referencias.bib`
+  siguen resolviendo por DOI contra `Referencias_seminario.xlsx` y ninguna baja de tres
+  usos. Cuerpo de introducción a conclusiones: 25 páginas, bajo el tope de 30.
+
+  **Queda pendiente**, porque excede lo que el autor humano autorizó en esta pasada: la
+  portada no trae profesor guía, profesor correferente ni nombre de carrera, que la
+  plantilla del formato sí pide, y los nombres van abreviados ahí y completos en
+  `tab:plan`.
+
 ### Task-037 — cerrada por claude-1, pendiente de revisión
 
 - **Task-037 — §6.5 con ocho propiedades y estructura fija, y §5.3 sin referencias a
@@ -1766,6 +1858,20 @@ Formato de registro:
 Una contradicción abierta bloquea el merge de **todas** las secciones implicadas.
 
 ## Historial de decisiones
+
+- **2026-09-11** — El autor humano ordena aplicar los arreglos de la auditoría (Task-038)
+  y comitear directo en `main`, sin rama ni pull request. La autorización cubre
+  `main.tex`, que el protocolo reserva para él: se le agregaron la opción `es-lcroman`
+  de babel, la redefinición de `\titleformat{\chapter}` a 14 pt y las penalizaciones de
+  corte de URL de biblatex. No establece precedente: la próxima vez que haga falta
+  tocar `main.tex` se necesita otra instrucción explícita, igual que en Task-019.
+  Tres decisiones de contenido suyas quedan registradas aquí porque no se derivan del
+  documento: la fila del 27 de agosto de `tab:plan` dice treinta y seis y no cuarenta y
+  cinco; las seis referencias anteriores a 2022 se conservan porque la búsqueda
+  complementaria que las trajo es previa a la aplicación del protocolo y porque aportan
+  al trabajo; y la herramienta de esa búsqueda, Claude Scientist, la proporcionó el
+  profesor guía y se declara en §3.1.2 con sus dos usos, buscar artículos y revisar el
+  formato del documento.
 
 - **2026-09-10** — El autor humano entrega el calendario real y reemplaza por completo
   la tabla de `05_plan_trabajo.tex`. El plan pasa de actividades con periodo estimado a
