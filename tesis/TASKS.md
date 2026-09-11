@@ -72,6 +72,40 @@ antes de tocar nada:
 
 ## Cola de tareas
 
+### Task-039 — cerrada en sesión directa con el autor humano, commit en `main`
+
+- **Task-039 — La declaración de uso de IA, revisada, y el alcance de avance dicho de
+  forma explícita.** El autor humano pidió revisar la declaración que Task-038 agregó a
+  §3.1.2 y buscar consistencia en el resto del documento, recordando que la entrega es
+  el avance de la primera parte del trabajo y no un informe final.
+
+  **Lo que se encontró y se corrigió.**
+
+  1. **La declaración vivía en un solo lugar.** El §10.3 del formato pide declararla en
+     la metodología, y el capítulo de metodología del documento es el 5. Un lector que
+     la buscara ahí no encontraba nada, porque estaba solo dentro de §3.1.2. §5.1 la
+     recoge ahora en un párrafo propio: los dos puntos donde intervino la herramienta,
+     con remisión a `subsec:busqueda`, y la frase que deja la redacción, las decisiones
+     de inclusión y la verificación de cada dato a cargo del equipo.
+  2. **"Anterior a la aplicación del protocolo" quedaba en tensión con el diagrama.**
+     La figura del flujo PRISMA sí incluye esa búsqueda, en la columna de otros métodos,
+     y §3.1.3 evalúa sus 36 documentos con los criterios del protocolo. §3.1.2 dice
+     ahora las dos cosas: la búsqueda es anterior al protocolo y quedó incorporada
+     después a su flujo como vía de identificación por otros métodos.
+  3. **El alcance de avance estaba dicho, pero no atado a los objetivos.** §5.1 declara
+     ahora que las dos etapas cerradas son las que cubren los objetivos específicos
+     primero y segundo, y que el tercero depende de la etapa en curso.
+  4. **El horizonte del calendario podía leerse como el cierre de la tesis.** La tabla
+     habla del "informe final" del 20 de noviembre y solo un comentario del `.tex`
+     aclaraba que no es el cierre del trabajo. §5.4 lo dice ahora en la prosa.
+  5. De paso, `subsec:busqueda` es la etiqueta nueva que hacía falta para remitir a
+     §3.1.2, y `cap:objetivos`, que estaba definida y sin uso, queda referenciada. El
+     documento ya no tiene etiquetas sin referencia ni referencias colgantes.
+
+  **Verificación.** `./scripts/compilar.sh` en verde, 33 páginas, cero `Overfull` y cero
+  citas o referencias sin resolver. Los huecos de página que quedan son todos de cierre
+  de capítulo.
+
 ### Task-038 — cerrada en sesión directa con el autor humano, commit en `main`
 
 - **Task-038 — Auditoría del PDF contra la pauta de evaluación y el formato de la
