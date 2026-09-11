@@ -25,6 +25,7 @@ varios casos el motivo del abandono es el resultado.
 12. [Mapa de archivos](#12-mapa-de-archivos)
 13. [El experimento que faltaba: verdad conocida por construcción](#13-el-experimento-que-faltaba-verdad-conocida-por-construcción)
 14. [El viñedo con retardos, y el hallazgo sobre el propio estimador](#14-el-viñedo-con-retardos-y-el-hallazgo-sobre-el-propio-estimador)
+15. [Hacer que la invariancia se cumpla, en vez de esperar que se cumpla](#15-hacer-que-la-invariancia-se-cumpla-en-vez-de-esperar-que-se-cumpla)
 
 ---
 
@@ -903,6 +904,8 @@ el mecanismo de detección es reutilizable.
 | Se umbralizaron los tres bloques de retardo con el suelo de la matriz 36×36 completa | Los suelos por bloque van de 4.11e-5 a 2.02e-4, un factor 5 | Inflaba el conteo de aristas del presente |
 | El grafo de 19 aristas se presentaba como "el grafo del modelo" | Con `k=1` el `rho` contra él es 0.05 y el solapamiento no supera el azar | Es el grafo bajo `familia_balanceada`; la condición es parte del resultado |
 | El suelo de ruido por cola negativa se daba por universal | Bajo `k=1` hay 0 de 132 valores negativos y el suelo sale `nan` | El estimador exige un enmascarado que produzca cortes con efecto negativo |
+| El umbral 3x y el estimador del suelo nunca se barrieron | Un barrido de 36 criterios da grafos de 8 a 38 aristas | Sólo 8 de las 19 sobreviven a todos; la retención pasa a incluir el barrido |
+| La agregación entre semillas se daba por inocua | Es la palanca más fuerte: el núcleo baja de 15 a 8 al añadirla | Media, mediana y recortada no retienen lo mismo |
 
 El patrón que los une: **cuando un estadístico da el mismo valor en fuentes que
 deberían diferir, o un p pegado a un extremo, casi siempre es la métrica y no el
@@ -952,6 +955,7 @@ reproduce el viejo hasta 1e-9.
 | `resumen_replicas.py` | Agrega las réplicas; la orientación se suma, no se promedia |
 | `entrenar_temporal_tokens.py` | Los retardos como tokens (12 índices × 3 instantes = 36) para darle tiempo al transformer sin tocar `forward_enmascarado` |
 | `grafo_temporal.py` | Reparto de la dependencia por instante y comparación con el grafo publicado |
+| `barrido_p2.py` | Recomputa las matrices por semilla y barre 36 criterios de retención |
 | `control_fases.py` | Los cuatro controles del efecto por fase: bootstrap, placebo de etiquetas, calendario rotado, suelo con `n` igualado, dificultad de escena, regresión por fecha, ICP con permutación exacta |
 
 ### Pruebas (`pruebas/`)
@@ -1468,6 +1472,127 @@ umbral inventado.
    elegir la pregunta, no un detalle de implementación.
 4. El suelo de ruido por cola negativa exige un enmascarado que la produzca.
    Bajo `k = 1` el método se queda sin criterio de umbral.
+
+---
+
+## 15. Hacer que la invariancia se cumpla, en vez de esperar que se cumpla
+
+El trabajo exige a una hipótesis relacional un conjunto de propiedades, y una
+de ellas es la invariancia a las decisiones del procedimiento que no cambian
+la cantidad estimada: umbral, estimador del suelo de ruido, agregación entre
+semillas. Esa propiedad **no se cumplía**, y hasta aquí nadie la había medido.
+
+### 15.1 Primero, separar dos clases de decisión
+
+La lista original metía en el mismo saco cosas distintas:
+
+```
+decision arbitraria     umbral 3x, estimador del suelo, agregacion entre
+                        semillas, submuestra de fechas. No cambian la
+                        pregunta, solo la respuesta. Que la cambien ES un
+                        defecto y hay que repararlo.
+
+decision constitutiva   el esquema de enmascarado, la inclusion de retardos.
+                        Cambian QUE se mide. Que cambien la respuesta no es
+                        defecto: es correcto, y lo que corresponde es
+                        declararlo en el enunciado del resultado.
+```
+
+Sin esa separación, el cambio de enmascarado —que produce `rho` 0.050 contra
+el grafo publicado, sección 14— aparece como un fallo de invariancia cuando no
+lo es. Con ella, el problema se reduce a las decisiones verdaderamente
+arbitrarias, y ésas sí se pueden cerrar.
+
+### 15.2 El estado de cada decisión arbitraria
+
+```
+epocas de entrenamiento     REPARADA   entrenar hasta converger, verificado
+                                       en el log. No es una opcion.
+particion train/val         REPARADA   estratificar por el regimen relevante
+submuestra de fechas        REPARADA   no submuestrear una media; usar todo
+                                       con intervalo bootstrap
+suelo global o por bloque   REPARADA   el suelo del bloque comparable
+umbral y estimador          ver 15.3
+agregacion entre semillas   ver 15.3
+tamano de parche            ABIERTA    el test con 26x26 esta confundido con
+                                       el tamano de muestra (seccion 13.12)
+```
+
+### 15.3 La reparación: el barrido dentro de la regla de retención
+
+En vez de elegir un umbral y confiar, se declara una familia de criterios que
+estiman lo mismo y se retiene sólo lo que sobrevive a todos.
+
+La familia declarada, sobre las 15 matrices por semilla recomputadas desde los
+checkpoints publicados sin reentrenar:
+
+```
+agregacion entre semillas   media, mediana, recortada al 20%
+estimador del suelo         media|neg|, mediana|neg|, sd de los negativos,
+                            1.4826*MAD
+umbral                      2.5x, 3x, 4x
+                            3 x 4 x 3 = 36 celdas
+```
+
+`p75` y `p90` de la cola negativa quedan **fuera** de la familia: son cotas
+conservadoras del error, no estimaciones de su magnitud típica, así que no
+miden la misma cantidad. Incluirlas hacía que la intersección la decidiera la
+celda más estricta y no la estabilidad, que es lo que se quiere medir.
+
+```
+tamano del grafo por celda   min 8, max 38, mediana 16
+nucleo estable en las 36     8 aristas
+grafo publicado (media, media|neg|, 3x)   19 aristas
+```
+
+La agregación entre semillas resultó ser la palanca más fuerte: con sólo
+estimador y umbral el núcleo es de 15 aristas; al añadir las tres agregaciones
+baja a 8.
+
+```
+NUCLEO ESTABLE
+  NDVI   <- CHL_REDEDGE
+  KNDVI  <- CHL_REDEDGE
+  EVI    <- CHL_REDEDGE
+  EVI2   <- CHL_REDEDGE
+  SAVI   <- CHL_REDEDGE
+  PSRI   <- CHL_REDEDGE
+  ARI    <- KNDVI
+  ARI    <- NDWI
+```
+
+Seis de las ocho tienen `CHL_REDEDGE` como fuente. El índice de clorofila en
+el borde rojo es lo que el modelo usa para casi todo lo que sobrevive al
+barrido.
+
+*Salvedad:* la media sobre las semillas recomputadas reproduce el `Datt`
+publicado con un error relativo máximo de 0.132, no exactamente, así que la
+comparación "8 de 19" arrastra ese margen.
+
+### 15.4 Lo que esto compra, y lo que no
+
+Compra que la invariancia **se cumpla por construcción**. El enunciado pasa de
+
+> 19 aristas con ΔMSE mayor que 3× el ruido
+
+a
+
+> 8 aristas estables sobre una familia declarada de 36 criterios de retención,
+> bajo enmascarado por familia espectral
+
+Se pierden once aristas y se gana que nadie pueda preguntar "¿y si hubieras
+usado 2.5x, o la mediana?". La pregunta ya está contestada dentro del
+resultado.
+
+**Lo que no compra:** `ARI <- KNDVI` está dentro del núcleo estable, y es la
+arista que la sección 9 retiró por ser artefacto de la partición cronológica.
+Una hipótesis puede ser perfectamente invariante al umbral, al estimador y a
+la agregación, y seguir siendo un artefacto del reparto de los datos.
+
+Las propiedades son independientes y ninguna sustituye a otra. Ése es el
+argumento para exigirlas todas en vez de buscar un criterio único, y es la
+razón por la que la sección 6.5 del documento sustituye la ecuación de
+independencia condicional por una lista.
 
 ---
 
