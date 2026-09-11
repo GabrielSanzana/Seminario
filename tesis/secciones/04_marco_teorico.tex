@@ -19,7 +19,7 @@ La razón de esta estructura es directa. Si la atención se aplicara entre posic
 
 \section{Agregación entre capas}
 
-Un modelo con $L$ capas y $h$ cabezas produce $L \times h$ matrices de atención, de modo que hace falta un procedimiento para obtener una sola que represente al modelo completo. Se emplea para eso el attention rollout de \textcite{abnar2020quantifying}, que propaga la atención a través de las capas incorporando las conexiones residuales:
+Un modelo con $L$ capas y $h$ cabezas produce $L \times h$ matrices de atención, de modo que hace falta un procedimiento para obtener una sola que represente al modelo completo. El framework no fija cuál debe ser ese procedimiento, sino las condiciones que su resultado tiene que cumplir, según se detalla en el capítulo \ref{cap:propuesta}. La instancia de este trabajo emplea el attention rollout de \textcite{abnar2020quantifying}, que propaga la atención a través de las capas incorporando las conexiones residuales:
 
 \begin{equation}
 \tilde{A} = \prod_{\ell=1}^{L}\left( \alpha I + (1-\alpha) \bar{A}^{(\ell)} \right),
@@ -45,7 +45,7 @@ con $Z$ el espacio interno aprendido por la red en una capa $L$. A partir de esa
 
 Esa matriz se comporta como un operador relacional y debe cumplir tres propiedades para ser entrada válida del framework. Sus valores son no negativos, $A_{ij} \geq 0$. Sus filas suman aproximadamente uno, $\sum_j A_{ij} \approx 1$, lo que permite leerla como una cadena de Markov dirigida. Y es asimétrica, de modo que en general $A_{ij} \neq A_{ji}$ y la dirección de la relación queda codificada. Las tres en conjunto forman la condición de admisibilidad, y una representación que no las satisfaga queda fuera del alcance del framework mientras no se le aplique una adaptación explícita.
 
-\section{Qué se sabe sobre medir una explicación}
+\section{Medición de la calidad de una explicación}
 
 Las técnicas necesarias para evaluar el resultado provienen de un cuerpo de trabajo cuya conclusión general es que casi ninguna medida de calidad puede adoptarse sin examinarla antes. Que un mecanismo interno sea legible no implica que gobierne la salida, según mostraron \textcite{rizzo2022faithfulness} al comparar atención y confianza como formas de saliencia sobre un mismo modelo, de manera que la fidelidad hay que medirla en cada caso.
 
