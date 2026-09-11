@@ -41,8 +41,28 @@
 \titlespacing*{\section}{0cm}{10pt}{0pt}
 \titlespacing*{\subsection}{0cm}{8pt}{0pt}
 
+% Nombres que impone babel en espanol. El formato de la Escuela pide "Lista de
+% Tablas" y "Tabla", no "Indice de cuadros" ni "Cuadro". Se corrigen con
+% \renewcommand dentro de \captionsspanish, sin tocar pucv_inf_2024.sty.
+\addto\captionsspanish{%
+  \renewcommand{\listfigurename}{Lista de Figuras}%
+  \renewcommand{\listtablename}{Lista de Tablas}%
+  \renewcommand{\figurename}{Figura}%
+  \renewcommand{\tablename}{Tabla}%
+}
+
+% Leyendas: tamano 10 (footnotesize sobre un cuerpo de 12), justificadas a la
+% izquierda y centradas cuando ocupan una sola linea, como pide el formato.
+\captionsetup{font=footnotesize, labelfont=footnotesize,
+              justification=raggedright, singlelinecheck=true}
+% En tablas la leyenda va SIEMPRE a la izquierda: la excepcion de centrarla
+% cuando ocupa una sola linea vale para figuras, no para tablas.
+\captionsetup[table]{singlelinecheck=false}
+
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
+
+\usepackage{float}
 
 \addbibresource{referencias.bib}
 
@@ -55,23 +75,34 @@
 \newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Índice General\vspace{-0.5cm}}{Índice General}}
 \tableofcontents
 
+% La lista de figuras va antes que la de tablas, y ambas entran al indice
+% general (formato de la Escuela).
+\newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Lista de Figuras\vspace{-0.5cm}}{Lista de Figuras}}
+\listoffigures
+
 \newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Lista de Tablas\vspace{-0.5cm}}{Lista de Tablas}}
 \listoftables
 
 \newpage
 \pagenumbering{arabic}
 
-% \input en vez de \include: \include fuerza pagina nueva antes y despues de
-% cada archivo, lo que dejaba espacio en blanco cuando un capitulo terminaba
-% a media pagina. \input no rompe pagina, asi que un capitulo corto ya no dej
-% la pagina siguiente en blanco esperando el proximo \chapter (ver tambien el
-% \titleclass{\chapter}{straight} en pucv_inf_2024.sty).
+% Cada capitulo empieza en hoja propia (instruccion del autor humano, Task-035).
+% Se usa \input mas un \clearpage explicito y no \include, porque \include
+% fuerza ademas una pagina nueva DESPUES de cada archivo, y ese segundo salto
+% no hace falta. Ver tambien \titleclass{\chapter}{straight} en el .sty.
+\clearpage
 \input{secciones/01_introduccion}
+\clearpage
 \input{secciones/02_objetivos}
+\clearpage
 \input{secciones/03_estado_arte}
+\clearpage
 \input{secciones/04_marco_teorico}
+\clearpage
 \input{secciones/05_plan_trabajo}
+\clearpage
 \input{secciones/06_propuesta}
+\clearpage
 \input{secciones/07_conclusiones}
 
 \newpage\phantomsection\addcontentsline{toc}{chapter}{\texorpdfstring{Referencias\vspace{-0.5cm}}{Referencias}}
