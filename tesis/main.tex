@@ -55,6 +55,9 @@
 % izquierda y centradas cuando ocupan una sola linea, como pide el formato.
 \captionsetup{font=footnotesize, labelfont=footnotesize,
               justification=raggedright, singlelinecheck=true}
+% En tablas la leyenda va SIEMPRE a la izquierda: la excepcion de centrarla
+% cuando ocupa una sola linea vale para figuras, no para tablas.
+\captionsetup[table]{singlelinecheck=false}
 
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
